@@ -8,17 +8,17 @@ const SIDEBAR  =[
     {
         name:"Overview",icon: FiBarChart2, color:"#6366f1",href:"/",
     },
-    {
-        name:"Products",icon:FiShoppingBag,  color:"#8B5CF6",href:"/products"
-    },
+    // {
+    //     name:"Products",icon:FiShoppingBag,  color:"#8B5CF6",href:"/products"
+    // },
     
-    {
-        name:"Sales",icon:FiDollarSign, color:"#8B5CF6",href:"/sales"
-    },
+     {
+         name:"Sales",icon:FiDollarSign, color:"#8B5CF6",href:"/sales"
+     },
     
-    {
-        name:"Orders",icon:FiShoppingCart,color:"#8B5CF6",href:"/orders"
-    },
+    // {
+    //     name:"Orders",icon:FiShoppingCart,color:"#8B5CF6",href:"/orders"
+    // },
     
     {
         name:"Analytics",icon:FiTrendingUp,color:"#8B5CF6",href:"/products"

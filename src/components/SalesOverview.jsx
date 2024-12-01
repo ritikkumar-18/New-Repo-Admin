@@ -2,7 +2,7 @@ import React from 'react'
 import { LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,ResponsiveContainer } from 'recharts'
 import { motion } from 'framer-motion'
 const salesData = [
-	{ name: "Jul", visitors: 4200 },
+	{ name: "Jul", visitors: 1240 },
 	{ name: "Aug", visitors: 3800 },
 	{ name: "Sep", visitors: 5100 },
 	{ name: "Oct", visitors: 4600 },

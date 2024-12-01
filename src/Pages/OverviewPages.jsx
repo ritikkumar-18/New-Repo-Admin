@@ -19,13 +19,13 @@ const OverviewPages = () => {
             animate={{opacity:1,y:0}}
             transition={{duration:1}}>
                 <StatCards
-                name="Total Users" icon={FaUser} value ='56778' color="#6366F1"
+                name="Total Users" icon={FaUser} value ='78978' color="#6366F1"
                 />
                 <StatCards
                 name="New Users" icon={FaUser} value ='9876' color="#8B5Cf6"
                 />
                 <StatCards
-                name="Get Jobs" icon={FaGetPocket} value ='49884' color="#EC4899"
+                name="Get Jobs" icon={FaGetPocket} value ='69884' color="#EC4899"
                 />
                 <StatCards
                 name="Converison Rate" icon={FiBarChart2} value ='98%' color="#108981"

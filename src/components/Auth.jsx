@@ -34,11 +34,11 @@ function Auth() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen  bg-white">
+    <div className="flex items-center justify-center h-screen  bg-gray-900 text-black">
       <ToastContainer />
       {currentPage === "home" && (
         <div className="text-center ">
-          <h1 className="text-5xl font-bold mb-10">Welcome </h1>
+          <h1 className="text-5xl font-bold mb-10 text-gray-100">Welcome </h1>
           <div className="flex space-x-20 ml-10">
           <button
             className="bg-blue-500 text-white py-2 px-6 rounded mb-4 hover:bg-blue-700"
@@ -92,7 +92,7 @@ function LoginPage({ onLogin, onBack }) {
   return (
     <div className=" relative bg-white bg-opacity-80 p-3 rounded-lg shadow-xl   mx-auto"style={{width:"28rem"}}>
       <div className="fixed top-4 left-4">
-      <FaChevronCircleLeft onClick={onBack} className="cursor-pointer"/>
+      <FaChevronCircleLeft onClick={onBack} className="cursor-pointer text-gray-100"/>
       </div>
       
       {isLogin ? (
