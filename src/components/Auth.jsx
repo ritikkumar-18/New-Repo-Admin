@@ -4,11 +4,16 @@ import { useEffect } from "react";
 import { FaChevronCircleLeft } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OverviewPages from "../Pages/OverviewPages";
+import Products from "../Pages/Products";
+import Sidebar from "./Sidebar";
+import { Routes,Route } from "react-router-dom";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("home");
   const [role, setRole] = useState("");
   const [userDetails, setUserDetails] = useState({ username: "", role: "" });
+  const [userPassword, setUserPassword] = useState({ password: ""});
 
   const goToLogin = (selectedRole) => {
     setRole(selectedRole);
@@ -16,8 +21,9 @@ function Auth() {
   };
 
   const handleLogin = (username, password) => {
-    if (role === "admin" && password === "password") {
+    if (role === "admin" ) {
       setUserDetails({ username, role: "admin" });
+      setUserPassword({userPassword})
       setCurrentPage("adminDashboard");
       toast.success("Login successful! Welcome to the Admin Dashboard.");
     } else if (role === "customer") {
@@ -32,7 +38,7 @@ function Auth() {
       <ToastContainer />
       {currentPage === "home" && (
         <div className="text-center ">
-          <h1 className="text-5xl font-bold mb-10">Welcome Again</h1>
+          <h1 className="text-5xl font-bold mb-10">Welcome </h1>
           <div className="flex space-x-20 ml-10">
           <button
             className="bg-blue-500 text-white py-2 px-6 rounded mb-4 hover:bg-blue-700"
@@ -84,7 +90,7 @@ function LoginPage({ onLogin, onBack }) {
   };
 
   return (
-    <div className=" relative bg-white bg-opacity-80 p-3 rounded-lg shadow-xl  mt-32 mx-auto"style={{width:"28rem"}}>
+    <div className=" relative bg-white bg-opacity-80 p-3 rounded-lg shadow-xl   mx-auto"style={{width:"28rem"}}>
       <div className="fixed top-4 left-4">
       <FaChevronCircleLeft onClick={onBack} className="cursor-pointer"/>
       </div>
@@ -164,64 +170,29 @@ function LoginPage({ onLogin, onBack }) {
   );
 }
 
-function AdminDashboard({onBack}) {
+  function AdminDashboard({onBack}) {
   
-  const [userCount, setUserCount] = useState(0);
-
-  // Simulate fetching data
-  useEffect(() => {
-    // Replace with actual API call
-    setTimeout(() => {
-      setUserCount(123); // Example user count
-    }, 1000);
-  }, []);
 
   return (
     
-    <div className="max-w-7xl mx-auto p-4">
-       <button onClick={onBack}>Go To Home</button>
-      <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
+    <div className="flex bg-gray-900 text-gray-100 overflow-hidden mr-auto w-full  h-full mb-auto">
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 opacity-80">
+          <div className="absolute inset-0 backdrop-blur-sm">
 
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* User Count Card */}
-        <div className="bg-white shadow rounded-lg p-4">
-          <h2 className="text-lg font-semibold text-gray-700">Total Users</h2>
-          <p className="text-3xl font-bold text-blue-600 mt-2">{userCount}</p>
-        </div>
+          </div>
 
-        {/* Options */}
-        <div className="bg-white shadow rounded-lg p-4">
-          <h2 className="text-lg font-semibold text-gray-700">Options</h2>
-          <ul className="mt-4 space-y-2">
-            <li>
-              <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                View Users
-              </button>
-            </li>
-            <li>
-              <button className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                Manage Content
-              </button>
-            </li>
-            <li>
-              <button className="w-full bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
-                View Reports
-              </button>
-            </li>
-            <li>
-              <button className="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
-                Settings
-              </button>
-            </li>
-          </ul>
         </div>
       </div>
-    </div>
+      <Sidebar/>
+      <Routes>
     
-
-      
-     
+        <Route path='/'element={<OverviewPages/>}/>
+        <Route path='/products'element={<Products/>}/>
+      </Routes>
+    </div>
   );
 }
 
-export default Auth;
+
+ export default Auth;
