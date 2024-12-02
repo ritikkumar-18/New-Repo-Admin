@@ -3,17 +3,18 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiShoppingBag, FiShoppingCart, FiTrendingUp } from 'react-icons/fi'
 import { BiMenu } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
+import { FaUser } from 'react-icons/fa'
 
 const SIDEBAR  =[
     {
-        name:"Overview",icon: FiBarChart2, color:"#6366f1",href:"/",
+        name:"Overview",icon: FiBarChart2, color:"#8B5CF6",href:"/",
     },
-    // {
-    //     name:"Products",icon:FiShoppingBag,  color:"#8B5CF6",href:"/products"
-    // },
+     {
+         name:"Users",icon: FaUser,  color:"#8B5CF6",href:"/users"
+     },
     
      {
-         name:"Sales",icon:FiDollarSign, color:"#8B5CF6",href:"/sales"
+         name:"Income",icon:FiDollarSign, color:"#8B5CF6",href:"/income"
      },
     
     // {
@@ -36,9 +37,11 @@ const SIDEBAR  =[
 
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] =useState(true);
+    
 
 
   return (
+    
     <motion.div className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen?"w-64":"w-20"}`}>
        {/* animate={{width:isSidebarOpen?256:80}} */}
        <div className='h-full bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 flex-col border-r border-gray-700'>
