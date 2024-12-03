@@ -209,7 +209,7 @@ import { Routes, Route } from "react-router-dom";
 import Income from "../Pages/Income";
 import { motion } from "framer-motion";
 import Settings from "../Pages/Settings";
-// import Logout from "../Pages/Logout";
+import Analytics from "../Pages/Analytics";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -366,7 +366,8 @@ function AdminDashboard({ onBack }) {
         <Route path="/users" element={<Users />} />
         <Route path="/income" element={<Income />} />
         <Route path ='/settings' element={<Settings/>}/>
-        {/* <Route path='/logout' element={<Logout/>}/> */}
+        <Route path ='/analytics' element={<Analytics/>}/>
+        
       </Routes>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Settingpage1 from './Settingpage1';
 import { HelpCircle, Plus } from 'lucide-react';
 import { FaGoogle, FaFacebook, FaTwitter } from 'react-icons/fa';
+import { BsThreads } from 'react-icons/bs';
 
 const Connected = () => {
   const [connectedAccounts, setConnectedAccounts] = useState([
@@ -21,7 +22,7 @@ const Connected = () => {
       id: 3,
       name: "Twitter",
       connected: true,
-      icon: <FaTwitter size={20} className="text-[#1DA1F2]" />,
+      icon: <BsThreads size={20} className="text-[#1DA1F2]" />,
     },
   ]);
 

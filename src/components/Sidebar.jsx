@@ -22,7 +22,7 @@ const SIDEBAR  =[
     // },
     
     {
-        name:"Analytics",icon:FiTrendingUp,color:"#8B5CF6",href:"/products"
+        name:"Analytics",icon:FiTrendingUp,color:"#8B5CF6",href:"/analytics"
     },
     
     {
