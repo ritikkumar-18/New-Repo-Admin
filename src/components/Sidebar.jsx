@@ -28,9 +28,9 @@ const SIDEBAR  =[
     {
         name:"Settings",icon:FiSettings,color:"#8B5CF6",href:"/settings"
     },
-    {
-        name:"Logout",icon:FiLogOut,color:"#8B5CF6",href:"/logout"
-    },
+    // {
+    //     name:"Logout",icon:FiLogOut,color:"#8B5CF6",href:"/logout"
+    // },
 
 ]
 
