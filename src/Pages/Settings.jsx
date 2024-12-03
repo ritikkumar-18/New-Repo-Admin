@@ -5,6 +5,7 @@ import Notification from '../components/Settings/Notification'
 import Security from '../components/Settings/Security'
 import Connected from '../components/Settings/Connected'
 import Danger from '../components/Settings/Delete'
+import SettingProfile from '../SettingProfile'
 
 const Settings = () => {
   return (
@@ -12,6 +13,7 @@ const Settings = () => {
     <Header title='Settings' />
     <main className='max-w-4xl mx-auto py-6 px-4 lg:px-8'>
         {/* <SettingProfile/> */}
+        <SettingProfile/>
         <Notification/>
         <Security/>
         <Connected/>
