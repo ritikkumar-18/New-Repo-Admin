@@ -2,9 +2,9 @@
  import Settingpage1 from './Settingpage1'
  import { User } from 'lucide-react'
 
- const SettingProfile = () => {
+ const Profile = () => {
    return (
-     <Settingpage1 icon={User} title={"Profile"}>
+     < Settingpage1 icon={User} title={"Profile"}>
          <div className='flex flex-col sm:flex-row items-center mb-6'>
              <div className=''>
                  <h3 className='text-lg font-semibold text-gray-100'>XYZ</h3>
@@ -17,4 +17,4 @@
    )
  }
 
- export default SettingProfile
+ export default Profile
