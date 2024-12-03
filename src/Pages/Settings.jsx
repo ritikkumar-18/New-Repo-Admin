@@ -3,6 +3,8 @@ import Header from '../components/Common/Header'
 import SettingProfile from '../components/Settings/settingProfile'
 import Notification from '../components/Settings/Notification'
 import Security from '../components/Settings/Security'
+import Connected from '../components/Settings/Connected'
+import Danger from '../components/Settings/Delete'
 
 const Settings = () => {
   return (
@@ -12,6 +14,8 @@ const Settings = () => {
         <SettingProfile/>
         <Notification/>
         <Security/>
+        <Connected/>
+        <Danger/>
         </main>
     </div>
 
