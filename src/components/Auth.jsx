@@ -199,7 +199,6 @@
 
 // //  export default Auth;
 import React, { useState } from "react";
-import { FaChevronCircleLeft } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OverviewPages from "../Pages/OverviewPages";
@@ -210,6 +209,7 @@ import Income from "../Pages/Income";
 import { motion } from "framer-motion";
 import Settings from "../Pages/Settings";
 import Analytics from "../Pages/Analytics";
+import Logout from "../Pages/Logout";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -228,6 +228,11 @@ function Auth() {
       toast.error("Invalid Credentials");
     }
   };
+  const handleLogout = () => {
+    setCurrentPage("login");  // Reset to login page
+     toast.info("You have been logged out.");
+  };
+
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900 text-black">
@@ -240,7 +245,8 @@ function Auth() {
       )}
 
       {currentPage === "adminDashboard" && (
-        <AdminDashboard userDetails={userDetails} onBack={() => setCurrentPage("login")} />
+        <AdminDashboard userDetails={userDetails} onLogout={handleLogout} />
+
       )}
     </div>
   );
@@ -272,9 +278,7 @@ function LoginPage({ onLogin, onBack }) {
       transition={{ duration: 1 }}
       style={{ width: "28rem" }}
      >
-    {/* //   <div className="fixed top-4 left-4">
-    //     <FaChevronCircleLeft onClick={onBack} className="cursor-pointer text-gray-100" />
-    //   </div> */}
+  
 
       {isLogin ? (
         <>
@@ -297,7 +301,7 @@ function LoginPage({ onLogin, onBack }) {
               className="w-full mb-4 p-3 border rounded-md focus:outline-none"
             />
             <button className="bg-purple-200 hover:bg-purple-400 text-black hover:text-white transition-all border border-black font-bold w-full py-2 rounded-md mt-6 mb-5">
-              Submit
+              Login
             </button>
           </form>
           <div className="text-center">
@@ -336,7 +340,7 @@ function LoginPage({ onLogin, onBack }) {
               className="w-full mb-4 p-3 border rounded-md focus:outline-none"
             />
             <button className="bg-purple-200 hover:bg-purple-400 text-black hover:text-white transition-all border border-black font-bold w-full py-2 rounded-md mt-6 mb-5">
-              Submit
+              Create Account
             </button>
           </form>
           <div className="text-center">
@@ -351,7 +355,7 @@ function LoginPage({ onLogin, onBack }) {
   );
 }
 
-function AdminDashboard({ onBack }) {
+function AdminDashboard({ onLogout }) {
   return (
     <div className="flex bg-gray-900 text-gray-100 overflow-hidden mr-auto w-full h-full mb-auto">
       <div className="fixed inset-0 z-0">
@@ -367,6 +371,8 @@ function AdminDashboard({ onBack }) {
         <Route path="/income" element={<Income />} />
         <Route path ='/settings' element={<Settings/>}/>
         <Route path ='/analytics' element={<Analytics/>}/>
+        <Route path ='/logout' element={<Logout onLogout={onLogout} />} /> 
+        <Route path ='/login'element={<Auth/>}/>
         
       </Routes>
     </div>
