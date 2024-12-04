@@ -25,7 +25,7 @@ const Logout = ({ onLogout }) => {
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Logout"} />
       <motion.div
-			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700 mt-32'
+			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border mx-72 border-gray-700 mt-32'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}
@@ -43,7 +43,7 @@ const Logout = ({ onLogout }) => {
         {isModalVisible && (
           <div className="fixed inset-0 flex justify-center items-center bg-gray-700 bg-opacity-50 z-20">
             <div className="bg-red-700 p-6 rounded-lg shadow-xl max-w-sm w-full">
-              <h3 className="text-lg font-bold mb-4">Are you sure you want to log out?</h3>
+              <h3 className="text-xl font-bold mb-10">Are you sure you want to Log Out ?</h3>
               <div className="flex justify-between">
                 <button
                   onClick={handleConfirmLogout}

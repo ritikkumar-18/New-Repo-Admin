@@ -204,7 +204,7 @@ import "react-toastify/dist/ReactToastify.css";
 import OverviewPages from "../Pages/OverviewPages";
 import Users from "../Pages/Users";
 import Sidebar from "./Sidebar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Income from "../Pages/Income";
 import { motion } from "framer-motion";
 import Settings from "../Pages/Settings";
@@ -253,6 +253,7 @@ function Auth() {
 }
 
 function LoginPage({ onLogin, onBack }) {
+  const navigate =useNavigate()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
@@ -263,6 +264,8 @@ function LoginPage({ onLogin, onBack }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(username, password);
+    navigate('/')
+    console.log("Hello welcome to Admin Dashboard")
   };
 
   const handleSignupSubmit = (e) => {
