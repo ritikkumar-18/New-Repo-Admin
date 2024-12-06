@@ -4,7 +4,7 @@ import { PieChart,Pie,Cell,Tooltip,ResponsiveContainer,Legend } from 'recharts'
 
 const categoryData = [
 	{ name: "Frontend Developer", value: 4500 },
-	{ name: "Backend Developer", value: 3200 },
+	{ name: "Backend Dev", value: 3200 },
 	{ name: "DevOps", value: 2800 },
 	{ name: "Data Scientist", value: 2100 },
 	{ name: "API Handler", value: 1900 },

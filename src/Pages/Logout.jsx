@@ -12,9 +12,14 @@ const Logout = ({ onLogout }) => {
     onLogout();
     navigate('/login'); 
   };
+  const Cancel=()=>{
+    navigate('/')
+
+  }
 
   const handleCancelLogout = () => {
-    setIsModalVisible(false); // Close the modal without logging out
+    setIsModalVisible(false);
+     // Close the modal without logging out
   };
 
   const handleLogoutClick = () => {
@@ -25,7 +30,7 @@ const Logout = ({ onLogout }) => {
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Logout"} />
       <motion.div
-			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border mx-72 border-gray-700 mt-32'
+			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border  md:mx-72 border-gray-700 mt-32'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}
@@ -39,10 +44,13 @@ const Logout = ({ onLogout }) => {
         >
           Logout
         </button>
-        <button onClick={handleCancelLogout}className='bg-gray-400 text-white py-2 px-4 rounded-md'>Cancel</button>
+        <button onClick={Cancel}className='bg-gray-400 text-white py-2 px-4 rounded-md'>Cancel</button>
         {isModalVisible && (
-          <div className="fixed inset-0 flex justify-center items-center bg-gray-700 bg-opacity-50 z-20">
-            <div className="bg-red-700 p-6 rounded-lg shadow-xl max-w-sm w-full">
+          <motion.div className="fixed inset-0 flex justify-center items-center rounded-xl bg-gray-800 bg-opacity-50 z-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}>
+            <div className="bg-red-700 p-6 rounded-lg shadow-xl max-w-sm w-full sm:text-xs">
               <h3 className="text-xl font-bold mb-10">Are you sure you want to Log Out ?</h3>
               <div className="flex justify-between">
                 <button
@@ -59,7 +67,7 @@ const Logout = ({ onLogout }) => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
       </main>
       </motion.div>
