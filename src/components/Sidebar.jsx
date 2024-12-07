@@ -4,6 +4,7 @@ import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiShoppingBag, FiShopp
 import { BiMenu } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { FaUser } from 'react-icons/fa'
+import { CalendarHeart } from 'lucide-react'
 
 const SIDEBAR  =[
     {
@@ -24,6 +25,9 @@ const SIDEBAR  =[
     {
         name:"Analytics",icon:FiTrendingUp,color:"#8B5CF6",href:"/analytics"
     },
+    {
+        name:"Calender",icon:CalendarHeart,color:"#8B5CF6",href:"/calender"
+    },
     
     {
         name:"Settings",icon:FiSettings,color:"#8B5CF6",href:"/settings"
@@ -31,6 +35,7 @@ const SIDEBAR  =[
      {
          name:"Logout",icon:FiLogOut,color:"#8B5CF6",href:"/logout"
      },
+     
 
 ]
 

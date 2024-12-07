@@ -11,6 +11,9 @@ import Settings from "../Pages/Settings";
 import Analytics from "../Pages/Analytics";
 import Logout from "../Pages/Logout";
 import { FaCheckCircle } from "react-icons/fa";
+import { Croissant, Cross, Home, Star, X } from "lucide-react";
+import { FcMultipleSmartphones } from "react-icons/fc";
+import Calender from "../Pages/Calender";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -26,7 +29,9 @@ function Auth() {
       setCurrentPage("adminDashboard");
       toast.success("Welcome to the Admin Dashboard.",);
     } else {
-      toast.error("Invalid Credentials",);
+      toast.error("Invalid Credentials",{
+        icon:<X style={{ color: 'red' }} />
+      });
     }
   };
   const handleLogout = () => {
@@ -188,6 +193,7 @@ function AdminDashboard({ onLogout,onDelete }) {
         <Route path ='/analytics' element={<Analytics/>}/>
         <Route path ='/logout' element={<Logout onLogout={onLogout} />} /> 
         <Route path ='/login'element={<Auth/>}/>
+        <Route path ='/calender' element={<Calender/>}/>
         
       </Routes>
     </div>
