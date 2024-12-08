@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiShoppingBag, FiShoppingCart, FiTrendingUp } from 'react-icons/fi'
+import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiTrendingUp } from 'react-icons/fi'
 import { BiMenu } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { FaUser } from 'react-icons/fa'
-import { CalendarHeart } from 'lucide-react'
+import { CalendarHeart, Container, Mail } from 'lucide-react'
 
 const SIDEBAR  =[
     {
@@ -17,21 +17,24 @@ const SIDEBAR  =[
      {
          name:"Income",icon:FiDollarSign, color:"#8B5CF6",href:"/income"
      },
-    
-    // {
-    //     name:"Orders",icon:FiShoppingCart,color:"#8B5CF6",href:"/orders"
-    // },
-    
+
     {
         name:"Analytics",icon:FiTrendingUp,color:"#8B5CF6",href:"/analytics"
     },
     {
+        name:"Job Management", icon:Container,color:"#8B5CF6",href:'/job'
+    },
+    {
         name:"Calender",icon:CalendarHeart,color:"#8B5CF6",href:"/calender"
+    },
+    {
+        name:"Email",icon:Mail,color:"#8B5CF6",href:'/email'
     },
     
     {
         name:"Settings",icon:FiSettings,color:"#8B5CF6",href:"/settings"
     },
+    
      {
          name:"Logout",icon:FiLogOut,color:"#8B5CF6",href:"/logout"
      },

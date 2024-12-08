@@ -11,13 +11,13 @@ import Settings from "../Pages/Settings";
 import Analytics from "../Pages/Analytics";
 import Logout from "../Pages/Logout";
 import { FaCheckCircle } from "react-icons/fa";
-import { Croissant, Cross, Home, Star, X } from "lucide-react";
-import { FcMultipleSmartphones } from "react-icons/fc";
+import { X } from "lucide-react";
 import Calender from "../Pages/Calender";
+import Email from "../Pages/Email";
+import Job from "../Pages/Job";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
-  const [role, setRole] = useState(""); 
   const [userDetails, setUserDetails] = useState({ username: "", role: "" });
   const [userPassword, setUserPassword] = useState({ password: "" });
 
@@ -58,7 +58,7 @@ function Auth() {
   );
 }
 
-function LoginPage({ onLogin, onBack }) {
+function LoginPage({ onLogin}) {
   const navigate =useNavigate()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -73,16 +73,8 @@ function LoginPage({ onLogin, onBack }) {
     navigate('/')
     console.log("Hello welcome to Admin Dashboard")
   };
-
-  // const handleSignupSubmit = (e) => {
-  //   e.preventDefault();
-  //   toast.success("Account created successfully!");
-  //   setIsLogin(true); // Switch back to login after successful sign-up
-  // };
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-    
-    // Custom SVG or image as the icon
     toast.success("Account created successfully!", {
       icon:<FaCheckCircle/>
     });
@@ -96,10 +88,7 @@ function LoginPage({ onLogin, onBack }) {
       className="relative bg-white bg-opacity-80 p-3 rounded-lg shadow-xl mx-auto"	initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      style={{ width: "28rem" }}
-     >
-  
-
+      style={{ width: "28rem" }}>
       {isLogin ? (
         <>
           <h2 className="text-3xl font-bold mb-8 ">Login to your Account</h2>
@@ -175,7 +164,7 @@ function LoginPage({ onLogin, onBack }) {
   );
 }
 
-function AdminDashboard({ onLogout,onDelete }) {
+function AdminDashboard({ onLogout}) {
   return (
     <div className="flex bg-gray-900 text-gray-100 overflow-hidden mr-auto w-full h-full mb-auto">
       <div className="fixed inset-0 z-0">
@@ -194,6 +183,8 @@ function AdminDashboard({ onLogout,onDelete }) {
         <Route path ='/logout' element={<Logout onLogout={onLogout} />} /> 
         <Route path ='/login'element={<Auth/>}/>
         <Route path ='/calender' element={<Calender/>}/>
+        <Route path='/email' element={<Email/>}/>
+        <Route path='/job' element={<Job/>}/>
         
       </Routes>
     </div>
