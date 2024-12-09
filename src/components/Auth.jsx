@@ -15,6 +15,7 @@ import { X } from "lucide-react";
 import Calender from "../Pages/Calender";
 import Email from "../Pages/Email";
 import Job from "../Pages/Job";
+import Help from "../Pages/Help";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -185,6 +186,7 @@ function AdminDashboard({ onLogout}) {
         <Route path ='/calender' element={<Calender/>}/>
         <Route path='/email' element={<Email/>}/>
         <Route path='/job' element={<Job/>}/>
+        <Route path="/help" element={<Help/>}/>
         
       </Routes>
     </div>
