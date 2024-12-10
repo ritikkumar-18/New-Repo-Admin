@@ -16,6 +16,7 @@ import Calender from "../Pages/Calender";
 import Email from "../Pages/Email";
 import Job from "../Pages/Job";
 import Help from "../Pages/Help";
+import TeamManagementDashboard from "../Pages/TeamManagementDashboard";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -187,6 +188,7 @@ function AdminDashboard({ onLogout}) {
         <Route path='/email' element={<Email/>}/>
         <Route path='/job' element={<Job/>}/>
         <Route path="/help" element={<Help/>}/>
+        <Route path='/team' element={<TeamManagementDashboard/>}/>
         
       </Routes>
     </div>

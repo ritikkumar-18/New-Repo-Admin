@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiTrendingUp } from 'react-icons/fi'
 import { BiMenu } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import { FaUser } from 'react-icons/fa'
 import { CalendarHeart, Container, HelpCircle, Mail } from 'lucide-react'
+import { FaTeamspeak, FaUser } from 'react-icons/fa'
 
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
@@ -21,6 +21,8 @@ const SIDEBAR = [
   { name: "Calendar", icon: CalendarHeart, color: "#8B5CF6", href: "/calender" },
 
   { name: "Email", icon: Mail, color: "#8B5CF6", href: '/email' },
+
+  { name: "Team Management", icon:FaTeamspeak, color:"#8B5CF6",href:'/team'},
 
   { name: "Settings", icon: FiSettings, color: "#8B5CF6", href: "/settings" },
 
