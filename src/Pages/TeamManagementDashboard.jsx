@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Common/Header';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { motion } from 'framer-motion';
 
 const TeamManagementDashboard = () => {
   const [members, setMembers] = useState([
@@ -16,11 +17,10 @@ const TeamManagementDashboard = () => {
     { id: 3, task: 'Review Job Listing', assignedTo: 'Charlie', status: 'Completed' },
   ]);
 
-  // State for new task input
+
   const [newTask, setNewTask] = useState('');
   const [assignedTo, setAssignedTo] = useState('');
   
-  // State for editing a task
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingTaskData, setEditingTaskData] = useState({
     task: '',
@@ -28,15 +28,12 @@ const TeamManagementDashboard = () => {
     status: 'Pending'
   });
 
-  // Handle role change for team members
   const handleRoleChange = (id, newRole) => {
     setMembers(members.map((member) =>
       member.id === id ? { ...member, role: newRole } : member
     ));
     toast.success(`Role updated successfully!`);
   };
-
-  // Toggle member's active status (active/inactive)
   const toggleMemberStatus = (id) => {
     setMembers(members.map((member) =>
       member.id === id ? { ...member, active: !member.active } : member
@@ -44,7 +41,6 @@ const TeamManagementDashboard = () => {
     toast.success(`Member status updated!`);
   };
 
-  // Handle task status update
   const handleTaskStatusChange = (id, newStatus) => {
     setTasks(tasks.map((task) =>
       task.id === id ? { ...task, status: newStatus } : task
@@ -93,8 +89,10 @@ const TeamManagementDashboard = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Team Management"} />
-      <div className="flex-1 p-6">
-        {/* Team Management Section */}
+      < motion.div className="flex-1 p-6"  initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }} >
+      
         <div className="mb-12">
           <h2 className="text-3xl font-bold mb-6 text-white">Manage Hiring Team</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -190,11 +188,15 @@ const TeamManagementDashboard = () => {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {editingTaskId && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full sm:w-1/3">
+        < motion.div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }} >
+
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full sm:w-1/3">
             <h2 className="text-3xl font-bold mb-6 text-white">Edit Task</h2>
             <div className="flex flex-col space-y-4">
               <input
@@ -238,7 +240,7 @@ const TeamManagementDashboard = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
       <ToastContainer />
     </div>

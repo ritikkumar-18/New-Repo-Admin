@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Common/Header';
+import { motion } from 'framer-motion';
 
 const Application = () => {
   const [applications, setApplications] = useState([
@@ -67,7 +68,10 @@ const Application = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Application"} />
-      <div className="flex justify-between mb-6">
+      <motion.div className= ""initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }} >
+     <div className="flex justify-between mb-6">
         <input
           type="text"
           placeholder="Search by name or skill"
@@ -75,8 +79,7 @@ const Application = () => {
           value={filter.search}
           onChange={(e) =>
             setFilter({ ...filter, search: e.target.value })
-          }
-        />
+          }/>
         <select
           className="p-2 border text-black border-gray-700 rounded"
           value={filter.status}
@@ -146,6 +149,7 @@ const Application = () => {
           </div>
         </div>
       )}
+      </motion.div>
     </div>
   );
 };
