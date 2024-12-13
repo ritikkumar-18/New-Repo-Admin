@@ -22,9 +22,9 @@ const SIDEBAR = [
 
   { name: "Email", icon: Mail, color: "#8B5CF6", href: '/email' },
 
-  { name: "Application Management", icon: DownloadCloud, color:"#8B5CF6", href:'/application'},
-
   { name: "Team Management", icon:FaTeamspeak, color:"#8B5CF6",href:'/team'},
+
+  { name: "Application Management", icon: DownloadCloud, color:"#8B5CF6", href:'/application'},
 
   { name: "Settings", icon: FiSettings, color: "#8B5CF6", href: "/settings" },
 
