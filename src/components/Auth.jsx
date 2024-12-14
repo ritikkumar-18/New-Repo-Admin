@@ -18,6 +18,7 @@ import Job from "../Pages/Job";
 import Help from "../Pages/Help";
 import TeamManagementDashboard from "../Pages/TeamManagementDashboard";
 import Application from "../Pages/Application";
+import FeedbackandReview from "../Pages/FeedbackandReview";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -191,6 +192,7 @@ function AdminDashboard({ onLogout}) {
         <Route path="/help" element={<Help/>}/>
         <Route path='/team' element={<TeamManagementDashboard/>}/>
         <Route path='/application' element={<Application/>}/>
+        <Route path ='/feedback' element={<FeedbackandReview/>}/>
         
       </Routes>
     </div>

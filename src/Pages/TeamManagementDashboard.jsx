@@ -89,7 +89,8 @@ const TeamManagementDashboard = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Team Management"} />
-      < motion.div className="flex-1 p-6"  initial={{ opacity: 0, y: 20 }}
+      < motion.div className="flex-1 p-6" 
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }} >
       

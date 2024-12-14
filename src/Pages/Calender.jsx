@@ -60,7 +60,7 @@ const Calender = () => {
 
                 <h1 className="text-4xl font-bold mb-6 text-center text-gray-100">Event Calendar</h1>
 
-                <div className="w-full max-w-screen-xl bg-gray-800 p-6 rounded-lg shadow-xl">
+                <div className="w-full max-w-screen-xl bg-gray-800 p-6 rounded-lg shadow-xl ">
                     <Calendar
                         localizer={localizer}
                         events={events}
