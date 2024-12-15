@@ -92,11 +92,11 @@ const Email = () => {
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto bg-gray-700 shadow-md rounded-lg">
+        <div className="max-w-6xl mx-auto  shadow-md rounded-lg">
           <div className="p-4 border-b">
             <input
               type="text"
-              className="w-full p-3 rounded-md border border-gray-900 text-black"
+              className="w-full p-3 rounded-md border bg-gray-700 border-gray-900 text-black"
               placeholder="Search emails..."
               value={searchQuery}
               onChange={handleSearch}

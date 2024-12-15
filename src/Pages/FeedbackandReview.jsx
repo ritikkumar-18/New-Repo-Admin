@@ -58,7 +58,7 @@ const FeedbackandReview = () => {
             </div>
           </div>
           <textarea
-            className="w-full p-3 border rounded-md text-black"
+            className="w-full p-3 border rounded-md bg-gray-900 text-white"
             placeholder="Leave a comment..."
             value={comment}
             onChange={(e) => setComment(e.target.value)} />
@@ -98,7 +98,7 @@ const FeedbackandReview = () => {
             <input
               type="text"
               placeholder="Describe the issue..."
-              className="w-full p-3 border rounded-md text-black"
+              className="w-full p-3 border rounded-md text-white bg-gray-900 "
               value={reportedContent}
               onChange={(e) => setReportedContent(e.target.value)} />
           </div>

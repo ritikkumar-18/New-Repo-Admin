@@ -112,7 +112,7 @@ const TeamManagementDashboard = () => {
                     <select
                       value={member.role}
                       onChange={(e) => handleRoleChange(member.id, e.target.value)}
-                      className="w-full mt-2 border text-black p-2 rounded" >
+                      className="w-full mt-2 border text-white bg-gray-800 p-2 rounded" >
                       <option value="Recruiter">Recruiter</option>
                       <option value="Interviewer">Interviewer</option>
                       <option value="Hiring Manager">Hiring Manager</option>

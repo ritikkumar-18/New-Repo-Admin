@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiTrendingUp } from 'react-icons/fi'
 import { BiMenu } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import { CalendarHeart, Container, Download, DownloadCloud, HelpCircle, Mail, MessageSquare } from 'lucide-react'
-import { FaTeamspeak, FaUser } from 'react-icons/fa'
+import { CalendarHeart, Container, ContainerIcon, Download, DownloadCloud, HelpCircle, Mail, MessageSquare } from 'lucide-react'
+import { FaRupeeSign, FaTeamspeak, FaUser } from 'react-icons/fa'
 import { FcFeedback } from 'react-icons/fc'
 
 const SIDEBAR = [
@@ -27,11 +27,13 @@ const SIDEBAR = [
 
   { name: "Application Management", icon: DownloadCloud, color:"#8B5CF6", href:'/application'},
 
-  { name: "Settings", icon: FiSettings, color: "#8B5CF6", href: "/settings" },
+  { name: "Payments & Billing",icon :FaRupeeSign, color :"#8B5CF6", href:'/payment'},
 
   { name: "Support and Help", icon: HelpCircle, color: "#8B5CF6", href: '/help' },
 
   { name : "Feedback & Review", icon:MessageSquare, color:"#8B5CF6", href:"/feedback"},
+
+  { name: "Settings", icon: FiSettings, color: "#8B5CF6", href: "/settings" },
 
   { name: "Logout", icon: FiLogOut, color: "#8B5CF6", href: "/logout" },
 ]

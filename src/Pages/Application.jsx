@@ -68,20 +68,21 @@ const Application = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Application"} />
-      <motion.div className= ""initial={{ opacity: 0, y: 20 }}
+      <motion.div className= "container mx-auto px-6 md:px-8 py-6"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }} >
-     <div className="flex justify-between mb-6">
+     <div className="flex justify-between mb-6 ">
         <input
           type="text"
           placeholder="Search by name or skill"
-          className="p-2 border text-black border-gray-700 rounded"
+          className="p-2 border text-black bg-gray-700 border-gray-700 rounded"
           value={filter.search}
           onChange={(e) =>
             setFilter({ ...filter, search: e.target.value })
           }/>
         <select
-          className="p-2 border text-black border-gray-700 rounded"
+          className="p-2 border text-white bg-gray-600 border-gray-700 rounded"
           value={filter.status}
           onChange={(e) => setFilter({ ...filter, status: e.target.value })}>
           <option value="">All Statuses</option>
@@ -112,7 +113,7 @@ const Application = () => {
                 </label>
                 <select
                   id="status"
-                  className="p-2 border text-black border-gray-700 rounded"
+                  className="p-2 border text-white bg-gray-600 border-gray-700 rounded"
                   value={application.status}
                   onChange={(e) =>
                     handleStatusChange(application.id, e.target.value)

@@ -19,6 +19,7 @@ import Help from "../Pages/Help";
 import TeamManagementDashboard from "../Pages/TeamManagementDashboard";
 import Application from "../Pages/Application";
 import FeedbackandReview from "../Pages/FeedbackandReview";
+import Payment from "../Pages/Payment";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -193,6 +194,8 @@ function AdminDashboard({ onLogout}) {
         <Route path='/team' element={<TeamManagementDashboard/>}/>
         <Route path='/application' element={<Application/>}/>
         <Route path ='/feedback' element={<FeedbackandReview/>}/>
+        <Route path ='/payment' element={<Payment/>}/>
+
         
       </Routes>
     </div>
