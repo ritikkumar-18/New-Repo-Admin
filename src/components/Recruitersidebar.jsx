@@ -89,7 +89,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiTrendingUp } from 'react-icons/fi'
 import { BiMenu } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import { Briefcase, CalendarHeart, Container, Mail, MessageCircle, ReceiptRussianRuble } from 'lucide-react'
+import { BookOpen, Briefcase, CalendarHeart, Container, Mail, MessageCircle, ReceiptRussianRuble } from 'lucide-react'
 import { FaUser } from 'react-icons/fa'
 
 const SIDEBAR = [
@@ -101,6 +101,7 @@ const SIDEBAR = [
 
   {name :'Recruit',icon:Briefcase,color:"#8B5CF6",href:'/'}, 
   { name: "Job Management", icon: Container, color: "#8B5CF6", href: '/job' },
+  {name :"Job Opening", icon :BookOpen ,color:"#8B5CF6",href:'/jobopening'},
   { name: "Calendar", icon: CalendarHeart, color: "#8B5CF6", href: "/calender" },
   { name: "Email", icon: Mail, color: "#8B5CF6", href: '/email' },
   { name : "Feedback & Review", icon:MessageCircle, color:"#8B5CF6", href:"/feedback"},

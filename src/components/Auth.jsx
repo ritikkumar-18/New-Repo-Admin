@@ -228,6 +228,7 @@ import FeedbackandReview from "../Pages/FeedbackandReview";
 import Payment from "../Pages/Payment";
 import RecruiterSidebar from "./Recruitersidebar";
 import Recruit from "../Pages/Recruit";
+import Jobopening from "../Pages/Jobopening";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -375,6 +376,7 @@ function RecruiterDashboard({ onLogout }) {
       <Routes>
         <Route path='/'element={<Recruit/>}/>
         <Route path="/job" element={<Job />} />
+        <Route path='/jobopening' element={<Jobopening/>}/>
         <Route path="/calender" element={<Calender />} />
         <Route path="/email" element={<Email />} />
         <Route path="/feedback" element={<FeedbackandReview />} />
