@@ -96,13 +96,12 @@ const Email = () => {
           <div className="p-4 border-b">
             <input
               type="text"
-              className="w-full p-3 rounded-md border bg-gray-700 border-gray-900 text-black"
+              className="w-full p-3 rounded-md border bg-gray-700 border-gray-900 text-white"
               placeholder="Search emails..."
               value={searchQuery}
-              onChange={handleSearch}
-            />
+              onChange={handleSearch}/>
           </div>
-
+ 
           <div className="overflow-y-auto max-h-96">
             {filteredEmails.length > 0 ? (
               filteredEmails.map((email) => (

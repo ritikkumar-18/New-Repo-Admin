@@ -4,6 +4,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment'; 
 import 'react-big-calendar/lib/css/react-big-calendar.css'; 
 import { motion } from 'framer-motion';
+import { toast } from 'react-hot-toast';
 
 const localizer = momentLocalizer(moment);
 
@@ -40,7 +41,7 @@ const Calender = () => {
             setShowModal(false); 
             setNewEvent({ title: '', description: '', start: null, end: null }); // Reset form
         } else {
-            alert("Please fill in both the title and description.");
+            toast.error("Please fill in both the title and description.");
         }
     };
 

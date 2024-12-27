@@ -42,7 +42,7 @@ const AI = () => {
 						<div className={`p-2 rounded-full ${item.color} bg-opacity-20`}>
 							<item.icon className={`size-6 ${item.color}`} />
 						</div>
-						<p className='text-gray-300'>{item.insight}</p>
+						<p className='text-gray-300 xs:text-xs'>{item.insight}</p>
 					</div>
 				))}
 			</div>

@@ -36,12 +36,12 @@ const FAQ = () => {
      initial={{ opacity: 0, y: 20 }}
      animate={{ opacity: 1, y: 0 }}
      transition={{ delay: 0.2 }}>
-      <h2 className="text-2xl font-semibold text-center mb-6">Frequently Asked Questions</h2>
+      <h2 className=" sm:text-3xl xs:text-xl font-semibold text-center mb-6">Frequently Asked Questions</h2>
       <div className="space-y-4">
         {faqData.map((item, index) => (
           <div key={index} className="border-b border-gray-300 pb-4">
             <div
-              className="text-lg font-medium cursor-pointer" onClick={() => toggleAnswer(index)}>
+              className="sm:text-lg xs:text-md font-medium cursor-pointer" onClick={() => toggleAnswer(index)}>
               {item.question}
             </div>
 

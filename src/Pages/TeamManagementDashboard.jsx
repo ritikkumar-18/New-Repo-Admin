@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Common/Header';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import { motion } from 'framer-motion';
 
@@ -95,7 +95,7 @@ const TeamManagementDashboard = () => {
         transition={{ delay: 0.2 }} >
       
         <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-white">Manage Hiring Team</h2>
+          <h2 className="sm:text-3xl xs:text-2xl font-bold mb-6 text-white">Manage Hiring Team</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {members.map((member) => (
               <div key={member.id} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl">
@@ -126,7 +126,7 @@ const TeamManagementDashboard = () => {
         </div>
 
         <div>
-          <h2 className="text-3xl font-bold mb-6 text-white">Task Tracker</h2>
+          <h2 className="sm:text-3xl xs:text-2xl font-bold mb-6 text-white">Task Tracker</h2>
           <table className="min-w-full bg-gray-800 border border-gray-300 rounded-lg shadow-md">
             <thead>
               <tr>
@@ -163,7 +163,7 @@ const TeamManagementDashboard = () => {
 
 
         <div className="mt-12">
-          <h2 className="text-3xl font-bold mb-6 text-white">Add New Task</h2>
+          <h2 className="sm:text-3xl xs:text-2xl font-bold mb-6 text-white">Add New Task</h2>
           <div className="flex space-x-4">
             <input
               type="text"
@@ -243,7 +243,7 @@ const TeamManagementDashboard = () => {
           </div>
         </motion.div>
       )}
-      <ToastContainer />
+      <Toaster />
     </div>
   );
 };

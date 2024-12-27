@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 
 const Recruit = () => {
     const [applicants, setApplicants] = useState([
-        { id: 1, name: "John Doe", position: "Software Engineer", status: "Interview Scheduled" },
-        { id: 2, name: "Jane Smith", position: "Product Manager", status: "Applied" },
+        { id: 1, name: "John", position: "Software Engineer", status: "Interview Sch." },
+        { id: 2, name: "Jane ", position: "Product Manager", status: "Applied" },
         { id: 3, name: "Alex ", position: "Data Scientist", status: "Hired" },
       ]);
     
@@ -49,10 +49,10 @@ const Recruit = () => {
                   id="status"
                   value={applicant.status}
                   onChange={(e) => updateStatus(applicant.id, e.target.value)}
-                  className="mt-1 block w-full px-4 py-2 bg-gray-700 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+                  className="mt-1 block w-full px-4 py-2 bg-gray-700 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500  text-white"
                 >
                   <option value="Applied">Applied</option>
-                  <option value="Interview Scheduled">Interview Scheduled</option>
+                  <option value="Interview Sch..">Interview Sch..</option>
                   <option value="Hired">Hired</option>
                   <option value="Rejected">Rejected</option>
                 </select>
@@ -69,7 +69,7 @@ const getStatusColor = (status) => {
     switch (status) {
       case "Applied":
         return "bg-yellow-500";
-      case "Interview Scheduled":
+      case "Interview Sch..":
         return "bg-blue-500";
       case "Hired":
         return "bg-green-500";

@@ -76,13 +76,13 @@ const Application = () => {
         <input
           type="text"
           placeholder="Search by name or skill"
-          className="p-2 border text-black bg-gray-700 border-gray-700 rounded"
+          className="p-2 border text-white bg-gray-700 border-gray-700 rounded xs:w-28"
           value={filter.search}
           onChange={(e) =>
             setFilter({ ...filter, search: e.target.value })
           }/>
         <select
-          className="p-2 border text-white bg-gray-600 border-gray-700 rounded"
+          className="p-2 border text-white bg-gray-600 border-gray-700 rounded xs:w-28"
           value={filter.status}
           onChange={(e) => setFilter({ ...filter, status: e.target.value })}>
           <option value="">All Statuses</option>

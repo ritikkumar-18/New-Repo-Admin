@@ -5,10 +5,11 @@
  const Profile = () => {
    return (
      < Settingpage1 icon={User} title={"Profile"}>
-         <div className='flex flex-col sm:flex-row items-center mb-6'>
-             <div className=''>
+         <div className='flex flex-col items-center sm:flex-row mb-6 '>
+          <img src='https://t3.ftcdn.net/jpg/10/06/36/08/240_F_1006360868_NGeKlYvbt39P8rOOZvIkotMiET9KOg5U.jpg'alt='profile' className='rounded-full w-20 h-20 object-cover mr-4'/>
+             <div className=' xs:text-center'>
                  <h3 className='text-lg font-semibold text-gray-100'>XYZ</h3>
-                 <p className='text-gray-400'>XYZ@gmail.com</p>
+                 <p className='text-gray-400 '>XYZ@gmail.com</p>
              </div>
 
          </div>

@@ -82,46 +82,47 @@
 // }
 
 // export default RecruiterSidebar
-// ;
 
-import React, { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiTrendingUp } from 'react-icons/fi'
-import { BiMenu } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
-import { BookOpen, Briefcase, CalendarHeart, Container, Mail, MessageCircle, ReceiptRussianRuble } from 'lucide-react'
-import { FaUser } from 'react-icons/fa'
+import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FiLogOut, FiSettings } from 'react-icons/fi';
+import { BiMenu } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+import { BookOpen, Briefcase, CalendarHeart, Mail, MessageCircle, UserSearch } from 'lucide-react';
 
 const SIDEBAR = [
-//   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
-//   { name: "Users", icon: FaUser, color: "#8B5CF6", href: "/users" },
-//   { name: "Income", icon: FiDollarSign, color: "#8B5CF6", href: "/income" },
-//   { name: "Analytics", icon: FiTrendingUp, color: "#8B5CF6", href: "/analytics" },
-  
-
-  {name :'Recruit',icon:Briefcase,color:"#8B5CF6",href:'/'}, 
-  { name: "Job Management", icon: Container, color: "#8B5CF6", href: '/job' },
-  {name :"Job Opening", icon :BookOpen ,color:"#8B5CF6",href:'/jobopening'},
-  { name: "Calendar", icon: CalendarHeart, color: "#8B5CF6", href: "/calender" },
-  { name: "Email", icon: Mail, color: "#8B5CF6", href: '/email' },
-  { name : "Feedback & Review", icon:MessageCircle, color:"#8B5CF6", href:"/feedback"},
-  { name: "Settings", icon: FiSettings, color: "#8B5CF6", href: "/settings" },
-  { name: "Logout", icon: FiLogOut, color: "#8B5CF6", href: "/logout" },
-]
+  { name: 'Recruit', icon: Briefcase, color: '#8B5CF6', href: '/' },
+  { name: 'Candidate search', icon: UserSearch, color: '#8B5CF6', href: '/candidate' },
+  { name: 'Job Opening', icon: BookOpen, color: '#8B5CF6', href: '/jobopening' },
+  { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },
+  { name: 'Email', icon: Mail, color: '#8B5CF6', href: '/email' },
+  { name: 'Feedback & Review', icon: MessageCircle, color: '#8B5CF6', href: '/feedback' },
+  { name: 'Settings', icon: FiSettings, color: '#8B5CF6', href: '/settings' },
+  { name: 'Logout', icon: FiLogOut, color: '#8B5CF6', href: '/logout' },
+];
 
 const RecruiterSidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);  // State to manage sidebar open/close
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);  // Open if screen width is larger than 768px
+
+  // Handle window resize
+  const handleResize = () => {
+    setIsSidebarOpen(window.innerWidth > 768);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <motion.div
-      className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen ? "w-64" : "w-20"}`}
+      className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen ? 'w-64' : 'w-20'}`}
     >
       <div className="h-full bg-gray-800 bg-opacity-80 backdrop-blur-md p-4 flex-col border-r border-gray-700">
-        {/* Sidebar toggle button */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => setIsSidebarOpen(prevState => !prevState)}  // Toggle state when clicked
+          onClick={() => setIsSidebarOpen(prevState => !prevState)}
           className="p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit"
         >
           <BiMenu size={24} />
@@ -130,14 +131,20 @@ const RecruiterSidebar = () => {
         <nav className="mt-8 flex-grow overflow-y-auto max-h-[calc(100vh-100px)] custom-scrollbar">
           {SIDEBAR.map((item) => (
             <Link key={item.href} to={item.href}>
-              <motion.div className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2">
-                <item.icon size={20} style={{ color: item.color, minWidth: "20px" }} />
+              <motion.div
+                className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2"
+                initial={{ opacity: 0, x: isSidebarOpen ? -10 : 0 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: isSidebarOpen ? 10 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <item.icon size={20} style={{ color: item.color, minWidth: '20px' }} />
                 <AnimatePresence>
                   {isSidebarOpen && (
                     <motion.span
                       className="ml-4 whitespace-nowrap"
                       initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: "auto" }}
+                      animate={{ opacity: 1, width: 'auto' }}
                       exit={{ opacity: 0, width: 0 }}
                       transition={{ duration: 0.2, delay: 0.3 }}
                     >
@@ -152,6 +159,6 @@ const RecruiterSidebar = () => {
       </div>
     </motion.div>
   );
-}
+};
 
 export default RecruiterSidebar;

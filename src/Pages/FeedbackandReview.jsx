@@ -2,9 +2,8 @@ import React from 'react'
 import Header from '../components/Common/Header';
 import { FaStar, FaExclamationCircle, FaRegCommentDots } from 'react-icons/fa';
 import { useState } from 'react';
-import { ToastContainer,toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { motion } from 'framer-motion';
+import { Toaster,toast } from 'react-hot-toast';
 
 
 const FeedbackandReview = () => {
@@ -30,7 +29,6 @@ const FeedbackandReview = () => {
   const handleReportSubmit = (e) => {
     e.preventDefault();
     if (reportedContent.trim() !== '') {
-      toast.info(`Reported content: ${reportedContent}`);
       toast.success("Reported Successfully");
       setReportedContent('');
     }
@@ -39,6 +37,7 @@ const FeedbackandReview = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Feedback & Review"} />
+      <Toaster/>
       < motion.section className="bg-gray-900 p-6 rounded-lg shadow-md mb-6"
        initial={{ opacity: 0, y: 20 }}
        animate={{ opacity: 1, y: 0 }}
@@ -107,7 +106,7 @@ const FeedbackandReview = () => {
           </button>
         </form>
       </motion.section>
-      <ToastContainer/> 
+       
       </div>
   )
 }

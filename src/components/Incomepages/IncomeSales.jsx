@@ -27,7 +27,7 @@ const IncomeSales = () => {
 				<h2 className='text-xl font-semibold text-gray-100'>Income Overview</h2>
 
 				<select
-					className='bg-gray-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2  focus:ring-blue-500'
+					className='bg-gray-700 text-white rounded-md px-3 py-1 sm:w-auto xs:ml-3 focus:outline-none focus:ring-2  focus:ring-blue-500'
 					value={selectedTimeRange}
 					onChange={(e) => setSelectedTimeRange(e.target.value)}
 				>

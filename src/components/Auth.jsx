@@ -205,12 +205,10 @@
 
 // export default Auth;
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { LoaderIcon, toast, Toaster } from "react-hot-toast"; // Replace react-toastify with react-hot-toast
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaCheckCircle } from "react-icons/fa";
-import { X } from "lucide-react";
+import { Key, LockKeyhole, X } from "lucide-react";
 import Sidebar from "./Sidebar";
 import OverviewPages from "../Pages/OverviewPages";
 import Users from "../Pages/Users";
@@ -229,6 +227,11 @@ import Payment from "../Pages/Payment";
 import RecruiterSidebar from "./Recruitersidebar";
 import Recruit from "../Pages/Recruit";
 import Jobopening from "../Pages/Jobopening";
+import Candidate from "../Pages/Candidate search";
+import { FaGamepad } from "react-icons/fa";
+import { FiLock } from "react-icons/fi";
+
+
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -250,20 +253,17 @@ function Auth() {
 
   const handleLogout = () => {
     setCurrentPage("login");
-    toast.info("You have been logged out.");
+    toast.success("You have been Logout")
+    
   };
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900 text-black">
-      <ToastContainer />
-      {currentPage === "login" && (
-        <LoginPage onLogin={handleLogin} />
-      )}
-
+      <Toaster />
+      {currentPage === "login" && <LoginPage onLogin={handleLogin} />}
       {currentPage === "adminDashboard" && (
         <AdminDashboard userDetails={userDetails} onLogout={handleLogout} />
       )}
-
       {currentPage === "recruiterDashboard" && (
         <RecruiterDashboard userDetails={userDetails} onLogout={handleLogout} />
       )}
@@ -275,7 +275,11 @@ function LoginPage({ onLogin }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("admin"); // Default to admin
+  const [role, setRole] = useState("admin");
+  const [signupName, setSignupName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [isLogin, setIsLogin] = useState(true); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -284,63 +288,113 @@ function LoginPage({ onLogin }) {
     console.log("Login successful");
   };
 
+  const handleSignupSubmit = (e) => {
+    e.preventDefault();
+    toast.success("Account created successfully!")
+    setIsLogin(true);
+  };
+
   return (
     <motion.div
-      className="relative bg-white bg-opacity-80 p-3 rounded-lg shadow-xl mx-auto"
+      className="relative bg-gray-100 bg-opacity-80 p-3 rounded-lg shadow-xl m-5 "
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      style={{ width: "28rem" }}
-    >
-      <h2 className="text-3xl font-bold mb-8">Login to your Account</h2>
-      <form onSubmit={handleSubmit}>
-        <label className="block mb-2 text-lg font-bold">Username</label>
-        <input
-          type="email"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter Your E-mail"
-          className="w-full mb-1 p-3 border rounded-md focus:outline-none"
-        />
-        <label className="block mb-2 text-lg font-bold">Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter Your Password"
-          className="w-full mb-4 p-3 border rounded-md focus:outline-none"
-        />
-        <div className="mb-4">
-          <label className="block mb-2 text-lg font-bold">Role</label>
-          <div>
-            <label>
-              <input
-                type="radio"
-                value="admin"
-                checked={role === "admin"}
-                onChange={() => setRole("admin")}
-                className="mr-2"
-              />
-              Admin
-            </label>
-            <label className="ml-4">
-              <input
-                type="radio"
-                value="recruiter"
-                checked={role === "recruiter"}
-                onChange={() => setRole("recruiter")}
-                className="mr-2"
-              />
-              Recruiter
-            </label>
+      style={{ width: "28rem" }}>
+      
+      {isLogin ? (
+        <>
+          <h2 className="font-bold mb-8 xs:text-xl sm:text-3xl text-center mt-2 ">Login to your Account</h2>
+          <img src="https://cdn-icons-png.flaticon.com/128/6261/6261542.png" className="absolute left-6 top-6  xs:top-5" 
+          style={{ width: '33px' }} 
+          alt="Login Icon"/>
+    
+          <form onSubmit={handleSubmit}>
+            <label className="block mb-2 text-lg font-bold">Username</label>
+            <input
+              type="email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter Your E-mail"
+              className="w-full mb-1 p-3 border rounded-md focus:outline-none" />
+            <label className="block mb-2 text-lg font-bold">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter Your Password"
+              className="w-full mb-4 p-3 border rounded-md focus:outline-none" />
+            <div className="mb-4">
+              <label className="block mb-2 text-lg font-bold">Role</label>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    value="admin"
+                    checked={role === "admin"}
+                    onChange={() => setRole("admin")}
+                    className="mr-2" /> Admin </label>
+                <label className="ml-4">
+                  <input
+                    type="radio"
+                    value="recruiter"
+                    checked={role === "recruiter"}
+                    onChange={() => setRole("recruiter")}
+                    className="mr-2" /> Recruiter </label>
+              </div>
+            </div>
+            <button
+              className="bg-purple-200 hover:bg-purple-400 text-black hover:text-white transition-all border border-black font-bold w-full py-2 rounded-md mt-6 mb-5">
+              Login
+            </button>
+          </form>
+          <div className="text-center">
+            <label className="block mb-2 text-sm font-bold">Don't have an account?</label>
+            <button onClick={() => setIsLogin(false)} className="text-black font-bold">
+              Register
+            </button>
           </div>
-        </div>
-        <button
-          className="bg-purple-200 hover:bg-purple-400 text-black hover:text-white transition-all border border-black font-bold w-full py-2 rounded-md mt-6 mb-5"
-        >
-          Login
-        </button>
-      </form>
+        </>
+      ) : (
+        <>
+          <h2 className="font-bold mb-8 xs:text-xl sm:text-3xl text-center mt-2 ">Create your Account</h2>
+          <img src="https://cdn-icons-png.flaticon.com/128/295/295128.png" className="absolute left-6 top-6 xs:left-7 xs:top-5" 
+          style={{ width: '33px' }} 
+          alt="craete Icon"  />
+          <form onSubmit={handleSignupSubmit}>
+            <label className="block mb-2 text-lg font-bold">Name</label>
+            <input
+              type="text"
+              value={signupName}
+              onChange={(e) => setSignupName(e.target.value)}
+              placeholder="Enter Your Name"
+              className="w-full mb-1 p-3 border rounded-md focus:outline-none" />
+            <label className="block mb-2 text-lg font-bold">E-mail</label>
+            <input
+              type="email"
+              value={signupEmail}
+              onChange={(e) => setSignupEmail(e.target.value)}
+              placeholder="Enter Your Email"
+              className="w-full mb-1 p-3 border rounded-md focus:outline-none" />
+            <label className="block mb-2 text-lg font-bold">Password</label>
+            <input
+              type="password"
+              value={signupPassword}
+              onChange={(e) => setSignupPassword(e.target.value)}
+              placeholder="Enter Your Password"
+              className="w-full mb-4 p-3 border rounded-md focus:outline-none" />
+            <button className="bg-purple-200 hover:bg-purple-400 text-black hover:text-white transition-all border border-black font-bold w-full py-2 rounded-md mt-6 mb-5">
+              Create Account
+            </button>
+          </form>
+          <div className="text-center">
+            <label className="block mb-2 text-sm font-bold">Already have an account?</label>
+            <button onClick={() => setIsLogin(true)} className="text-black font-bold">
+              Login
+            </button>
+          </div>
+        </>
+      )}
     </motion.div>
   );
 }
@@ -374,9 +428,9 @@ function RecruiterDashboard({ onLogout }) {
     <div className="flex bg-gray-900 text-gray-100 overflow-hidden w-full h-full">
       <RecruiterSidebar />
       <Routes>
-        <Route path='/'element={<Recruit/>}/>
-        <Route path="/job" element={<Job />} />
-        <Route path='/jobopening' element={<Jobopening/>}/>
+        <Route path="/" element={<Recruit />} />
+        <Route path="/candidate" element={<Candidate/>} />
+        <Route path="/jobopening" element={<Jobopening />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/email" element={<Email />} />
         <Route path="/feedback" element={<FeedbackandReview />} />
@@ -385,6 +439,7 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/logout" element={<Logout onLogout={onLogout} />} />
       </Routes>
     </div>
+
   );
 }
 

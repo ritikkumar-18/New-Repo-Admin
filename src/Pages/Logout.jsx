@@ -27,15 +27,17 @@ const Logout = ({ onLogout }) => {
   };
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 ">
       <Header title={"Logout"} />
       <motion.div
-			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border  md:mx-72 border-gray-700 mt-32'
+			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border  md:mx-72 border-gray-700 mt-32 '
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
-			transition={{ delay: 0.2 }}
-		>
-            <h2 className='font-bold text-white text-2xl text-center'> Do you want to Logout ? </h2>
+			transition={{ delay: 0.2 }}>
+            <h2 className='font-bold text-white sm:text-2xl text-center xs:text-sm'> Do you want to Logout ? </h2>
+            <img src="https://cdn2.iconfinder.com/data/icons/network-and-internet-3d-illustration-pack/128/Logout_3D_Illustration_Icon.png" className="absolute sm:left-20 sm:top-6 xs:left-5 xs:top-4  " 
+          style={{ width: '40px' }} 
+          alt="Login Icon"  />
 	
       <main className="max-w-7xl mx-auto py-6 px-4 lg:px-8 flex justify-evenly mt-10 ">
         <button 
@@ -51,7 +53,7 @@ const Logout = ({ onLogout }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}>
             <div className="bg-red-700 p-6 rounded-lg shadow-xl max-w-sm w-full sm:text-xs">
-              <h3 className="text-xl font-bold mb-10">Are you sure you want to Log Out ?</h3>
+              <h3 className="sm:text-xl xs:text-sm font-bold mb-10">Are you sure you want to Log Out ?</h3>
               <div className="flex justify-between">
                 <button
                   onClick={handleConfirmLogout}
