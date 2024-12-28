@@ -93,17 +93,13 @@ import { FaRupeeSign, FaTeamspeak, FaUser } from 'react-icons/fa';
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
   { name: "Users", icon: FaUser, color: "#8B5CF6", href: "/users" },
-  { name: "Income", icon: FiDollarSign, color: "#8B5CF6", href: "/income" },
-  { name: "Analytics", icon: FiTrendingUp, color: "#8B5CF6", href: "/analytics" },
+  
   { name: "Job Management", icon: Container, color: "#8B5CF6", href: '/job' },
-  { name: "Calendar", icon: CalendarHeart, color: "#8B5CF6", href: "/calender" },
-  { name: "Email", icon: Mail, color: "#8B5CF6", href: '/email' },
   { name: "Team Management", icon: FaTeamspeak, color: "#8B5CF6", href: '/team' },
-  { name: "Application Management", icon: DownloadCloud, color: "#8B5CF6", href: '/application' },
-  { name: "Payments & Billing", icon: FaRupeeSign, color: "#8B5CF6", href: '/payment' },
+  
+  { name: "Subscription Plan", icon: FaRupeeSign, color: "#8B5CF6", href: '/payment' },
   { name: "Support and Help", icon: HelpCircle, color: "#8B5CF6", href: '/help' },
-  { name: "Feedback & Review", icon: MessageSquare, color: "#8B5CF6", href: "/feedback" },
-  { name: "Settings", icon: FiSettings, color: "#8B5CF6", href: "/settings" },
+  
   { name: "Logout", icon: FiLogOut, color: "#8B5CF6", href: "/logout" },
 ];
 

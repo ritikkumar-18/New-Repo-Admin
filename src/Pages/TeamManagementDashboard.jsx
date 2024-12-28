@@ -162,33 +162,7 @@ const TeamManagementDashboard = () => {
         </div>
 
 
-        <div className="mt-12">
-          <h2 className="sm:text-3xl xs:text-2xl font-bold mb-6 text-white">Add New Task</h2>
-          <div className="flex space-x-4">
-            <input
-              type="text"
-              placeholder="Task Description"
-              value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
-              className="p-2 bg-gray-700 text-white rounded w-full sm:w-1/2"
-            />
-            <select
-              value={assignedTo}
-              onChange={(e) => setAssignedTo(e.target.value)}
-              className="p-2 bg-gray-700 text-white rounded w-full sm:w-1/2"
-            >
-              {members.map((member) => (
-                <option key={member.id} value={member.name}>{member.name}</option>
-              ))}
-            </select>
-            <button
-              onClick={addNewTask}
-              className="px-6 py-2 bg-green-500 text-white rounded"
-            >
-              Add Task
-            </button>
-          </div>
-        </div>
+       
       </motion.div>
 
       {editingTaskId && (

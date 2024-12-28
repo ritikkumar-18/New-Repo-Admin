@@ -205,10 +205,10 @@
 
 // export default Auth;
 import React, { useState } from "react";
-import { LoaderIcon, toast, Toaster } from "react-hot-toast"; // Replace react-toastify with react-hot-toast
+import { toast, Toaster } from "react-hot-toast"; 
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Key, LockKeyhole, X } from "lucide-react";
+import { X } from "lucide-react";
 import Sidebar from "./Sidebar";
 import OverviewPages from "../Pages/OverviewPages";
 import Users from "../Pages/Users";
@@ -228,10 +228,6 @@ import RecruiterSidebar from "./Recruitersidebar";
 import Recruit from "../Pages/Recruit";
 import Jobopening from "../Pages/Jobopening";
 import Candidate from "../Pages/Candidate search";
-import { FaGamepad } from "react-icons/fa";
-import { FiLock } from "react-icons/fi";
-
-
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -253,12 +249,11 @@ function Auth() {
 
   const handleLogout = () => {
     setCurrentPage("login");
-    toast.success("You have been Logout")
-    
+    toast.success("You have been logged out.");
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900 text-black">
+    <div className="flex items-center justify-center h-screen bg-black">
       <Toaster />
       {currentPage === "login" && <LoginPage onLogin={handleLogin} />}
       {currentPage === "adminDashboard" && (
@@ -276,126 +271,258 @@ function LoginPage({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
-  const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(true); 
+  const [isLogin, setIsLogin] = useState(true);
+  const [otpSent, setOtpSent] = useState(false); 
+  const [otp, setOtp] = useState(""); 
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const [newPassword, setNewPassword] = useState(""); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(username, password, role);
-    navigate('/');
-    console.log("Login successful");
+    navigate("/");
+    setUsername("");
+    setPassword("");
+    setRole("admin");
   };
 
-  const handleSignupSubmit = (e) => {
+  const handleForgotPasswordSubmit = (e) => {
     e.preventDefault();
-    toast.success("Account created successfully!")
-    setIsLogin(true);
+    toast.promise(
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("OTP sent successfully!");
+          setOtpSent(true);
+          setOtp(""); // Reset OTP state
+
+        
+        }, 2000);
+      }),
+      {
+        loading: "Sending OTP...",
+        success: "OTP sent successfully!",
+        error: "Failed to send OTP.",
+      }
+    );
+    setSignupEmail("");
+     
+
+  };
+
+  const handleVerifyOtp = (e) => {
+    e.preventDefault();
+    if (otp === "1234") { // Replace this with actual OTP verification logic
+      const submitToast = toast.promise(
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve('OTP verified successfully!');
+            setIsOtpVerified(true);
+            setOtp(""); // Reset OTP state
+
+          }, 2000);
+        }),
+        {
+          loading: 'Verifying OTP...',
+          success: 'OTP verified successfully!',
+          error: 'Invalid OTP!',
+        }
+      );
+      setNewPassword(""); 
+    } else {
+      toast.error("Invalid OTP!");
+    }
+  };
+
+  const handleResetPassword = (e) => {
+    e.preventDefault();
+    if (newPassword.length >= 6) {
+      toast.success("Password reset successfully!");
+      setIsLogin(true); // Redirect to login
+      setOtpSent(false);
+      setIsOtpVerified(false);
+    } else {
+      toast.error("Password must be at least 6 characters.");
+    }
   };
 
   return (
-    <motion.div
-      className="relative bg-gray-100 bg-opacity-80 p-3 rounded-lg shadow-xl m-5 "
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      style={{ width: "28rem" }}>
-      
-      {isLogin ? (
-        <>
-          <h2 className="font-bold mb-8 xs:text-xl sm:text-3xl text-center mt-2 ">Login to your Account</h2>
-          <img src="https://cdn-icons-png.flaticon.com/128/6261/6261542.png" className="absolute left-6 top-6  xs:top-5" 
-          style={{ width: '33px' }} 
-          alt="Login Icon"/>
-    
-          <form onSubmit={handleSubmit}>
-            <label className="block mb-2 text-lg font-bold">Username</label>
-            <input
-              type="email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter Your E-mail"
-              className="w-full mb-1 p-3 border rounded-md focus:outline-none" />
-            <label className="block mb-2 text-lg font-bold">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter Your Password"
-              className="w-full mb-4 p-3 border rounded-md focus:outline-none" />
-            <div className="mb-4">
-              <label className="block mb-2 text-lg font-bold">Role</label>
+    <div className="flex w-4/5 h-3/4 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="hidden sm:block w-4/6 relative bg-gray-800">
+        <video className="w-full h-full object-cover" autoPlay loop muted>
+          <source
+            src="https://videos.pexels.com/video-files/1722882/1722882-sd_640_360_25fps.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div className="w-full sm:w-1/2 lg:w-3/5 flex flex-col items-center justify-center bg-white shadow-lg rounded-lg p-8">
+        {isLogin ? (
+          <motion.div
+            className="w-full"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h2 className="text-2xl font-bold text-center mb-6">Login to Your Account</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label>
-                  <input
-                    type="radio"
-                    value="admin"
-                    checked={role === "admin"}
-                    onChange={() => setRole("admin")}
-                    className="mr-2" /> Admin </label>
-                <label className="ml-4">
-                  <input
-                    type="radio"
-                    value="recruiter"
-                    checked={role === "recruiter"}
-                    onChange={() => setRole("recruiter")}
-                    className="mr-2" /> Recruiter </label>
+                <label className="block text-lg font-medium text-gray-700">Email Address</label>
+                <input
+                  type="email"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
               </div>
+              <div>
+                <label className="block text-lg font-medium text-gray-700">Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-2 text-lg font-bold">Role</label>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      value="admin"
+                      checked={role === "admin"}
+                      onChange={() => setRole("admin")}
+                      className="mr-2"
+                    />
+                    Admin
+                  </label>
+                  <label className="ml-4">
+                    <input
+                      type="radio"
+                      value="recruiter"
+                      checked={role === "recruiter"}
+                      onChange={() => setRole("recruiter")}
+                      className="mr-2"
+                    />
+                    Recruiter
+                  </label>
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+              >
+                Login
+              </button>
+            </form>
+            <div className="text-center mt-4">
+              <button
+                onClick={() => setIsLogin(false)}
+                className="text-purple-600 hover:underline"
+              >
+                Forgot Password?
+              </button>
             </div>
-            <button
-              className="bg-purple-200 hover:bg-purple-400 text-black hover:text-white transition-all border border-black font-bold w-full py-2 rounded-md mt-6 mb-5">
-              Login
-            </button>
-          </form>
-          <div className="text-center">
-            <label className="block mb-2 text-sm font-bold">Don't have an account?</label>
-            <button onClick={() => setIsLogin(false)} className="text-black font-bold">
-              Register
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-          <h2 className="font-bold mb-8 xs:text-xl sm:text-3xl text-center mt-2 ">Create your Account</h2>
-          <img src="https://cdn-icons-png.flaticon.com/128/295/295128.png" className="absolute left-6 top-6 xs:left-7 xs:top-5" 
-          style={{ width: '33px' }} 
-          alt="craete Icon"  />
-          <form onSubmit={handleSignupSubmit}>
-            <label className="block mb-2 text-lg font-bold">Name</label>
-            <input
-              type="text"
-              value={signupName}
-              onChange={(e) => setSignupName(e.target.value)}
-              placeholder="Enter Your Name"
-              className="w-full mb-1 p-3 border rounded-md focus:outline-none" />
-            <label className="block mb-2 text-lg font-bold">E-mail</label>
-            <input
-              type="email"
-              value={signupEmail}
-              onChange={(e) => setSignupEmail(e.target.value)}
-              placeholder="Enter Your Email"
-              className="w-full mb-1 p-3 border rounded-md focus:outline-none" />
-            <label className="block mb-2 text-lg font-bold">Password</label>
-            <input
-              type="password"
-              value={signupPassword}
-              onChange={(e) => setSignupPassword(e.target.value)}
-              placeholder="Enter Your Password"
-              className="w-full mb-4 p-3 border rounded-md focus:outline-none" />
-            <button className="bg-purple-200 hover:bg-purple-400 text-black hover:text-white transition-all border border-black font-bold w-full py-2 rounded-md mt-6 mb-5">
-              Create Account
-            </button>
-          </form>
-          <div className="text-center">
-            <label className="block mb-2 text-sm font-bold">Already have an account?</label>
-            <button onClick={() => setIsLogin(true)} className="text-black font-bold">
-              Login
-            </button>
-          </div>
-        </>
-      )}
-    </motion.div>
+          </motion.div>
+        ) : otpSent ? (
+          isOtpVerified ? (
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <h2 className="text-2xl font-bold text-center mb-6">Create New Password</h2>
+              <form onSubmit={handleResetPassword} className="space-y-4">
+                <div>
+                  <label className="block text-lg font-medium text-gray-700">New Password</label>
+                  <input
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Enter new password"
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+                >
+                  Submit
+                </button>
+              </form>
+            </motion.div>
+          ) : (
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <h2 className="text-2xl font-bold text-center mb-6">Enter OTP</h2>
+              <form onSubmit={handleVerifyOtp} className="space-y-4">
+                <div>
+                  <label className="block text-lg font-medium text-gray-700">OTP</label>
+                  <input
+                    type="text"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    placeholder="Enter the OTP"
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+                >
+                  Verify OTP
+                </button>
+              </form>
+            </motion.div>
+          )
+        ) : (
+          <motion.div
+            className="w-full"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h2 className="text-2xl font-bold text-center mb-6">Forgot Password</h2>
+            <form onSubmit={handleForgotPasswordSubmit} className="space-y-4">
+              <div>
+                <label className="block text-lg font-medium text-gray-700 text-center">In order to retrieve your password, please enter <br/>register email id</label>
+                <input
+                  type="email"
+                  value={signupEmail}
+                  onChange={(e) => setSignupEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+              >
+                Send OTP
+              </button>
+            </form>
+            <div className="text-center mt-4">
+              <button
+                onClick={() => setIsLogin(true)}
+                className="text-purple-600 hover:underline"
+              >
+                Back to Login
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -429,7 +556,7 @@ function RecruiterDashboard({ onLogout }) {
       <RecruiterSidebar />
       <Routes>
         <Route path="/" element={<Recruit />} />
-        <Route path="/candidate" element={<Candidate/>} />
+        <Route path="/candidate" element={<Candidate />} />
         <Route path="/jobopening" element={<Jobopening />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/email" element={<Email />} />
@@ -439,7 +566,6 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/logout" element={<Logout onLogout={onLogout} />} />
       </Routes>
     </div>
-
   );
 }
 

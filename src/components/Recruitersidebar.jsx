@@ -88,7 +88,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FiLogOut, FiSettings } from 'react-icons/fi';
 import { BiMenu } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { BookOpen, Briefcase, CalendarHeart, Mail, MessageCircle, UserSearch } from 'lucide-react';
+import { BookOpen, Briefcase, CalendarHeart, Mail, MessageCircle,  UserSearch } from 'lucide-react';
 
 const SIDEBAR = [
   { name: 'Recruit', icon: Briefcase, color: '#8B5CF6', href: '/' },
@@ -116,8 +116,7 @@ const RecruiterSidebar = () => {
 
   return (
     <motion.div
-      className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen ? 'w-64' : 'w-20'}`}
-    >
+      className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen ? 'w-64' : 'w-20'}`}>
       <div className="h-full bg-gray-800 bg-opacity-80 backdrop-blur-md p-4 flex-col border-r border-gray-700">
         <motion.button
           whileHover={{ scale: 1.1 }}

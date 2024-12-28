@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '../components/Common/Header';
-import { toast, Toaster } from 'react-hot-toast'; // Import Toaster and toast from react-hot-toast
+import { toast, Toaster } from 'react-hot-toast'; 
 import { Search } from 'lucide-react';
 
 const Jobopening = () => {
@@ -82,15 +82,7 @@ const Jobopening = () => {
         </div>
 
         <div className="mb-6">
-          <button
-            onClick={() => {
-              setEditingJob(null);
-              setFormData({ title: '', department: '', location: '', status: 'active', hiringManager: '' });
-            }}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mb-4"
-          >
-            Add New Job
-          </button>
+          
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
