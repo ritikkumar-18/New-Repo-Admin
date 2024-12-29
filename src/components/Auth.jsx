@@ -277,6 +277,7 @@ function LoginPage({ onLogin }) {
   const [otp, setOtp] = useState(""); 
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const [newPassword, setNewPassword] = useState(""); 
+  const [confirmPassword, setConfirmPassword] = useState(""); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -351,14 +352,14 @@ function LoginPage({ onLogin }) {
       <div className="hidden sm:block w-4/6 relative bg-gray-800">
         <video className="w-full h-full object-cover" autoPlay loop muted>
           <source
-            src="https://videos.pexels.com/video-files/1722882/1722882-sd_640_360_25fps.mp4"
+            src="https://videos.pexels.com/video-files/1390942/1390942-sd_960_506_24fps.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
         </video>
       </div>
 
-      <div className="w-full sm:w-1/2 lg:w-3/5 flex flex-col items-center justify-center bg-white shadow-lg rounded-lg p-8">
+      <div className="w-full  sm:w-1/2 lg:w-3/5 flex flex-col items-center justify-center bg-white shadow-lg rounded-lg p-8">
         {isLogin ? (
           <motion.div
             className="w-full"
@@ -366,7 +367,7 @@ function LoginPage({ onLogin }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <h2 className="text-2xl font-bold text-center mb-6">Login to Your Account</h2>
+            <h2 className="sm:text-2xl xs:text-xl font-bold text-center mb-6 ">Login to Your Account</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-lg font-medium text-gray-700">Email Address</label>
@@ -445,6 +446,14 @@ function LoginPage({ onLogin }) {
                     type="password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Enter new password"
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                   <label className="block text-lg font-medium text-gray-700">Confirm Password</label>
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Enter new password"
                     className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />

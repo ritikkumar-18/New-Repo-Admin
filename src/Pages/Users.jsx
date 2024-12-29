@@ -19,7 +19,7 @@ const userStats = {
 const Users = () => {
   return (
     <div className='flex-1 overflow-auto relative z-10'>
-			<Header title='Users' />
+			<Header title='Recruiters' />
 
 			<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
 				{/* STATS */}
@@ -29,7 +29,7 @@ const Users = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					<StatCards
+					{/* <StatCards
 						name='Total Users'
 						icon={UsersIcon}
 						value={userStats.totalUsers.toLocaleString()}
@@ -42,7 +42,7 @@ const Users = () => {
 						value={userStats.activeUsers.toLocaleString()}
 						color='#F59E0B'
 					/>
-					<StatCards name='Churn Rate' icon={UserX} value={userStats.churnRate} color='#EF4444' />
+					<StatCards name='Churn Rate' icon={UserX} value={userStats.churnRate} color='#EF4444' /> */}
 				</motion.div>
         <Usertable/>
        

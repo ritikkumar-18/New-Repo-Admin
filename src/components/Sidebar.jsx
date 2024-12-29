@@ -87,12 +87,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FiBarChart2, FiDollarSign, FiLogOut, FiSettings, FiTrendingUp } from 'react-icons/fi';
 import { BiMenu } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { CalendarHeart, Container, ContainerIcon, Download, DownloadCloud, HelpCircle, Mail, MessageSquare } from 'lucide-react';
+import {  Container,  HelpCircle } from 'lucide-react';
 import { FaRupeeSign, FaTeamspeak, FaUser } from 'react-icons/fa';
 
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
-  { name: "Users", icon: FaUser, color: "#8B5CF6", href: "/users" },
+  { name: "Recruiters", icon: FaUser, color: "#8B5CF6", href: "/users" },
   
   { name: "Job Management", icon: Container, color: "#8B5CF6", href: '/job' },
   { name: "Team Management", icon: FaTeamspeak, color: "#8B5CF6", href: '/team' },

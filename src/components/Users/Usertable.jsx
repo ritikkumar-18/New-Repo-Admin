@@ -1,40 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Search } from "lucide-react";
 
 const userData = [
-  { id: 1, name: "Will Smith", email: "will@example.com", role: "Customer", status: "Active" },
-  { id: 2, name: "Lune Paul", email: "paul@example.com", role: "Admin", status: "Active" },
-  { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Customer", status: "Inactive" },
-  { id: 4, name: "Alice", email: "alice@example.com", role: "Customer", status: "Active" },
-  { id: 5, name: "Charlie Wilson", email: "charlie@example.com", role: "Developer", status: "Active" },
-  { id: 6, name: "Eve Adams", email: "eve@example.com", role: "Manager", status: "Active" },
-  { id: 7, name: "Jake Long", email: "jake@example.com", role: "Customer", status: "Inactive" },
-  { id: 8, name: "Mia Taylor", email: "mia@example.com", role: "Developer", status: "Active" },
-  { id: 9, name: "Sophia Brown", email: "sophia@example.com", role: "Admin", status: "Inactive" },
-  { id: 10, name: "Daniel Green", email: "daniel@example.com", role: "Customer", status: "Active" },
-  { id: 11, name: "Oliver King", email: "oliver@example.com", role: "Developer", status: "Active" },
-  { id: 12, name: "Lily White", email: "lily@example.com", role: "Manager", status: "Inactive" },
-  { id: 13, name: "Jack Davis", email: "jack@example.com", role: "Customer", status: "Active" },
-  { id: 14, name: "Emma Lewis", email: "emma@example.com", role: "Admin", status: "Active" },
-  { id: 15, name: "Michael Carter", email: "michael@example.com", role: "Customer", status: "Inactive" },
-  { id: 16, name: "Olivia Martinez", email: "olivia@example.com", role: "Developer", status: "Active" },
-  { id: 17, name: "Lucas Harris", email: "lucas@example.com", role: "Admin", status: "Inactive" },
-  { id: 18, name: "Isabella Robinson", email: "isabella@example.com", role: "Manager", status: "Active" },
-  { id: 19, name: "Benjamin Young", email: "benjamin@example.com", role: "Customer", status: "Active" },
-  { id: 20, name: "Charlotte Clark", email: "charlotte@example.com", role: "Developer", status: "Inactive" },
-  { id: 21, name: "James Scott", email: "james@example.com", role: "Admin", status: "Active" },
-  { id: 22, name: "Amelia Walker", email: "amelia@example.com", role: "Customer", status: "Inactive" },
-  { id: 23, name: "Henry Allen", email: "henry@example.com", role: "Developer", status: "Active" },
-  { id: 24, name: "Ava Nelson", email: "ava@example.com", role: "Manager", status: "Active" },
-  { id: 25, name: "William King", email: "william@example.com", role: "Customer", status: "Inactive" }
+  { id: 1, name: "Will Smith", email: "will@example.com", status: "Active", joined: "2022-01-15", contact: "123-456-7890", address: "123 Main St, Springfield" },
+  { id: 2, name: "Lune Paul", email: "paul@example.com", status: "Active", joined: "2021-12-10", contact: "987-654-3210", address: "456 Elm St, Springfield" },
+  { id: 3, name: "John Doe", email: "john@example.com", status: "Inactive", joined: "2022-02-20", contact: "555-123-4567", address: "789 Oak St, Springfield" },
+  { id: 4, name: "Jane Doe", email: "jane@example.com", status: "Active", joined: "2021-11-30", contact: "444-567-8901", address: "101 Pine St, Springfield" },
+  
+    { id: 5, name: "Alice Johnson", email: "alice@example.com", status: "Active", joined: "2023-05-01", contact: "111-222-3333", address: "202 Maple St, Springfield" },
+    { id: 6, name: "Bob Brown", email: "bob@example.com", status: "Inactive", joined: "2022-09-15", contact: "333-444-5555", address: "303 Birch St, Springfield" },
+    { id: 7, name: "Charlie White", email: "charlie@example.com", status: "Active", joined: "2021-08-05", contact: "666-777-8888", address: "404 Cedar St, Springfield" },
+    { id: 8, name: "Dave Green", email: "dave@example.com", status: "Pending", joined: "2023-01-20", contact: "222-333-4444", address: "505 Chestnut St, Springfield" },
+    { id: 9, name: "Eve Black", email: "eve@example.com", status: "Inactive", joined: "2022-03-10", contact: "888-999-0000", address: "606 Elm St, Springfield" },
+    { id: 10, name: "Frank White", email: "frank@example.com", status: "Active", joined: "2020-07-25", contact: "123-789-4567", address: "707 Maple St, Springfield" },
+    { id: 11, name: "Grace Lee", email: "grace@example.com", status: "Active", joined: "2023-02-14", contact: "555-333-6666", address: "808 Oak St, Springfield" },
+    { id: 12, name: "Hannah Adams", email: "hannah@example.com", status: "Inactive", joined: "2021-10-01", contact: "444-888-9999", address: "909 Pine St, Springfield" }
+  
+  
 ];
 
 const Usertable = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(userData.slice(0, 5)); // Start with a few items
-  const [isLoading, setIsLoading] = useState(false);
-  const tableRef = useRef(null); // Reference to the table container
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [filteredUsers, setFilteredUsers] = useState(userData);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
@@ -42,106 +34,158 @@ const Usertable = () => {
     const filtered = userData.filter(
       (user) => user.name.toLowerCase().includes(term) || user.email.toLowerCase().includes(term)
     );
-    setFilteredUsers(filtered.slice(0, 5)); 
+    setFilteredUsers(filtered);
+    setCurrentPage(1); 
   };
 
-  const loadMoreData = () => {
-    if (isLoading) return;
-    setIsLoading(true);
-
-    // Simulate loading more data (in real cases, fetch more from an API)
-    setTimeout(() => {
-      setFilteredUsers((prevUsers) => [
-        ...prevUsers,
-        ...userData.slice(prevUsers.length, prevUsers.length + 5), // Load 5 more users
-      ]);
-      setIsLoading(false);
-    }); 
+  const openModal = (user) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
   };
 
-  const handleScroll = () => {
-    const table = tableRef.current;
-    if (table.scrollTop + table.clientHeight === table.scrollHeight) {
-      loadMoreData();
-    }
+  const closeModal = () => {
+    setSelectedUser(null);
+    setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    const table = tableRef.current;
-    table.addEventListener('scroll', handleScroll);
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+  const displayedUsers = filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    return () => {
-      table.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <motion.div
-      className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2 }} >
-      <div className='flex justify-between items-center mb-6 sm:w-full'>
-        <h2 className='text-xl font-semibold text-gray-100 '>Users</h2>
-        <div className='relative'>
+      className="flex-1 bg-gray-900 "
+      initial={{opacity:0,y:20}}
+      animate={{opacity:1,y:0}}
+      transition={{duration:0.5}}
+    >
+  
+        <div className="mb-6 relative">
           <input
-            type='text'
-            placeholder='Search users...'
-            className='bg-gray-700 text-white placeholder-gray-400 xs:w-10 sm:w-full rounded-lg  pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500'
+            type="text"
             value={searchTerm}
-            onChange={handleSearch} />
-          <Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
+            onChange={handleSearch}
+            placeholder="Search"
+            className="py-2 border rounded bg-gray-800 text-white pl-10 w-auto focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+          <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
         </div>
-      </div>
+      
 
-      <div className='overflow-y-auto' ref={tableRef} style={{ maxHeight: '400px' }}>
-        <table className='min-w-full divide-y divide-gray-700'>
-          <thead>
-            <tr>
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>Name</th>
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>Email</th>
-              
-    
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody className='divide-y divide-gray-700'>
-            {filteredUsers.map((user) => (
-              <motion.tr
-                key={user.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <td className='px-6 py-4 whitespace-nowrap'>
-                  <div className='flex items-center'>
-                    <div className='flex-shrink-0 h-10 w-10'>
-                      <div className='h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-blue-500 flex items-center justify-center text-white font-semibold'>
-                        {user.name.charAt(0)}
-                      </div>
-                    </div>
-                    <div className='ml-4'>
-                      <div className='text-sm font-medium text-gray-100'>{user.name}</div>
-                    </div>
+      <div className="w-full p-6 ">
+        <motion.div
+          className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial={{opacity:0,y:20}}
+          animate={{opacity:1,y:0}}
+          transition={{duration:0.5}} >
+          {displayedUsers.map((user) => (
+            <motion.div
+              key={user.id}
+              className="bg-gray-900 rounded-lg p-4 flex flex-col justify-between h-full"
+              initial={{opacity:0,y:20}}
+              animate={{opacity:1,y:0}}
+              transition={{duration:0.5}}
+            >
+              <div>
+                {/* <div className="flex items-center space-x-4">
+                  <div className="h-10 w-10  bg-gradient-to-r from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
+                    {user.name.charAt(0)}
                   </div>
-                </td>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-100">{user.name}</h3>
+                    <p className="text-sm text-gray-300">{user.email}</p>
+                  </div>
+                </div> */}
+                <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+               <div className="h-10 w-10 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-xl">
+               {user.name.charAt(0)}
+              </div>
+            <div>
+            <h3 className="text-lg font-semibold text-gray-100">{user.name}</h3>
+            <p className="text-sm text-gray-300">{user.email}</p>
+            </div>
+           </div>
 
-                <td className='px-6 py-4 whitespace-nowrap'>
-                  <div className='text-sm text-gray-300'>{user.email}</div>
-                </td>
+                <div className="mt-4 space-y-2">
+                  <p className="text-sm text-gray-400">
+                    Status:{" "}
+                    <span className={user.status === "Active" ? "text-green-400" : "text-red-400"}>
+                      {user.status}
+                    </span>
+                  </p>
+                  {/* <p className="text-sm text-gray-400">
+                    Joined: <span className="text-gray-200">{user.joined}</span>
+                  </p> */}
+                  {/* <p className="text-sm text-gray-400">
+                    Contact: <span className="text-gray-200">{user.contact}</span>
+                  </p> */}
+                </div>
+              </div>
+              <div className="mt-4 flex space-x-4">
+                <button
+                  className="text-blue-400 hover:text-blue-300"
+                  onClick={() => openModal(user)}
+                >
+                  View More
+                </button>
                 
-
-                
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-                  <button className='text-indigo-400 hover:text-indigo-300 mr-2'>Edit</button>
-                  <button className='text-red-400 hover:text-red-300'>Delete</button>
-                </td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
+
+      <div className="mt-6 flex justify-center space-x-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            className={`px-4 py-2 rounded-lg ${currentPage === index + 1 ? 'bg-purple-500 text-white' : 'bg-gray-700 text-gray-400'} hover:bg-purple-600 hover:text-white`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+
+      {isModalOpen && selectedUser && (
+        <motion.div
+          className="fixed inset-0  bg-black bg-opacity-50 flex justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="bg-gray-800 p-6 rounded-lg sm:w-1/3 text-center xs:w-full">
+            <h2 className="text-lg font-semibold mb-4">{selectedUser.name}</h2>
+            <p className="text-sm text-gray-400 mb-2">
+              Email: <span className="text-gray-200">{selectedUser.email}</span>
+            </p>
+            <p className="text-sm text-gray-400 mb-2">
+              Status:{" "}
+              <span className={selectedUser.status === "Active" ? "text-green-400" : "text-red-400"}>
+                {selectedUser.status}
+              </span>
+            </p>
+            <p className="text-sm text-gray-400 mb-2">
+              Joined: <span className="text-gray-200">{selectedUser.joined}</span>
+            </p>
+            <p className="text-sm text-gray-400 mb-2">
+              Contact: <span className="text-gray-200">{selectedUser.contact}</span>
+            </p>
+            <p className="text-sm text-gray-400 mb-2">
+              Address: <span className="text-gray-200">{selectedUser.address}</span>
+            </p>
+            <button
+              className="mt-4 px-6 py-2 bg-red-500 text-white rounded-lg"
+              onClick={closeModal}
+            >
+              Close
+            </button>
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 };

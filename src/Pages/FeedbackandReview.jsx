@@ -45,7 +45,7 @@ const FeedbackandReview = () => {
         <h3 className="text-xl font-semibold mb-4">Leave a Feedback</h3>
         <form onSubmit={handleFeedbackSubmit} className="space-y-4">
           <div className="flex items-center">
-            <span className="text-gray-500 mr-4">Rating:</span>
+            {/* <span className="text-gray-500 mr-4">Rating:</span>
             <div className="flex space-x-1">
               {[1, 2, 3, 4, 5].map((value) => (
                 <FaStar
@@ -54,7 +54,7 @@ const FeedbackandReview = () => {
                   onClick={() => setRatings((prev) => ({ ...prev, employer: value }))}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
           <textarea
             className="w-full p-3 border rounded-md bg-gray-900 text-white"

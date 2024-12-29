@@ -35,9 +35,7 @@ const Logout = ({ onLogout }) => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}>
             <h2 className='font-bold text-white sm:text-2xl text-center xs:text-sm'> Do you want to Logout ? </h2>
-            <img src="https://cdn2.iconfinder.com/data/icons/network-and-internet-3d-illustration-pack/128/Logout_3D_Illustration_Icon.png" className="absolute sm:left-20 sm:top-6 xs:left-5 xs:top-4  " 
-          style={{ width: '40px' }} 
-          alt="Login Icon"  />
+            
 	
       <main className="max-w-7xl mx-auto py-6 px-4 lg:px-8 flex justify-evenly mt-10 ">
         <button 

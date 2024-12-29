@@ -149,7 +149,7 @@ const Payment = () => {
         {/* Transaction History Section */}
         <div>
           <h2 className="text-xl font-semibold mb-4">Transaction History</h2>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-hidden">
             <table className="table-auto w-full border-collapse text-gray-200">
               <thead>
                 <tr>
