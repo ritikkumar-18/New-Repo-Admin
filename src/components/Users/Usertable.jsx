@@ -62,8 +62,8 @@ const Usertable = () => {
       animate={{opacity:1,y:0}}
       transition={{duration:0.5}}
     >
-  
-        <div className="mb-6 relative">
+        
+        <div className="mb-6 relative flex-grow">
           <input
             type="text"
             value={searchTerm}

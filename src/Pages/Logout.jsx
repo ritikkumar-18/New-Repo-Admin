@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Common/Header';
 import { motion } from 'framer-motion';
+import { LogOutIcon } from 'lucide-react';
 
 const Logout = ({ onLogout }) => {
   const [isModalVisible, setIsModalVisible] = useState(false); 
@@ -34,6 +35,7 @@ const Logout = ({ onLogout }) => {
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}>
+        <LogOutIcon className='absolute sm:ml-16 xs:size-5 xs:ml-4 sm:size-7 sm:mt-1'/>
             <h2 className='font-bold text-white sm:text-2xl text-center xs:text-sm'> Do you want to Logout ? </h2>
             
 	

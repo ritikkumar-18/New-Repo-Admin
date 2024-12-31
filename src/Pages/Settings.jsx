@@ -6,6 +6,7 @@ import Connected from '../components/Settings/Connected'
 import Danger from '../components/Settings/Delete'
 import Profile from '../components/Settings/Profile'
 
+
 const Settings = () => {
   return (
     <div className='flex-1 overflow-auto relative z-10'>
@@ -14,6 +15,8 @@ const Settings = () => {
         <Profile/>
         {/* <Notification/> */}
         <Security/>
+  
+        
         {/* <Connected/>
         <Danger/> */}
         </main>

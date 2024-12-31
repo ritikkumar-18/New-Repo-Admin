@@ -584,12 +584,14 @@ const Candidate = () => {
               <p className="text-gray-400">No candidates found.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6">
               {paginatedCandidates.map((candidate) => (
-                <div
+                <motion.div
                   key={candidate.id}
                   className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                >
+                 initial={{ opacity: 0, y: 20 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.2 }} >
                   <h3 className="text-xl font-bold mb-2">{candidate.name}</h3>
                   <p className="text-gray-400">{candidate.location}</p>
                   <p className="mt-2"><strong>Skills:</strong> {candidate.skills.join(", ")}</p>
@@ -601,7 +603,7 @@ const Candidate = () => {
                       {candidate.available ? "Available" : "Not Available"}
                     </span>
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}
