@@ -1014,6 +1014,13 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/" element={<Recruit />} />
         <Route path="/job-opening" element={<Jobopening />} />
         <Route path="/candidate" element={<Candidate />} />
+        <Route path="/jobopening" element={<Jobopening />} />
+        <Route path="/calender" element={<Calender />} />
+         <Route path="/email" element={<Email />} />
+         <Route path="/feedback" element={<FeedbackandReview />} />
+         <Route path="/payment" element={<Payment />} />
+         <Route path="/settings" element={<Settings />} />
+         <Route path="/logout" element={<Logout onLogout={onLogout} />} />
       </Routes>
     </div>
   );
