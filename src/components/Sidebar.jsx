@@ -94,7 +94,7 @@ const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
   { name: "Recruiters", icon: FaUser, color: "#8B5CF6", href: "/users" },
   
-  { name: "Job Management", icon: Container, color: "#8B5CF6", href: '/job' },
+  // { name: "Job Management", icon: Container, color: "#8B5CF6", href: '/job' },
   { name: "Team Management", icon: FaTeamspeak, color: "#8B5CF6", href: '/team' },
   
   { name: "Subscription Plan", icon: FaRupeeSign, color: "#8B5CF6", href: '/payment' },

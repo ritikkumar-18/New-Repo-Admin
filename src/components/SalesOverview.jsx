@@ -1,6 +1,8 @@
-import React from 'react'
-import { LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,ResponsiveContainer } from 'recharts'
-import { motion } from 'framer-motion'
+import React from 'react';
+import { Pie, Tooltip, ResponsiveContainer, PieChart, Cell, Legend } from 'recharts';
+import { motion } from 'framer-motion';
+
+// Assuming sales data represents the total for each month
 const salesData = [
 	{ name: "Jul", visitors: 1240 },
 	{ name: "Aug", visitors: 3800 },
@@ -16,44 +18,58 @@ const salesData = [
 	{ name: "Jun", visitors: 7500 },
 ];
 
+const totalVisitors = salesData.reduce((acc, curr) => acc + curr.visitors, 0);
+
+const firstPlatformGrowth = (totalVisitors * 0.4); // 40%
+const secondPlatformGrowth = (totalVisitors * 0.3); // 30%
+const aggregateStoreGrowth = (totalVisitors * 0.3); // 30%
+
+const growthData = [
+	{ name: 'First Platform', value: firstPlatformGrowth },
+	{ name: 'Second Platform', value: secondPlatformGrowth },
+	{ name: 'Aggregate Store', value: aggregateStoreGrowth },
+];
+
+const COLORS = ["#6366F1", "#8B5CF6", "#EC4899"]; 
 
 const SalesOverview = () => {
   return (
     <motion.div
-			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
-			initial={{ opacity: 0, y: 20 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ delay: 0.2 }}
-		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>No. of Visitors</h2>
+      className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+    >
+      <h2 className='text-lg font-medium mb-4 text-gray-100'>No. of Visitors</h2>
 
-			<div className='h-80'>
-				<ResponsiveContainer width={"100%"} height={"100%"}>
-					<LineChart data={salesData}>
-						<CartesianGrid strokeDasharray='3 3' stroke='#4B5563' />
-						<XAxis dataKey={"name"} stroke='#9ca3af' />
-						<YAxis stroke='#9ca3af' />
-						<Tooltip
-							contentStyle={{
-								backgroundColor: "rgba(31, 41, 55, 0.8)",
-								borderColor: "#4B5563",
-							}}
-							itemStyle={{ color: "#E5E7EB" }}
-						/>
-						<Line
-							type='monotone'
-							dataKey='visitors'
-							stroke='#6366F1'
-							strokeWidth={3}
-							dot={{ fill: "#6366F1", strokeWidth: 2, r: 6 }}
-							activeDot={{ r: 8, strokeWidth: 2 }}
-						/>
-					</LineChart>
-				</ResponsiveContainer>
-			</div>
-		</motion.div>
-    
-  )
+      <div className='h-80'>
+        <ResponsiveContainer width={"100%"} height={"100%"}>
+          <PieChart>
+            <Pie
+              data={growthData}
+              dataKey="value"
+              nameKey="name"
+              outerRadius="80%"
+              fill="#8884d8"
+              label
+            >
+              {growthData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                borderColor: "#4B5563",
+              }}
+              itemStyle={{ color: "#E5E7EB" }}
+            />
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </motion.div>
+  );
 }
 
-export default SalesOverview
+export default SalesOverview;

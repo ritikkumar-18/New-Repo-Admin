@@ -772,7 +772,7 @@ function LoginPage({ onLogin }) {
   };
 
   return (
-    <div className="flex w-4/5 h-3/4 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="flex w-4/5 h-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="hidden sm:block w-4/6 relative bg-gray-800">
         <video className="w-full h-full object-cover" autoPlay loop muted>
           <source
@@ -791,7 +791,7 @@ function LoginPage({ onLogin }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <h2 className="sm:text-2xl xs:text-xl font-bold text-center mb-6">
+            <h2 className="sm:text-2xl xs:text-xl font-bold text-center mb-6 ">
               Login to Your Account
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -995,9 +995,9 @@ function AdminDashboard({ onLogout }) {
         <Route path="/logout" element={<Logout onLogout={onLogout} />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/email" element={<Email />} />
-        <Route path="/job" element={<Job />} />
+        {/* <Route path="/job" element={<Job />} /> */}
         <Route path="/help" element={<Help />} />
-        <Route path="/team-management-dashboard" element={<TeamManagementDashboard />} />
+        <Route path="/team" element={<TeamManagementDashboard />} />
         <Route path="/application" element={<Application />} />
         <Route path="/feedback-and-review" element={<FeedbackandReview />} />
         <Route path="/payment" element={<Payment />} />
@@ -1016,11 +1016,11 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/candidate" element={<Candidate />} />
         <Route path="/jobopening" element={<Jobopening />} />
         <Route path="/calender" element={<Calender />} />
-         <Route path="/email" element={<Email />} />
-         <Route path="/feedback" element={<FeedbackandReview />} />
-         <Route path="/payment" element={<Payment />} />
-         <Route path="/settings" element={<Settings />} />
-         <Route path="/logout" element={<Logout onLogout={onLogout} />} />
+        <Route path="/email" element={<Email />} />
+        <Route path="/feedback" element={<FeedbackandReview />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/logout" element={<Logout onLogout={onLogout} />} />
       </Routes>
     </div>
   );

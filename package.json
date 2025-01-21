@@ -24,7 +24,8 @@
     "react-multi-select-component": "^4.3.4",
     "react-router-dom": "^7.0.1",
     "react-toastify": "^10.0.6",
-    "recharts": "^2.13.3"
+    "recharts": "^2.13.3",
+    "swiper": "^11.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

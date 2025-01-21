@@ -22,7 +22,7 @@ const Categorybased = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Category Distribution</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-100'>Department Distribution</h2>
 			<div className='h-80'>
 				<ResponsiveContainer width={"100%"} height={"100%"}>
 					<PieChart>
