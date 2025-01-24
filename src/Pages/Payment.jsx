@@ -419,11 +419,13 @@ const Payment = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Subscription Plans"} />
+      <motion.div></motion.div>
       <motion.div
         className="container mx-auto px-6 md:px-8 py-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        initial={{opacity:0,y:20}}
+            animate={{opacity:1,y:0}}
+            transition={{duration:0.5}}
+        
       >
         <div className="mb-8">
           <h2 className="text-xl font-semibold mb-4">Create New Subscription Plan</h2>

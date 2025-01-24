@@ -23,7 +23,7 @@ const Recruit = () => {
     <motion.div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mx-auto px-6 mt-3"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.2 }}>
+    transition={{ delay: 0.5 }}>
     
           {applicants.map((applicant) => (
             <div

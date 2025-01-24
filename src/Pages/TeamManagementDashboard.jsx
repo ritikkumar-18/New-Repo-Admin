@@ -49,7 +49,7 @@ const TeamManagementDashboard = () => {
 
   const handleUpdateMember = (updatedMember) => {
     setMembers(members.map((member) => (member.id === updatedMember.id ? updatedMember : member)));
-    toast.success('Member updated!');
+
   };
 
   const handleAddNewMember = () => {
