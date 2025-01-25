@@ -124,7 +124,7 @@ const TeamManagementDashboard = () => {
       <table className="w-full table-auto border-collapse bg-gray-900 text-white rounded-lg shadow-md overflow-hidden">
         <thead className=" text-white">
           <tr>
-            <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Serial no.</th>
+            <th className="px-3 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Serial no.</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Name</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Status</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm">Actions</th>
@@ -156,6 +156,81 @@ const TeamManagementDashboard = () => {
         </tbody>
       </table>
     </div>
+    <AnimatePresence>
+           {viewingMember && (
+            <motion.div
+              className="fixed inset-0 bg-opacity-30 flex mt-14"
+              onClick={closeDetailView} 
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex-1"></div>
+              <motion.div
+                className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 sm:w-1/3 relative shadow-2xl rounded-lg xs:w-auto"
+                initial={{ opacity: 0, x: "100%" }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: "100%" }}
+                transition={{ duration: 0.5 }}
+                onClick={(e) => e.stopPropagation()} 
+              >
+                <AiOutlineClose
+                  className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-gray-200"
+                  size={24}
+                  onClick={closeDetailView}
+                />
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="h-20 w-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-2xl">
+                    {viewingMember.name.charAt(0)}
+                  </div>
+                  <h2 className="text-2xl font-semibold text-gray-100">
+                    {viewingMember.name}
+                  </h2>
+                </div>
+
+                <div className="mt-6 space-y-4">
+                  <div className="flex items-center space-x-4">
+                    <p className="text-sm text-gray-400">Role:</p>
+                    <span className="text-sm text-gray-200">{viewingMember.role}</span>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <p className="text-sm text-gray-400">Department:</p>
+                    <span className="text-sm text-gray-200">{viewingMember.department}</span>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <p className="text-sm text-gray-400">Location:</p>
+                    <span className="text-sm text-gray-200">{viewingMember.location}</span>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <p className="text-sm text-gray-400">Skills:</p>
+                    <span className="text-sm text-gray-200">
+                      {viewingMember.skills.join(", ")}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <p className="text-sm text-gray-400">Contact:</p>
+                    <span className="text-sm text-gray-200">{viewingMember.contact}</span>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <p className="text-sm text-gray-400">Address:</p>
+                    <span className="text-sm text-gray-200">{viewingMember.address}</span>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex justify-center">
+                  <button
+                    className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:opacity-90 transition duration-300"
+                    onClick={closeDetailView}
+                  >
+                    Close
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
 
     <div className="flex justify-center mt-6 space-x-2">
       {Array.from({ length: Math.ceil(filteredMembers.length / membersPerPage) }, (_, index) => (
