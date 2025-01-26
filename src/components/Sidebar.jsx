@@ -3,15 +3,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FiBarChart2, FiLogOut } from 'react-icons/fi';
 import { BiMenu } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { HelpCircle } from 'lucide-react';
-import { FaRupeeSign, FaTeamspeak, FaUser } from 'react-icons/fa';
+import {  MessageSquare } from 'lucide-react';
+import {  FaRupeeSign, FaTeamspeak, FaUser } from 'react-icons/fa';
 
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
   { name: "Recruiters", icon: FaUser, color: "#8B5CF6", href: "/users" },
   { name: "Team Management", icon: FaTeamspeak, color: "#8B5CF6", href: '/team' },
   { name: "Subscription Plan", icon: FaRupeeSign, color: "#8B5CF6", href: '/payment' },
-  { name: "Support and Help", icon: HelpCircle, color: "#8B5CF6", href: '/help' },
+  { name: "Queries", icon: MessageSquare, color: "#8B5CF6", href: '/help' },
   { name: "Logout", icon: FiLogOut, color: "#8B5CF6", href: "/logout" },
 ];
 

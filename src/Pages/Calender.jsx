@@ -54,7 +54,7 @@ const Calender = () => {
         <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
             <Header title={"Calendar"} />
 
-            < motion.div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-8"
+            < motion.div className="flex flex-col items-center justify-center  min-h-screen bg-gray-900 p-8"
             initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}>

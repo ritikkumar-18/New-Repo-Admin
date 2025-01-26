@@ -631,6 +631,7 @@ import Recruit from "../Pages/Recruit";
 import Jobopening from "../Pages/Jobopening";
 import Candidate from "../Pages/Candidate search";
 import pointSound from '/blip.mp3';  
+import Resume from "../Pages/Resume";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -1016,6 +1017,7 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/candidate" element={<Candidate />} />
         <Route path="/jobopening" element={<Jobopening />} />
         <Route path="/calender" element={<Calender />} />
+        <Route path="/resume"element={<Resume/>}/>
         <Route path="/email" element={<Email />} />
         <Route path="/feedback" element={<FeedbackandReview />} />
         <Route path="/payment" element={<Payment />} />

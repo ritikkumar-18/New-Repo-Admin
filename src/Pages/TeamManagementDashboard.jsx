@@ -99,9 +99,9 @@ const TeamManagementDashboard = () => {
           value={filters}
           onChange={handleFilterChange}
           placeholder="Search..."
-          className="px-4 py-3 pl-10 xs:w-20 md:w-auto bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-2 py-2 pl-10 xs:w-20 md:w-auto bg-gray-800 text-white border rounded  focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
-        <Search className="absolute left-3 top-4 text-gray-400" size={18} />
+        <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
       </div>
       <div className="relative xs:w-auto md:w-auto md:text-sm xs:text-xs">
         <select
@@ -127,7 +127,7 @@ const TeamManagementDashboard = () => {
             <th className="px-3 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Serial no.</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Name</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Status</th>
-            <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm">Actions</th>
+            <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm ">Actions</th>
           </tr>
         </thead>
         <tbody>

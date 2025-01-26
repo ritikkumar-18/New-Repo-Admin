@@ -76,7 +76,7 @@ const ChatApp = () => {
   return (
   <motion.div className="flex flex-col h-full  bg-gray-900 text-white "
     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-      <div className="flex flex-1 flex-col md:flex-row ">
+      <div className="flex flex-1 flex-col md:flex-row  ">
       
         <div
           className={`${
@@ -92,7 +92,7 @@ const ChatApp = () => {
               className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
             />
           </div>
-          <div className="flex-1 overflow-y-auto ">
+          <div className="flex-1 overflow-y-auto  ">
             {filteredChats.map((chat) => (
               <div
                 key={chat.id}
@@ -101,7 +101,7 @@ const ChatApp = () => {
                   selectedChat?.id === chat.id ? "bg-rose-700" : "hover:bg-gray-700"
                 }`}
               >
-                <div className="flex justify-between">
+                <div className="flex justify-between ">
                   <h3 className="text-lg font-medium">{chat.name}</h3>
                   <span className="text-sm text-gray-400">{chat.time}</span>
                 </div>

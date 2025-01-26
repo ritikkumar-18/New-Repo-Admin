@@ -46,7 +46,7 @@ const Users = () => {
 				</motion.div>
         <Usertable/>
        
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 '>
           
 
         </div>
