@@ -81,9 +81,9 @@ const ChatApp = () => {
         <div
           className={`${
             isChatListVisible ? "flex" : "hidden"
-          } w-full md:w-1/3 bg-gray-800 border-r  border-gray-700 flex-col md:flex`}
+          } w-full md:w-1/3 bg-gray-800 border-r sm:h-[840px] border-gray-700 flex-col md:flex`}
         >
-          <div className="p-4 border-b border-gray-700 bg-gray-800 ">
+          <div className="p-4 border-b border-gray-700 bg-gray-800  ">
             <input
               type="text"
               placeholder="Search"
@@ -97,7 +97,7 @@ const ChatApp = () => {
               <div
                 key={chat.id}
                 onClick={() => handleSelectChat(chat)}
-                className={`p-4 cursor-pointer border-b border-gray-700 ${
+                className={`p-4 cursor-pointer border-b border-gray-700  ${
                   selectedChat?.id === chat.id ? "bg-rose-700" : "hover:bg-gray-700"
                 }`}
               >
@@ -160,7 +160,7 @@ const ChatApp = () => {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type a message..."
-                  className="flex-1 px-4 py-2 border  xs:w-[100px] border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
+                  className="flex-1 px-4 py-2 border  sm:w-[100px] border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
                 />
                 <button
                   onClick={handleSendMessage}

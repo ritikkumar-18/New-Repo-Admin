@@ -774,7 +774,7 @@ function LoginPage({ onLogin }) {
 
   return (
     <div className="flex w-4/5 h-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="hidden sm:block w-4/6 relative bg-gray-800">
+      <div className="hidden md:block w-4/6 relative bg-gray-800">
         <video className="w-full h-full object-cover" autoPlay loop muted>
           <source
             src="https://videos.pexels.com/video-files/1390942/1390942-sd_960_506_24fps.mp4"
@@ -784,7 +784,7 @@ function LoginPage({ onLogin }) {
         </video>
       </div>
 
-      <div className="w-full sm:w-1/2 lg:w-3/5 flex flex-col items-center justify-center bg-white shadow-lg rounded-lg p-8">
+      <div className="w-full md:w-1/2 lg:w-3/5 flex flex-col items-center justify-center bg-white shadow-lg rounded-lg p-8">
         {isLogin ? (
           <motion.div
             className="w-full"
@@ -792,7 +792,7 @@ function LoginPage({ onLogin }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <h2 className="sm:text-2xl xs:text-xl font-bold text-center mb-6 ">
+            <h2 className="md:text-2xl :text-xl font-bold text-center mb-6 ">
               Login to Your Account
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">

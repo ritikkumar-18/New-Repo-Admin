@@ -20,11 +20,11 @@ const Logout = ({ onLogout }) => {
 
   const handleCancelLogout = () => {
     setIsModalVisible(false);
-     // Close the modal without logging out
+ 
   };
 
   const handleLogoutClick = () => {
-    setIsModalVisible(true); // Show the modal when user clicks logout
+    setIsModalVisible(true); 
   };
 
   return (
@@ -35,8 +35,8 @@ const Logout = ({ onLogout }) => {
 			initial={{opacity:0,y:20}}
             animate={{opacity:1,y:0}}
             transition={{duration:0.5}}>
-         <LogOutIcon className='absolute sm:ml-16 xs:size-5 xs:ml-4 xl:ml-10 sm:size-7 sm:mt-1'/>
-            <h2 className='font-bold text-white sm:text-2xl text-center xs:text-sm'> Do you want to Logout ? </h2>
+         <LogOutIcon className='absolute  sm:size-5 sm:ml-4 md:size-7 md:ml-16 md:mt-1 sm:mt-0.5'/>
+            <h2 className='font-bold text-white sm:text-md text-center md:text-2xl '> Do you want to Logout ? </h2>
             
 	
       <main className="max-w-7xl mx-auto py-6 px-4 lg:px-8 flex justify-evenly mt-10 ">
@@ -53,7 +53,7 @@ const Logout = ({ onLogout }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}>
             <div className="bg-red-700 p-6 rounded-lg shadow-xl max-w-sm w-full sm:text-xs">
-              <h3 className="sm:text-xl xs:text-sm font-bold mb-10">Are you sure you want to Log Out ?</h3>
+              <h3 className="sm:text-xl  font-bold mb-10">Are you sure you want to Log Out ?</h3>
               <div className="flex justify-between">
                 <button
                   onClick={handleConfirmLogout}

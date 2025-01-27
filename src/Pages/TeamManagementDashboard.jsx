@@ -168,7 +168,7 @@ const TeamManagementDashboard = () => {
             >
               <div className="flex-1"></div>
               <motion.div
-                className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 sm:w-1/3 relative shadow-2xl rounded-lg xs:w-auto"
+                className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2  relative shadow-2xl rounded-lg md:w-1/3 sm:w-auto"
                 initial={{ opacity: 0, x: "100%" }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: "100%" }}
