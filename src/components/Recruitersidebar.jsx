@@ -85,14 +85,15 @@
 
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiLogOut, FiSettings } from 'react-icons/fi';
+import { FiBarChart2, FiLogOut, FiSettings } from 'react-icons/fi';
 import { BiMenu } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { BookOpen, Briefcase, CalendarHeart, Download, Mail, MessageCircle,  MessagesSquareIcon,  UserSearch } from 'lucide-react';
 import {  FaComments } from 'react-icons/fa';
 
 const SIDEBAR = [
-  { name: 'Recruit', icon: Briefcase, color: '#8B5CF6', href: '/' },
+  { name:'Overview' ,icon:FiBarChart2,color:'#8B5CF6',href:'/'},
+  { name: 'Recruit', icon: Briefcase, color: '#8B5CF6', href: '/recruit' },
   { name: 'Candidate search', icon: UserSearch, color: '#8B5CF6', href: '/candidate' },
   { name: 'Job Opening', icon: BookOpen, color: '#8B5CF6', href: '/jobopening' },
   { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },

@@ -7,7 +7,7 @@ import { FiBarChart2 } from 'react-icons/fi'
 import SalesOverview from '../components/SalesOverview'
 import Categorybased from '../components/Categorybased'
 import GetjobChart from '../components/GetjobChart'
-import {  Briefcase, Building2, CreditCard, DollarSign, Eye, SubscriptIcon, Toilet, UserCheck, UserPlus2, Users2Icon } from 'lucide-react'
+import {  Briefcase, Building2, CreditCard, DollarSign, UserCheck, UserPlus2, Users2Icon } from 'lucide-react'
 import UserCharts from '../components/Users/UserCharts'
 import Production from '../components/Analytics/Production'
 

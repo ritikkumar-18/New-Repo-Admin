@@ -81,7 +81,7 @@ const ChatApp = () => {
         <div
           className={`${
             isChatListVisible ? "flex" : "hidden"
-          } w-full md:w-1/3 bg-gray-800 border-r sm:h-[840px] border-gray-700 flex-col md:flex`}
+          } w-full md:w-1/3 bg-gray-800 border-r md:h-[560px] sm:h-[780px] border-gray-700 flex-col md:flex`}
         >
           <div className="p-4 border-b border-gray-700 bg-gray-800  ">
             <input

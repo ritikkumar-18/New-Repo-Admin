@@ -632,6 +632,7 @@ import Jobopening from "../Pages/Jobopening";
 import Candidate from "../Pages/Candidate search";
 import pointSound from '/blip.mp3';  
 import Resume from "../Pages/Resume";
+import Overviewrecruit from "../Pages/Overviewrecruit";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -1012,7 +1013,8 @@ function RecruiterDashboard({ onLogout }) {
     <div className="flex bg-gray-900 text-gray-100 overflow-hidden w-full h-full">
       <RecruiterSidebar />
       <Routes>
-        <Route path="/" element={<Recruit />} />
+        <Route path="/" element={<Overviewrecruit/>}/>
+        <Route path="/recruit" element={<Recruit />} />
         <Route path="/job-opening" element={<Jobopening />} />
         <Route path="/candidate" element={<Candidate />} />
         <Route path="/jobopening" element={<Jobopening />} />

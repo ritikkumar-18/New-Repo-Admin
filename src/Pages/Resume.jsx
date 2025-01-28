@@ -1,239 +1,208 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AiOutlineClose } from "react-icons/ai";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import Header from "../components/Common/Header";
 
-// Candidate and Offer Data
 const candidates = [
-  { id: 1, name: "John Doe", role: "Software Engineer", avatar: "https://via.placeholder.com/100", resume: "John's detailed resume content..." },
-  { id: 2, name: "Jane Smith", role: "UI/UX Designer", avatar: "https://via.placeholder.com/100", resume: "Jane's detailed resume content..." },
-  // Add more candidates as needed
+  { 
+    id: 1, 
+    name: "John Doe", 
+    role: "Software Engineer", 
+    avatar: "https://cdn-icons-png.flaticon.com/128/4333/4333609.png", 
+    resume: "John Doe's detailed resume content. He has 5 years of experience in software engineering, specializing in web development with React, Node.js, and MongoDB." 
+  },
+  { 
+    id: 2, 
+    name: "Jane Smith", 
+    role: "UI/UX Designer", 
+    avatar: "https://cdn-icons-png.flaticon.com/128/1999/1999625.png", 
+    resume: "Jane Smith's detailed resume content. She specializes in user-centered design, prototyping, and interaction design, with 3 years of experience in the field." 
+  },
+  { 
+    id: 3, 
+    name: "Samuel Green", 
+    role: "Data Scientist", 
+    avatar: "https://cdn-icons-png.flaticon.com/128/3135/3135715.png", 
+    resume: "Samuel Green's detailed resume content. With a background in machine learning and AI, he has 4 years of experience in data analytics and predictive modeling." 
+  },
+  { 
+    id: 4, 
+    name: "Emily Brown", 
+    role: "DevOps Engineer", 
+    avatar: "https://cdn-icons-png.flaticon.com/128/6997/6997662.png", 
+    resume: "Emily Brown's detailed resume content. She has 6 years of experience managing infrastructure, automating deployments, and ensuring system reliability using Docker, Kubernetes, and AWS." 
+  },
 ];
 
 const offerTemplates = [
   { id: 1, name: "Standard Offer", content: "Dear [Name],\n\nWe are excited to offer you the position of [Role] at our company..." },
   { id: 2, name: "Internship Offer", content: "Dear [Name],\n\nWe are pleased to offer you an internship opportunity as [Role]..." },
   { id: 3, name: "Contract Offer", content: "Dear [Name],\n\nWe are happy to offer you a contractual role as [Role] for [Duration]..." },
-  // Add more templates as needed
 ];
 
 const Resume = () => {
-  const [viewingCandidate, setViewingCandidate] = useState(null);
-  const [showOfferModal, setShowOfferModal] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [customNote, setCustomNote] = useState("");
+  const [viewingResume, setViewingResume] = useState(null);
+  const [offerModal, setOfferModal] = useState({ open: false, candidate: null });
   const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const itemsPerPage = 5;
+  const [customNote, setCustomNote] = useState("");
 
-  // Filter candidates based on search query
-  const filteredCandidates = candidates.filter(
-    (candidate) =>
-      candidate.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      candidate.role.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  // Paginated Candidates
-  const paginatedCandidates = filteredCandidates.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const handleGenerateOffer = () => {
+  const handleIssueOffer = () => {
     if (!selectedTemplate) {
-      toast.error("Please select a template before generating an offer.");
+      toast.error("Please select a template to issue an offer.");
       return;
     }
-    toast.success(`Offer letter generated using: ${selectedTemplate.name}`);
-    setShowOfferModal(false);
-    setCustomNote("");
+    const offerContent = selectedTemplate.content
+      .replace("[Name]", offerModal.candidate.name)
+      .replace("[Role]", offerModal.candidate.role);
+
+    toast.success("Offer letter issued!");
+    console.log("Generated Offer:", offerContent);
+    setOfferModal({ open: false, candidate: null });
     setSelectedTemplate(null);
+    setCustomNote("");
   };
 
-  const closeOfferModal = () => {
-    setShowOfferModal(false);
-    setCustomNote("");
-    setSelectedTemplate(null);
-  };
-
-  // Handle page change
-  const handlePageChange = (direction) => {
-    if (direction === "next" && currentPage < Math.ceil(filteredCandidates.length / itemsPerPage)) {
-      setCurrentPage(currentPage + 1);
-    } else if (direction === "prev" && currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
+  const downloadResume = (resume, name) => {
+    const blob = new Blob([resume], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${name}_Resume.txt`;
+    link.click();
   };
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
-      <Header title={"Resume"} />
-      <Toaster />
+    <div className="flex-1 overflow-auto z-10 relative">
+      <Header title="Resume" />
 
-      {/* Search Bar */}
-      <div className="mb-4 w-full max-w-md mx-auto">
-        <input
-          type="text"
-          className="p-2 w-full rounded-md bg-gray-800 text-gray-300 placeholder-gray-500"
-          placeholder="Search candidates..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
-
-      {/* Candidate Table */}
-      <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-md mx-auto max-w-4xl">
-        <table className="table-auto w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-gray-700 text-gray-300">
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Role</th>
-              <th className="px-4 py-2">Actions</th>
+      <table className="w-full text-left table-auto bg-gray-800 rounded-lg overflow-hidden mt-3 ">
+        <thead className="bg-gray-700 ">
+          <tr>
+            <th className="px-4 py-2" >Avatar</th>
+            <th className="px-4 py-2">Name</th>
+            <th className="px-4 py-2">Role</th>
+            <th className="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {candidates.map((candidate) => (
+            <tr key={candidate.id} className="hover:bg-gray-700 transition ">
+              <td className="px-4 py-2">
+                <img
+                  src={candidate.avatar}
+                  alt={candidate.name}
+                  className="w-12 h-12 rounded-full"
+                />
+              </td>
+              <td className="px-4 py-2">{candidate.name}</td>
+              <td className="px-4 py-2">{candidate.role}</td>
+              <td className="px-4 py-2 flex space-x-2">
+                <button
+                  className="md:px-3 py-1 bg-blue-500 rounded hover:bg-blue-600 "
+                  onClick={() => setViewingResume(candidate)}
+                >
+                  View Resume
+                </button>
+                <button
+                  className="px-3 py-1 bg-green-500 rounded hover:bg-green-600  sm:px-2"
+                  onClick={() => setOfferModal({ open: true, candidate })}
+                >
+                  Issue Offer
+                </button>
+                <button
+                  className="px-3 py-1 bg-teal-500 rounded hover:bg-teal-600  sm:px-2 "
+                  onClick={() => downloadResume(candidate.resume, candidate.name)}
+                >
+                  Download Resume
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {paginatedCandidates.map((candidate) => (
-              <tr key={candidate.id} className="border-b border-gray-700 hover:bg-gray-700 transition">
-                <td className="px-4 py-2">{candidate.name}</td>
-                <td className="px-4 py-2">{candidate.role}</td>
-                <td className="px-4 py-2">
-                  <button
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                    onClick={() => setViewingCandidate(candidate)}
-                  >
-                    View Resume
-                  </button>
-                  <button
-                    className="ml-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                    onClick={() => setShowOfferModal(true)}
-                  >
-                    Issue Offer
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-between items-center mt-4 mx-auto max-w-4xl">
-        <button
-          className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600"
-          onClick={() => handlePageChange("prev")}
-        >
-          Prev
-        </button>
-        <span className="text-gray-400">Page {currentPage} of {Math.ceil(filteredCandidates.length / itemsPerPage)}</span>
-        <button
-          className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600"
-          onClick={() => handlePageChange("next")}
-        >
-          Next
-        </button>
-      </div>
-
-      {/* Resume Modal */}
       <AnimatePresence>
-        {viewingCandidate && (
+        {viewingResume && (
           <motion.div
-            className="fixed inset-0 bg-gray-800 bg-opacity-75 flex"
-            onClick={() => setViewingCandidate(null)}
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.5 }}
+            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setViewingResume(null)}
           >
             <motion.div
-              className="bg-gray-900 p-6 w-full lg:w-1/2 max-w-2xl mx-auto shadow-2xl rounded-lg overflow-auto"
+              className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full"
               onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ duration: 0.5 }}
             >
-              <AiOutlineClose
-                className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-gray-200"
-                size={24}
-                onClick={() => setViewingCandidate(null)}
-              />
-              <div className="flex items-center mb-4">
-                <img
-                  src={viewingCandidate.avatar}
-                  alt="Avatar"
-                  className="w-16 h-16 rounded-full mr-4"
-                />
-                <div>
-                  <h2 className="text-xl font-semibold">{viewingCandidate.name}</h2>
-                  <p className="text-sm text-gray-400">{viewingCandidate.role}</p>
-                </div>
-              </div>
-              <p className="mb-4 whitespace-pre-line">{viewingCandidate.resume}</p>
+              <h2 className="text-xl font-semibold mb-4">
+                {viewingResume.name}'s Resume
+              </h2>
+              <p className="whitespace-pre-line">{viewingResume.resume}</p>
               <button
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                onClick={() => {
-                  const element = document.createElement("a");
-                  const file = new Blob([viewingCandidate.resume], { type: "text/plain" });
-                  element.href = URL.createObjectURL(file);
-                  element.download = `${viewingCandidate.name}_Resume.txt`;
-                  document.body.appendChild(element);
-                  element.click();
-                  toast.success("Resume downloaded successfully!");
-                }}
+                className="mt-4 px-4 py-2 bg-blue-500 rounded hover:bg-blue-600"
+                onClick={() => setViewingResume(null)}
               >
-                Download Resume
+                Close
               </button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Offer Letter Modal */}
-      {showOfferModal && (
-        <OfferModal
-          templates={offerTemplates}
-          onGenerateOffer={handleGenerateOffer}
-          onCancel={closeOfferModal}
-          customNote={customNote}
-          setCustomNote={setCustomNote}
-          selectedTemplate={selectedTemplate}
-          setSelectedTemplate={setSelectedTemplate}
-        />
-      )}
-    </div>
-  );
-};
-
-// Offer Modal Component
-const OfferModal = ({ templates, onGenerateOffer, onCancel, customNote, setCustomNote, selectedTemplate, setSelectedTemplate }) => {
-  return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
-      <div className="bg-gray-900 p-6 rounded-lg shadow-lg max-w-lg w-full">
-        <h2 className="text-lg font-semibold mb-4">Select Offer Template</h2>
-        {templates.map((template) => (
-          <div key={template.id} className="mb-2">
-            <button
-              className={`w-full px-4 py-2 rounded-md text-left ${selectedTemplate && selectedTemplate.id === template.id ? 'bg-gray-600' : 'bg-gray-800'}`}
-              onClick={() => setSelectedTemplate(template)}
-            >
-              {template.name}
-            </button>
-            <p className="text-sm text-gray-400 mt-1">{template.content}</p>
+      <Toaster />
+      {offerModal.open && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
+            <h2 className="text-xl font-semibold mb-4">
+              Issue Offer to {offerModal.candidate.name}
+            </h2>
+            <div className="mb-4 space-y-2">
+              {offerTemplates.map((template) => (
+                <div key={template.id}>
+                  <button
+                    className={`w-full p-3 text-left rounded ${
+                      selectedTemplate?.id === template.id
+                        ? "bg-gray-600"
+                        : "bg-gray-700"
+                    }`}
+                    onClick={() => setSelectedTemplate(template)}
+                  >
+                    {template.name}
+                  </button>
+                </div>
+              ))}
+            </div>
+            {selectedTemplate && (
+              <div className="p-3 bg-gray-700 rounded mb-4">
+                <pre className="whitespace-pre-wrap text-sm">
+                  {selectedTemplate.content
+                    .replace("[Name]", offerModal.candidate.name)
+                    .replace("[Role]", offerModal.candidate.role)}
+                </pre>
+              </div>
+            )}
+            <textarea
+              className="w-full p-3 bg-gray-700 rounded mb-4"
+              placeholder="Add custom note (optional)"
+              value={customNote}
+              onChange={(e) => setCustomNote(e.target.value)}
+            />
+            <div className="flex justify-between">
+              <button
+                className="px-4 py-2 bg-red-500 rounded hover:bg-red-600"
+                onClick={() => setOfferModal({ open: false, candidate: null })}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-green-500 rounded hover:bg-green-600"
+                onClick={handleIssueOffer}
+              >
+                Generate Offer
+              </button>
+            </div>
           </div>
-        ))}
-        <textarea
-          className="mt-4 w-full p-2 bg-gray-800 border border-gray-700 rounded-md placeholder-gray-400"
-          placeholder="Add custom note (optional)"
-          value={customNote}
-          onChange={(e) => setCustomNote(e.target.value)}
-        ></textarea>
-
-        <div className="flex justify-between mt-4">
-          <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={onCancel}>Cancel</button>
-          <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onClick={onGenerateOffer}>Generate Offer</button>
         </div>
-      </div>
+      )}
     </div>
   );
 };
