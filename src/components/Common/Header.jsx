@@ -58,7 +58,7 @@ const Header = ({ title }) => {
                     notifications.map((notification, index) => (
                       <li
                         key={index}
-                        className="px-4 py-3 text-sm text-gray-300 hover:bg-gray-700"
+                        className="px-4 py-3 text-sm text-gray-300 hover:bg-gray-700 hover:cursor-pointer"
                       >
                         {notification}
                       </li>
