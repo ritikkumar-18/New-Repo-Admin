@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Toaster, toast } from "react-hot-toast";
 import Header from "../components/Common/Header";
 import { AiOutlineEye } from "react-icons/ai";
 import { Download, Paperclip, Search, X } from "lucide-react";
-
-
+ 
 
 const candidates = [
-  { id: 1, name: "John Doe", role: "Software Engineer", avatar: "https://cdn-icons-png.flaticon.com/128/4333/4333609.png" },
-  { id: 2, name: "Jane Smith", role: "UI/UX Designer", avatar: "https://cdn-icons-png.flaticon.com/128/1999/1999625.png" },
-  { id: 3, name: "Samuel Green", role: "Data Scientist", avatar: "https://cdn-icons-png.flaticon.com/128/3135/3135715.png" },
-  { id: 4, name: "Emily Brown", role: "DevOps Engineer", avatar: "https://cdn-icons-png.flaticon.com/128/6997/6997662.png" },
-  { id: 5, name: " S.Doe", role: "Mobile Engineer", avatar: "https://cdn-icons-png.flaticon.com/128/4140/4140048.png"},
-  { id: 6, name: "Gian Smith", role: "Blockchain Developer", avatar: "https://cdn-icons-png.flaticon.com/128/18663/18663695.png"},
-  { id: 7, name: "Sam Wilson", role: "Backend Developer", avatar: "https://cdn-icons-png.flaticon.com/128/4140/4140061.png"},
-  { id: 8, name: "MR. Brown", role: "Manual Tester", avatar: "https://cdn-icons-png.flaticon.com/128/4140/4140039.png"},
-  { id: 9, name: "Jhonny", role: "Content Writer", avatar: "https://cdn-icons-png.flaticon.com/128/4333/4333609.png"},
-  { id: 10, name: "Steve Smith", role: "SEO Developer", avatar: "https://cdn-icons-png.flaticon.com/128/924/924874.png"},
-  { id: 11, name: "Camron Green", role: "Java Developer", avatar: "https://cdn-icons-png.flaticon.com/128/4205/4205906.png" },
-  { id: 12, name: "BrathWate ", role: "DevOps Engineer", avatar: "https://cdn-icons-png.flaticon.com/128/18743/18743396.png"},
+  { id: 1, name: "John Doe", role: "Software Engineer", profile: "https://cdn-icons-png.flaticon.com/128/4333/4333609.png" },
+  { id: 2, name: "Jane Smith", role: "UI/UX Designer", profile: "https://cdn-icons-png.flaticon.com/128/1999/1999625.png" },
+  { id: 3, name: "Samuel Green", role: "Data Scientist", profile: "https://cdn-icons-png.flaticon.com/128/3135/3135715.png" },
+  { id: 4, name: "Emily Brown", role: "DevOps Engineer", profile: "https://cdn-icons-png.flaticon.com/128/6997/6997662.png" },
+  { id: 5, name: " S.Doe", role: "Mobile Engineer", profile: "https://cdn-icons-png.flaticon.com/128/4140/4140048.png"},
+  { id: 6, name: "Gian Smith", role: "Blockchain Developer", profile: "https://cdn-icons-png.flaticon.com/128/18663/18663695.png"},
+  { id: 7, name: "Sam Wilson", role: "Backend Developer", profile: "https://cdn-icons-png.flaticon.com/128/4140/4140061.png"},
+  { id: 8, name: "MR. Brown", role: "Manual Tester", profile: "https://cdn-icons-png.flaticon.com/128/4140/4140039.png"},
+  { id: 9, name: "Jhonny", role: "Content Writer", profile: "https://cdn-icons-png.flaticon.com/128/4333/4333609.png"},
+  { id: 10, name: "Steve Smith", role: "SEO Developer", profile: "https://cdn-icons-png.flaticon.com/128/924/924874.png"},
+  { id: 11, name: "Camron Green", role: "Java Developer", profile: "https://cdn-icons-png.flaticon.com/128/4205/4205906.png" },
+  { id: 12, name: "BrathWate ", role: "DevOps Engineer", profile: "https://cdn-icons-png.flaticon.com/128/18743/18743396.png"},
 ];
 
 const offerTemplates = [
@@ -106,6 +106,10 @@ const Resume = () => {
   return (
     <div className="flex-1 overflow-auto bg-gray-900 text-white">
       <Header title="Resume" />
+      <motion.div 
+      initial={{ opacity: 0, y: 20 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 0.5 }}>
       <div className="flex justify-between relative items-center mb-4 mt-5 px-4">
         <input
           type="text"
@@ -132,7 +136,7 @@ const Resume = () => {
         <table className="w-full text-left table-auto border border-gray-700">
           <thead className="bg-gray-800">
             <tr>
-              <th className="px-4 py-2">Avatar</th>
+              <th className="px-4 py-2">Profile</th>
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">For Applied</th>
               <th className="px-4 py-2">Actions</th>
@@ -145,13 +149,13 @@ const Resume = () => {
                 <tr key={candidate.id} className="hover:bg-gray-800">
                   <td className="px-4 py-2">
                     <img
-                      src={candidate.avatar}
+                      src={candidate.profile}
                       alt={candidate.name}
                       className="w-8 h-8 rounded-full"
                     />
                   </td>
                   <td className="px-4 py-2">{candidate.name}</td>
-                  <td className="px-4 py-2">{candidate.role}</td>
+                  <td className="px-4 py-2 ">{candidate.role}</td>
                   <td className="px-4 py-2">
                     <button
                       onClick={() => setOfferModal({ open: true, candidate })}
@@ -261,7 +265,9 @@ const Resume = () => {
       )}
 
       <Toaster />
+      </motion.div>
     </div>
+    
   );
 };
 
