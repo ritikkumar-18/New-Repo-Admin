@@ -36,7 +36,7 @@ const FAQ = () => {
      initial={{ opacity: 0, y: 20 }}
      animate={{ opacity: 1, y: 0 }}
      transition={{ delay: 0.2 }}>
-      <h2 className=" sm:text-3xl xs:text-xl font-semibold text-center mb-6">Frequently Asked Questions</h2>
+      <h2 className=" md:text-3xl sm:text-xl font-semibold text-center mb-6">Frequently Asked Questions</h2>
       <div className="space-y-4">
         {faqData.map((item, index) => (
           <div key={index} className="border-b border-gray-300 pb-4">

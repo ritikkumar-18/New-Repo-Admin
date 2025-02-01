@@ -621,7 +621,6 @@ import Analytics from "../Pages/Analytics";
 import Logout from "../Pages/Logout";
 import Calender from "../Pages/Calender";
 import Email from "../Pages/Email";
-import Job from "../Pages/Job";
 import Help from "../Pages/Help";
 import TeamManagementDashboard from "../Pages/TeamManagementDashboard";
 import Application from "../Pages/Application";
@@ -704,11 +703,16 @@ function LoginPage({ onLogin }) {
     
     // Validate email format and check if the field is not empty
     if (signupEmail === "") {
-      toast.error("Email field cannot be empty.");
+      toast.error("Email field cannot be empty.",{
+        style:{
+          background:"#f8d7da",
+          
+        }
+      });
       return;
     }
 
-    // Simple email validation regex
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(signupEmail)) {
       toast.error("Invalid email format.");
@@ -997,7 +1001,6 @@ function AdminDashboard({ onLogout }) {
         <Route path="/logout" element={<Logout onLogout={onLogout} />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/email" element={<Email />} />
-        {/* <Route path="/job" element={<Job />} /> */}
         <Route path="/help" element={<Help />} />
         <Route path="/team" element={<TeamManagementDashboard />} />
         <Route path="/application" element={<Application />} />

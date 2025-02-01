@@ -4,6 +4,8 @@ import Header from '../components/Common/Header';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose, AiOutlineEdit, AiOutlineEye, AiOutlinePlus } from 'react-icons/ai';
 import toast from 'react-hot-toast';
+import { CheckCircle, XCircle } from "lucide-react";
+
 
 const Payment = () => {
   const [subscriptionPlans, setSubscriptionPlans] = useState([
@@ -84,7 +86,7 @@ const Payment = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title={"Subscription Plans"} />
-    <motion.div className="container  px-6 md:px-8 py-6"
+    <motion.div className="container  px-6 md:px-8 py-6 mx-auto"
       initial={{ opacity: 0, y: 20 }} 
       animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.5 }}>
@@ -102,7 +104,7 @@ const Payment = () => {
             >
               <div className="flex-1"></div>
               <motion.div
-                className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 sm:w-1/3 relative shadow-2xl rounded-lg xs:w-auto"
+                className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 md:w-1/3 sm:w-auto relative shadow-2xl rounded-lg "
                 initial={{ opacity: 0, x: "100%" }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: "100%" }}
@@ -193,29 +195,22 @@ const Payment = () => {
                     <td className="px-6 py-3 border border-gray-700">{plan.subscriptionType}</td>
                     <td className="px-6 py-3 border border-gray-700">{plan.status}</td>
                     <td className="px-6 py-3 border border-gray-700 space-x-2">
-                      <button
-                        onClick={() => handleViewClick(plan)}
-                        className="bg-blue-500 text-white px-2 py-2 md:mb-0 xs:mb-5 rounded"
-                      >
-                        <AiOutlineEye className="text-white" />
-                      </button>
+                      
+                   <div className="flex px-6 py-3 flex-wrap md:flex-nowrap items-center gap-2 md:gap-4 mt-2">
+                       <button  onClick={() => handleViewClick(plan)} className="bg-blue-500 text-white px-3 py-2 rounded flex items-center justify-center">
+                            <AiOutlineEye className="text-white" />
+                       </button>
 
-                      <button
-                        onClick={() => handleEditClick(plan)}
-                        className="bg-yellow-500 text-white px-2 py-2 rounded"
-                      >
-                        <AiOutlineEdit className="text-white" />
-                      </button>
-                      <button
-                        onClick={() => toggleStatus(plan.id)}
-                        className={`${
-                          plan.status === "Active"
-                            ? "bg-red-500"
-                            : "bg-blue-500"
-                        } text-white px-2 py-2 mt-4 rounded`}
-                      >
-                        {plan.status === "Active" ? "Deactivate" : "Activate"}
-                      </button>
+                        <button  onClick={() => handleEditClick(plan)} className="bg-yellow-500 text-white px-3 py-2 rounded flex items-center justify-center">
+                            <AiOutlineEdit className="text-white" />
+                        </button>
+
+                        <button onClick={() => toggleStatus(plan.id)}
+                         className={`${plan.status === "Active" ? "bg-red-500" : "bg-green-500"} text-white px-3 py-2 rounded flex items-center gap-2 justify-center`}>
+                          {plan.status === "Active" ? <XCircle size={20} /> : <CheckCircle size={20} />}
+                        </button>
+                   </div>
+
                     </td>
                   </tr>
                 ))}
@@ -246,7 +241,7 @@ const Payment = () => {
           >
             <div className="flex-1"></div>
             <motion.div
-              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 sm:w-1/3 relative shadow-2xl rounded-lg xs:w-auto"
+              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 md:w-1/3 sm:w-auto relative shadow-2xl rounded-lg"
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
@@ -309,7 +304,7 @@ const Payment = () => {
           >
             <div className="flex-1"></div>
             <motion.div
-              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 sm:w-1/3 relative shadow-2xl rounded-lg xs:w-auto"
+              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 md:w-1/3 sm:w-auto relative shadow-2xl rounded-lg "
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}

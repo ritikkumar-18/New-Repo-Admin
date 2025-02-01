@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Filter, Search, X } from "lucide-react";
+import { CheckCircle, Clock, Filter, Search, X, XCircle } from "lucide-react";
 import { AiOutlineEye } from "react-icons/ai";
 
 const userData = [
@@ -122,16 +122,31 @@ const Usertable = () => {
                 <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{user.name}</td>
                 <td className="px-6 py-4 text-gray-200 border-r border-gray-700">{user.email}</td>
                 <td className="px-6 py-4 border-r border-gray-700">
-                  <span
-                    className={`px-2 py-1 rounded text-xs ${
-                      user.status === "Active"
-                        ? "bg-green-500 text-white"
-                        : user.status === "Pending"
-                        ? "bg-yellow-500 text-white"
-                        : "bg-red-500 text-white"
-                    }`}>
-                    {user.status}
+                  
+                  <span className={`px-2 py-1 flex items-center space-x-1 rounded text-xs ${
+                    user.status === "Active"
+                    ? "bg-green-500 text-white"
+                    : user.status === "Pending"
+                    ? "bg-yellow-500 text-white"
+                    : "bg-red-500 text-white"}`}>
+                     {user.status === "Active" ? (
+                          <>
+                          <CheckCircle size={14} className="text-white" />
+                       <span>Active</span>
+                         </>
+                         ) : user.status === "Pending" ? (
+                              <>
+                            <Clock size={14} className="text-white" />
+                          <span>Pending</span>
+                             </>
+                            ) : (
+                              <>
+                         <XCircle size={14} className="text-white" />
+                           <span>Inactive</span>
+                           </>
+                         )}
                   </span>
+
                 </td>
                 <td className="px-6 py-4 flex items-center space-x-2">
                   <button

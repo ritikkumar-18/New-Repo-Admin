@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import Header from '../components/Common/Header';
 import { toast, Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AiOutlineClose, AiOutlineDelete,AiOutlineEye, AiOutlineEdit, AiOutlinePlus} from 'react-icons/ai';
-import { Search } from 'lucide-react';
+import { AiOutlineClose, AiOutlinePlus} from 'react-icons/ai';
+import { Search,Trash2,Eye,Edit, XCircle, CheckCircle } from 'lucide-react';
 
 const TeamManagementDashboard = () => {
   const [members, setMembers] = useState([
     { id: 1, name: 'Alice', role: 'Recruiter', active: true, department: 'HR', location: 'New York', skills: ['Recruiting', 'Communication'], contact: 'alice@example.com', address: '123 Main St, City' },
     { id: 2, name: 'Bob', role: 'Interviewer', active: true, department: 'Tech', location: 'San Francisco', skills: ['Interviewing', 'Technical Analysis'], contact: 'bob@example.com', address: '456 Second St, City' },
     { id: 3, name: 'Charlie', role: 'Manager', active: true, department: 'Operations', location: 'London', skills: ['Leadership', 'Team Management'], contact: 'charlie@example.com', address: '789 Third St, City' },
-    { id: 4, name: 'David', role: 'HR Specialist', active: true, department: 'HR', location: 'Chicago', skills: ['Employee Relations', 'Conflict Resolution'], contact: 'david@example.com', address: '101 Fourth St, City' },
+    { id: 4, name: 'David', role: 'HR Specialist', active: false, department: 'HR', location: 'Chicago', skills: ['Employee Relations', 'Conflict Resolution'], contact: 'david@example.com', address: '101 Fourth St, City' },
     { id: 5, name: 'Eva', role: 'Software Engineer', active: true, department: 'Tech', location: 'Berlin', skills: ['JavaScript', 'React'], contact: 'eva@example.com', address: '202 Fifth St, City' },
     { id: 6, name: 'Frank', role: 'Data Scientist', active: true, department: 'Tech', location: 'San Francisco', skills: ['Machine Learning', 'Data Analysis'], contact: 'frank@example.com', address: '303 Sixth St, City' },
     { id: 7, name: 'Grace', role: 'UI/UX Designer', active: true, department: 'Design', location: 'New York', skills: ['Sketch', 'Figma'], contact: 'grace@example.com', address: '404 Seventh St, City' },
-    { id: 8, name: 'Hank', role: 'Developer', active: true, department: 'Tech', location: 'Sydney', skills: ['Python', 'Django'], contact: 'hank@example.com', address: '505 Eighth St, City' },
+    { id: 8, name: 'Hank', role: 'Developer', active: false, department: 'Tech', location: 'Sydney', skills: ['Python', 'Django'], contact: 'hank@example.com', address: '505 Eighth St, City' },
     { id: 9, name: 'Ivy', role: 'QA Engineer', active: true, department: 'Tech', location: 'Austin', skills: ['Automated Testing', 'Manual Testing'], contact: 'ivy@example.com', address: '606 Ninth St, City' },
     { id: 10, name: 'Jack', role: 'Team Lead', active: true, department: 'Tech', location: 'Paris', skills: ['Leadership', 'Scrum'], contact: 'jack@example.com', address: '707 Tenth St, City' },
-    { id: 11, name: 'Ivy John', role: 'Junior Engineer', active: true, department: 'Tech', location: 'London', skills: ['Automated Testing', 'Manual Testing'], contact: 'ivyjohn@example.com', address: '404 Second St, City' },
+    { id: 11, name: 'Ivy John', role: 'Junior Engineer', active: false, department: 'Tech', location: 'London', skills: ['Automated Testing', 'Manual Testing'], contact: 'ivyjohn@example.com', address: '404 Second St, City' },
     { id: 12, name: 'Jacky', role: 'Team Manager', active: true, department: 'Non-Tech', location: 'NewYork', skills: ['Leadership', 'Scrum'], contact: 'jacky@example.com', address: '101 Seven St, City' },
   ]);
   
@@ -44,12 +44,17 @@ const TeamManagementDashboard = () => {
 
   const handleDeleteMember = (id) => {
     setMembers(members.filter((member) => member.id !== id));
-    toast.error('Member deleted!');
+    toast.error('Member deleted!',{
+      style:{
+        background:"#f8d7da",
+        
+      }
+    });
   };
 
   const handleUpdateMember = (updatedMember) => {
     setMembers(members.map((member) => (member.id === updatedMember.id ? updatedMember : member)));
-    toast.success('Member updated!');
+    
   };
 
   const handleAddNewMember = () => {
@@ -136,19 +141,31 @@ const TeamManagementDashboard = () => {
               <td className="px-6 py-4 text-gray-200 text-center font-mono text-sm border-r border-gray-700">{index + 1}</td>
               <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.name}</td>
               <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
-                <span className={`px-2 py-1 rounded text-xs ${member.active ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-                  {member.active ? 'Active' : 'Inactive'}
+                
+                <span className={`px-2 py-1 flex items-center space-x-1 rounded text-xs ${member.active ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+                 {member.active ? (
+                 <>
+                       <CheckCircle size={14} className="text-white" />
+                        <span>Active</span>
+                  </>
+                  ) : (
+                    <>
+                 <XCircle size={14} className="text-white" />
+                  <span>Inactive</span>
+                  </>
+                    )}
                 </span>
+
               </td>
-              <td className="px-6 py-4 flex items-center space-x-2">
+              <td className="px-6 py-4 flex items-center space-x-5">
                 <button onClick={() => openDetailView(member)} className="px-4 py-2 text-sm rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md">
-                  <AiOutlineEye className="text-white" />
+                  <Eye className="text-white" size={18}/>
                 </button>
                 <button onClick={() => handleEditMember(member)} className="px-4 py-2 text-sm rounded bg-purple-500 hover:bg-purple-600 text-white shadow-md">
-                  <AiOutlineEdit className="text-white" />
+                  <Edit className="text-white" size={18}/>
                 </button>
                 <button onClick={() => handleDeleteMember(member.id)} className="px-4 py-2 text-sm rounded bg-red-500 hover:bg-red-600 text-white shadow-md">
-                  <AiOutlineDelete />
+                  <Trash2 size={18}/>
                 </button>
               </td>
             </tr>

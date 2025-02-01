@@ -9,6 +9,7 @@ const ChatApp = () => {
     { id: 3, name: "Bill", lastMessage: "I'll call you tomorrow", time: "10:30 pm" },
     { id: 4, name: "Liam Brown", lastMessage: "Meeting confirmed", time: "9:15 pm" },
     { id: 5, name: "William", lastMessage: "Let me know your thoughts", time: "8:40 pm" },
+    // {id:6 , name:"John", lastMessage:"I'll be there in 5 minutes", time:"7:30pm"},
   ]);
 
   const [filteredChats, setFilteredChats] = useState(chats);
@@ -76,12 +77,12 @@ const ChatApp = () => {
   return (
   <motion.div className="flex flex-col h-full  bg-gray-900 text-white "
     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-      <div className="flex flex-1 flex-col md:flex-row  ">
+      <div className="flex flex-1 flex-col md:flex-row ">
       
         <div
           className={`${
             isChatListVisible ? "flex" : "hidden"
-          } w-full md:w-1/3 bg-gray-800 border-r md:h-[560px] sm:h-[780px] border-gray-700 flex-col md:flex`}
+          }  md:h-auto  md:w-1/3 bg-gray-800  border-r sm:h-[780px] border-gray-700 flex-col md:flex`}
         >
           <div className="p-4 border-b border-gray-700 bg-gray-800  ">
             <input
@@ -120,12 +121,7 @@ const ChatApp = () => {
             <>
               <div className="p-4 border-b border-gray-700 bg-gray-800 shadow-sm flex items-center justify-between">
                 <h2 className="text-xl font-medium">{selectedChat.name}</h2>
-                {/* <button
-                  onClick={handleCloseChat}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-                >
-                  Back
-                </button> */}
+               
                 <X className="text-red-500 hover:cursor-pointer"onClick={handleCloseChat} size={24}/>
               </div>
               <div
