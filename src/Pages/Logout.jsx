@@ -35,7 +35,7 @@ const Logout = ({ onLogout }) => {
 			initial={{opacity:0,y:20}}
             animate={{opacity:1,y:0}}
             transition={{duration:0.5}}>
-         <LogOutIcon className='absolute  sm:size-5 sm:ml-4 md:size-7 md:ml-16 md:mt-1 sm:mt-0.5'/>
+         {/* <LogOutIcon className='absolute  sm:size-5 sm:ml-auto  md:size-7 md:ml-16 md:mt-1 sm:mt-0.5'/> */}
             <h2 className='font-bold text-white sm:text-md text-center md:text-2xl '> Do you want to Logout ? </h2>
             
 	

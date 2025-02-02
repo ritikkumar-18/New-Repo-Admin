@@ -77,7 +77,7 @@ const Usertable = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}>
       
-      {/* Search and Filter Button */}
+    
       <div className="mb-6 flex items-center justify-between">
         <div className="relative flex-grow">
           <input
@@ -175,7 +175,7 @@ const Usertable = () => {
         ))}
       </div>
 
-      {/* Filter Slider */}
+      
       <AnimatePresence>
         {isFilterOpen && (
           <motion.div
@@ -187,20 +187,20 @@ const Usertable = () => {
             transition={{ duration: 0.5 }}>
             <div className="flex-1"></div>
             <motion.div
-              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 relative shadow-2xl rounded-lg md:w-1/3 sm:w-auto"
+              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 relative shadow-2xl rounded-lg md:w-1/3 sm:w-auto "
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ duration: 0.5 }}
               onClick={(e) => e.stopPropagation()}>
               <X
-                className="absolute top-2 right-1 text-gray-400 cursor-pointer hover:text-gray-200"
+                className="absolute top-2 right-3 text-gray-400 cursor-pointer hover:text-gray-200"
                 size={24}
                 onClick={closeFilter}
               />
 
               
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-6 md:mt-5 sm:mt-5">
                 <button
                   className={`px-6 py-2 rounded-lg ${
                     filterStatus === "Active" ? "bg-green-500 text-white" : "bg-gray-700 text-gray-400"
