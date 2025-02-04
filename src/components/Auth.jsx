@@ -853,16 +853,14 @@ function LoginPage({ onLogin }) {
               </div>
               <button
                 type="submit"
-                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
-              >
+                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition">
                 Login
               </button>
             </form>
             <div className="text-center mt-4">
               <button
                 onClick={() => setIsLogin(false)}
-                className="text-purple-600 hover:underline"
-              >
+                className="text-purple-600 hover:underline">
                 Forgot Password?
               </button>
             </div>
@@ -873,8 +871,7 @@ function LoginPage({ onLogin }) {
               className="w-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-            >
+              transition={{ duration: 1 }}>
               <h2 className="text-2xl font-bold text-center mb-6">
                 Create New Password
               </h2>
@@ -888,8 +885,7 @@ function LoginPage({ onLogin }) {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Enter new password"
-                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  />
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"/>
                 </div>
                 <div>
                   <label className="block text-lg font-medium text-gray-700">
@@ -900,16 +896,14 @@ function LoginPage({ onLogin }) {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm your password"
-                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  />
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" />
                 </div>
                 {passwordError && (
                   <p className="text-red-500 text-sm mt-2">{passwordError}</p>
                 )}
                 <button
                   type="submit"
-                  className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
-                >
+                  className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition">
                   Submit
                 </button>
               </form>
@@ -919,8 +913,7 @@ function LoginPage({ onLogin }) {
               className="w-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-            >
+              transition={{ duration: 1 }} >
               <h2 className="text-2xl font-bold text-center mb-6">Enter OTP</h2>
               <form onSubmit={handleVerifyOtp} className="space-y-4">
                 <div>
@@ -932,13 +925,11 @@ function LoginPage({ onLogin }) {
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                     placeholder="Enter the OTP"
-                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  />
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"/>
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
-                >
+                  className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition">
                   Verify OTP
                 </button>
               </form>
@@ -949,8 +940,7 @@ function LoginPage({ onLogin }) {
             className="w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
+            transition={{ duration: 1 }}>
             <h2 className="text-2xl font-bold text-center mb-6">Forgot Password</h2>
             <form onSubmit={handleForgotPasswordSubmit} className="space-y-4">
               <div>
@@ -963,21 +953,18 @@ function LoginPage({ onLogin }) {
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
+                  className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"/>
               </div>
               <button
                 type="submit"
-                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
-              >
+                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition">
                 Send OTP
               </button>
             </form>
             <div className="text-center mt-4">
               <button
                 onClick={() => setIsLogin(true)}
-                className="text-purple-600 hover:underline"
-              >
+                className="text-purple-600 hover:underline">
                 Back to Login
               </button>
             </div>
