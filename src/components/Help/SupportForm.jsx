@@ -76,8 +76,10 @@ const ChatApp = () => {
 
   return (
   <motion.div className="flex flex-col h-full  bg-gray-900 text-white "
-    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-      <div className="flex flex-1 flex-col md:flex-row ">
+    initial={{ opacity: 0, y: 20 }} 
+    animate={{ opacity: 1, y: 0 }} 
+    transition={{ duration: 0.5 }}>
+      <div className="flex flex-1 flex-col md:flex-row px-4 ">
       
         <div
           className={`${

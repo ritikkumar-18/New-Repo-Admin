@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, Clock, Filter, Search, X, XCircle } from "lucide-react";
-import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 
 const userData = [
   { id: 1, name: "Will Smith", email: "will@example.com", status: "Active", joined: "2022-01-15", contact: "123-456-7890", address: "123 Main St, Springfield" },
@@ -27,6 +27,27 @@ const Usertable = () => {
   const [isSliderOpen, setIsSliderOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false); 
   const [filterStatus, setFilterStatus] = useState(""); 
+  const [isEditOpen, setIsEditOpen] = useState(false);
+const [editUser, setEditUser] = useState(null);
+
+const openEditModal = (user) => {
+  setEditUser(user);
+  setIsEditOpen(true);
+};
+
+const closeEditModal = () => {
+  if (editUser) {
+    setFilteredUsers((prevUsers) =>
+      prevUsers.map((user) => (user.id === editUser.id ? editUser : user))
+    );
+  }
+  setIsEditOpen(false);
+  setTimeout(() => setEditUser(null), 500);
+};
+
+
+
+
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
@@ -37,6 +58,11 @@ const Usertable = () => {
     setFilteredUsers(filtered);
     setCurrentPage(1);
   };
+  const deleteUser = (userId) => {
+    setFilteredUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+  
+  };
+  
 
   const openSlider = (user) => {
     setSelectedUser(user);
@@ -62,6 +88,8 @@ const Usertable = () => {
     setFilteredUsers(filtered);
     setCurrentPage(1);
   };
+  
+  
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const displayedUsers = filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -154,6 +182,13 @@ const Usertable = () => {
                     className="px-4 py-2 text-sm rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md">
                     <AiOutlineEye />
                   </button>
+                  <button className="px-4 py-2 text-sm rounded bg-purple-500 hover:bg-purple-600 text-white shadow-md">
+                    <AiOutlineEdit   onClick={() => openEditModal(user)}
+                    />                  
+                    </button>
+                    <button onClick={() => deleteUser(user.id)} className="bg-red-500 text-white px-4 py-2 rounded">
+                      <AiOutlineDelete/>
+                    </button>
                 </td>
               </tr>
             ))}
@@ -174,6 +209,7 @@ const Usertable = () => {
           </button>
         ))}
       </div>
+      
 
       
       <AnimatePresence>
@@ -306,6 +342,78 @@ const Usertable = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <AnimatePresence>
+  {isEditOpen && editUser && (
+    <motion.div
+      className="fixed inset-0 bg-opacity-30 flex mt-14"
+      onClick={closeEditModal}
+      initial={{ opacity: 0, x: "100%" }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: "100%" }}
+      transition={{ duration: 0.5 }}>
+      <div className="flex-1"></div>
+      <motion.div
+        className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 relative shadow-2xl rounded-lg md:w-1/3 sm:w-auto"
+        initial={{ opacity: 0, x: "100%" }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: "100%" }}
+        transition={{ duration: 0.5 }}
+        onClick={(e) => e.stopPropagation()}>
+        <X
+          className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-gray-200"
+          size={24}
+          onClick={closeEditModal}
+        />
+        <h2 className="text-2xl font-semibold text-gray-100 mb-4">Edit User</h2>
+
+        <div className="space-y-4">
+          <input
+            type="text"
+            className="w-full p-2 rounded bg-gray-700 text-white"
+            placeholder="Name"
+            value={editUser.name}
+            onChange={(e) => setEditUser({ ...editUser, name: e.target.value })}
+          />
+          <input
+            type="email"
+            className="w-full p-2 rounded bg-gray-700 text-white"
+            placeholder="Email"
+            value={editUser.email}
+            onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
+          />
+          <input
+            type="text"
+            className="w-full p-2 rounded bg-gray-700 text-white"
+            placeholder="Contact"
+            value={editUser.contact}
+            onChange={(e) => setEditUser({ ...editUser, contact: e.target.value })}
+          />
+          <input
+            type="text"
+            className="w-full p-2 rounded bg-gray-700 text-white"
+            placeholder="Address"
+            value={editUser.address}
+            onChange={(e) => setEditUser({ ...editUser, address: e.target.value })}
+          />
+        </div>
+
+        <div className="mt-6 flex justify-center space-x-4">
+          <button
+            className="px-6 py-2 bg-green-500 text-white rounded-lg hover:opacity-90 transition"
+            onClick={closeEditModal}>
+            Save
+          </button>
+          <button
+            className="px-6 py-2 bg-red-500 text-white rounded-lg hover:opacity-90 transition"
+            onClick={closeEditModal}>
+            Cancel
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
 
     </motion.div>
   );

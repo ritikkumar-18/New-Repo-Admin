@@ -632,6 +632,9 @@ import Candidate from "../Pages/Candidate search";
 import pointSound from '/blip.mp3';  
 import Resume from "../Pages/Resume";
 import Overviewrecruit from "../Pages/Overviewrecruit";
+import CMS from "../Pages/CMS";
+import Transaction from "../Pages/Transaction";
+import SubAdmin from "../Pages/SubAdmin";
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -826,7 +829,7 @@ function LoginPage({ onLogin }) {
                 />
               </div>
               
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label className="block mb-2 text-lg font-bold">Role</label>
                 <div>
                   <label>
@@ -849,8 +852,8 @@ function LoginPage({ onLogin }) {
                     />
                     Recruiter
                   </label>
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
               <button
                 type="submit"
                 className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition">
@@ -989,6 +992,9 @@ function AdminDashboard({ onLogout }) {
         <Route path="/calender" element={<Calender />} />
         <Route path="/email" element={<Email />} />
         <Route path="/help" element={<Help />} />
+        <Route path='/cms'element={<CMS/>}/>
+        <Route path='/sub'element={<SubAdmin/>}/>
+        <Route path="transaction"element={<Transaction/>}/>
         <Route path="/team" element={<TeamManagementDashboard />} />
         <Route path="/application" element={<Application />} />
         <Route path="/feedback-and-review" element={<FeedbackandReview />} />

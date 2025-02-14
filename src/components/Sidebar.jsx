@@ -3,15 +3,20 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiBarChart2, FiLogOut } from "react-icons/fi";
 import { BiMenu } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
-import { MessageSquare } from "lucide-react";
+import { ArrowLeftRight, Axis3D, CopyMinus, MessageSquare } from "lucide-react";
 import { FaRupeeSign, FaTeamspeak, FaUser } from "react-icons/fa";
 
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
   { name: "Recruiters", icon: FaUser, color: "#8B5CF6", href: "/users" },
   { name: "Team Management", icon: FaTeamspeak, color: "#8B5CF6", href: "/team" },
+  {name:"SubAdmin",icon:Axis3D,color:'#8B5CF6',href:'/sub'},
   { name: "Subscription Plan", icon: FaRupeeSign, color: "#8B5CF6", href: "/payment" },
+  {name:"Transaction",icon:ArrowLeftRight,color:'#8B5CF6',href:'/transaction'},
   { name: "Queries", icon: MessageSquare, color: "#8B5CF6", href: "/help" },
+  {name:"CMS",icon:CopyMinus,color:"#8B5CF6",href:"/cms"},
+  
+  
   { name: "Logout", icon: FiLogOut, color: "#8B5CF6", href: "/logout" },
 ];
 
