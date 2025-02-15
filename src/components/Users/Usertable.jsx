@@ -4,18 +4,18 @@ import { CheckCircle, Clock, Filter, Search, X, XCircle } from "lucide-react";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 
 const userData = [
-  { id: 1, name: "Will Smith", email: "will@example.com", status: "Active", joined: "2022-01-15", contact: "123-456-7890", address: "123 Main St, Springfield" },
-  { id: 2, name: "Lune Paul", email: "paul@example.com", status: "Active", joined: "2021-12-10", contact: "987-654-3210", address: "456 Elm St, Springfield" },
-  { id: 3, name: "John Doe", email: "john@example.com", status: "Inactive", joined: "2022-02-20", contact: "555-123-4567", address: "789 Oak St, Springfield" },
-  { id: 4, name: "Jane Doe", email: "jane@example.com", status: "Active", joined: "2021-11-30", contact: "444-567-8901", address: "101 Pine St, Springfield" },
-  { id: 5, name: "Alice Johnson", email: "alice@example.com", status: "Active", joined: "2023-05-01", contact: "111-222-3333", address: "202 Maple St, Springfield" },
-  { id: 6, name: "Bob Brown", email: "bob@example.com", status: "Inactive", joined: "2022-09-15", contact: "333-444-5555", address: "303 Birch St, Springfield" },
-  { id: 7, name: "Charlie White", email: "charlie@example.com", status: "Active", joined: "2021-08-05", contact: "666-777-8888", address: "404 Cedar St, Springfield" },
-  { id: 8, name: "Dave Green", email: "dave@example.com", status: "Pending", joined: "2023-01-20", contact: "222-333-4444", address: "505 Chestnut St, Springfield" },
-  { id: 9, name: "Eve Black", email: "eve@example.com", status: "Inactive", joined: "2022-03-10", contact: "888-999-0000", address: "606 Elm St, Springfield" },
-  { id: 10, name: "Frank White", email: "frank@example.com", status: "Active", joined: "2020-07-25", contact: "123-789-4567", address: "707 Maple St, Springfield" },
-  { id: 11, name: "Grace Lee", email: "grace@example.com", status: "Active", joined: "2023-02-14", contact: "555-333-6666", address: "808 Oak St, Springfield" },
-  { id: 12, name: "Hannah Adams", email: "hannah@example.com", status: "Inactive", joined: "2021-10-01", contact: "444-888-9999", address: "909 Pine St, Springfield" }
+  { id: 1, name: "Will Smith", email: "will@example.com", status: "Active", joined: "2022-01-15", contact: "123-456-7890", address: "123 Main St, Springfield",verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: true },companyDetails: { name: 'Tech Solutions', type: 'Software Development' },profileHandledBy: 'Alice',subscriptionDetails: { plan: 'Standard', validUntil: '15th August 2025' },additionalDetails: { pendingDays: 5, lastLoggedIn: '1 day ago', lastActivity: 'Conducted Interviews' } },
+  { id: 2, name: "Lune Paul", email: "paul@example.com", status: "Active", joined: "2021-12-10", contact: "987-654-3210", address: "456 Elm St, Springfield",verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'OEX PVT. Ltd.', type: 'Operations Management' },profileHandledBy: 'None',subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 0, lastLoggedIn: '3 hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 3, name: "John Doe", email: "john@example.com", status: "Inactive", joined: "2022-02-20", contact: "555-123-4567", address: "789 Oak St, Springfield",verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Amazon PVT. Ltd.', type: 'Recruit Management' },profileHandledBy: 'Charlie',subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 4, lastLoggedIn: '3 hours ago', lastActivity: 'Reviewed Team Performance' }  },
+  { id: 4, name: "Jane Doe", email: "jane@example.com", status: "Active", joined: "2021-11-30", contact: "444-567-8901", address: "101 Pine St, Springfield",verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Paytm Ops Ltd', type: 'Operations Management' },profileHandledBy: 'Paytm',subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 0, lastLoggedIn: '3 hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 5, name: "Alice Johnson", email: "alice@example.com", status: "Active", joined: "2023-05-01", contact: "111-222-3333", address: "202 Maple St, Springfield",verificationDocuments: { panCard: true, msmeCertificate: false, gstCertificate: false }, companyDetails: { name: 'ABC Corp', type: 'HR Consulting' },profileHandledBy: 'Alice',subscriptionDetails: { plan: 'Premium', validUntil: '30th June 2025' },additionalDetails: { pendingDays: 10, lastLoggedIn: '2 days ago', lastActivity: 'Updated Job Postings' } },
+  { id: 6, name: "Bob Brown", email: "bob@example.com", status: "Inactive", joined: "2022-09-15", contact: "333-444-5555", address: "303 Birch St, Springfield" ,verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Phonepay  Ltd', type: 'Communication Management' },profileHandledBy: 'Charlie',subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 0, lastLoggedIn: '3 hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 7, name: "Charlie White", email: "charlie@example.com", status: "Active", joined: "2021-08-05", contact: "666-777-8888", address: "404 Cedar St, Springfield" ,verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Paytm Ops Ltd', type: 'Financial Management' },profileHandledBy: 'Charlie',subscriptionDetails: { plan: 'Medium', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 0, lastLoggedIn: '1 hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 8, name: "Dave Green", email: "dave@example.com", status: "Pending", joined: "2023-01-20", contact: "222-333-4444", address: "505 Chestnut St, Springfield",verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate:false}, companyDetails: { name: 'Google Ops Ltd', type: 'Tech Management' },profileHandledBy: 'Bob',subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 0, lastLoggedIn: 'half hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 9, name: "Eve Black", email: "eve@example.com", status: "Inactive", joined: "2022-03-10", contact: "888-999-0000", address: "606 Elm St, Springfield" ,verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Paytm Ops Ltd', type: 'Transaction Management' },profileHandledBy: 'Charlie',subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 8, lastLoggedIn: '3 hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 10, name: "Frank White", email: "frank@example.com", status: "Active", joined: "2020-07-25", contact: "123-789-4567", address: "707 Maple St, Springfield" ,verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Naukri Ops Ltd', type: 'Operations Management' },profileHandledBy: 'Charlie',subscriptionDetails: { plan: 'Premium', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 10, lastLoggedIn: '6 hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 11, name: "Grace Lee", email: "grace@example.com", status: "Active", joined: "2023-02-14", contact: "555-333-6666", address: "808 Oak St, Springfield" ,verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Paytm Ops Ltd', type: 'Transfer Management' },profileHandledBy: 'Charlie',subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 0, lastLoggedIn: '3 hours ago', lastActivity: 'Reviewed Team Performance' } },
+  { id: 12, name: "Hannah Adams", email: "hannah@example.com", status: "Inactive", joined: "2021-10-01", contact: "444-888-9999", address: "909 Pine St, Springfield" ,verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true }, companyDetails: { name: 'Techizons PVT. Ltd.', type: 'Operations Management' },profileHandledBy: 'Charlie',subscriptionDetails: { plan: 'Premium', validUntil: '1st January 2026' },additionalDetails: { pendingDays: 0, lastLoggedIn: '35 minutes ago', lastActivity: 'Reviewed Team Performance' } },
 ];
 
 const Usertable = () => {
@@ -281,7 +281,7 @@ const closeEditModal = () => {
             transition={{ duration: 0.5 }}>
             <div className="flex-1"></div>
             <motion.div
-              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 relative shadow-2xl rounded-lg md:w-1/3 sm:w-auto"
+              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 relative shadow-2xl rounded-lg md:w-1/3 sm:w-auto max-h-[90vh] overflow-y-auto"
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
@@ -330,6 +330,45 @@ const closeEditModal = () => {
                   <span className="text-sm text-gray-200">{selectedUser.address}</span>
                 </div>
               </div>
+               {/* Verification Documents */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Verification Documents</h3>
+          <div className="mt-2 space-y-2 text-gray-300">
+            <p>PAN Card: {selectedUser.verificationDocuments?.panCard ? "✅ Available" : "❌ Not Available"}</p>
+            <p>MSME Certificate: {selectedUser.verificationDocuments?.msmeCertificate ? "✅ Available" : "❌ Not Available"}</p>
+            <p>GST Certificate: {selectedUser.verificationDocuments?.gstCertificate ? "✅ Available" : "❌ Not Available"}</p>
+          </div>
+        </div>
+
+        {/* Company Details */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Company Details</h3>
+          <p className="text-gray-300">Company Name: {selectedUser.companyDetails?.name || "Techizons PVT. LTD."}</p>
+          <p className="text-gray-300">Company Type: {selectedUser.companyDetails?.type || "IT"}</p>
+        </div>
+
+        {/* Profile Managed By */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Profile Managed By</h3>
+          <p className="text-gray-300">{selectedUser.profileHandledBy || "N/A"}</p>
+        </div>
+
+        {/* Subscription Details */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Subscription Details</h3>
+          <p className="text-gray-300">Plan: {selectedUser.subscriptionDetails?.plan || "N/A"}</p>
+          <p className="text-gray-300">Valid Until: {selectedUser.subscriptionDetails?.validUntil || "N/A"}</p>
+        </div>
+
+        {/* Additional Details */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Additional Details</h3>
+          <p className="text-gray-300">Status: {selectedUser.active ? "✅ Active" : "❌ Inactive"}</p>
+          <p className="text-gray-300">Pending Days: {selectedUser.additionalDetails?.pendingDays || "N/A"}</p>
+          <p className="text-gray-300">Last Logged In: {selectedUser.additionalDetails?.lastLoggedIn || "N/A"}</p>
+          <p className="text-gray-300">Last Activity: {selectedUser.additionalDetails?.lastActivity || "N/A"}</p>
+        </div>
+
 
               <div className="mt-6 flex justify-center">
                 <button

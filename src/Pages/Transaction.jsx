@@ -186,29 +186,36 @@ const Transaction = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
         >
-          <div className="flex justify-between mb-4">
-            <h3 className="text-2xl font-semibold text-blue-400">Transactions</h3>
-            <div className="flex items-center gap-3">
-              <input 
-                type="text" 
-                placeholder="Search by Name" 
-                className="p-2 bg-gray-700 rounded-md border border-gray-600"
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <select 
-                className="p-2 bg-gray-700 rounded-md border border-gray-600" 
-                onChange={(e) => setFilterStatus(e.target.value)}
-              >
-                <option value="All">All</option>
-                <option value="Pending">Pending</option>
-                <option value="Paid">Paid</option>
-              </select>
-              <button 
-                onClick={refreshTransactions} 
-                className="bg-green-600 px-4 py-2 rounded-md text-white hover:bg-green-700 transition-all duration-300"
-              ><FiRefreshCw /></button>
-            </div>
-          </div>
+          
+        <div className="flex flex-wrap justify-between items-center mb-4 gap-3">
+        <h3 className="text-xl sm:text-2xl font-semibold text-blue-400">Transactions</h3>
+
+        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+         <input 
+          type="text" 
+           placeholder="Search by Name" 
+          className="p-2 w-full sm:w-auto bg-gray-700 rounded-md border border-gray-600"
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+    
+    <select 
+      className="p-2 w-full sm:w-auto bg-gray-700 rounded-md border border-gray-600" 
+      onChange={(e) => setFilterStatus(e.target.value)}
+    >
+      <option value="All">All</option>
+      <option value="Pending">Pending</option>
+      <option value="Paid">Paid</option>
+    </select>
+
+    <button 
+      onClick={refreshTransactions} 
+      className="bg-green-600 px-4 py-2 rounded-md text-white hover:bg-green-700 transition-all duration-300"
+    >
+      <FiRefreshCw />
+    </button>
+  </div>
+</div>
+
 
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
