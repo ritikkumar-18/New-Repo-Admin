@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiBarChart2, FiLogOut } from "react-icons/fi";
 import { BiMenu } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
@@ -7,21 +7,19 @@ import { ArrowLeftRight, Axis3D, CopyMinus, MessageSquare } from "lucide-react";
 import { FaRupeeSign, FaTeamspeak, FaUser } from "react-icons/fa";
 
 const SIDEBAR = [
-  { name: "Overview", icon: FiBarChart2, href: "/", active: true },
-  { name: "Recruiters", icon: FaUser, href: "/users", active: true },
-  { name: "Team Management", icon: FaTeamspeak, href: "/team", active: false },
-  { name: "SubAdmin", icon: Axis3D, href: "/sub", active: true },
-  { name: "Subscription Plan", icon: FaRupeeSign, href: "/payment", active: false },
-  { name: "Transaction", icon: ArrowLeftRight, href: "/transaction", active: true },
-  { name: "Queries", icon: MessageSquare, href: "/help", active: true },
-  { name: "CMS", icon: CopyMinus, href: "/cms", active: false },
-  { name: "Logout", icon: FiLogOut, href: "/logout", active: true },
+  { name: "Overview", icon: FiBarChart2, href: "/"  },
+  { name: "Recruiters", icon: FaUser, href: "/users"  },
+  { name: "Team Management", icon: FaTeamspeak, href: "/team"  },
+  { name: "SubAdmin", icon: Axis3D, href: "/sub"  },
+  { name: "Subscription Plan", icon: FaRupeeSign, href: "/payment" },
+  { name: "Transaction", icon: ArrowLeftRight, href: "/transaction" },
+  { name: "Queries", icon: MessageSquare, href: "/help" },
+  { name: "CMS", icon: CopyMinus, href: "/cms" },
+  { name: "Logout", icon: FiLogOut, href: "/logout"  },
 ];
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all"); 
   const location = useLocation();
 
   useEffect(() => {
@@ -30,13 +28,6 @@ const Sidebar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  
-  const filteredItems = SIDEBAR.filter(
-    (item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) &&
-      (filter === "all" || (filter === "active" && item.active) || (filter === "inactive" && !item.active))
-  );
-
   return (
     <motion.div
       className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${
@@ -44,7 +35,7 @@ const Sidebar = () => {
       }`}
     >
       <div className="h-full bg-gray-800 bg-opacity-80 backdrop-blur-md p-4 flex-col border-r border-gray-700">
-        
+        {/* Toggle Button */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -54,62 +45,9 @@ const Sidebar = () => {
           <BiMenu size={24} />
         </motion.button>
 
-        
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className={`mt-4 ${isSidebarOpen ? "w-full" : "w-14"}`}
-        >
-          <input
-            type="text"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className={`px-3 py-2 rounded-md bg-gray-800 text-gray-300 border border-gray-700 focus:outline-none focus:border-gray-500 transition-all ${
-              isSidebarOpen ? "w-full" : "w-14"
-            }`}
-          />
-        </motion.div>
-
-        
-        {isSidebarOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-4 flex gap-2 text-gray-400 text-sm"
-          >
-            <button
-              className={`px-3 py-1 rounded-md transition ${
-                filter === "all" ? "bg-gray-700 text-white" : "hover:bg-gray-700"
-              }`}
-              onClick={() => setFilter("all")}
-            >
-              All
-            </button>
-            <button
-              className={`px-3 py-1 rounded-md transition ${
-                filter === "active" ? "bg-green-600 text-white" : "hover:bg-green-600"
-              }`}
-              onClick={() => setFilter("active")}
-            >
-              Active
-            </button>
-            <button
-              className={`px-3 py-1 rounded-md transition ${
-                filter === "inactive" ? "bg-red-600 text-white" : "hover:bg-red-600"
-              }`}
-              onClick={() => setFilter("inactive")}
-            >
-              Inactive
-            </button>
-          </motion.div>
-        )}
-
         {/* Sidebar Navigation */}
-        <nav className="mt-4 flex-grow overflow-y-auto max-h-[calc(100vh-150px)] custom-scrollbar">
-          {filteredItems.map((item) => (
+        <nav className="mt-4 flex-grow overflow-y-auto max-h-[calc(100vh-100px)] custom-scrollbar">
+          {SIDEBAR.map((item) => (
             <Link key={item.href} to={item.href}>
               <motion.div
                 className={`flex items-center p-4 text-sm font-medium rounded-lg transition-all mb-2 relative cursor-pointer ${
@@ -144,7 +82,7 @@ const Sidebar = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Active Tab Indicator */}
+                {/*  Tab Indicator */}
                 {location.pathname === item.href && (
                   <motion.div
                     className="absolute bottom-0 left-0 w-full h-1 bg-teal-500 rounded-full"

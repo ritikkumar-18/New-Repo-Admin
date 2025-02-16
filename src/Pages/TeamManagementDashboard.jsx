@@ -284,7 +284,7 @@ const TeamManagementDashboard = () => {
           value={filters}
           onChange={handleFilterChange}
           placeholder="Search..."
-          className="px-2 py-2 pl-10 xs:w-20 md:w-auto bg-gray-800 text-white border rounded  focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className=" py-2 pl-10 xs:w-20 md:w-auto bg-gray-800 text-white border rounded  focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
       </div>
@@ -292,8 +292,7 @@ const TeamManagementDashboard = () => {
         <select
           value={selectedDepartment}
           onChange={handleDepartmentChange}
-          className="px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
+          className="px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" >
           <option value="all">All Departments</option>
           <option value="HR">HR</option>
           <option value="Tech">Tech</option>
@@ -304,13 +303,11 @@ const TeamManagementDashboard = () => {
       </div>
     </div>
 
-    
-
-    <div className="overflow-x-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="overflow-x-auto border rounded-lg border-gray-700">
       <table className="w-full table-auto border-collapse bg-gray-900 text-white rounded-lg shadow-md overflow-hidden">
         <thead className=" text-white">
           <tr>
-            <th className="px-3 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Serial no.</th>
+            
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Name</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Status</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm ">Actions</th>
@@ -319,7 +316,7 @@ const TeamManagementDashboard = () => {
         <tbody>
           {currentMembers.map((member, index) => (
             <tr key={member.id} className="border-t border-gray-700 transition duration-300">
-              <td className="px-6 py-4 text-gray-200 text-center font-mono text-sm border-r border-gray-700">{index + 1}</td>
+              
               <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.name}</td>
               <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
                 
@@ -651,6 +648,7 @@ const TeamManagementDashboard = () => {
 };
 
 export default TeamManagementDashboard;
+
 // <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
     //   <Header title="Team Management" />
     //   <motion.div className="flex-1 p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>

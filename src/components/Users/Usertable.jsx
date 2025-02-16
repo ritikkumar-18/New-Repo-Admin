@@ -25,10 +25,8 @@ const Usertable = () => {
   const [filteredUsers, setFilteredUsers] = useState(userData);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSliderOpen, setIsSliderOpen] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false); 
-  const [filterStatus, setFilterStatus] = useState(""); 
   const [isEditOpen, setIsEditOpen] = useState(false);
-const [editUser, setEditUser] = useState(null);
+  const [editUser, setEditUser] = useState(null);
 
 const openEditModal = (user) => {
   setEditUser(user);
@@ -44,11 +42,6 @@ const closeEditModal = () => {
   setIsEditOpen(false);
   setTimeout(() => setEditUser(null), 500);
 };
-
-
-
-
-
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
@@ -74,23 +67,6 @@ const closeEditModal = () => {
     setTimeout(() => setSelectedUser(null), 500);
   };
 
-  const openFilter = () => {
-    setIsFilterOpen(true);
-  };
-
-  const closeFilter = () => {
-    setIsFilterOpen(false);
-  };
-
-  const handleFilterChange = (status) => {
-    setFilterStatus(status);
-    const filtered = userData.filter((user) => (status ? user.status === status : true));
-    setFilteredUsers(filtered);
-    setCurrentPage(1);
-  };
-  
-  
-
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const displayedUsers = filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
@@ -100,7 +76,7 @@ const closeEditModal = () => {
 
   return (
     <motion.div
-      className="flex-1 bg-gray-900 relative "
+      className="flex-1 bg-gray-900 relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}>
@@ -116,19 +92,13 @@ const closeEditModal = () => {
             className="py-2 border rounded bg-gray-800 text-white pl-10 w-auto focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
           <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+          
         </div>
 
-        <div className="ml-4">
-          <Filter
-            className="cursor-pointer text-white hover:text-teal-400"
-            size={26}
-            onClick={openFilter} 
-          />
-        </div>
       </div>
 
       
-      <div className="overflow-x-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+      <div className="overflow-x-auto  rounded-lg border border-gray-700">
         <motion.table
           className="w-full table-auto border-collapse bg-gray-900 text-white rounded-lg shadow-md overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
@@ -136,7 +106,7 @@ const closeEditModal = () => {
           transition={{ duration: 0.5 }}>
           <thead className="text-white">
             <tr>
-              <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-b border-gray-700">Serial no.</th>
+              
               <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-b border-gray-700">Name</th>
               <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-b border-gray-700">Email</th>
               <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-b  border-gray-700">Status</th>
@@ -146,7 +116,7 @@ const closeEditModal = () => {
           <tbody>
             {displayedUsers.map((user, index) => (
               <tr key={user.id} className="border-t border-gray-700 transition duration-300 hover:cursor-pointer">
-                <td className="px-6 py-4 text-gray-200 text-center font-mono text-sm border-r border-gray-700">{index + 1}</td>
+                
                 <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{user.name}</td>
                 <td className="px-6 py-4 text-gray-200 border-r border-gray-700">{user.email}</td>
                 <td className="px-6 py-4 border-r border-gray-700">
@@ -208,68 +178,7 @@ const closeEditModal = () => {
             {index + 1}
           </button>
         ))}
-      </div>
-      
-
-      
-      <AnimatePresence>
-        {isFilterOpen && (
-          <motion.div
-            className="fixed inset-0 bg-opacity-30 flex mt-16"
-            onClick={closeFilter}
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.5 }}>
-            <div className="flex-1"></div>
-            <motion.div
-              className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 relative shadow-2xl rounded-lg md:w-1/3 sm:w-auto "
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ duration: 0.5 }}
-              onClick={(e) => e.stopPropagation()}>
-              <X
-                className="absolute top-2 right-3 text-gray-400 cursor-pointer hover:text-gray-200"
-                size={24}
-                onClick={closeFilter}
-              />
-
-              
-              <div className="flex flex-col space-y-6 md:mt-5 sm:mt-5">
-                <button
-                  className={`px-6 py-2 rounded-lg ${
-                    filterStatus === "Active" ? "bg-green-500 text-white" : "bg-gray-700 text-gray-400"
-                  }`}
-                  onClick={() => handleFilterChange("Active")}>
-                  Active
-                </button>
-                <button
-                  className={`px-6 py-2 rounded-lg ${
-                    filterStatus === "Inactive" ? "bg-red-500 text-white" : "bg-gray-700 text-gray-400"
-                  }`}
-                  onClick={() => handleFilterChange("Inactive")}>
-                  Inactive
-                </button>
-                <button
-                  className={`px-6 py-2 rounded-lg ${
-                    filterStatus === "Pending" ? "bg-yellow-500 text-white" : "bg-gray-700 text-gray-400"
-                  }`}
-                  onClick={() => handleFilterChange("Pending")}>
-                  Pending
-                </button>
-                <button
-                  className="px-6 py-2 rounded-lg bg-gray-700 text-gray-400"
-                  onClick={() => handleFilterChange("")}> {/* Reset filter */}
-                  Reset Filter
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-  
+      </div>  
       <AnimatePresence>
         {isSliderOpen && selectedUser && (
           <motion.div
