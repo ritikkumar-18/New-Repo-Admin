@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Clock, Filter, Search, X, XCircle } from "lucide-react";
+import { CheckCircle, Clock, Filter, Search, ToggleLeft, ToggleRight, X, XCircle } from "lucide-react";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 
 const userData = [
@@ -27,11 +27,17 @@ const Usertable = () => {
   const [isSliderOpen, setIsSliderOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editUser, setEditUser] = useState(null);
+  const [filterStatus, setFilterStatus] = useState("All");
 
 const openEditModal = (user) => {
   setEditUser(user);
   setIsEditOpen(true);
 };
+const filteredAdmins = userData.filter(
+  (member) =>
+    
+    (filterStatus === "All" || member.status === filterStatus)
+);
 
 const closeEditModal = () => {
   if (editUser) {
@@ -94,6 +100,13 @@ const closeEditModal = () => {
           <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
           
         </div>
+        <button
+          onClick={() =>
+            setFilterStatus(filterStatus === "All" ? "Active" : filterStatus === "Active" ? "Inactive" : "All")}
+          className="flex items-center gap-2  bg-gray-700 px-4 py-2 rounded hover:bg-gray-600" >
+          {filterStatus === "Active" ? <ToggleLeft size={20} /> : <ToggleRight size={20} />}
+          {filterStatus}
+        </button>
 
       </div>
 
@@ -114,7 +127,7 @@ const closeEditModal = () => {
             </tr>
           </thead>
           <tbody>
-            {displayedUsers.map((user, index) => (
+          {filteredAdmins.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((user, index) => (
               <tr key={user.id} className="border-t border-gray-700 transition duration-300 hover:cursor-pointer">
                 
                 <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{user.name}</td>

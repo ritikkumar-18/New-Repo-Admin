@@ -636,6 +636,8 @@ import CMS from "../Pages/CMS";
 import Transaction from "../Pages/Transaction";
 import SubAdmin from "../Pages/SubAdmin";
 
+
+
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login");
   const [userDetails, setUserDetails] = useState({ username: "", role: "" });
@@ -646,18 +648,33 @@ function Auth() {
     audio.play();
   };
 
-  const handleLogin = (username, password, role) => {
-    if (username && password && role) {
-      setUserDetails({ username, role });
-      setUserPassword({ password });
-      setCurrentPage(role === "admin" ? "adminDashboard" : "recruiterDashboard");
-      toast.success(`Welcome to the ${role === "admin" ? "Admin" : "Recruiter"} Dashboard.`);
-    } 
-    else {
-      toast.error("Invalid Credentials")
-      playPointSound();  
-    }
+  // const handleLogin = (username, password, role) => {
+  //   if (username && password && role) {
+  //     setUserDetails({ username, role });
+  //     setUserPassword({ password });
+  //     setCurrentPage(role === "admin" ? "adminDashboard" : "recruiterDashboard");
+  //     toast.success(`Welcome to the ${role === "admin" ? "Admin" : "Recruiter"} Dashboard.`);
+  //   } 
+  //   else {
+  //     toast.error("Invalid Credentials")
+  //     playPointSound();  
+  //   }
+  // };
+  const users = {
+    "a@gmail.com": { password: "123", role: "admin" },
+    "r@gmail.com": { password: "123", role: "recruiter" },
   };
+
+  const handleLogin = (email, password) => {
+    if (users[email] && users[email].password === password) {
+      setUserDetails({ username: email, role: users[email].role });
+      setCurrentPage(users[email].role === "admin" ? "adminDashboard" : "recruiterDashboard");
+      toast.success(`Welcome to the ${users[email].role === "admin" ? "Admin" : "Recruiter"} Dashboard.`);
+    } else {
+      toast.error("Invalid Credentials");
+      playPointSound();
+    }
+  }
 
   const handleLogout = () => {
     setCurrentPage("login");
@@ -993,6 +1010,7 @@ function AdminDashboard({ onLogout }) {
         <Route path="/email" element={<Email />} />
         <Route path="/help" element={<Help />} />
         <Route path='/cms'element={<CMS/>}/>
+        
         <Route path='/sub'element={<SubAdmin/>}/>
         <Route path="transaction"element={<Transaction/>}/>
         <Route path="/team" element={<TeamManagementDashboard />} />

@@ -3,7 +3,7 @@ import Header from '../components/Common/Header';
 import { toast, Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose, AiOutlinePlus} from 'react-icons/ai';
-import { Search,Trash2,Eye,Edit, XCircle, CheckCircle } from 'lucide-react';
+import { Search,Trash2,Eye,Edit, XCircle, CheckCircle, ToggleLeft, ToggleRight } from 'lucide-react';
 
 const TeamManagementDashboard = () => {
   const [members, setMembers] = useState([
@@ -30,13 +30,19 @@ const TeamManagementDashboard = () => {
         skills: ['Recruiting', 'Communication'],
         contact: 'alice@example.com',
         address: '123 Main St, City',
-        verificationDocuments: { panCard: true, msmeCertificate: false, gstCertificate: true },
-        companyDetails: { name: 'ABC Corp', type: 'HR Consulting' },
-        profileHandledBy: 'Alice',
-        subscriptionDetails: { plan: 'Premium', validUntil: '30th June 2025' },
-        additionalDetails: { pendingDays: 10, lastLoggedIn: '2 days ago', lastActivity: 'Updated Job Postings' }
-      },
-      {
+        joinDate: '2022-06-15',
+        releaseDate: null,
+        aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+        panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+        email: 'alice@example.com',
+        phone: '+1-234-567-8901',
+        experience: '5 years',
+        salary: '$60,000',
+        position: 'Senior Recruiter',
+        status: 'Active',
+        remark: 'Excellent performance',
+    },
+    {
         id: 2,
         name: 'Bob',
         role: 'Interviewer',
@@ -46,13 +52,19 @@ const TeamManagementDashboard = () => {
         skills: ['Interviewing', 'Technical Analysis'],
         contact: 'bob@example.com',
         address: '456 Second St, City',
-        verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: true },
-        companyDetails: { name: 'Tech Solutions', type: 'Software Development' },
-        profileHandledBy: 'Alice',
-        subscriptionDetails: { plan: 'Standard', validUntil: '15th August 2025' },
-        additionalDetails: { pendingDays: 5, lastLoggedIn: '1 day ago', lastActivity: 'Conducted Interviews' }
-      },
-      {
+        joinDate: '2021-09-10',
+        releaseDate: '2024-01-20',
+        aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+        panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+        email: 'bob@example.com',
+        phone: '+1-987-654-3210',
+        experience: '8 years',
+        salary: '$80,000',
+        position: 'Lead Interviewer',
+        status: 'Inactive',
+        remark: 'Left for a better opportunity',
+    },
+    {
         id: 3,
         name: 'Charlie',
         role: 'Manager',
@@ -62,13 +74,19 @@ const TeamManagementDashboard = () => {
         skills: ['Leadership', 'Team Management'],
         contact: 'charlie@example.com',
         address: '789 Third St, City',
-        verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true },
-        companyDetails: { name: 'Global Ops Ltd', type: 'Operations Management' },
-        profileHandledBy: 'Charlie',
-        subscriptionDetails: { plan: 'Enterprise', validUntil: '1st January 2026' },
-        additionalDetails: { pendingDays: 0, lastLoggedIn: '3 hours ago', lastActivity: 'Reviewed Team Performance' }
-      },
-      {
+        joinDate: '2020-02-18',
+        releaseDate: null,
+        aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+        panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+        email: 'charlie@example.com',
+        phone: '+44-203-123-4567',
+        experience: '10 years',
+        salary: '$100,000',
+        position: 'Operations Manager',
+        status: 'Active',
+        remark: 'Key asset to the team',
+    },
+    {
         id: 4,
         name: 'David',
         role: 'HR Specialist',
@@ -78,13 +96,19 @@ const TeamManagementDashboard = () => {
         skills: ['Employee Relations', 'Conflict Resolution'],
         contact: 'david@example.com',
         address: '101 Fourth St, City',
-        verificationDocuments: { panCard: true, msmeCertificate: false, gstCertificate: false },
-        companyDetails: { name: 'HR Experts', type: 'Human Resources' },
-        profileHandledBy: 'Alice',
-        subscriptionDetails: { plan: 'Basic', validUntil: 'Expired' },
-        additionalDetails: { pendingDays: 15, lastLoggedIn: '10 days ago', lastActivity: 'Reviewed Employee Complaints' }
-      },
-      {
+        joinDate: '2018-07-25',
+        releaseDate: '2023-11-30',
+        aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+        panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+        email: 'david@example.com',
+        phone: '+1-312-555-7890',
+        experience: '7 years',
+        salary: '$55,000',
+        position: 'HR Specialist',
+        status: 'Inactive',
+        remark: 'Resigned due to relocation',
+    },
+    {
         id: 5,
         name: 'Eva',
         role: 'Software Engineer',
@@ -94,110 +118,149 @@ const TeamManagementDashboard = () => {
         skills: ['JavaScript', 'React'],
         contact: 'eva@example.com',
         address: '202 Fifth St, City',
-        verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: true },
-        companyDetails: { name: 'CodeCrafters', type: 'IT Services' },
-        profileHandledBy: 'Bob',
-        subscriptionDetails: { plan: 'Premium', validUntil: '5th December 2025' },
-        additionalDetails: { pendingDays: 2, lastLoggedIn: '5 hours ago', lastActivity: 'Pushed Code to GitHub' }
-      },
-      {
-        id: 6,
-        name: 'Frank',
-        role: 'Data Scientist',
-        active: true,
-        department: 'Tech',
-        location: 'San Francisco',
-        skills: ['Machine Learning', 'Data Analysis'],
-        contact: 'frank@example.com',
-        address: '303 Sixth St, City',
-        verificationDocuments: { panCard: true, msmeCertificate: false, gstCertificate: true },
-        companyDetails: { name: 'AI Analytics', type: 'Data Science' },
-        profileHandledBy: 'Charlie',
-        subscriptionDetails: { plan: 'Enterprise', validUntil: '28th September 2025' },
-        additionalDetails: { pendingDays: 7, lastLoggedIn: '6 days ago', lastActivity: 'Trained ML Model' }
-      },
-      {
-        id: 7,
-        name: 'Grace',
-        role: 'UI/UX Designer',
-        active: true,
-        department: 'Design',
-        location: 'New York',
-        skills: ['Sketch', 'Figma'],
-        contact: 'grace@example.com',
-        address: '404 Seventh St, City',
-        verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true },
-        companyDetails: { name: 'Creative Studio', type: 'Design & Branding' },
-        profileHandledBy: 'Eva',
-        subscriptionDetails: { plan: 'Premium', validUntil: '12th April 2026' },
-        additionalDetails: { pendingDays: 3, lastLoggedIn: '8 hours ago', lastActivity: 'Designed New UI' }
-      },
-      {
-        id: 8,
-        name: 'Hank',
-        role: 'Developer',
-        active: false,
-        department: 'Tech',
-        location: 'Sydney',
-        skills: ['Python', 'Django'],
-        contact: 'hank@example.com',
-        address: '505 Eighth St, City',
-        verificationDocuments: { panCard: true, msmeCertificate: false, gstCertificate: false },
-        companyDetails: { name: 'DevWorks', type: 'Software Solutions' },
-        profileHandledBy: 'Bob',
-        subscriptionDetails: { plan: 'Basic', validUntil: 'Expired' },
-        additionalDetails: { pendingDays: 20, lastLoggedIn: '15 days ago', lastActivity: 'Built API Endpoint' }
-      },
-      {
-        id: 9,
-        name: 'Ivy',
-        role: 'QA Engineer',
-        active: true,
-        department: 'Tech',
-        location: 'Austin',
-        skills: ['Automated Testing', 'Manual Testing'],
-        contact: 'ivy@example.com',
-        address: '606 Ninth St, City',
-        verificationDocuments: { panCard: true, msmeCertificate: true, gstCertificate: false },
-        companyDetails: { name: 'TestPros', type: 'QA & Testing' },
-        profileHandledBy: 'Grace',
-        subscriptionDetails: { plan: 'Standard', validUntil: '30th May 2025' },
-        additionalDetails: { pendingDays: 5, lastLoggedIn: '12 hours ago', lastActivity: 'Ran Test Suite' }
-      },
-      {
-        id: 10,
-        name: 'Jack',
-        role: 'Team Lead',
-        active: true,
-        department: 'Tech',
-        location: 'Paris',
-        skills: ['Leadership', 'Scrum'],
-        contact: 'jack@example.com',
-        address: '707 Tenth St, City',
-        verificationDocuments: { panCard: false, msmeCertificate: true, gstCertificate: true },
-        companyDetails: { name: 'Agile Inc', type: 'Project Management' },
-        profileHandledBy: 'Charlie',
-        subscriptionDetails: { plan: 'Enterprise', validUntil: '1st July 2026' },
-        additionalDetails: { pendingDays: 0, lastLoggedIn: 'Just now', lastActivity: 'Reviewed Sprint Plan' }
-      
-      }, 
-      {
-        id:11,
-        name:'Jill',
-        role:'Recruiter',
-        active:true,
-        department:'IT',
-        location:'Africa',
-        skills:['Recruiting','consulting'],
-        contact:'jill@example.com',
-        address:'1234 main ct',
-        verificationDocuments:{panCard:true,msmeCertificate:false,gstCertificate:false},
-        companyDetails:{name:'BDS Group',type:'IT Services'},
-        profileHandledBy:'Jill',
-        subscriptionDetails:{plan:'Premium',validUntil:'28 feb 2024'},
-        additionalDetails:{pendingDays:3,lastLoggedIn:'2 hour ago',lastActivity:'Reviewed Team Performance'},
-
-      },
+        joinDate: '2019-12-05',
+        releaseDate: null,
+        aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+        panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+        email: 'eva@example.com',
+        phone: '+49-30-9876-5432',
+        experience: '6 years',
+        salary: '$75,000',
+        position: 'Senior Software Engineer',
+        status: 'Active',
+        remark: 'Consistently exceeds expectations',
+    },
+    {
+      id: 6,
+      name: 'Bobbbb',
+      role: 'Interviewer',
+      active: true,
+      department: 'Tech',
+      location: 'San Francisco',
+      skills: ['Interviewing', 'Technical Analysis'],
+      contact: 'bob@example.com',
+      address: '456 Second St, City',
+      joinDate: '2021-09-10',
+      releaseDate: '2024-01-20',
+      aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+      panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+      email: 'bob@example.com',
+      phone: '+1-987-654-3210',
+      experience: '8 years',
+      salary: '$80,000',
+      position: 'Lead Interviewer',
+      status: 'Inactive',
+      remark: 'Left for a better opportunity',
+  },{
+    id: 7,
+    name: 'Kenna',
+    role: 'Interviewer',
+    active: true,
+    department: 'Tech',
+    location: 'San Francisco',
+    skills: ['Interviewing', 'Technical Analysis'],
+    contact: 'bob@example.com',
+    address: '456 Second St, City',
+    joinDate: '2021-09-10',
+    releaseDate: '2024-01-20',
+    aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+    panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+    email: 'bob@example.com',
+    phone: '+1-987-654-3210',
+    experience: '8 years',
+    salary: '$80,000',
+    position: 'Lead Interviewer',
+    status: 'Inactive',
+    remark: 'Left for a better opportunity',
+},
+{
+  id: 8,
+  name: 'Bobbly',
+  role: 'Interviewer',
+  active: true,
+  department: 'Tech',
+  location: 'San Francisco',
+  skills: ['Interviewing', 'Technical Analysis'],
+  contact: 'bob@example.com',
+  address: '456 Second St, City',
+  joinDate: '2021-09-10',
+  releaseDate: '2024-01-20',
+  aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+  panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+  email: 'bob@example.com',
+  phone: '+1-987-654-3210',
+  experience: '8 years',
+  salary: '$80,000',
+  position: 'Lead Interviewer',
+  status: 'Inactive',
+  remark: 'Left for a better opportunity',
+},
+{
+  id: 9,
+  name: 'Sam',
+  role: 'Interviewer',
+  active: true,
+  department: 'Tech',
+  location: 'San Francisco',
+  skills: ['Interviewing', 'Technical Analysis'],
+  contact: 'bob@example.com',
+  address: '456 Second St, City',
+  joinDate: '2021-09-10',
+  releaseDate: '2024-01-20',
+  aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+  panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+  email: 'bob@example.com',
+  phone: '+1-987-654-3210',
+  experience: '8 years',
+  salary: '$80,000',
+  position: 'Lead Interviewer',
+  status: 'Inactive',
+  remark: 'Left for a better opportunity',
+},
+{
+  id: 10,
+  name: 'Will',
+  role: 'Interviewer',
+  active: true,
+  department: 'Tech',
+  location: 'San Francisco',
+  skills: ['Interviewing', 'Technical Analysis'],
+  contact: 'bob@example.com',
+  address: '456 Second St, City',
+  joinDate: '2021-09-10',
+  releaseDate: '2024-01-20',
+  aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+  panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+  email: 'bob@example.com',
+  phone: '+1-987-654-3210',
+  experience: '8 years',
+  salary: '$80,000',
+  position: 'Lead Interviewer',
+  status: 'Inactive',
+  remark: 'Left for a better opportunity',
+},
+{
+  id: 11,
+  name: 'Ram',
+  role: 'Interviewer',
+  active: true,
+  department: 'Tech',
+  location: 'San Francisco',
+  skills: ['Interviewing', 'Technical Analysis'],
+  contact: 'bob@example.com',
+  address: '456 Second St, City',
+  joinDate: '2021-09-10',
+  releaseDate: '2024-01-20',
+  aadharCard: 'https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg',
+  panCard: 'https://indiangrow.com/data/user/maker/document/pan/banner.jpg',
+  email: 'bob@example.com',
+  phone: '+1-987-654-3210',
+  experience: '8 years',
+  salary: '$80,000',
+  position: 'Lead Interviewer',
+  status: 'Inactive',
+  remark: 'Left for a better opportunity',
+},
   ]);
   
   const [viewingMember, setViewingMember] = useState(null);
@@ -208,6 +271,7 @@ const TeamManagementDashboard = () => {
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false);
   const [isEditMemberModalOpen, setIsEditMemberModalOpen] = useState(false);
   const [editedMember, setEditedMember] = useState(null);
+  const [filterStatus, setFilterStatus] = useState("All");
   
   
   const membersPerPage = 10;
@@ -221,6 +285,11 @@ const TeamManagementDashboard = () => {
     const isSkillsMatch = member.skills.some(skill => skill.toLowerCase().includes(filters.toLowerCase()));
     return (isNameMatch || isSkillsMatch) && isDepartmentMatch;
   });
+  const filteredAdmins = members.filter(
+    (member) =>
+      
+      (filterStatus === "All" || member.status === filterStatus)
+  );
 
   const handleDeleteMember = (id) => {
     setMembers(members.filter((member) => member.id !== id));
@@ -288,6 +357,15 @@ const TeamManagementDashboard = () => {
         />
         <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
       </div>
+      <div className='md:ml-48 sm:ml-5 sm:mr-5'>
+      <button
+          onClick={() =>
+            setFilterStatus(filterStatus === "All" ? "Active" : filterStatus === "Active" ? "Inactive" : "All")}
+          className="flex items-center gap-2  bg-gray-700 px-4 py-2 rounded hover:bg-gray-600" >
+          {filterStatus === "Active" ? <ToggleLeft size={20} /> : <ToggleRight size={20} />}
+          {filterStatus}
+        </button>
+        </div>
       <div className="relative xs:w-auto md:w-auto md:text-sm xs:text-xs">
         <select
           value={selectedDepartment}
@@ -309,15 +387,23 @@ const TeamManagementDashboard = () => {
           <tr>
             
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Name</th>
+            <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Experience</th>
+            <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Location</th>
+            <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Department</th>
+
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Status</th>
+            
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm ">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {currentMembers.map((member, index) => (
+        {filteredAdmins.slice((currentPage - 1) * membersPerPage, currentPage * membersPerPage).map((member, index) => (
             <tr key={member.id} className="border-t border-gray-700 transition duration-300">
               
               <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.name}</td>
+              <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.experience}</td>
+              <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.location}</td>
+              <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.department}</td>
               <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
                 
                 <span className={`px-2 py-1 flex items-center space-x-1 rounded text-xs ${member.active ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
@@ -352,7 +438,125 @@ const TeamManagementDashboard = () => {
       </table>
     </div>
      
-<AnimatePresence>
+{/* <AnimatePresence>
+  {viewingMember && (
+    <motion.div
+      className="fixed inset-0 bg-opacity-50 flex justify-end mt-14"
+      onClick={closeDetailView}
+      initial={{ opacity: 0, x: "100%" }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: "100%" }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 md:w-1/3 sm:w-auto relative shadow-2xl rounded-lg 
+        max-h-[90vh] overflow-y-auto"
+        initial={{ opacity: 0, x: "100%" }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: "100%" }}
+        transition={{ duration: 0.5 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        
+        <AiOutlineClose
+          className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-gray-200"
+          size={24}
+          onClick={closeDetailView}
+        />
+
+        
+        <div className="flex flex-col items-center space-y-4">
+          <div className="h-20 w-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-2xl">
+            {viewingMember.name.charAt(0)}
+          </div>
+          <h2 className="text-2xl font-semibold text-gray-100">
+            {viewingMember.name}
+          </h2>
+        </div>
+
+        
+        <div className="mt-6 space-y-4">
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Role:</p>
+            <span className="text-sm text-gray-200">{viewingMember.role}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Department:</p>
+            <span className="text-sm text-gray-200">{viewingMember.department}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Location:</p>
+            <span className="text-sm text-gray-200">{viewingMember.location}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Skills:</p>
+            <span className="text-sm text-gray-200">{viewingMember.skills.join(", ")}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Contact:</p>
+            <span className="text-sm text-gray-200">{viewingMember.contact}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Address:</p>
+            <span className="text-sm text-gray-200">{viewingMember.address}</span>
+          </div>
+        </div>
+
+        
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Verification Documents</h3>
+          <div className="mt-2 space-y-2 text-gray-300">
+            <p>PAN Card: {viewingMember.verificationDocuments?.panCard ? "✅ Available" : "❌ Not Available"}</p>
+            <p>MSME Certificate: {viewingMember.verificationDocuments?.msmeCertificate ? "✅ Available" : "❌ Not Available"}</p>
+            <p>GST Certificate: {viewingMember.verificationDocuments?.gstCertificate ? "✅ Available" : "❌ Not Available"}</p>
+          </div>
+        </div>
+
+        
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Company Details</h3>
+          <p className="text-gray-300">Company Name: {viewingMember.companyDetails?.name || "Tecgizons PVT. LTD."}</p>
+          <p className="text-gray-300">Company Type: {viewingMember.companyDetails?.type || "IT"}</p>
+        </div>
+
+        
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Profile Managed By</h3>
+          <p className="text-gray-300">{viewingMember.profileHandledBy || "N/A"}</p>
+        </div>
+
+        
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Subscription Details</h3>
+          <p className="text-gray-300">Plan: {viewingMember.subscriptionDetails?.plan || "N/A"}</p>
+          <p className="text-gray-300">Valid Until: {viewingMember.subscriptionDetails?.validUntil || "N/A"}</p>
+        </div>
+
+        
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100">Additional Details</h3>
+          <p className="text-gray-300">Status: {viewingMember.active ? "✅ Active" : "❌ Inactive"}</p>
+          <p className="text-gray-300">Pending Days: {viewingMember.additionalDetails?.pendingDays || "N/A"}</p>
+          <p className="text-gray-300">Last Logged In: {viewingMember.additionalDetails?.lastLoggedIn || "N/A"}</p>
+          <p className="text-gray-300">Last Activity: {viewingMember.additionalDetails?.lastActivity || "N/A"}</p>
+        </div>
+
+        
+        <div className="mt-6 flex justify-center">
+          <button
+            className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:opacity-90 transition duration-300"
+            onClick={closeDetailView}
+          >
+            Close
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+ */}
+ <AnimatePresence>
   {viewingMember && (
     <motion.div
       className="fixed inset-0 bg-opacity-50 flex justify-end mt-14"
@@ -407,52 +611,59 @@ const TeamManagementDashboard = () => {
             <span className="text-sm text-gray-200">{viewingMember.skills.join(", ")}</span>
           </div>
           <div className="flex items-center space-x-4">
-            <p className="text-sm text-gray-400">Contact:</p>
-            <span className="text-sm text-gray-200">{viewingMember.contact}</span>
+            <p className="text-sm text-gray-400">Email:</p>
+            <span className="text-sm text-gray-200">{viewingMember.email}</span>
           </div>
           <div className="flex items-center space-x-4">
-            <p className="text-sm text-gray-400">Address:</p>
-            <span className="text-sm text-gray-200">{viewingMember.address}</span>
+            <p className="text-sm text-gray-400">Phone:</p>
+            <span className="text-sm text-gray-200">{viewingMember.phone}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Experience:</p>
+            <span className="text-sm text-gray-200">{viewingMember.experience}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Salary:</p>
+            <span className="text-sm text-gray-200">{viewingMember.salary}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Position:</p>
+            <span className="text-sm text-gray-200">{viewingMember.position}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Status:</p>
+            <span className="text-sm text-gray-200">{viewingMember.status}</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className="text-sm text-gray-400">Remark:</p>
+            <span className="text-sm text-gray-200">{viewingMember.remark}</span>
           </div>
         </div>
 
         {/* Verification Documents */}
         <div className="border-t border-gray-600 pt-4">
           <h3 className="text-lg font-semibold text-gray-100">Verification Documents</h3>
-          <div className="mt-2 space-y-2 text-gray-300">
-            <p>PAN Card: {viewingMember.verificationDocuments?.panCard ? "✅ Available" : "❌ Not Available"}</p>
-            <p>MSME Certificate: {viewingMember.verificationDocuments?.msmeCertificate ? "✅ Available" : "❌ Not Available"}</p>
-            <p>GST Certificate: {viewingMember.verificationDocuments?.gstCertificate ? "✅ Available" : "❌ Not Available"}</p>
+          <div className="mt-2 space-y-2">
+            <p className="text-gray-300">Aadhar Card:</p>
+            <img
+              src={viewingMember.aadharCard}
+              alt="Aadhar Card"
+              className="w-40 rounded shadow-md"
+            />
+            <p className="text-gray-300">PAN Card:</p>
+            <img
+              src={viewingMember.panCard}
+              alt="PAN Card"
+              className="w-40 rounded shadow-md"
+            />
           </div>
         </div>
 
-        {/* Company Details */}
+        {/* Join Date & Release Date */}
         <div className="border-t border-gray-600 pt-4">
-          <h3 className="text-lg font-semibold text-gray-100">Company Details</h3>
-          <p className="text-gray-300">Company Name: {viewingMember.companyDetails?.name || "Tecgizons PVT. LTD."}</p>
-          <p className="text-gray-300">Company Type: {viewingMember.companyDetails?.type || "IT"}</p>
-        </div>
-
-        {/* Profile Managed By */}
-        <div className="border-t border-gray-600 pt-4">
-          <h3 className="text-lg font-semibold text-gray-100">Profile Managed By</h3>
-          <p className="text-gray-300">{viewingMember.profileHandledBy || "N/A"}</p>
-        </div>
-
-        {/* Subscription Details */}
-        <div className="border-t border-gray-600 pt-4">
-          <h3 className="text-lg font-semibold text-gray-100">Subscription Details</h3>
-          <p className="text-gray-300">Plan: {viewingMember.subscriptionDetails?.plan || "N/A"}</p>
-          <p className="text-gray-300">Valid Until: {viewingMember.subscriptionDetails?.validUntil || "N/A"}</p>
-        </div>
-
-        {/* Additional Details */}
-        <div className="border-t border-gray-600 pt-4">
-          <h3 className="text-lg font-semibold text-gray-100">Additional Details</h3>
-          <p className="text-gray-300">Status: {viewingMember.active ? "✅ Active" : "❌ Inactive"}</p>
-          <p className="text-gray-300">Pending Days: {viewingMember.additionalDetails?.pendingDays || "N/A"}</p>
-          <p className="text-gray-300">Last Logged In: {viewingMember.additionalDetails?.lastLoggedIn || "N/A"}</p>
-          <p className="text-gray-300">Last Activity: {viewingMember.additionalDetails?.lastActivity || "N/A"}</p>
+          <h3 className="text-lg font-semibold text-gray-100">Employment Dates</h3>
+          <p className="text-gray-300">Join Date: {viewingMember.joinDate}</p>
+          <p className="text-gray-300">Release Date: {viewingMember.releaseDate || "N/A"}</p>
         </div>
 
         {/* Close Button */}
@@ -468,7 +679,6 @@ const TeamManagementDashboard = () => {
     </motion.div>
   )}
 </AnimatePresence>
-
 
 
     <div className="flex justify-center mt-6 space-x-2">
@@ -560,7 +770,7 @@ const TeamManagementDashboard = () => {
   )}
 
   {/* Edit Member Modal */}
-  {isEditMemberModalOpen && (
+  {/* {isEditMemberModalOpen && (
     <motion.div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 mt-16 p-7"
       onClick={() => setIsEditMemberModalOpen(false)} >
@@ -640,7 +850,240 @@ const TeamManagementDashboard = () => {
         </form>
       </motion.div>
     </motion.div>
-  )}
+  )} */} 
+  {isEditMemberModalOpen && (
+  <motion.div
+    className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 mt-16 p-7"
+    onClick={() => setIsEditMemberModalOpen(false)}
+  >
+    <motion.div
+      className="bg-gray-800 p-6 rounded-lg shadow-sm md:w-1/2 xs:w-full overflow-y-auto max-h-[80vh]"
+      onClick={(e) => e.stopPropagation()}
+      initial={{ x: "100%" }}
+      animate={{ x: "0%" }}
+      exit={{ x: "100%" }}
+      transition={{ type: "spring", stiffness: 200, damping: 25 }}
+    >
+      {/* Modal Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="md:text-2xl xs:text-lg xs:w-full sm:text-center font-bold text-white">
+          Edit Member Details
+        </h2>
+        <button
+          onClick={() => setIsEditMemberModalOpen(false)}
+          className="text-white text-2xl"
+        >
+          <AiOutlineClose />
+        </button>
+      </div>
+
+      {/* Edit Form */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSaveEditedMember();
+        }}
+      >
+        {/* Name */}
+        <input
+          type="text"
+          value={editedMember.name}
+          onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
+          placeholder="Name"
+          className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+        />
+
+        {/* Role */}
+        <input
+          type="text"
+          value={editedMember.role}
+          onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
+          placeholder="Role"
+          className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+        />
+
+        {/* Department */}
+        <input
+          type="text"
+          value={editedMember.department}
+          onChange={(e) =>
+            setEditedMember({ ...editedMember, department: e.target.value })
+          }
+          placeholder="Department"
+          className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+        />
+
+        {/* Contact */}
+        <input
+          type="text"
+          value={editedMember.contact}
+          onChange={(e) => setEditedMember({ ...editedMember, contact: e.target.value })}
+          placeholder="Contact"
+          className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+        />
+
+        {/* Address */}
+        <input
+          type="text"
+          value={editedMember.address}
+          onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
+          placeholder="Address"
+          className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+        />
+
+        {/* Location */}
+        <input
+          type="text"
+          value={editedMember.location}
+          onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
+          placeholder="Location"
+          className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+        />
+
+        {/* Skills (Handled as an Array) */}
+        <input
+          type="text"
+          value={editedMember.skills?.join(", ") || ""}
+          onChange={(e) =>
+            setEditedMember({ ...editedMember, skills: e.target.value.split(", ") })
+          }
+          placeholder="Skills (comma-separated)"
+          className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+        />
+
+        {/* Verification Documents */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100 mb-2">
+            Verification Documents
+          </h3>
+          <input
+            type="text"
+            value={editedMember.verificationDocuments?.panCard || ""}
+            onChange={(e) =>
+              setEditedMember({
+                ...editedMember,
+                verificationDocuments: {
+                  ...editedMember.verificationDocuments,
+                  panCard: e.target.value,
+                },
+              })
+            }
+            placeholder="PAN Card"
+            className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+          />
+
+          <input
+            type="text"
+            value={editedMember.verificationDocuments?.msmeCertificate || ""}
+            onChange={(e) =>
+              setEditedMember({
+                ...editedMember,
+                verificationDocuments: {
+                  ...editedMember.verificationDocuments,
+                  msmeCertificate: e.target.value,
+                },
+              })
+            }
+            placeholder="MSME Certificate"
+            className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+          />
+
+          <input
+            type="text"
+            value={editedMember.verificationDocuments?.gstCertificate || ""}
+            onChange={(e) =>
+              setEditedMember({
+                ...editedMember,
+                verificationDocuments: {
+                  ...editedMember.verificationDocuments,
+                  gstCertificate: e.target.value,
+                },
+              })
+            }
+            placeholder="GST Certificate"
+            className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+          />
+        </div>
+
+        {/* Company Details */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100 mb-2">Company Details</h3>
+          <input
+            type="text"
+            value={editedMember.companyDetails?.name || ""}
+            onChange={(e) =>
+              setEditedMember({
+                ...editedMember,
+                companyDetails: { ...editedMember.companyDetails, name: e.target.value },
+              })
+            }
+            placeholder="Company Name"
+            className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+          />
+
+          <input
+            type="text"
+            value={editedMember.companyDetails?.type || ""}
+            onChange={(e) =>
+              setEditedMember({
+                ...editedMember,
+                companyDetails: { ...editedMember.companyDetails, type: e.target.value },
+              })
+            }
+            placeholder="Company Type"
+            className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+          />
+        </div>
+
+        {/* Subscription Details */}
+        <div className="border-t border-gray-600 pt-4">
+          <h3 className="text-lg font-semibold text-gray-100 mb-2">Subscription Details</h3>
+          <input
+            type="text"
+            value={editedMember.subscriptionDetails?.plan || ""}
+            onChange={(e) =>
+              setEditedMember({
+                ...editedMember,
+                subscriptionDetails: {
+                  ...editedMember.subscriptionDetails,
+                  plan: e.target.value,
+                },
+              })
+            }
+            placeholder="Subscription Plan"
+            className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+          />
+
+          <input
+            type="text"
+            value={editedMember.subscriptionDetails?.validUntil || ""}
+            onChange={(e) =>
+              setEditedMember({
+                ...editedMember,
+                subscriptionDetails: {
+                  ...editedMember.subscriptionDetails,
+                  validUntil: e.target.value,
+                },
+              })
+            }
+            placeholder="Valid Until"
+            className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
+          />
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+        >
+          Save Changes
+        </button>
+      </form>
+    </motion.div>
+  </motion.div>
+)}
+
+  
 </div>
 
 

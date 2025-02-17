@@ -58,9 +58,7 @@ const CMS = () => {
       <Header title={"CMS"} />
       <motion.div
         className="max-w-4xl mx-auto p-6 bg-gray-900 text-white shadow-xl rounded-lg md:p-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        
 
       >
     
