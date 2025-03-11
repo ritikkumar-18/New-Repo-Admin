@@ -632,9 +632,12 @@ import Candidate from "../Pages/Candidate search";
 import pointSound from '/blip.mp3';  
 import Resume from "../Pages/Resume";
 import Overviewrecruit from "../Pages/Overviewrecruit";
-import CMS from "../Pages/CMS";
+
 import Transaction from "../Pages/Transaction";
 import SubAdmin from "../Pages/SubAdmin";
+import Privacy from "./cms/Privacy";
+import About from "./cms/Aboutus";
+import Terms from "./cms/Terms&Condi";
 
 
 
@@ -1009,8 +1012,9 @@ function AdminDashboard({ onLogout }) {
         <Route path="/calender" element={<Calender />} />
         <Route path="/email" element={<Email />} />
         <Route path="/help" element={<Help />} />
-        <Route path='/cms'element={<CMS/>}/>
-        
+        <Route path="/cms/privacy-policy"element={<Privacy/>}/>
+        <Route path="/cms/terms-and-conditions" element={<Terms/>}/>
+        <Route path='/cms/about-us'element={<About/>}/>
         <Route path='/sub'element={<SubAdmin/>}/>
         <Route path="transaction"element={<Transaction/>}/>
         <Route path="/team" element={<TeamManagementDashboard />} />

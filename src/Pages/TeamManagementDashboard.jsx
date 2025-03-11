@@ -283,13 +283,15 @@ const TeamManagementDashboard = () => {
     const isNameMatch = member.name.toLowerCase().includes(filters.toLowerCase());
     const isDepartmentMatch = selectedDepartment === 'all' || member.department.toLowerCase() === selectedDepartment.toLowerCase();
     const isSkillsMatch = member.skills.some(skill => skill.toLowerCase().includes(filters.toLowerCase()));
+     filterStatus === 'All' || (member.active ? 'Active' : 'Inactive') === filterStatus;
+
     return (isNameMatch || isSkillsMatch) && isDepartmentMatch;
   });
-  const filteredAdmins = members.filter(
-    (member) =>
+  // const filteredAdmins = members.filter(
+  //   (member) =>
       
-      (filterStatus === "All" || member.status === filterStatus)
-  );
+  //     (filterStatus === "All" || member.status === filterStatus)
+  // );
 
   const handleDeleteMember = (id) => {
     setMembers(members.filter((member) => member.id !== id));
@@ -365,7 +367,7 @@ const TeamManagementDashboard = () => {
           {filterStatus === "Active" ? <ToggleLeft size={20} /> : <ToggleRight size={20} />}
           {filterStatus}
         </button>
-        </div>
+        </div> 
       <div className="relative xs:w-auto md:w-auto md:text-sm xs:text-xs">
         <select
           value={selectedDepartment}
@@ -390,14 +392,12 @@ const TeamManagementDashboard = () => {
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Experience</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Location</th>
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Department</th>
-
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">Status</th>
-            
             <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm ">Actions</th>
           </tr>
         </thead>
         <tbody>
-        {filteredAdmins.slice((currentPage - 1) * membersPerPage, currentPage * membersPerPage).map((member, index) => (
+        {filteredMembers.slice((currentPage - 1) * membersPerPage, currentPage * membersPerPage).map((member, index) => (
             <tr key={member.id} className="border-t border-gray-700 transition duration-300">
               
               <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.name}</td>
@@ -877,14 +877,14 @@ const TeamManagementDashboard = () => {
         </button>
       </div>
 
-      {/* Edit Form */}
+      
       <form
         onSubmit={(e) => {
           e.preventDefault();
           handleSaveEditedMember();
         }}
       >
-        {/* Name */}
+        
         <input
           type="text"
           value={editedMember.name}
@@ -893,7 +893,7 @@ const TeamManagementDashboard = () => {
           className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
         />
 
-        {/* Role */}
+        
         <input
           type="text"
           value={editedMember.role}
@@ -902,7 +902,7 @@ const TeamManagementDashboard = () => {
           className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
         />
 
-        {/* Department */}
+        
         <input
           type="text"
           value={editedMember.department}
@@ -913,7 +913,7 @@ const TeamManagementDashboard = () => {
           className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
         />
 
-        {/* Contact */}
+        
         <input
           type="text"
           value={editedMember.contact}
@@ -922,7 +922,7 @@ const TeamManagementDashboard = () => {
           className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
         />
 
-        {/* Address */}
+        
         <input
           type="text"
           value={editedMember.address}
@@ -931,7 +931,7 @@ const TeamManagementDashboard = () => {
           className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
         />
 
-        {/* Location */}
+        
         <input
           type="text"
           value={editedMember.location}
@@ -940,7 +940,7 @@ const TeamManagementDashboard = () => {
           className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
         />
 
-        {/* Skills (Handled as an Array) */}
+        
         <input
           type="text"
           value={editedMember.skills?.join(", ") || ""}
@@ -951,7 +951,7 @@ const TeamManagementDashboard = () => {
           className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
         />
 
-        {/* Verification Documents */}
+        
         <div className="border-t border-gray-600 pt-4">
           <h3 className="text-lg font-semibold text-gray-100 mb-2">
             Verification Documents

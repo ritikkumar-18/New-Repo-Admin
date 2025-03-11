@@ -106,7 +106,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiBarChart2, FiLogOut } from "react-icons/fi";
 import { BiMenu } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowLeftRight, Axis3D, CopyMinus, MessageSquare } from "lucide-react";
+import { ArrowLeftRight, Axis3D, CopyMinus, FileText, Info, LockKeyhole, MessageSquare, ShieldCheck } from "lucide-react";
 import { FaRupeeSign, FaTeamspeak, FaUser } from "react-icons/fa";
 
 const SIDEBAR = [
@@ -122,9 +122,9 @@ const SIDEBAR = [
     icon: CopyMinus,
     href: "#",
     subMenu: [
-      { name: "Privacy Policy", href: "/cms/privacy-policy" },
-      { name: "Terms & Conditions", href: "/cms/terms-and-conditions" },
-      { name: "About Us", href: "/cms/about-us" }
+      { name: "Privacy Policy",icon: LockKeyhole, href: "/cms/privacy-policy" },
+      { name: "Terms & Conditions", icon :ShieldCheck, href: "/cms/terms-and-conditions" },
+      { name: "About Us", icon: Info, href: "/cms/about-us" }
     ]
   },
   { name: "Logout", icon: FiLogOut, href: "/logout" }
@@ -195,12 +195,15 @@ const Sidebar = () => {
                   className="ml-6 mt-2 space-y-2"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                >
+                  exit={{ height: 0, opacity: 0 }}>
                   {item.subMenu.map((subItem, subIndex) => (
-                    <Link key={subIndex} to={subItem.href} className="block p-2 text-gray-400 hover:text-white transition-all">
-                      {subItem.name}
-                    </Link>
+                    <Link
+                    key={subIndex}
+                    to={subItem.href}
+                    className="flex items-center gap-2 p-2 text-gray-400 hover:text-white transition-all">
+                    {React.createElement(subItem.icon, { size: 18, className: "text-gray-500" })}
+                   <span>{subItem.name}</span>
+                   </Link>
                   ))}
                 </motion.div>
               )}

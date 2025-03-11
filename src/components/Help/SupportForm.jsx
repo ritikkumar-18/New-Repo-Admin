@@ -403,8 +403,180 @@
 // };
 
 // export default ChatApp;
-import { X, Paperclip, Smile, Send } from "lucide-react";
+// import { X, Paperclip, Smile, Send } from "lucide-react";
+// import React, { useState, useRef, useEffect } from "react";
+// import { motion } from "framer-motion";
+// import EmojiPicker from "emoji-picker-react";
+
+// const ChatApp = () => {
+//   const [chats, setChats] = useState([
+//     { id: 1, name: "Evy", lastMessage: "+111 987 6543", time: "12:12 am", online: true },
+//     { id: 2, name: "Emma Johnson", lastMessage: "Available for discussion", time: "11:45 pm", online: false },
+//     { id: 3, name: "Bill", lastMessage: "I'll call you tomorrow", time: "10:30 pm", online: true },
+//   ]);
+
+//   const [filteredChats, setFilteredChats] = useState(chats);
+//   const [selectedChat, setSelectedChat] = useState(null);
+//   const [messages, setMessages] = useState([]);
+//   const [newMessage, setNewMessage] = useState("");
+//   const [search, setSearch] = useState("");
+//   const [isTyping, setIsTyping] = useState(false);
+//   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+//   const [readReceipts, setReadReceipts] = useState({});
+//   const [file, setFile] = useState(null);
+
+//   const chatContainerRef = useRef(null);
+
+//   const handleSearch = (e) => {
+//     const query = e.target.value.toLowerCase();
+//     setSearch(query);
+//     setFilteredChats(
+//       chats.filter(
+//         (chat) =>
+//           chat.name.toLowerCase().includes(query) ||
+//           chat.lastMessage.toLowerCase().includes(query)
+//       )
+//     );
+//   };
+
+//   const handleSelectChat = (chat) => {
+//     setSelectedChat(chat);
+//     setMessages([{ sender: "Admin", text: "Welcome to the chat.", timestamp: new Date() }]);
+//     setReadReceipts((prev) => ({ ...prev, [chat.id]: "Read" }));
+//   };
+
+//   const handleSendMessage = () => {
+//     if (newMessage.trim() === "" && !file) return;
+
+//     const message = {
+//       sender: "User",
+//       text: newMessage,
+//       timestamp: new Date(),
+//       file: file,
+//     };
+//     setMessages((prev) => [...prev, message]);
+//     setNewMessage("");
+//     setFile(null);
+//     scrollToBottom();
+//     setReadReceipts((prev) => ({ ...prev, [selectedChat.id]: "Delivered" }));
+
+//     setIsTyping(true);
+//     setTimeout(() => {
+//       const adminResponse = {
+//         sender: "Admin",
+//         text: "Thank you for your message. We'll respond shortly.",
+//         timestamp: new Date(),
+//       };
+//       setMessages((prev) => [...prev, adminResponse]);
+//       setIsTyping(false);
+//       setReadReceipts((prev) => ({ ...prev, [selectedChat.id]: "Read" }));
+//       scrollToBottom();
+//     }, 1500);
+//   };
+
+//   const handleCloseChat = () => {
+//     setSelectedChat(null);
+//     setMessages([]);
+//   };
+
+//   const scrollToBottom = () => {
+//     setTimeout(() => {
+//       if (chatContainerRef.current) {
+//         chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//       }
+//     }, 100);
+//   };
+
+//   const handleEmojiClick = (emojiObject) => {
+//     setNewMessage((prev) => prev + emojiObject.emoji);
+//     setShowEmojiPicker(false);
+//   };
+
+//   const handleFileUpload = (e) => {
+//     setFile(e.target.files[0]);
+//   };
+
+//   return (
+//     <motion.div
+//       className="flex h-screen bg-gray-900 text-white"
+//       initial={{ opacity: 0, y: -20 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.5 }}
+//     >
+//       <div className={`w-1/3 bg-gray-800 border-r border-gray-700 overflow-y-auto ${selectedChat ? 'hidden md:block' : 'block'}`}>
+//         <div className="p-4 border-b border-gray-700 bg-gray-800">
+//           <input
+//             type="text"
+//             placeholder="Search"
+//             value={search}
+//             onChange={handleSearch}
+//             className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
+//           />
+//         </div>
+//         {filteredChats.map((chat) => (
+//           <div
+//             key={chat.id}
+//             onClick={() => handleSelectChat(chat)}
+//             className="p-4 cursor-pointer border-b border-gray-700 hover:bg-gray-700 flex justify-between items-center"
+//           >
+//             <div>
+//               <h3 className="text-lg font-medium">{chat.name}</h3>
+//               <p className="text-sm text-gray-400 truncate">{chat.lastMessage}</p>
+//             </div>
+//             <div className={`h-3 w-3 rounded-full ${chat.online ? 'bg-green-500' : 'bg-gray-500'}`}></div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {selectedChat && (
+//         <motion.div
+//           initial={{ x: 100, opacity: 0 }}
+//           animate={{ x: 0, opacity: 1 }}
+//           transition={{ duration: 0.5 }}
+//           className="flex-1 flex flex-col bg-gray-900"
+//         >
+//           <div className="p-4 border-b border-gray-700 bg-gray-800 flex justify-between">
+//             <h2 className="text-xl font-medium">{selectedChat.name}</h2>
+//             <X className="text-red-500 cursor-pointer" onClick={handleCloseChat} size={24} />
+//           </div>
+//           <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 bg-gray-900">
+//             {messages.map((msg, index) => (
+//               <div key={index} className={`flex ${msg.sender === "Admin" ? "justify-start" : "justify-end"} mb-4`}>
+//                 <div className={`p-4 rounded-lg shadow-md ${msg.sender === "Admin" ? "bg-gray-100 text-black" : "bg-green-600 text-white"}`}>
+//                   <p>{msg.text}</p>
+//                   {msg.file && <p className="text-sm text-gray-400">📎 {msg.file.name}</p>}
+//                 </div>
+//               </div>
+//             ))}
+//             {isTyping && <p className="text-gray-400">Admin is typing...</p>}
+//           </div>
+//           <div className="p-4 border-t border-gray-700 bg-gray-800 flex items-center">
+//             <Smile className="cursor-pointer mr-3 text-yellow-500" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+//             {showEmojiPicker && <EmojiPicker onEmojiClick={handleEmojiClick} />}
+//             <input
+//               type="file"
+//               className="hidden"
+//               onChange={handleFileUpload}
+//             />
+//             <Paperclip className="cursor-pointer text-blue-400" onClick={() => document.querySelector('input[type=file]').click()} />
+//             <input
+//               type="text"
+//               className="flex-1 mx-2 px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none"
+//               value={newMessage}
+//               onChange={(e) => setNewMessage(e.target.value)}
+//               placeholder="Type a message..."
+//             />
+//             <Send className="cursor-pointer text-green-400" onClick={handleSendMessage} />
+//           </div>
+//         </motion.div>
+//       )}
+//     </motion.div>
+//   );
+// };
+
+// export default ChatApp;
 import React, { useState, useRef, useEffect } from "react";
+import { X, Paperclip, Smile, Send, Check, CheckCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import EmojiPicker from "emoji-picker-react";
 
@@ -415,7 +587,6 @@ const ChatApp = () => {
     { id: 3, name: "Bill", lastMessage: "I'll call you tomorrow", time: "10:30 pm", online: true },
   ]);
 
-  const [filteredChats, setFilteredChats] = useState(chats);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -426,18 +597,6 @@ const ChatApp = () => {
   const [file, setFile] = useState(null);
 
   const chatContainerRef = useRef(null);
-
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearch(query);
-    setFilteredChats(
-      chats.filter(
-        (chat) =>
-          chat.name.toLowerCase().includes(query) ||
-          chat.lastMessage.toLowerCase().includes(query)
-      )
-    );
-  };
 
   const handleSelectChat = (chat) => {
     setSelectedChat(chat);
@@ -474,11 +633,6 @@ const ChatApp = () => {
     }, 1500);
   };
 
-  const handleCloseChat = () => {
-    setSelectedChat(null);
-    setMessages([]);
-  };
-
   const scrollToBottom = () => {
     setTimeout(() => {
       if (chatContainerRef.current) {
@@ -487,33 +641,23 @@ const ChatApp = () => {
     }, 100);
   };
 
-  const handleEmojiClick = (emojiObject) => {
-    setNewMessage((prev) => prev + emojiObject.emoji);
-    setShowEmojiPicker(false);
-  };
-
-  const handleFileUpload = (e) => {
-    setFile(e.target.files[0]);
-  };
-
   return (
     <motion.div
       className="flex h-screen bg-gray-900 text-white"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className={`w-1/3 bg-gray-800 border-r border-gray-700 overflow-y-auto ${selectedChat ? 'hidden md:block' : 'block'}`}>
+      transition={{ duration: 0.5 }}>
+      
+      <div className={`md:w-1/3 sm:w-full bg-gray-800 border-r border-gray-700 overflow-y-auto ${selectedChat ? 'hidden md:block' : 'block'}`}>
         <div className="p-4 border-b border-gray-700 bg-gray-800">
           <input
             type="text"
             placeholder="Search"
             value={search}
-            onChange={handleSearch}
-            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
-          />
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none"/>
         </div>
-        {filteredChats.map((chat) => (
+        {chats.map((chat) => (
           <div
             key={chat.id}
             onClick={() => handleSelectChat(chat)}
@@ -528,6 +672,7 @@ const ChatApp = () => {
         ))}
       </div>
 
+      {/* Chat Window */}
       {selectedChat && (
         <motion.div
           initial={{ x: 100, opacity: 0 }}
@@ -537,28 +682,19 @@ const ChatApp = () => {
         >
           <div className="p-4 border-b border-gray-700 bg-gray-800 flex justify-between">
             <h2 className="text-xl font-medium">{selectedChat.name}</h2>
-            <X className="text-red-500 cursor-pointer" onClick={handleCloseChat} size={24} />
+            <X className="text-red-500 cursor-pointer" onClick={() => setSelectedChat(null)} size={24} />
           </div>
           <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 bg-gray-900">
             {messages.map((msg, index) => (
               <div key={index} className={`flex ${msg.sender === "Admin" ? "justify-start" : "justify-end"} mb-4`}>
                 <div className={`p-4 rounded-lg shadow-md ${msg.sender === "Admin" ? "bg-gray-100 text-black" : "bg-green-600 text-white"}`}>
                   <p>{msg.text}</p>
-                  {msg.file && <p className="text-sm text-gray-400">📎 {msg.file.name}</p>}
                 </div>
               </div>
             ))}
-            {isTyping && <p className="text-gray-400">Admin is typing...</p>}
           </div>
           <div className="p-4 border-t border-gray-700 bg-gray-800 flex items-center">
             <Smile className="cursor-pointer mr-3 text-yellow-500" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
-            {showEmojiPicker && <EmojiPicker onEmojiClick={handleEmojiClick} />}
-            <input
-              type="file"
-              className="hidden"
-              onChange={handleFileUpload}
-            />
-            <Paperclip className="cursor-pointer text-blue-400" onClick={() => document.querySelector('input[type=file]').click()} />
             <input
               type="text"
               className="flex-1 mx-2 px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white focus:outline-none"

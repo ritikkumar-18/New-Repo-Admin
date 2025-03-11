@@ -153,13 +153,13 @@ const Transaction = () => {
   return (
     <div className="flex-1 overflow-auto bg-gray-900 text-white">
       <Header title={"Transactions"} />
-      <div className="flex flex-col w-full h-screen p-6 overflow-auto">
+      <div className="flex flex-col w-full h-screen p-2 overflow-auto">
         <motion.div 
           className="w-full max-w-5xl mx-auto bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700"
           initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        >
+        transition={{ delay: 0.2 }}>
+          
           <h2 className="text-3xl font-bold text-center mb-4 text-blue-400">Transaction Management</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {Object.keys(formData).map((key) => (

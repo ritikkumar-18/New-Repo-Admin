@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
-import { Plus, X, ToggleLeft, ToggleRight, Eye, Trash } from "lucide-react";
+import { Plus, X, ToggleLeft, ToggleRight, Eye, Trash, Search } from "lucide-react";
 import Header from "../components/Common/Header";
 
 const SubAdmin = () => {
@@ -105,14 +105,19 @@ const SubAdmin = () => {
       >
         <Plus size={24} color="white" />
       </button>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 0.5 }}>
       <div className="p-4 flex flex-col sm:flex-row gap-2 sm:justify-between">
         <input
           type="text"
-          placeholder="Search by name or email..."
-          className="w-full sm:w-auto p-2 rounded bg-gray-700 border border-gray-600"
+          placeholder="Search"
+          className=" py-2 pl-10 xs:w-20 md:w-auto bg-gray-800 text-white border rounded  focus:outline-none focus:ring-2 focus:ring-purple-500"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        <Search size={18} className="absolute left-7 mt-2.5 text-gray-400"/>
         <button
           onClick={() =>
             setFilterStatus(filterStatus === "All" ? "Active" : filterStatus === "Active" ? "Inactive" : "All")
@@ -123,24 +128,24 @@ const SubAdmin = () => {
           {filterStatus}
         </button>
       </div>
-      <div className="p-4 rounded-lg overflow-x-auto">
-        <table className="w-full border-collapse rounded-lg border border-gray-700 text-sm">
+      <div className=" p-4 overflow-x-auto  ">
+        <table className="w-full table-auto border-collapse border rounded-lg  border-gray-700">
           <thead>
-            <tr className="border-b border-gray-700 bg-gray-700">
-              <th className="p-2">Name</th>
-              <th className="p-2">Email</th>
-              <th className="p-2">Joined Date</th>
-              <th className="p-2">Status</th>
-              <th className="p-2">Actions</th>
+            <tr className="border-b border-gray-700">
+              <th className="px-6 py-4 font-bold uppercase tracking-wider text-sm border-r border-gray-700">Name</th>
+              <th className="px-6 py-4  font-bold uppercase tracking-wider text-sm border-r border-gray-700">Email</th>
+              <th className="px-6 py-4  font-bold uppercase tracking-wider text-sm border-r border-gray-700">Joined Date</th>
+              <th className="px-6 py-4  font-bold uppercase tracking-wider text-sm border-r border-gray-700">Status</th>
+              <th className="px-6 py-4  font-bold uppercase tracking-wider text-sm">Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredAdmins.slice((currentPage - 1) * adminsPerPage, currentPage * adminsPerPage).map((admin, index) => (
               <tr key={index} className="border-b border-gray-700 text-center">
-                <td className="p-2">{admin.name}</td>
-                <td className="p-2">{admin.email}</td>
-                <td className="p-2">{admin.joinedDate}</td>
-                <td className="p-2">{admin.status}</td>
+                <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{admin.name}</td>
+                <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{admin.email}</td>
+                <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{admin.joinedDate}</td>
+                <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{admin.status}</td>
                 <td className="p-2 flex gap-2 justify-center">
                   <button onClick={() => setViewAdmin(admin)} className="bg-green-500 p-1 rounded text-xs">
                     <Eye size={16} />
@@ -271,7 +276,9 @@ const SubAdmin = () => {
             </button>
           </div>
         </motion.div>
+        
       )}
+      </motion.div>
     </div>
   );
 };
