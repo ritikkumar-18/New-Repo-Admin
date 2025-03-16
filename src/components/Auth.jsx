@@ -638,6 +638,8 @@ import SubAdmin from "../Pages/SubAdmin";
 import Privacy from "./cms/Privacy";
 import About from "./cms/Aboutus";
 import Terms from "./cms/Terms&Condi";
+import Paymentpolicy from "./cms/Paymentpolicy";
+import Tempalte from "../Pages/Tempalte";
 
 
 
@@ -1013,6 +1015,7 @@ function AdminDashboard({ onLogout }) {
         <Route path="/email" element={<Email />} />
         <Route path="/help" element={<Help />} />
         <Route path="/cms/privacy-policy"element={<Privacy/>}/>
+        <Route path="/cms/payment-policy" element={<Paymentpolicy/>}/>
         <Route path="/cms/terms-and-conditions" element={<Terms/>}/>
         <Route path='/cms/about-us'element={<About/>}/>
         <Route path='/sub'element={<SubAdmin/>}/>
@@ -1038,6 +1041,7 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/jobopening" element={<Jobopening />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/resume"element={<Resume/>}/>
+        <Route path='/template'element={<Tempalte/>}/>
         <Route path="/email" element={<Email />} />
         <Route path="/feedback" element={<FeedbackandReview />} />
         <Route path="/payment" element={<Payment />} />

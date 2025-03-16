@@ -989,30 +989,15 @@
 
 // export default TeamManagementDashboard
 
-"use client"
-
 import { useState } from "react"
 import Header from "../components/Common/Header"
 import { toast } from "react-hot-toast"
 import { motion, AnimatePresence } from "framer-motion"
-import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai"
-import { Search, Trash2, Eye, Edit, XCircle, CheckCircle, ToggleLeft, ToggleRight } from "lucide-react"
+import { AiOutlinePlus, AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai"
+import { Search, XCircle, CheckCircle, ToggleLeft, ToggleRight, X } from "lucide-react"
 
 const TeamManagementDashboard = () => {
   const [members, setMembers] = useState([
-    // { id: 1, name: 'Alice', role: 'Recruiter', active: true, department: 'HR', location: 'New York', skills: ['Recruiting', 'Communication'], contact: 'alice@example.com', address: '123 Main St, City' },
-    // { id: 2, name: 'Bob', role: 'Interviewer', active: true, department: 'Tech', location: 'San Francisco', skills: ['Interviewing', 'Technical Analysis'], contact: 'bob@example.com', address: '456 Second St, City' },
-    // { id: 3, name: 'Charlie', role: 'Manager', active: true, department: 'Operations', location: 'London', skills: ['Leadership', 'Team Management'], contact: 'charlie@example.com', address: '789 Third St, City' },
-    // { id: 4, name: 'David', role: 'HR Specialist', active: false, department: 'HR', location: 'Chicago', skills: ['Employee Relations', 'Conflict Resolution'], contact: 'david@example.com', address: '101 Fourth St, City' },
-    // { id: 5, name: 'Eva', role: 'Software Engineer', active: true, department: 'Tech', location: 'Berlin', skills: ['JavaScript', 'React'], contact: 'eva@example.com', address: '202 Fifth St, City' },
-    // { id: 6, name: 'Frank', role: 'Data Scientist', active: true, department: 'Tech', location: 'San Francisco', skills: ['Machine Learning', 'Data Analysis'], contact: 'frank@example.com', address: '303 Sixth St, City' },
-    // { id: 7, name: 'Grace', role: 'UI/UX Designer', active: true, department: 'Design', location: 'New York', skills: ['Sketch', 'Figma'], contact: 'grace@example.com', address: '404 Seventh St, City' },
-    // { id: 8, name: 'Hank', role: 'Developer', active: false, department: 'Tech', location: 'Sydney', skills: ['Python', 'Django'], contact: 'hank@example.com', address: '505 Eighth St, City' },
-    // { id: 9, name: 'Ivy', role: 'QA Engineer', active: true, department: 'Tech', location: 'Austin', skills: ['Automated Testing', 'Manual Testing'], contact: 'ivy@example.com', address: '606 Ninth St, City' },
-    // { id: 10, name: 'Jack', role: 'Team Lead', active: true, department: 'Tech', location: 'Paris', skills: ['Leadership', 'Scrum'], contact: 'jack@example.com', address: '707 Tenth St, City' },
-    // { id: 11, name: 'Ivy John', role: 'Junior Engineer', active: false, department: 'Tech', location: 'London', skills: ['Automated Testing', 'Manual Testing'], contact: 'ivyjohn@example.com', address: '404 Second St, City' },
-    // { id: 12, name: 'Jacky', role: 'Team Manager', active: true, department: 'Non-Tech', location: 'NewYork', skills: ['Leadership', 'Scrum'], contact: 'jacky@example.com', address: '101 Seven St, City' },
-
     {
       id: 1,
       name: "Alice",
@@ -1280,19 +1265,6 @@ const TeamManagementDashboard = () => {
   const handleFilterChange = (e) => setFilters(e.target.value)
   const handleDepartmentChange = (e) => setSelectedDepartment(e.target.value)
 
-  // const filteredMembers = members.filter((member) => {
-  //   const isNameMatch = member.name.toLowerCase().includes(filters.toLowerCase());
-  //   const isDepartmentMatch = selectedDepartment === 'all' || member.department.toLowerCase() === selectedDepartment.toLowerCase();
-  //   const isSkillsMatch = member.skills.some(skill => skill.toLowerCase().includes(filters.toLowerCase()));
-  //    filterStatus === 'All' || (member.active ? 'Active' : 'Inactive') === filterStatus;
-
-  //   return (isNameMatch || isSkillsMatch) && isDepartmentMatch;
-  // });
-  // const filteredAdmins = members.filter(
-  //   (member) =>
-
-  //     (filterStatus === "All" || member.status === filterStatus)
-  // );
   const filteredMembers = members.filter((member) => {
     // Search term can match name OR skills OR role OR location
     const searchTerm = filters.toLowerCase()
@@ -1301,7 +1273,7 @@ const TeamManagementDashboard = () => {
     const isLocationMatch = member.location.toLowerCase().includes(searchTerm)
     const isSkillsMatch = member.skills.some((skill) => skill.toLowerCase().includes(searchTerm))
 
-    // These filters should still be applied as restrictions
+    
     const isDepartmentMatch =
       selectedDepartment === "all" || member.department.toLowerCase() === selectedDepartment.toLowerCase()
 
@@ -1310,7 +1282,6 @@ const TeamManagementDashboard = () => {
       (filterStatus === "Active" && member.active) ||
       (filterStatus === "Inactive" && !member.active)
 
-    
     return (isNameMatch || isRoleMatch || isLocationMatch || isSkillsMatch) && isDepartmentMatch && isStatusMatch
   })
 
@@ -1365,14 +1336,13 @@ const TeamManagementDashboard = () => {
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
       <Header title="Team Management" />
       <motion.div
-        className="flex-1 p-6"
+        className="flex-1 md:p-6 sm:p-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-          <div className="w-full md:w-1/3 relative">
+          <div className="w-full md:w-1/3  relative">
             <input
               type="text"
               value={filters}
@@ -1382,7 +1352,7 @@ const TeamManagementDashboard = () => {
             />
             <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 w-full md:w-auto">
             <button
               onClick={() =>
                 setFilterStatus(filterStatus === "All" ? "Active" : filterStatus === "Active" ? "Inactive" : "All")
@@ -1392,11 +1362,11 @@ const TeamManagementDashboard = () => {
               {filterStatus === "Active" ? <ToggleLeft size={20} /> : <ToggleRight size={20} />}
               {filterStatus}
             </button>
-            <div className="relative">
+            <div className="relative w-full md:w-auto">
               <select
                 value={selectedDepartment}
                 onChange={handleDepartmentChange}
-                className="px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full md:w-auto px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="all">All Departments</option>
                 <option value="HR">HR</option>
@@ -1410,34 +1380,47 @@ const TeamManagementDashboard = () => {
 
         <div className="overflow-x-auto border rounded-lg border-gray-700">
           <table className="w-full table-auto border-collapse bg-gray-900 text-white rounded-lg shadow-md overflow-hidden">
-            <thead className=" text-white">
+            <thead className="text-white">
               <tr>
-                <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
                   Name
                 </th>
-                <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
                   Experience
                 </th>
-                <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
                   Location
                 </th>
-                <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
                   Department
                 </th>
-                <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
                   Status
                 </th>
-                <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm ">Actions</th>
+                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-b border-gray-700">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {paginatedMembers.map((member, index) => (
-                <tr key={member.id} className="border-t border-gray-700 transition duration-300 hover:bg-gray-800 cursor-pointer">
-                  <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.name}</td>
-                  <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.experience}</td>
-                  <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.location}</td>
-                  <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.department}</td>
-                  <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+                <tr
+                  key={member.id}
+                  className="border-t border-gray-700 transition duration-300 hover:bg-gray-800 cursor-pointer"
+                >
+                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+                    {member.name}
+                  </td>
+                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+                    {member.experience}
+                  </td>
+                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+                    {member.location}
+                  </td>
+                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+                    {member.department}
+                  </td>
+                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
                     <span
                       className={`px-2 py-1 flex items-center space-x-1 rounded text-xs ${member.active ? "bg-green-500 text-white" : "bg-red-500 text-white"}`}
                     >
@@ -1454,25 +1437,27 @@ const TeamManagementDashboard = () => {
                       )}
                     </span>
                   </td>
-                  <td className="px-6 py-4 flex items-center space-x-5">
-                    <button
-                      onClick={() => openDetailView(member)}
-                      className="px-4 py-2 text-sm rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md"
-                    >
-                      <Eye className="text-white" size={18} />
-                    </button>
-                    <button
-                      onClick={() => handleEditMember(member)}
-                      className="px-4 py-2 text-sm rounded bg-purple-500 hover:bg-purple-600 text-white shadow-md"
-                    >
-                      <Edit className="text-white" size={18} />
-                    </button>
-                    <button
-                      onClick={() => handleDeleteMember(member.id)}
-                      className="px-4 py-2 text-sm rounded bg-red-500 hover:bg-red-600 text-white shadow-md"
-                    >
-                      <Trash2 size={18} />
-                    </button>
+                  <td className="px-4 md:px-6 py-4">
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => openDetailView(member)}
+                        className="p-2 text-sm rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md"
+                      >
+                        <AiOutlineEye size={16} />
+                      </button>
+                      <button
+                        onClick={() => handleEditMember(member)}
+                        className="p-2 text-sm rounded bg-purple-500 hover:bg-purple-600 text-white shadow-md"
+                      >
+                        <AiOutlineEdit size={16} />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteMember(member.id)}
+                        className="p-2 text-sm rounded bg-red-500 hover:bg-red-600 text-white shadow-md"
+                      >
+                        <AiOutlineDelete size={16} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -1480,117 +1465,180 @@ const TeamManagementDashboard = () => {
           </table>
         </div>
 
+        {/* Pagination */}
+        <div className="mt-6 flex justify-center flex-wrap gap-2">
+          {Array.from({ length: Math.ceil(filteredMembers.length / membersPerPage) }, (_, index) => (
+            <button
+              key={index + 1}
+              className={`px-3 py-2 rounded-lg ${
+                currentPage === index + 1 ? "bg-purple-500 text-white" : "bg-gray-700 text-gray-400"
+              } hover:bg-purple-600 hover:text-white`}
+              onClick={() => paginate(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+
+        {/* User Detail Slider */}
         <AnimatePresence>
           {viewingMember && (
             <motion.div
               className="fixed inset-0 bg-black bg-opacity-50 flex z-50"
               onClick={closeDetailView}
               initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:p-6 w-full md:w-1/3 lg:w-1/3 xl:w-1/3 h-full ml-auto relative shadow-2xl overflow-y-auto"
+                className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:p-6 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 h-full ml-auto relative shadow-2xl overflow-y-auto"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Close Button */}
-                <AiOutlineClose
+                <X
                   className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-gray-200"
                   size={24}
                   onClick={closeDetailView}
                 />
 
-                {/* Profile Section */}
+                {/* User Profile Header */}
                 <div className="flex flex-col items-center space-y-4 mb-6">
                   <div className="h-20 w-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-2xl">
                     {viewingMember.name.charAt(0)}
                   </div>
                   <h2 className="text-2xl font-semibold text-gray-100">{viewingMember.name}</h2>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      viewingMember.active ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"
+                    }`}
+                  >
+                    {viewingMember.active ? "Active" : "Inactive"}
+                  </span>
                 </div>
 
-                {/* Member Details */}
-                <div className="mt-6 space-y-4">
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Role:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.role}</span>
+                {/* Basic Information */}
+                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Basic Information</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                      <p className="text-sm text-gray-400">Role</p>
+                      <p className="text-sm text-gray-200">{viewingMember.role}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Position</p>
+                      <p className="text-sm text-gray-200">{viewingMember.position}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Department</p>
+                      <p className="text-sm text-gray-200">{viewingMember.department}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Location</p>
+                      <p className="text-sm text-gray-200">{viewingMember.location}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Department:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.department}</span>
+                </div>
+
+                {/* Contact Information */}
+                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Contact Information</h3>
+                  <div className="grid grid-cols-1 gap-3">
+                    <div>
+                      <p className="text-sm text-gray-400">Email</p>
+                      <p className="text-sm text-gray-200">{viewingMember.email}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Phone</p>
+                      <p className="text-sm text-gray-200">{viewingMember.phone}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Address</p>
+                      <p className="text-sm text-gray-200">{viewingMember.address}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Location:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.location}</span>
+                </div>
+
+                {/* Employment Details */}
+                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Employment Details</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                      <p className="text-sm text-gray-400">Experience</p>
+                      <p className="text-sm text-gray-200">{viewingMember.experience}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Salary</p>
+                      <p className="text-sm text-gray-200">{viewingMember.salary}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Join Date</p>
+                      <p className="text-sm text-gray-200">{viewingMember.joinDate}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Release Date</p>
+                      <p className="text-sm text-gray-200">{viewingMember.releaseDate || "N/A"}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Skills:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.skills.join(", ")}</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Email:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.email}</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Phone:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.phone}</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Experience:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.experience}</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Salary:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.salary}</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Position:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.position}</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Status:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.status}</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <p className="text-sm text-gray-400">Remark:</p>
-                    <span className="text-sm text-gray-200">{viewingMember.remark}</span>
+                </div>
+
+                {/* Skills */}
+                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Skills</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {viewingMember.skills.map((skill, index) => (
+                      <span key={index} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
                 {/* Verification Documents */}
-                <div className="border-t border-gray-600 pt-4">
-                  <h3 className="text-lg font-semibold text-gray-100">Verification Documents</h3>
-                  <div className="mt-2 space-y-2">
-                    <p className="text-gray-300">Aadhar Card:</p>
-                    <img
-                      src={viewingMember.aadharCard || "/placeholder.svg"}
-                      alt="Aadhar Card"
-                      className="w-40 rounded shadow-md"
-                    />
-                    <p className="text-gray-300">PAN Card:</p>
-                    <img
-                      src={viewingMember.panCard || "/placeholder.svg"}
-                      alt="PAN Card"
-                      className="w-40 rounded shadow-md"
-                    />
+                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Verification Documents</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-400">Aadhar Card</p>
+                      <img
+                        src={viewingMember.aadharCard || "/placeholder.svg"}
+                        alt="Aadhar Card"
+                        className="w-full h-auto mt-2 rounded-md object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">PAN Card</p>
+                      <img
+                        src={viewingMember.panCard || "/placeholder.svg"}
+                        alt="PAN Card"
+                        className="w-full h-auto mt-2 rounded-md object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Join Date & Release Date */}
-                <div className="border-t border-gray-600 pt-4">
-                  <h3 className="text-lg font-semibold text-gray-100">Employment Dates</h3>
-                  <p className="text-gray-300">Join Date: {viewingMember.joinDate}</p>
-                  <p className="text-gray-300">Release Date: {viewingMember.releaseDate || "N/A"}</p>
+                {/* Remarks */}
+                <div className="bg-gray-800/50 rounded-lg p-4 mb-6">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Remarks</h3>
+                  <p className="text-sm text-gray-200">{viewingMember.remark || "No remarks available"}</p>
                 </div>
 
-                {/* Close Button */}
-                <div className="mt-6 flex justify-center">
+                {/* Action Buttons */}
+                <div className="flex justify-between">
                   <button
-                    className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:opacity-90 transition duration-300"
+                    onClick={() => {
+                      closeDetailView()
+                      handleEditMember(viewingMember)
+                    }}
+                    className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+                  >
+                    Edit Details
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:opacity-90 transition duration-300"
                     onClick={closeDetailView}
                   >
                     Close
@@ -1601,367 +1649,429 @@ const TeamManagementDashboard = () => {
           )}
         </AnimatePresence>
 
-        <div className="flex justify-center mt-6 space-x-2">
-          {Array.from({ length: Math.ceil(filteredMembers.length / membersPerPage) }, (_, index) => (
-            <button
-              key={index + 1}
-              onClick={() => paginate(index + 1)}
-              className={`px-4 py-2 text-sm rounded-lg transition-all duration-300 ${currentPage === index + 1 ? "bg-purple-500 text-white shadow-md" : "bg-gray-700 text-gray-400 hover:bg-purple-600 hover:text-white"}`}
+        {/* Add member modal */}
+        <AnimatePresence>
+          {isAddMemberModalOpen && (
+            <motion.div
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 p-4"
+              onClick={() => setIsAddMemberModalOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              {index + 1}
-            </button>
-          ))}
-        </div>
+              <motion.div
+                className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              >
+                {/* Header */}
+                <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                  <h2 className="text-xl md:text-2xl font-semibold text-gray-100">Add New Member</h2>
+                  <button
+                    onClick={() => setIsAddMemberModalOpen(false)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
+
+                
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    handleAddNewMember()
+                  }}
+                  className="space-y-6">
+                  
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.name}
+                          onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.role}
+                          onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
+                        <select
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.department}
+                          onChange={(e) => setNewMember({ ...newMember, department: e.target.value })}
+                        >
+                          <option value="">Select Department</option>
+                          <option value="HR">HR</option>
+                          <option value="Tech">Tech</option>
+                          <option value="Design">Design</option>
+                          <option value="Operations">Operations</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.location}
+                          onChange={(e) => setNewMember({ ...newMember, location: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                        <input
+                          type="email"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.email}
+                          onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.phone}
+                          onChange={(e) => setNewMember({ ...newMember, phone: e.target.value })}
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.address}
+                          onChange={(e) => setNewMember({ ...newMember, address: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
+                      <input
+                        type="text"
+                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                        value={newMember.skills}
+                        onChange={(e) => setNewMember({ ...newMember, skills: e.target.value })}
+                        placeholder="e.g. JavaScript, React, Communication"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setIsAddMemberModalOpen(false)}
+                      className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
+                    >
+                      Add Member
+                    </button>
+                  </div>
+                </form>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Edit modal */}
+        <AnimatePresence>
+          {isEditMemberModalOpen && editedMember && (
+            <motion.div
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 p-4"
+              onClick={() => setIsEditMemberModalOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div
+                onClick={(e) => e.stopPropagation()}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              >
+                {/* Header */}
+                <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                  <h2 className="text-xl md:text-2xl font-semibold text-gray-100">Edit Member Profile</h2>
+                  <button
+                    onClick={() => setIsEditMemberModalOpen(false)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
+
+                {/* Form Content */}
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    handleSaveEditedMember()
+                  }}
+                  className="space-y-6"
+                >
+                  {/* Basic Information */}
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.name}
+                          onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.role}
+                          onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
+                        <select
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.department}
+                          onChange={(e) => setEditedMember({ ...editedMember, department: e.target.value })}
+                        >
+                          <option value="HR">HR</option>
+                          <option value="Tech">Tech</option>
+                          <option value="Design">Design</option>
+                          <option value="Operations">Operations</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.location}
+                          onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Position</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.position}
+                          onChange={(e) => setEditedMember({ ...editedMember, position: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Experience</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.experience}
+                          onChange={(e) => setEditedMember({ ...editedMember, experience: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Contact Information */}
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                        <input
+                          type="email"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.email}
+                          onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.phone}
+                          onChange={(e) => setEditedMember({ ...editedMember, phone: e.target.value })}
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.address}
+                          onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Employment Details */}
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Employment Details</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Status</label>
+                        <select
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.active ? "Active" : "Inactive"}
+                          onChange={(e) =>
+                            setEditedMember({
+                              ...editedMember,
+                              active: e.target.value === "Active",
+                              status: e.target.value,
+                            })
+                          }
+                        >
+                          <option value="Active">Active</option>
+                          <option value="Inactive">Inactive</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Salary</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.salary}
+                          onChange={(e) => setEditedMember({ ...editedMember, salary: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Join Date</label>
+                        <input
+                          type="date"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.joinDate || ""}
+                          onChange={(e) => setEditedMember({ ...editedMember, joinDate: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Release Date</label>
+                        <input
+                          type="date"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.releaseDate || ""}
+                          onChange={(e) => setEditedMember({ ...editedMember, releaseDate: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Skills */}
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
+                      <input
+                        type="text"
+                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                        value={editedMember.skills?.join(", ") || ""}
+                        onChange={(e) => setEditedMember({ ...editedMember, skills: e.target.value.split(", ") })}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Document Links */}
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Document Links</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card URL</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.aadharCard || ""}
+                          onChange={(e) => setEditedMember({ ...editedMember, aadharCard: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card URL</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.panCard || ""}
+                          onChange={(e) => setEditedMember({ ...editedMember, panCard: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Remarks */}
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-200 mb-3">Remarks</h3>
+                    <div>
+                      <textarea
+                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                        value={editedMember.remark || ""}
+                        onChange={(e) => setEditedMember({ ...editedMember, remark: e.target.value })}
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setIsEditMemberModalOpen(false)}
+                      className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
       <button
         onClick={() => setIsAddMemberModalOpen(true)}
-        className="bg-blue-500 text-white p-4 rounded-full fixed bottom-10 right-10 z-50 "
+        className="bg-blue-500 text-white p-4 rounded-full fixed bottom-10 right-10 z-50 shadow-lg hover:bg-blue-600 transition-colors"
+        aria-label="Add new member"
       >
         <AiOutlinePlus size={24} />
       </button>
-
-      {/* Add member modal to match the edit modal structure */}
-      {isAddMemberModalOpen && (
-        <motion.div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 mt-16 p-7"
-          onClick={() => setIsAddMemberModalOpen(false)}
-        >
-          <motion.div
-            className="bg-gray-800 p-6 rounded-lg shadow-sm md:w-1/2 w-full overflow-y-auto max-h-[80vh]"
-            onClick={(e) => e.stopPropagation()}
-            initial={{ x: "100%" }}
-            animate={{ x: "0%" }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-          >
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl md:text-2xl font-bold text-white">Add New Member</h2>
-              <button onClick={() => setIsAddMemberModalOpen(false)} className="text-white text-2xl">
-                <AiOutlineClose />
-              </button>
-            </div>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                handleAddNewMember()
-              }}
-              className="space-y-4"
-            >
-              {/* Basic Information */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-100">Basic Information</h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={newMember.name}
-                    onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
-                    placeholder="Name"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={newMember.role}
-                    onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
-                    placeholder="Role"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={newMember.department}
-                    onChange={(e) => setNewMember({ ...newMember, department: e.target.value })}
-                    placeholder="Department"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={newMember.location}
-                    onChange={(e) => setNewMember({ ...newMember, location: e.target.value })}
-                    placeholder="Location"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <input
-                  type="text"
-                  value={newMember.skills}
-                  onChange={(e) => setNewMember({ ...newMember, skills: e.target.value })}
-                  placeholder="Skills (comma-separated)"
-                  className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                />
-              </div>
-
-              {/* Contact Information */}
-              <div className="border-t border-gray-600 pt-4 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-100">Contact Information</h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={newMember.email}
-                    onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
-                    placeholder="Email"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={newMember.phone}
-                    onChange={(e) => setNewMember({ ...newMember, phone: e.target.value })}
-                    placeholder="Phone"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <input
-                  type="text"
-                  value={newMember.address}
-                  onChange={(e) => setNewMember({ ...newMember, address: e.target.value })}
-                  placeholder="Address"
-                  className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full px-4 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Add Member
-              </button>
-            </form>
-          </motion.div>
-        </motion.div>
-      )}
-
-      {/* Edit modal */}
-      {isEditMemberModalOpen && (
-        <motion.div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 mt-16 p-7"
-          onClick={() => setIsEditMemberModalOpen(false)}
-        >
-          <motion.div
-            className="bg-gray-800 p-6 rounded-lg shadow-sm md:w-1/2 w-full overflow-y-auto max-h-[80vh]"
-            onClick={(e) => e.stopPropagation()}
-            initial={{ x: "100%" }}
-            animate={{ x: "0%" }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-          >
-            {/* Modal Header */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl md:text-2xl font-bold text-white">Edit Member Details</h2>
-              <button onClick={() => setIsEditMemberModalOpen(false)} className="text-white text-2xl">
-                <AiOutlineClose />
-              </button>
-            </div>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                handleSaveEditedMember()
-              }}
-              className="space-y-4"
-            >
-              {/* Basic Information */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-100">Basic Information</h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={editedMember.name}
-                    onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
-                    placeholder="Name"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={editedMember.role}
-                    onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
-                    placeholder="Role"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={editedMember.department}
-                    onChange={(e) => setEditedMember({ ...editedMember, department: e.target.value })}
-                    placeholder="Department"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={editedMember.location}
-                    onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
-                    placeholder="Location"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={editedMember.position}
-                    onChange={(e) => setEditedMember({ ...editedMember, position: e.target.value })}
-                    placeholder="Position"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={editedMember.experience}
-                    onChange={(e) => setEditedMember({ ...editedMember, experience: e.target.value })}
-                    placeholder="Experience"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 gap-4">
-                  <input
-                    type="text"
-                    value={editedMember.skills?.join(", ") || ""}
-                    onChange={(e) => setEditedMember({ ...editedMember, skills: e.target.value.split(", ") })}
-                    placeholder="Skills (comma-separated)"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-              </div>
-
-              {/* Contact Information */}
-              <div className="border-t border-gray-600 pt-4 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-100">Contact Information</h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={editedMember.email}
-                    onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })}
-                    placeholder="Email"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={editedMember.phone}
-                    onChange={(e) => setEditedMember({ ...editedMember, phone: e.target.value })}
-                    placeholder="Phone"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <input
-                  type="text"
-                  value={editedMember.address}
-                  onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
-                  placeholder="Address"
-                  className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                />
-              </div>
-
-              
-              <div className="border-t border-gray-600 pt-4 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-100">Employment Details</h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={editedMember.salary}
-                    onChange={(e) => setEditedMember({ ...editedMember, salary: e.target.value })}
-                    placeholder="Salary"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <div className="flex items-center space-x-2">
-                    <span className="text-white">Status:</span>
-                    <select
-                      value={editedMember.active ? "Active" : "Inactive"}
-                      onChange={(e) =>
-                        setEditedMember({
-                          ...editedMember,
-                          active: e.target.value === "Active",
-                          status: e.target.value,
-                        })
-                      }
-                      className="flex-1 px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                    >
-                      <option value="Active">Active</option>
-                      <option value="Inactive">Inactive</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="date"
-                    value={editedMember.joinDate || ""}
-                    onChange={(e) => setEditedMember({ ...editedMember, joinDate: e.target.value })}
-                    placeholder="Join Date"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="date"
-                    value={editedMember.releaseDate || ""}
-                    onChange={(e) => setEditedMember({ ...editedMember, releaseDate: e.target.value })}
-                    placeholder="Release Date"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-
-                <textarea
-                  value={editedMember.remark || ""}
-                  onChange={(e) => setEditedMember({ ...editedMember, remark: e.target.value })}
-                  placeholder="Remarks"
-                  rows={3}
-                  className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                />
-              </div>
-
-              
-              <div className="border-t border-gray-600 pt-4 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-100">Document Links</h3>
-
-                <div className="grid grid-cols-1 gap-4">
-                  <input
-                    type="text"
-                    value={editedMember.aadharCard || ""}
-                    onChange={(e) => setEditedMember({ ...editedMember, aadharCard: e.target.value })}
-                    placeholder="Aadhar Card URL"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-
-                  <input
-                    type="text"
-                    value={editedMember.panCard || ""}
-                    onChange={(e) => setEditedMember({ ...editedMember, panCard: e.target.value })}
-                    placeholder="PAN Card URL"
-                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg border border-gray-600"
-                  />
-                </div>
-              </div>
-
-              
-              <div className="border-t border-gray-600 pt-4">
-                <button
-                  type="submit"
-                  className="w-full px-4 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
-                >
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </motion.div>
-        </motion.div>
-      )}
     </div>
   )
 }

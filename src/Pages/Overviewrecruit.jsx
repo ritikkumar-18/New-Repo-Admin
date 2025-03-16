@@ -28,7 +28,7 @@ const Overviewrecruit = () => {
             </motion.div>
             <div className='grid grid-cols-1  gap-8 lg:grid-cols-2'>
                 <RecruitSales/>
-                <AI/>
+                {/* <AI/> */}
                 <IncomeSales/>
             </div>
         </main>

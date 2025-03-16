@@ -3,15 +3,16 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FiBarChart2, FiLogOut, FiSettings } from 'react-icons/fi';
 import { BiMenu } from 'react-icons/bi';
 import { Link, useLocation } from 'react-router-dom'; 
-import { BookOpen, Briefcase, CalendarHeart, Download, Mail,  MessagesSquareIcon, UserSearch } from 'lucide-react';
+import { BookOpen, BookTemplate, Briefcase, CalendarHeart, Download, Mail,  MessagesSquareIcon, UserSearch } from 'lucide-react';
 
 const SIDEBAR = [
   { name: 'Overview', icon: FiBarChart2, color: '#8B5CF6', href: '/' },
   { name: 'Recruit', icon: Briefcase, color: '#8B5CF6', href: '/recruit' },
-  { name: 'Candidate search', icon: UserSearch, color: '#8B5CF6', href: '/candidate' },
+  { name: 'Shortlisted', icon: UserSearch, color: '#8B5CF6', href: '/candidate' },
   { name: 'Job Opening', icon: BookOpen, color: '#8B5CF6', href: '/jobopening' },
   { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },
   { name: 'Resume', icon: Download, color: '#8B5CF6', href: '/resume' },
+  {name:'Template',icon:BookTemplate,color:'#8B5CF6',href:'/template'},
   { name: 'Email', icon: Mail, color: '#8B5CF6', href: '/email' },
   { name: 'Feedback & Review', icon: MessagesSquareIcon, color: '#8B5CF6', href: '/feedback' },
   { name: 'Settings', icon: FiSettings, color: '#8B5CF6', href: '/settings' },
