@@ -632,14 +632,15 @@ import Candidate from "../Pages/Candidate search";
 import pointSound from '/blip.mp3';  
 import Resume from "../Pages/Resume";
 import Overviewrecruit from "../Pages/Overviewrecruit";
-
 import Transaction from "../Pages/Transaction";
 import SubAdmin from "../Pages/SubAdmin";
 import Privacy from "./cms/Privacy";
 import About from "./cms/Aboutus";
 import Terms from "./cms/Terms&Condi";
 import Paymentpolicy from "./cms/Paymentpolicy";
-import Tempalte from "../Pages/Tempalte";
+import Template from "../Pages/Template";
+import Notification from "./Notification/Notification";
+import Profile from "./Profile/Profile";
 
 
 
@@ -1019,6 +1020,8 @@ function AdminDashboard({ onLogout }) {
         <Route path="/cms/terms-and-conditions" element={<Terms/>}/>
         <Route path='/cms/about-us'element={<About/>}/>
         <Route path='/sub'element={<SubAdmin/>}/>
+        <Route path='/notifications'element={<Notification/>}/>
+        <Route path='/profile'element ={<Profile/>}/>
         <Route path="transaction"element={<Transaction/>}/>
         <Route path="/team" element={<TeamManagementDashboard />} />
         <Route path="/application" element={<Application />} />
@@ -1041,11 +1044,13 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/jobopening" element={<Jobopening />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/resume"element={<Resume/>}/>
-        <Route path='/template'element={<Tempalte/>}/>
+        <Route path='/template'element={<Template/>}/>
         <Route path="/email" element={<Email />} />
         <Route path="/feedback" element={<FeedbackandReview />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path='/notifications'element={<Notification/>}/>
+        <Route path='/profile'element ={<Profile/>}/>
         <Route path="/logout" element={<Logout onLogout={onLogout} />} />
       </Routes>
     </div>

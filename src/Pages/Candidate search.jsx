@@ -519,6 +519,7 @@ import {
   Building, Calendar, GraduationCap, Briefcase, MapPin,
   DollarSign, Clock, Award, Save, AlertCircle, User, Folder, Info, Users
 } from "lucide-react";
+import Header from "../components/Common/Header";
 
 function Candidate() {
   const [candidates, setCandidates] = useState([]);
@@ -554,7 +555,7 @@ function Candidate() {
           university: "Stanford University",
           year: "2019"
         },
-        jobType: "Full-time",
+        jobType: "Remote",
         lastPosition: "Senior Developer",
         company: "Tech Corp",
         joinDate: "2024-01-15",
@@ -605,7 +606,172 @@ function Candidate() {
             contact: "mike@email.com"
           }
         ]
-      }
+      },
+      {
+        id: 3,
+        name: "Joe",
+        email: "joe.@gmail.com",
+        phone: "+1 (415) 555-0123",
+        location: "San Francisco, USA",
+        skills: ["UI/UX", "Figma", "Adobe XD"],
+        experience: "8 years",
+        department: "Design",
+        education: {
+          degree: "BFA Design",
+          university: "Rhode Island School of Design",
+          year: "2020"
+        },
+        jobType: "Remote",
+        lastPosition: "Senior UI Designer",
+        company: "Design Studio",
+        joinDate: "2024-02-01",
+        salary: "$95,000",
+        projects: ["Brand Redesign", "Mobile Candidate UI", "Web Platform"],
+        certifications: ["Google UX Design", "Figma Advanced"],
+        languages: ["English", "French"],
+        availability: "Immediate",
+        notice: "2 weeks",
+        references: [
+          {
+            name: "Mike Wilson",
+            position: "Design Director",
+            company: "Creative Co",
+            contact: "mike@email.com"
+          }
+        ]
+      },
+      {
+        id: 4,
+        name: "Smith",
+        email: "smith@gmail.com",
+        phone: "+1 (415) 555-0123",
+        location: "San Francisco, USA",
+        skills: ["UI/UX", "Figma", "HTML/CSS"],
+        experience: "1.5 years",
+        department: "Design",
+        education: {
+          degree: "BFA Design",
+          university: "Rhode Island School of Design",
+          year: "2020"
+        },
+        jobType: "Remote",
+        lastPosition: "Senior UI Designer",
+        company: "Design Studio",
+        joinDate: "2024-02-01",
+        salary: "$95,000",
+        projects: ["Brand Redesign", "Mobile Candidate UI", "Web Platform"],
+        certifications: ["Google UX Design", "Figma Advanced"],
+        languages: ["English", "French"],
+        availability: "Immediate",
+        notice: "2 weeks",
+        references: [
+          {
+            name: "Mike Wilson",
+            position: "Design Director",
+            company: "Creative Co",
+            contact: "mike@email.com"
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: "Jane Smith",
+        email: "jane.smith@gmail.com",
+        phone: "+1 (415) 555-0123",
+        location: "San Francisco, USA",
+        skills: ["UI/UX", "Figma", "Adobe XD", "HTML/CSS"],
+        experience: "4 years",
+        department: "Design",
+        education: {
+          degree: "BFA Design",
+          university: "Rhode Island School of Design",
+          year: "2020"
+        },
+        jobType: "Remote",
+        lastPosition: "Senior UI Designer",
+        company: "Design Studio",
+        joinDate: "2024-02-01",
+        salary: "$95,000",
+        projects: ["Brand Redesign", "Mobile Candidate UI", "Web Platform"],
+        certifications: ["Google UX Design", "Figma Advanced"],
+        languages: ["English", "French"],
+        availability: "Immediate",
+        notice: "2 weeks",
+        references: [
+          {
+            name: "Mike Wilson",
+            position: "Design Director",
+            company: "Creative Co",
+            contact: "mike@email.com"
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: "Jane Smith",
+        email: "jane.smith@gmail.com",
+        phone: "+1 (415) 555-0123",
+        location: "San Francisco, USA",
+        skills: ["UI/UX", "Figma", "Adobe XD", "HTML/CSS"],
+        experience: "4 years",
+        department: "Design",
+        education: {
+          degree: "BFA Design",
+          university: "Rhode Island School of Design",
+          year: "2020"
+        },
+        jobType: "Remote",
+        lastPosition: "Senior UI Designer",
+        company: "Design Studio",
+        joinDate: "2024-02-01",
+        salary: "$95,000",
+        projects: ["Brand Redesign", "Mobile Candidate UI", "Web Platform"],
+        certifications: ["Google UX Design", "Figma Advanced"],
+        languages: ["English", "French"],
+        availability: "Immediate",
+        notice: "2 weeks",
+        references: [
+          {
+            name: "Mike Wilson",
+            position: "Design Director",
+            company: "Creative Co",
+            contact: "mike@email.com"
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: "kane",
+        email: "kane@gmail.com",
+        phone: "+1 (415) 555-0123",
+        location: "San Francisco, USA",
+        skills: ["UI/UX", "Figma", "Adobe XD", "HTML/CSS"],
+        experience: "4 years",
+        department: "Design",
+        education: {
+          degree: "BFA Design",
+          university: "Rhode Island School of Design",
+          year: "2020"
+        },
+        jobType: "Remote",
+        lastPosition: "Senior UI Designer",
+        company: "Design Studio",
+        joinDate: "2024-02-01",
+        salary: "$95,000",
+        projects: ["Brand Redesign", "Mobile Candidate UI", "Web Platform"],
+        certifications: ["Google UX Design", "Figma Advanced"],
+        languages: ["English", "French"],
+        availability: "Immediate",
+        notice: "2 weeks",
+        references: [
+          {
+            name: "Wilson",
+            position: "Design Director",
+            company: "Creative Co",
+            contact: "wilson@email.com"
+          }
+        ]
+      },
     ];
     setCandidates(mockData);
     setFilteredCandidates(mockData);
@@ -700,11 +866,13 @@ function Candidate() {
   );
 
   return (
-    <div className="flex-1 overflow-hidden relative bg-gray-900 min-h-screen">
-      <div className="p-4">
-        <h1 className="text-2xl font-bold text-white mb-6">Candidate Search</h1>
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
+      <Header title="Shortlisted Candidates" />
 
-        {/* Search and Filters */}
+        <motion.div className="p-6"
+        initial={{opacity:0,y:20}}
+        animate={{opacity:1,y:0}}
+        transition={{duration:0.5}}>
         <div className="flex items-center gap-4 mb-6">
           <div className="relative flex-grow">
             <input
@@ -1100,7 +1268,7 @@ function Candidate() {
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

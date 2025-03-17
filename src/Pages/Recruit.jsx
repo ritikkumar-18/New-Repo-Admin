@@ -581,7 +581,7 @@ const Recruit = () => {
     })
   }
 
-  // Function to send offer letter
+  
   const sendOfferLetter = () => {
     toast.success(`Offer letter sent to ${selectedApplicant.name}!`, {
       // icon: "📨",
@@ -637,10 +637,10 @@ const Recruit = () => {
 
       <motion.div
         className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mx-auto px-6 py-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-      >
+        initial={{opacity:0,y:20}}
+        animate={{opacity:1,y:0}}
+        transition={{duration:0.5}}>
+          
         {applicants.map((applicant) => (
           <motion.div
             key={applicant.id}

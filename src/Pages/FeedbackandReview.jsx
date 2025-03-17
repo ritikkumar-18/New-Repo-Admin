@@ -41,7 +41,7 @@ const FeedbackandReview = () => {
       < motion.section className="bg-gray-900 p-6 rounded-lg shadow-md mb-6"
        initial={{ opacity: 0, y: 20 }}
        animate={{ opacity: 1, y: 0 }}
-       transition={{ delay: 0.2 }}>
+       transition={{ duration: 0.5 }}>
         <h3 className="text-xl font-semibold mb-4">Leave a Feedback</h3>
         <form onSubmit={handleFeedbackSubmit} className="space-y-4">
           <div className="flex items-center">
@@ -68,7 +68,7 @@ const FeedbackandReview = () => {
       <motion.section className="bg-gray-900 p-6 rounded-lg shadow-md mb-6"
        initial={{ opacity: 0, y: 20 }}
        animate={{ opacity: 1, y: 0 }}
-       transition={{ delay: 0.2 }}>
+       transition={{ duration: 0.5 }}>
         <h3 className="text-xl font-semibold mb-4">Recent Feedback</h3>
         <ul className="space-y-4 ">
           {feedbacks.map((feedback) => (
@@ -89,7 +89,7 @@ const FeedbackandReview = () => {
       <motion.section className="bg-gray-900 p-6 rounded-lg shadow-md"
        initial={{ opacity: 0, y: 20 }}
        animate={{ opacity: 1, y: 0 }}
-       transition={{ delay: 0.2 }}>
+       transition={{ duration: 0.5 }}>
         <h3 className="text-xl font-semibold mb-4">Report Content</h3>
         <form onSubmit={handleReportSubmit} className="space-y-4">
           <div className="flex items-center">

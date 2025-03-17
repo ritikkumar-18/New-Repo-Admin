@@ -1,40 +1,8 @@
-"use client"
-
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import {
-  Search,
-  Plus,
-  FileText,
-  Star,
-  Clock,
-  Edit,
-  Download,
-  Copy,
-  Trash,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Sparkles,
-  Share2,
-  Filter,
-  Save,
-  Send,
-  Calendar,
-  Tag,
-  ArrowLeft,
-  ArrowRight,
-  AlertTriangle,
-  Printer,
-  Sliders,
-} from "lucide-react"
+import {Search,Plus,FileText,Star,Clock,Edit,Download,Copy,Trash,X,ChevronLeft,ChevronRight,Sparkles,Share2,Filter,Save,Send,Calendar,Tag,ArrowLeft,ArrowRight,AlertTriangle,Printer,Sliders,} from "lucide-react"
 import { toast, Toaster } from "react-hot-toast"
-
-const Header = ({ title }) => (
-  <div className="bg-gray-800 p-4 shadow-md">
-    <h1 className="text-xl font-bold text-white">{title}</h1>
-  </div>
-)
+import Header from "../components/Common/Header"
 
 // Sample template categories
 const categories = [
@@ -459,7 +427,7 @@ const filterOptions = {
   ],
 }
 
-const Tempalte = () => {
+const Template = () => {
   // State for managing templates
   const [templates, setTemplates] = useState(predefinedTemplates)
   const [filteredTemplates, setFilteredTemplates] = useState(templates)
@@ -628,7 +596,7 @@ const Tempalte = () => {
     setTemplates(updatedTemplates)
     applyFilters(selectedCategory, searchQuery, activeFilters)
 
-    toast.success("Tempalte favorite status updated!", {
+    toast.success("Template favorite status updated!", {
       icon: "⭐",
       style: {
         borderRadius: "10px",
@@ -675,21 +643,14 @@ const Tempalte = () => {
     setShowDeleteConfirm(false)
     setTemplateToDelete(null)
 
-    toast.success("Tempalte deleted successfully!", {
-      icon: "🗑️",
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    })
+    toast.success("Template deleted successfully!")
   }
 
   // Function to copy template content
   const copyTemplateContent = (content) => {
     navigator.clipboard.writeText(content)
 
-    toast.success("Tempalte copied to clipboard!", {
+    toast.success("Template copied to clipboard!", {
       icon: "📋",
       style: {
         borderRadius: "10px",
@@ -709,7 +670,7 @@ const Tempalte = () => {
     element.click()
     document.body.removeChild(element)
 
-    toast.success("Tempalte downloaded!", {
+    toast.success("Template downloaded!", {
       icon: "📥",
       style: {
         borderRadius: "10px",
@@ -797,7 +758,7 @@ const Tempalte = () => {
     updateFilters({ tags: updatedTags })
   }
 
-  // Function to save new template
+  
   const saveTemplate = () => {
     if (newTemplate.title.trim() === "" || newTemplate.content.trim() === "") {
       toast.error("Title and content are required!", {
@@ -811,7 +772,6 @@ const Tempalte = () => {
     }
 
     if (editMode && selectedTemplate) {
-      // Update existing template
       const updatedTemplates = templates.map((template) =>
         template.id === selectedTemplate.id
           ? {
@@ -821,7 +781,6 @@ const Tempalte = () => {
               category: newTemplate.category,
               tags: newTemplate.tags,
               content: newTemplate.content,
-              // Keep the original thumbnail and creation date
               thumbnail: template.thumbnail,
               createdAt: template.createdAt,
             }
@@ -829,7 +788,7 @@ const Tempalte = () => {
       )
 
       setTemplates(updatedTemplates)
-      toast.success("Tempalte updated successfully!", {
+      toast.success("Template updated successfully!", {
         icon: "✅",
         style: {
           borderRadius: "10px",
@@ -838,7 +797,7 @@ const Tempalte = () => {
         },
       })
     } else {
-      // Create new template
+      
       const newTemplateObj = {
         id: templates.length + 1,
         title: newTemplate.title,
@@ -862,7 +821,7 @@ const Tempalte = () => {
       })
     }
 
-    // Reset form and close
+    
     setNewTemplate({
       title: "",
       description: "",
@@ -875,7 +834,7 @@ const Tempalte = () => {
     applyFilters(selectedCategory, searchQuery, activeFilters)
   }
 
-  // Function to generate AI template
+  
   const generateAITemplate = () => {
     toast.success("AI is generating your template...", {
       icon: "✨",
@@ -885,11 +844,9 @@ const Tempalte = () => {
         color: "#fff",
       },
     })
-
-    // Simulate AI generation
     setTimeout(() => {
       const aiTemplate = {
-        title: "AI Generated Tempalte",
+        title: "AI Generated Template",
         description: "Customized offer letter based on your requirements",
         category: newTemplate.category || "hr",
         tags: ["AI Generated", "Custom", "Smart"],
@@ -936,16 +893,14 @@ const Tempalte = () => {
     }, 2000)
   }
 
-  // Add a new function after the generateAITemplate function to handle issuing an offer letter
+  
   const issueOfferLetter = (template) => {
     setSelectedTemplate(template)
     setShowPreview(false)
-
-    // Show issue offer letter modal
     setShowIssueModal(true)
   }
 
-  // Add state for issue offer letter modal and selected candidate
+  
   const [showIssueModal, setShowIssueModal] = useState(false)
   const [selectedCandidate, setSelectedCandidate] = useState(null)
   const [offerDetails, setOfferDetails] = useState({
@@ -954,23 +909,16 @@ const Tempalte = () => {
     responseDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
   })
 
-  // Add sample candidates data
   const candidates = [
     { id: 1, name: "John Smith", position: "Software Engineer", status: "Hired", email: "john.smith@example.com" },
     { id: 2, name: "Jane Doe", position: "Product Manager", status: "Hired", email: "jane.doe@example.com" },
     { id: 3, name: "Alex Johnson", position: "Data Scientist", status: "Hired", email: "alex.johnson@example.com" },
     { id: 4, name: "Sarah Williams", position: "UX Designer", status: "Hired", email: "sarah.williams@example.com" },
-    {
-      id: 5,
-      name: "Michael Brown",
-      position: "Marketing Specialist",
-      status: "Hired",
-      email: "michael.brown@example.com",
-    },
+    {id: 5,name: "Michael Brown",position: "Marketing Specialist",status: "Hired",email: "michael.brown@example.com",},
     { id: 6, name: "Emily Davis", position: "Financial Analyst", status: "Hired", email: "emily.davis@example.com" },
   ]
 
-  // Add function to send the offer letter to a candidate
+  
   const sendOfferToCandidate = () => {
     if (!selectedCandidate) {
       toast.error("Please select a candidate", {
@@ -996,7 +944,7 @@ const Tempalte = () => {
     setSelectedCandidate(null)
   }
 
-  // Function to scroll categories
+  
   const scrollCategories = (direction) => {
     if (categoriesRef.current) {
       const scrollAmount = direction === "left" ? -200 : 200
@@ -1005,9 +953,11 @@ const Tempalte = () => {
   }
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen">
-      <Header title={"Offer Letter Templates"} />
-      <Toaster position="top-right" />
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
+      <Header title="Offer Letter Templates" />
+      <motion.div initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}>
 
       <div className="p-4 md:p-6">
         {/* Search and Filter Bar */}
@@ -1029,7 +979,7 @@ const Tempalte = () => {
               className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
             >
               <Plus size={18} />
-              <span>Create Tempalte</span>
+              <span>Create Template</span>
             </button>
 
             <button
@@ -1251,14 +1201,14 @@ const Tempalte = () => {
                         <button
                           onClick={() => editTemplate(template)}
                           className="p-1.5 bg-gray-700 hover:bg-gray-600 text-white rounded transition-colors"
-                          title="Edit Tempalte"
+                          title="Edit Template"
                         >
                           <Edit size={16} />
                         </button>
                         <button
                           onClick={() => confirmDeleteTemplate(template)}
                           className="p-1.5 bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
-                          title="Delete Tempalte"
+                          title="Delete Template"
                         >
                           <Trash size={16} />
                         </button>
@@ -1360,14 +1310,14 @@ const Tempalte = () => {
                 onClick={() => setShowCreateForm(true)}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
               >
-                Create New Tempalte
+                Create New Template
               </button>
             </div>
           </div>
         )}
       </div>
 
-      {/* Tempalte Preview Modal */}
+      {/* Template Preview Modal */}
       <AnimatePresence>
         {showPreview && selectedTemplate && (
           <motion.div
@@ -1377,7 +1327,7 @@ const Tempalte = () => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto"
+              className="bg-white text-black rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto"
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
@@ -1446,7 +1396,7 @@ const Tempalte = () => {
                   <button
                     onClick={() => {
                       setShowPreview(false)
-                      toast.success("Tempalte sharing options opened!", {
+                      toast.success("Template sharing options opened!", {
                         icon: "🔗",
                         style: {
                           borderRadius: "10px",
@@ -1467,7 +1417,7 @@ const Tempalte = () => {
         )}
       </AnimatePresence>
 
-      {/* Create/Edit Tempalte Modal */}
+      {/* Create/Edit Template Modal */}
       <AnimatePresence>
         {showCreateForm && (
           <motion.div
@@ -1484,7 +1434,7 @@ const Tempalte = () => {
             >
               <div className="flex justify-between items-center p-4 border-b">
                 <h2 className="text-xl font-bold text-gray-800">
-                  {editMode ? "Edit Tempalte" : "Create New Tempalte"}
+                  {editMode ? "Edit Template" : "Create New Template"}
                 </h2>
                 <button
                   onClick={() => {
@@ -1507,7 +1457,7 @@ const Tempalte = () => {
               <div className="p-6 space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Tempalte Title*</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Template Title*</label>
                     <input
                       type="text"
                       value={newTemplate.title}
@@ -1575,7 +1525,7 @@ const Tempalte = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Tempalte Content*</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Template Content*</label>
                   <textarea
                     value={newTemplate.content}
                     onChange={(e) => setNewTemplate({ ...newTemplate, content: e.target.value })}
@@ -1621,7 +1571,7 @@ const Tempalte = () => {
                     className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center"
                   >
                     <Save className="w-4 h-4 mr-1" />
-                    {editMode ? "Update Tempalte" : "Save Tempalte"}
+                    {editMode ? "Update Template" : "Save Template"}
                   </button>
                 </div>
               </div>
@@ -1782,7 +1732,7 @@ const Tempalte = () => {
                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 flex items-center"
                   >
                     <Trash className="w-4 h-4 mr-1" />
-                    Delete Tempalte
+                    Delete Template
                   </button>
                 </div>
               </div>
@@ -1790,9 +1740,10 @@ const Tempalte = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      </motion.div>
     </div>
   )
 }
 
-export default Tempalte
+export default Template
 
