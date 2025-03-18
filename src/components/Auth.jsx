@@ -641,6 +641,8 @@ import Paymentpolicy from "./cms/Paymentpolicy";
 import Template from "../Pages/Template";
 import Notification from "./Notification/Notification";
 import Profile from "./Profile/Profile";
+import Askedquestion from "./HelpDesk/Askedquestion";
+import SupportChat from "./HelpDesk/SupportChat";
 
 
 
@@ -1046,7 +1048,9 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/resume"element={<Resume/>}/>
         <Route path='/template'element={<Template/>}/>
         <Route path="/email" element={<Email />} />
-        <Route path="/feedback" element={<FeedbackandReview />} />
+        <Route path='/helpdesk/feedback'element={<FeedbackandReview/>}/>
+        <Route path='/helpdesk/faq'element={<Askedquestion/>}/>
+        <Route path='/helpdesk/support-chat'element={<SupportChat/>}/>
         <Route path="/payment" element={<Payment />} />
         <Route path="/settings" element={<Settings />} />
         <Route path='/notifications'element={<Notification/>}/>
