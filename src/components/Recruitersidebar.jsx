@@ -115,7 +115,7 @@ const SIDEBAR = [
   { name: 'Recruit', icon: Briefcase, color: '#8B5CF6', href: '/recruit' },
   { name: 'Search Candidate', icon: Download, color: '#8B5CF6', href: '/resume' },
   { name: 'Template', icon: BookTemplate, color: '#8B5CF6', href: '/template' },
-  { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },
+  // { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },
   {
     name: 'Help Desk',
     icon: MessagesSquareIcon,

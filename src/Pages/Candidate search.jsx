@@ -518,6 +518,7 @@ function Candidate() {
                   <th className="p-4 text-left hidden md:table-cell">Phone</th>
                   <th className="p-4 text-left hidden md:table-cell">Email</th>
                   <th className="p-4 text-left">Department</th>
+                  {/* <th className="p-4 text-left">Experience</th>  */}
                   <th className="p-4 text-left hidden md:table-cell">Profession</th>
                   <th className="p-4 text-left hidden lg:table-cell">Job Type</th>
                   <th className="p-4 text-left hidden lg:table-cell">Location</th>
@@ -530,9 +531,10 @@ function Candidate() {
                     <td className="p-4">
                       <div className="font-medium">{candidate.name}</div>
                     </td>
-                    <td className="p-4 hidden md:table-cell">{candidate.phone}</td>
+                    <td className="p-4 text-left md:text-center whitespace-nowrap ">{candidate.phone}</td>
                     <td className="p-4 hidden md:table-cell">{candidate.email}</td>
                     <td className="p-4">{candidate.department}</td>
+                    {/* <td className="p-4">{candidate.experience}</td> */}
                     <td className="p-4 hidden md:table-cell">{candidate.profession}</td>
                     <td className="p-4 hidden lg:table-cell">
                       <span className="px-3 py-1 rounded-full text-sm bg-purple-900/40 text-purple-400">

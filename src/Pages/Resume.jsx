@@ -606,7 +606,7 @@ const ResumeSearch = () => {
                     <td className="p-4">
                       <div className="font-medium">{candidate.name}</div>
                     </td>
-                    <td className="p-4 hidden md:table-cell">{candidate.phone}</td>
+                    <td className="p-4 text-left md:text-center whitespace-nowrap">{candidate.phone}</td>
                     <td className="p-4 hidden md:table-cell">{candidate.email}</td>
                     <td className="p-4">{candidate.department}</td>
                     <td className="p-4 hidden md:table-cell">{candidate.profession}</td>

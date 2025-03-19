@@ -41,8 +41,12 @@ import StatCards from '../components/Common/StatCards';
 import { 
   BriefcaseIcon, Calendar, User2Icon, Bell, Sliders, ChevronRight, 
   CheckCircle, XCircle, Clock, CreditCard, Search, Filter, 
-  ArrowUpRight, ArrowDownRight, Settings, PieChart, BarChart, Activity
+  ArrowUpRight, ArrowDownRight, Settings, PieChart, BarChart, Activity,
+  BriefcaseMedicalIcon,
+  BriefcaseBusinessIcon,
+  BriefcaseConveyorBelt
 } from 'lucide-react';
+import { BiBriefcaseAlt } from 'react-icons/bi';
 
 // Enhanced mock data
 const applications = [
@@ -140,25 +144,25 @@ const Overviewrecruit = () => {
           <StatCards
             name="Active Jobs" 
             icon={BriefcaseIcon} 
-            value="12,354"
+            value="42,354"
             color="#6366F1"
           />
           <StatCards
-            name="Total Applications" 
-            icon={User2Icon} 
-            value="34,567"
+            name="In Active Jobs" 
+            icon={BriefcaseBusinessIcon} 
+            value="14,567"
             color="#10B981"
           />
           <StatCards
-            name="Interviews Today"  
-            value="23"
-            icon={Calendar}
+            name="Closed Jobs"  
+            value="2300"
+            icon={BriefcaseConveyorBelt}
             color="#EC4899"
           />
           <StatCards
-            name="Unread Messages"  
-            value="8"
-            icon={Bell}
+            name="Total Jobs"  
+            value="50,876"
+            icon={BiBriefcaseAlt}
             color="#F59E0B"
           />
         </motion.div>
