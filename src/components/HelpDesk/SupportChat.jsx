@@ -1,15 +1,156 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Header from '../Common/Header';
+// import React, { useState, useEffect, useRef } from 'react';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import Header from '../Common/Header';
 
-const SupportChat = () => {
-  const [messages, setMessages] = useState([]); 
-  const [newMessage, setNewMessage] = useState('');
-  const [isWaitingForReply, setIsWaitingForReply] = useState(false); 
-  const [isSupportTyping, setIsSupportTyping] = useState(false); 
-  const chatContainerRef = useRef(null); 
+// const SupportChat = () => {
+//   const [messages, setMessages] = useState([]); 
+//   const [newMessage, setNewMessage] = useState('');
+//   const [isWaitingForReply, setIsWaitingForReply] = useState(false); 
+//   const [isSupportTyping, setIsSupportTyping] = useState(false); 
+//   const chatContainerRef = useRef(null); 
 
   
+//   const sendMessage = () => {
+//     if (newMessage.trim() === '') return;
+
+//     const message = {
+//       id: Date.now(),
+//       text: newMessage,
+//       sender: 'recruiter',
+//       timestamp: new Date().toLocaleTimeString(),
+//     };
+
+//     setMessages((prev) => [...prev, message]);
+//     setNewMessage('');
+//     setIsWaitingForReply(true);
+
+    
+//     setIsSupportTyping(true);
+//     setTimeout(() => {
+//       const supportReply = {
+//         id: Date.now() + 1,
+//         text: 'Thank you for your message. Our support team will get back to you shortly.',
+//         sender: 'support',
+//         timestamp: new Date().toLocaleTimeString(),
+//       };
+//       setMessages((prev) => [...prev, supportReply]);
+//       setIsWaitingForReply(false);
+//       setIsSupportTyping(false);
+//     }, 3000); 
+//   };
+
+  
+//   const clearChat = () => {
+//     setMessages([]);
+//     setIsWaitingForReply(false);
+//     setIsSupportTyping(false);
+//   };
+
+  
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [messages]);
+
+//   return (
+//     <div className="flex flex-col h-screen bg-gray-900 text-white">
+//       <Header title={'Support Chat'} />
+//       <div
+//         ref={chatContainerRef}
+//         className="flex-1 overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full">
+//         {messages.map((msg) => (
+//           <motion.div
+//             key={msg.id}
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.3 }}
+//             className={`flex ${
+//               msg.sender === 'recruiter' ? 'justify-end' : 'justify-start'}`}>
+//             <div
+//               className={`max-w-[70%] p-4 rounded-lg ${
+//                 msg.sender === 'recruiter'
+//                   ? 'bg-teal-500 text-white'
+//                   : 'bg-gray-700 text-gray-300'
+//               }`}
+//             >
+//               <p>{msg.text}</p>
+//               <span className="text-xs text-gray-400 block mt-1">
+//                 {msg.timestamp}
+//               </span>
+//             </div>
+//           </motion.div>
+//         ))}
+
+        
+//         <AnimatePresence>
+//           {isSupportTyping && (
+//             <motion.div
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
+//               className="flex justify-start"
+//             >
+//               <div className="bg-gray-700 p-4 rounded-lg">
+//                 <div className="flex space-x-2">
+//                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+//                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+//                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+//                 </div>
+//               </div>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+//       </div>
+
+//       {/* Message Input (Fixed at the Bottom) */}
+//       <div className="sticky bottom-0 bg-gray-900 p-4 border-t border-gray-800">
+//         <div className="max-w-full mx-auto w-full flex space-x-4">
+//           <input
+//             type="text"
+//             value={newMessage}
+//             onChange={(e) => setNewMessage(e.target.value)}
+//             onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+//             placeholder="Type your message..."
+//             className="flex-1 p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+//             disabled={isWaitingForReply} // Disable input while waiting for a reply
+//           />
+//           <button
+//             onClick={sendMessage}
+//             disabled={isWaitingForReply || newMessage.trim() === ''}
+//             className="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+//           >
+//             Send
+//           </button>
+//           <button
+//             onClick={clearChat}
+//             className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+//           >
+//             Clear Chat
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SupportChat;
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Smile, Paperclip, Send, Trash2, Image as ImageIcon } from 'lucide-react';
+import Header from '../Common/Header';
+import EmojiPicker from 'emoji-picker-react'; // Add emoji picker
+
+const SupportChat = () => {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+  const [isWaitingForReply, setIsWaitingForReply] = useState(false);
+  const [isSupportTyping, setIsSupportTyping] = useState(false);
+  const [attachmentMenuOpen, setAttachmentMenuOpen] = useState(false);
+  const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
+  const chatContainerRef = useRef(null);
+
+  // Send a message
   const sendMessage = () => {
     if (newMessage.trim() === '') return;
 
@@ -18,13 +159,31 @@ const SupportChat = () => {
       text: newMessage,
       sender: 'recruiter',
       timestamp: new Date().toLocaleTimeString(),
+      status: 'sent', // Initial status
     };
 
     setMessages((prev) => [...prev, message]);
     setNewMessage('');
     setIsWaitingForReply(true);
 
-    
+    // Simulate message status updates
+    setTimeout(() => {
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === message.id ? { ...msg, status: 'delivered' } : msg
+        )
+      );
+    }, 1000);
+
+    setTimeout(() => {
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === message.id ? { ...msg, status: 'read' } : msg
+        )
+      );
+    }, 2000);
+
+    // Simulate support typing and reply
     setIsSupportTyping(true);
     setTimeout(() => {
       const supportReply = {
@@ -36,53 +195,84 @@ const SupportChat = () => {
       setMessages((prev) => [...prev, supportReply]);
       setIsWaitingForReply(false);
       setIsSupportTyping(false);
-    }, 3000); 
+    }, 3000);
   };
 
-  
+  // Handle attachment
+  const handleAttachment = (type) => {
+    const attachmentMessage = {
+      id: Date.now(),
+      text: `[${type} attachment]`,
+      sender: 'recruiter',
+      timestamp: new Date().toLocaleTimeString(),
+      status: 'sent',
+    };
+    setMessages((prev) => [...prev, attachmentMessage]);
+    setAttachmentMenuOpen(false);
+  };
+
+  // Clear chat with confirmation
   const clearChat = () => {
-    setMessages([]);
-    setIsWaitingForReply(false);
-    setIsSupportTyping(false);
+    if (window.confirm('Are you sure you want to clear the chat history?')) {
+      setMessages([]);
+      setIsWaitingForReply(false);
+      setIsSupportTyping(false);
+    }
   };
 
-  
+  // Auto-scroll to the latest message
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
+  // Add emoji to the message
+  const addEmoji = (emoji) => {
+    setNewMessage((prev) => prev + emoji.emoji);
+    setEmojiPickerOpen(false);
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white">
       <Header title={'Support Chat'} />
+
+      {/* Chat Messages */}
       <div
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full">
+        className="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl mx-auto w-full scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
+      >
         {messages.map((msg) => (
           <motion.div
             key={msg.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className={`flex ${
-              msg.sender === 'recruiter' ? 'justify-end' : 'justify-start'}`}>
+            className={`flex ${msg.sender === 'recruiter' ? 'justify-end' : 'justify-start'}`}
+          >
             <div
               className={`max-w-[70%] p-4 rounded-lg ${
                 msg.sender === 'recruiter'
-                  ? 'bg-teal-500 text-white'
+                  ? 'bg-green-700 text-white'
                   : 'bg-gray-700 text-gray-300'
               }`}
             >
               <p>{msg.text}</p>
-              <span className="text-xs text-gray-400 block mt-1">
-                {msg.timestamp}
-              </span>
+              <div className="flex items-center justify-between mt-1">
+                <span className="text-xs text-gray-100">{msg.timestamp}</span>
+                {msg.sender === 'recruiter' && (
+                  <span className="text-xs text-gray-400 ml-2">
+                    {msg.status === 'sent' && '✓'}
+                    {msg.status === 'delivered' && '✓✓'}
+                    {msg.status === 'read' && <span className="text-teal-400">✓✓</span>}
+                  </span>
+                )}
+              </div>
             </div>
           </motion.div>
         ))}
 
-        
+        {/* Typing Indicator */}
         <AnimatePresence>
           {isSupportTyping && (
             <motion.div
@@ -104,29 +294,81 @@ const SupportChat = () => {
       </div>
 
       {/* Message Input (Fixed at the Bottom) */}
-      <div className="sticky bottom-0 bg-gray-900 p-4 border-t border-gray-800">
-        <div className="max-w-full mx-auto w-full flex space-x-4">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-            placeholder="Type your message..."
-            className="flex-1 p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-            disabled={isWaitingForReply} // Disable input while waiting for a reply
-          />
+      <div className="sticky bottom-0 bg-gray-800 p-4 border-t border-gray-700">
+        <div className="max-w-4xl mx-auto w-full flex items-end space-x-4">
+          {/* Attachment Menu */}
+          <div className="relative">
+            <button
+              onClick={() => setAttachmentMenuOpen(!attachmentMenuOpen)}
+              className="p-2 hover:bg-gray-700 rounded-full transition-colors"
+            >
+              <Paperclip className="w-6 h-6 text-gray-400" />
+            </button>
+
+            {attachmentMenuOpen && (
+              <div className="absolute bottom-12 left-0 bg-gray-800 rounded-lg shadow-lg p-2 border border-gray-700">
+                <button
+                  onClick={() => handleAttachment('image')}
+                  className="flex items-center space-x-2 p-2 hover:bg-gray-700 rounded w-full"
+                >
+                  <ImageIcon className="w-5 h-5 text-gray-400" />
+                  <span>Image</span>
+                </button>
+                <button
+                  onClick={() => handleAttachment('file')}
+                  className="flex items-center space-x-2 p-2 hover:bg-gray-700 rounded w-full"
+                >
+                  <Paperclip className="w-5 h-5 text-gray-400" />
+                  <span>File</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Emoji Picker */}
+          <div className="relative">
+            <button
+              onClick={() => setEmojiPickerOpen(!emojiPickerOpen)}
+              className="p-2 hover:bg-gray-700 rounded-full transition-colors"
+            >
+              <Smile className="w-6 h-6 text-gray-400" />
+            </button>
+
+            {emojiPickerOpen && (
+              <div className="absolute bottom-12 left-0">
+                <EmojiPicker onEmojiClick={addEmoji} />
+              </div>
+            )}
+          </div>
+
+          {/* Message Input */}
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              placeholder="Type your message..."
+              className="w-full p-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 pr-12"
+              disabled={isWaitingForReply}
+            />
+          </div>
+
+          
           <button
             onClick={sendMessage}
             disabled={isWaitingForReply || newMessage.trim() === ''}
             className="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
           >
-            Send
+            <Send className="w-6 h-6" />
           </button>
+
+          
           <button
             onClick={clearChat}
             className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
           >
-            Clear Chat
+            <Trash2 className="w-6 h-6" />
           </button>
         </div>
       </div>

@@ -1865,11 +1865,11 @@ const Template = () => {
 
   return (
     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
-      <Header title="Offer Letter Templates" />
+      <Header title="Templates" />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
         <div className="p-4 md:p-6">
           {/* Templates Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {currentTemplates.map((template) => (
               <motion.div
                 key={template.id}
