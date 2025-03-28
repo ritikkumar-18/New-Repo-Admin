@@ -105,7 +105,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FiBarChart2, FiLogOut, FiSettings } from 'react-icons/fi';
 import { BiMenu } from 'react-icons/bi';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, BookTemplate, Briefcase, CalendarHeart, Download, Mail, MessagesSquareIcon, UserSearch } from 'lucide-react';
+import { BookOpen, BookTemplate, Briefcase, CalendarHeart, Download, HardDrive, Mail, MessagesSquareIcon, UserSearch } from 'lucide-react';
 import { FaQuestionCircle, FaComments, FaRegSmile } from 'react-icons/fa'; // Icons for FAQ, Support Chat, and Feedback
 
 const SIDEBAR = [
@@ -115,6 +115,7 @@ const SIDEBAR = [
   { name: 'Recruit', icon: Briefcase, color: '#8B5CF6', href: '/recruit' },
   { name: 'Search Candidate', icon: Download, color: '#8B5CF6', href: '/resume' },
   { name: 'Template', icon: BookTemplate, color: '#8B5CF6', href: '/template' },
+  { name:"HRM", icon: HardDrive, color: '#8B5CF6', href: '/hrm' },
   // { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },
   {
     name: 'Help Desk',
@@ -127,6 +128,7 @@ const SIDEBAR = [
       { name: 'Feedback', icon: FaRegSmile, href: '/helpdesk/feedback' },
     ],
   },
+  
   { name: 'Settings', icon: FiSettings, color: '#8B5CF6', href: '/settings' },
   { name: 'Logout', icon: FiLogOut, color: '#8B5CF6', href: '/logout' },
 ];

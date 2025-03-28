@@ -1423,7 +1423,7 @@ const Recruit = () => {
           <motion.div
             key={applicant.id}
             className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col hover:shadow-xl transition duration-300 ease-in-out"
-            whileHover={{ scale: 1.02 }}
+            
           >
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-xl font-semibold text-white">{applicant.name}</h3>

@@ -2,24 +2,11 @@
 // import Header from "../components/Common/Header"
 // import { toast } from "react-hot-toast"
 // import { motion, AnimatePresence } from "framer-motion"
-// import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai"
-// import { Search, Trash2, Eye, Edit, XCircle, CheckCircle, ToggleLeft, ToggleRight } from "lucide-react"
+// import { AiOutlinePlus, AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai"
+// import { Search, XCircle, CheckCircle, ToggleLeft, ToggleRight, X } from "lucide-react"
 
 // const TeamManagementDashboard = () => {
 //   const [members, setMembers] = useState([
-//     // { id: 1, name: 'Alice', role: 'Recruiter', active: true, department: 'HR', location: 'New York', skills: ['Recruiting', 'Communication'], contact: 'alice@example.com', address: '123 Main St, City' },
-//     // { id: 2, name: 'Bob', role: 'Interviewer', active: true, department: 'Tech', location: 'San Francisco', skills: ['Interviewing', 'Technical Analysis'], contact: 'bob@example.com', address: '456 Second St, City' },
-//     // { id: 3, name: 'Charlie', role: 'Manager', active: true, department: 'Operations', location: 'London', skills: ['Leadership', 'Team Management'], contact: 'charlie@example.com', address: '789 Third St, City' },
-//     // { id: 4, name: 'David', role: 'HR Specialist', active: false, department: 'HR', location: 'Chicago', skills: ['Employee Relations', 'Conflict Resolution'], contact: 'david@example.com', address: '101 Fourth St, City' },
-//     // { id: 5, name: 'Eva', role: 'Software Engineer', active: true, department: 'Tech', location: 'Berlin', skills: ['JavaScript', 'React'], contact: 'eva@example.com', address: '202 Fifth St, City' },
-//     // { id: 6, name: 'Frank', role: 'Data Scientist', active: true, department: 'Tech', location: 'San Francisco', skills: ['Machine Learning', 'Data Analysis'], contact: 'frank@example.com', address: '303 Sixth St, City' },
-//     // { id: 7, name: 'Grace', role: 'UI/UX Designer', active: true, department: 'Design', location: 'New York', skills: ['Sketch', 'Figma'], contact: 'grace@example.com', address: '404 Seventh St, City' },
-//     // { id: 8, name: 'Hank', role: 'Developer', active: false, department: 'Tech', location: 'Sydney', skills: ['Python', 'Django'], contact: 'hank@example.com', address: '505 Eighth St, City' },
-//     // { id: 9, name: 'Ivy', role: 'QA Engineer', active: true, department: 'Tech', location: 'Austin', skills: ['Automated Testing', 'Manual Testing'], contact: 'ivy@example.com', address: '606 Ninth St, City' },
-//     // { id: 10, name: 'Jack', role: 'Team Lead', active: true, department: 'Tech', location: 'Paris', skills: ['Leadership', 'Scrum'], contact: 'jack@example.com', address: '707 Tenth St, City' },
-//     // { id: 11, name: 'Ivy John', role: 'Junior Engineer', active: false, department: 'Tech', location: 'London', skills: ['Automated Testing', 'Manual Testing'], contact: 'ivyjohn@example.com', address: '404 Second St, City' },
-//     // { id: 12, name: 'Jacky', role: 'Team Manager', active: true, department: 'Non-Tech', location: 'NewYork', skills: ['Leadership', 'Scrum'], contact: 'jacky@example.com', address: '101 Seven St, City' },
-
 //     {
 //       id: 1,
 //       name: "Alice",
@@ -287,9 +274,8 @@
 //   const handleFilterChange = (e) => setFilters(e.target.value)
 //   const handleDepartmentChange = (e) => setSelectedDepartment(e.target.value)
 
-  
 //   const filteredMembers = members.filter((member) => {
-    
+//     // Search term can match name OR skills OR role OR location
 //     const searchTerm = filters.toLowerCase()
 //     const isNameMatch = member.name.toLowerCase().includes(searchTerm)
 //     const isRoleMatch = member.role.toLowerCase().includes(searchTerm)
@@ -305,7 +291,6 @@
 //       (filterStatus === "Active" && member.active) ||
 //       (filterStatus === "Inactive" && !member.active)
 
-    
 //     return (isNameMatch || isRoleMatch || isLocationMatch || isSkillsMatch) && isDepartmentMatch && isStatusMatch
 //   })
 
@@ -360,78 +345,91 @@
 //     <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
 //       <Header title="Team Management" />
 //       <motion.div
-//         className="flex-1 p-6"
+//         className="flex-1 md:p-6 sm:p-2"
 //         initial={{ opacity: 0, y: 20 }}
 //         animate={{ opacity: 1, y: 0 }}
 //         transition={{ duration: 0.5 }}
 //       >
-//         <div className="flex justify-between items-center mb-6">
-//           <div className="md:w-1/2 relative">
+//         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+//           <div className="w-full md:w-1/3  relative">
 //             <input
 //               type="text"
 //               value={filters}
 //               onChange={handleFilterChange}
 //               placeholder="Search..."
-//               className=" py-2 pl-10 xs:w-20 md:w-auto bg-gray-800 text-white border rounded  focus:outline-none focus:ring-2 focus:ring-purple-500"
+//               className="w-full py-2 pl-10 bg-gray-800 text-white border rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
 //             />
 //             <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
 //           </div>
-//           <div className="md:ml-48 sm:ml-5 sm:mr-5">
+//           <div className="flex items-center gap-4 w-full md:w-auto">
 //             <button
 //               onClick={() =>
 //                 setFilterStatus(filterStatus === "All" ? "Active" : filterStatus === "Active" ? "Inactive" : "All")
 //               }
-//               className="flex items-center gap-2  bg-gray-700 px-4 py-2 rounded hover:bg-gray-600"
+//               className="flex items-center gap-2 bg-gray-700 px-4 py-2 rounded hover:bg-gray-600"
 //             >
 //               {filterStatus === "Active" ? <ToggleLeft size={20} /> : <ToggleRight size={20} />}
 //               {filterStatus}
 //             </button>
-//           </div>
-//           <div className="relative xs:w-auto md:w-auto md:text-sm xs:text-xs">
-//             <select
-//               value={selectedDepartment}
-//               onChange={handleDepartmentChange}
-//               className="px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-//             >
-//               <option value="all">All Departments</option>
-//               <option value="HR">HR</option>
-//               <option value="Tech">Tech</option>
-//               <option value="Design">Design</option>
-//               <option value="Operations">Operations</option>
-//             </select>
+//             <div className="relative w-full md:w-auto">
+//               <select
+//                 value={selectedDepartment}
+//                 onChange={handleDepartmentChange}
+//                 className="w-full md:w-auto px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//               >
+//                 <option value="all">All Departments</option>
+//                 <option value="HR">HR</option>
+//                 <option value="Tech">Tech</option>
+//                 <option value="Design">Design</option>
+//                 <option value="Operations">Operations</option>
+//               </select>
+//             </div>
 //           </div>
 //         </div>
 
 //         <div className="overflow-x-auto border rounded-lg border-gray-700">
 //           <table className="w-full table-auto border-collapse bg-gray-900 text-white rounded-lg shadow-md overflow-hidden">
-//             <thead className=" text-white">
+//             <thead className="text-white">
 //               <tr>
-//                 <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+//                 <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
 //                   Name
 //                 </th>
-//                 <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+//                 <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
 //                   Experience
 //                 </th>
-//                 <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+//                 <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
 //                   Location
 //                 </th>
-//                 <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+//                 <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
 //                   Department
 //                 </th>
-//                 <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-gray-700">
+//                 <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
 //                   Status
 //                 </th>
-//                 <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm ">Actions</th>
+//                 <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-b border-gray-700">
+//                   Actions
+//                 </th>
 //               </tr>
 //             </thead>
 //             <tbody>
 //               {paginatedMembers.map((member, index) => (
-//                 <tr key={member.id} className="border-t border-gray-700 transition duration-300">
-//                   <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.name}</td>
-//                   <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.experience}</td>
-//                   <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.location}</td>
-//                   <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">{member.department}</td>
-//                   <td className="px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+//                 <tr
+//                   key={member.id}
+//                   className="border-t border-gray-700 transition duration-300 hover:bg-gray-800 cursor-pointer"
+//                 >
+//                   <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+//                     {member.name}
+//                   </td>
+//                   <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+//                     {member.experience}
+//                   </td>
+//                   <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+//                     {member.location}
+//                   </td>
+//                   <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
+//                     {member.department}
+//                   </td>
+//                   <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
 //                     <span
 //                       className={`px-2 py-1 flex items-center space-x-1 rounded text-xs ${member.active ? "bg-green-500 text-white" : "bg-red-500 text-white"}`}
 //                     >
@@ -448,25 +446,27 @@
 //                       )}
 //                     </span>
 //                   </td>
-//                   <td className="px-6 py-4 flex items-center space-x-5">
-//                     <button
-//                       onClick={() => openDetailView(member)}
-//                       className="px-4 py-2 text-sm rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md"
-//                     >
-//                       <Eye className="text-white" size={18} />
-//                     </button>
-//                     <button
-//                       onClick={() => handleEditMember(member)}
-//                       className="px-4 py-2 text-sm rounded bg-purple-500 hover:bg-purple-600 text-white shadow-md"
-//                     >
-//                       <Edit className="text-white" size={18} />
-//                     </button>
-//                     <button
-//                       onClick={() => handleDeleteMember(member.id)}
-//                       className="px-4 py-2 text-sm rounded bg-red-500 hover:bg-red-600 text-white shadow-md"
-//                     >
-//                       <Trash2 size={18} />
-//                     </button>
+//                   <td className="px-4 md:px-6 py-4">
+//                     <div className="flex items-center space-x-2">
+//                       <button
+//                         onClick={() => openDetailView(member)}
+//                         className="p-2 text-sm rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md"
+//                       >
+//                         <AiOutlineEye size={16} />
+//                       </button>
+//                       <button
+//                         onClick={() => handleEditMember(member)}
+//                         className="p-2 text-sm rounded bg-purple-500 hover:bg-purple-600 text-white shadow-md"
+//                       >
+//                         <AiOutlineEdit size={16} />
+//                       </button>
+//                       <button
+//                         onClick={() => handleDeleteMember(member.id)}
+//                         className="p-2 text-sm rounded bg-red-500 hover:bg-red-600 text-white shadow-md"
+//                       >
+//                         <AiOutlineDelete size={16} />
+//                       </button>
+//                     </div>
 //                   </td>
 //                 </tr>
 //               ))}
@@ -474,118 +474,180 @@
 //           </table>
 //         </div>
 
+//         {/* Pagination */}
+//         <div className="mt-6 flex justify-center flex-wrap gap-2">
+//           {Array.from({ length: Math.ceil(filteredMembers.length / membersPerPage) }, (_, index) => (
+//             <button
+//               key={index + 1}
+//               className={`px-3 py-2 rounded-lg ${
+//                 currentPage === index + 1 ? "bg-purple-500 text-white" : "bg-gray-700 text-gray-400"
+//               } hover:bg-purple-600 hover:text-white`}
+//               onClick={() => paginate(index + 1)}
+//             >
+//               {index + 1}
+//             </button>
+//           ))}
+//         </div>
+
+//         {/* User Detail Slider */}
 //         <AnimatePresence>
 //           {viewingMember && (
 //             <motion.div
-//               className="fixed inset-0 bg-opacity-50 flex justify-end mt-14"
+//               className="fixed inset-0 bg-black bg-opacity-50 flex z-50"
 //               onClick={closeDetailView}
-//               initial={{ opacity: 0, x: "100%" }}
-//               animate={{ opacity: 1, x: 0 }}
-//               exit={{ opacity: 0, x: "100%" }}
-//               transition={{ duration: 0.5 }}
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
+//               transition={{ duration: 0.3 }}
 //             >
 //               <motion.div
-//                 className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 w-1/2 md:w-1/3 sm:w-auto relative shadow-2xl rounded-lg 
-//         max-h-[90vh] overflow-y-auto"
-//                 initial={{ opacity: 0, x: "100%" }}
-//                 animate={{ opacity: 1, x: 0 }}
-//                 exit={{ opacity: 0, x: "100%" }}
-//                 transition={{ duration: 0.5 }}
+//                 className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:p-6 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 h-full ml-auto relative shadow-2xl overflow-y-auto"
+//                 initial={{ x: "100%" }}
+//                 animate={{ x: 0 }}
+//                 exit={{ x: "100%" }}
+//                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
 //                 onClick={(e) => e.stopPropagation()}
 //               >
-//                 {/* Close Button */}
-//                 <AiOutlineClose
+//                 <X
 //                   className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-gray-200"
 //                   size={24}
 //                   onClick={closeDetailView}
 //                 />
 
-//                 {/* Profile Section */}
-//                 <div className="flex flex-col items-center space-y-4">
+//                 {/* User Profile Header */}
+//                 <div className="flex flex-col items-center space-y-4 mb-6">
 //                   <div className="h-20 w-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-2xl">
 //                     {viewingMember.name.charAt(0)}
 //                   </div>
 //                   <h2 className="text-2xl font-semibold text-gray-100">{viewingMember.name}</h2>
+//                   <span
+//                     className={`px-3 py-1 rounded-full text-sm font-medium ${
+//                       viewingMember.active ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"
+//                     }`}
+//                   >
+//                     {viewingMember.active ? "Active" : "Inactive"}
+//                   </span>
 //                 </div>
 
-//                 {/* Member Details */}
-//                 <div className="mt-6 space-y-4">
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Role:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.role}</span>
+//                 {/* Basic Information */}
+//                 <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+//                   <h3 className="text-lg font-semibold text-gray-100 mb-3">Basic Information</h3>
+//                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+//                     <div>
+//                       <p className="text-sm text-gray-400">Role</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.role}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Position</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.position}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Department</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.department}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Location</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.location}</p>
+//                     </div>
 //                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Department:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.department}</span>
+//                 </div>
+
+//                 {/* Contact Information */}
+//                 <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+//                   <h3 className="text-lg font-semibold text-gray-100 mb-3">Contact Information</h3>
+//                   <div className="grid grid-cols-1 gap-3">
+//                     <div>
+//                       <p className="text-sm text-gray-400">Email</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.email}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Phone</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.phone}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Address</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.address}</p>
+//                     </div>
 //                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Location:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.location}</span>
+//                 </div>
+
+//                 {/* Employment Details */}
+//                 <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+//                   <h3 className="text-lg font-semibold text-gray-100 mb-3">Employment Details</h3>
+//                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+//                     <div>
+//                       <p className="text-sm text-gray-400">Experience</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.experience}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Salary</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.salary}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Join Date</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.joinDate}</p>
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">Release Date</p>
+//                       <p className="text-sm text-gray-200">{viewingMember.releaseDate || "N/A"}</p>
+//                     </div>
 //                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Skills:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.skills.join(", ")}</span>
-//                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Email:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.email}</span>
-//                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Phone:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.phone}</span>
-//                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Experience:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.experience}</span>
-//                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Salary:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.salary}</span>
-//                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Position:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.position}</span>
-//                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Status:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.status}</span>
-//                   </div>
-//                   <div className="flex items-center space-x-4">
-//                     <p className="text-sm text-gray-400">Remark:</p>
-//                     <span className="text-sm text-gray-200">{viewingMember.remark}</span>
+//                 </div>
+
+//                 {/* Skills */}
+//                 <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+//                   <h3 className="text-lg font-semibold text-gray-100 mb-3">Skills</h3>
+//                   <div className="flex flex-wrap gap-2">
+//                     {viewingMember.skills.map((skill, index) => (
+//                       <span key={index} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
+//                         {skill}
+//                       </span>
+//                     ))}
 //                   </div>
 //                 </div>
 
 //                 {/* Verification Documents */}
-//                 <div className="border-t border-gray-600 pt-4">
-//                   <h3 className="text-lg font-semibold text-gray-100">Verification Documents</h3>
-//                   <div className="mt-2 space-y-2">
-//                     <p className="text-gray-300">Aadhar Card:</p>
-//                     <img
-//                       src={viewingMember.aadharCard || "/placeholder.svg"}
-//                       alt="Aadhar Card"
-//                       className="w-40 rounded shadow-md"
-//                     />
-//                     <p className="text-gray-300">PAN Card:</p>
-//                     <img
-//                       src={viewingMember.panCard || "/placeholder.svg"}
-//                       alt="PAN Card"
-//                       className="w-40 rounded shadow-md"
-//                     />
+//                 <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+//                   <h3 className="text-lg font-semibold text-gray-100 mb-3">Verification Documents</h3>
+//                   <div className="grid grid-cols-2 gap-4">
+//                     <div>
+//                       <p className="text-sm text-gray-400">Aadhar Card</p>
+//                       <img
+//                         src={viewingMember.aadharCard || "/placeholder.svg"}
+//                         alt="Aadhar Card"
+//                         className="w-full h-auto mt-2 rounded-md object-cover"
+//                       />
+//                     </div>
+//                     <div>
+//                       <p className="text-sm text-gray-400">PAN Card</p>
+//                       <img
+//                         src={viewingMember.panCard || "/placeholder.svg"}
+//                         alt="PAN Card"
+//                         className="w-full h-auto mt-2 rounded-md object-cover"
+//                       />
+//                     </div>
 //                   </div>
 //                 </div>
 
-//                 {/* Join Date & Release Date */}
-//                 <div className="border-t border-gray-600 pt-4">
-//                   <h3 className="text-lg font-semibold text-gray-100">Employment Dates</h3>
-//                   <p className="text-gray-300">Join Date: {viewingMember.joinDate}</p>
-//                   <p className="text-gray-300">Release Date: {viewingMember.releaseDate || "N/A"}</p>
+//                 {/* Remarks */}
+//                 <div className="bg-gray-800/50 rounded-lg p-4 mb-6">
+//                   <h3 className="text-lg font-semibold text-gray-100 mb-3">Remarks</h3>
+//                   <p className="text-sm text-gray-200">{viewingMember.remark || "No remarks available"}</p>
 //                 </div>
 
-//                 {/* Close Button */}
-//                 <div className="mt-6 flex justify-center">
+//                 {/* Action Buttons */}
+//                 <div className="flex justify-between">
 //                   <button
-//                     className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:opacity-90 transition duration-300"
+//                     onClick={() => {
+//                       closeDetailView()
+//                       handleEditMember(viewingMember)
+//                     }}
+//                     className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+//                   >
+//                     Edit Details
+//                   </button>
+//                   <button
+//                     className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:opacity-90 transition duration-300"
 //                     onClick={closeDetailView}
 //                   >
 //                     Close
@@ -596,405 +658,461 @@
 //           )}
 //         </AnimatePresence>
 
-//         <div className="flex justify-center mt-6 space-x-2">
-//           {Array.from({ length: Math.ceil(filteredMembers.length / membersPerPage) }, (_, index) => (
-//             <button
-//               key={index + 1}
-//               onClick={() => paginate(index + 1)}
-//               className={`px-4 py-2 text-sm rounded-lg transition-all duration-300 ${currentPage === index + 1 ? "bg-purple-500 text-white shadow-md" : "bg-gray-700 text-gray-400 hover:bg-purple-600 hover:text-white"}`}
+//         {/* Add member modal */}
+//         <AnimatePresence>
+//           {isAddMemberModalOpen && (
+//             <motion.div
+//               className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 p-4"
+//               onClick={() => setIsAddMemberModalOpen(false)}
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
 //             >
-//               {index + 1}
-//             </button>
-//           ))}
-//         </div>
+//               <motion.div
+//                 className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl"
+//                 onClick={(e) => e.stopPropagation()}
+//                 initial={{ scale: 0.9, opacity: 0 }}
+//                 animate={{ scale: 1, opacity: 1 }}
+//                 exit={{ scale: 0.9, opacity: 0 }}
+//                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
+//               >
+//                 {/* Header */}
+//                 <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+//                   <h2 className="text-xl md:text-2xl font-semibold text-gray-100">Add New Member</h2>
+//                   <button
+//                     onClick={() => setIsAddMemberModalOpen(false)}
+//                     className="text-gray-400 hover:text-white transition-colors"
+//                   >
+//                     <X size={24} />
+//                   </button>
+//                 </div>
+
+                
+//                 <form
+//                   onSubmit={(e) => {
+//                     e.preventDefault()
+//                     handleAddNewMember()
+//                   }}
+//                   className="space-y-6">
+                  
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={newMember.name}
+//                           onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={newMember.role}
+//                           onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
+//                         <select
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={newMember.department}
+//                           onChange={(e) => setNewMember({ ...newMember, department: e.target.value })}
+//                         >
+//                           <option value="">Select Department</option>
+//                           <option value="HR">HR</option>
+//                           <option value="Tech">Tech</option>
+//                           <option value="Design">Design</option>
+//                           <option value="Operations">Operations</option>
+//                         </select>
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={newMember.location}
+//                           onChange={(e) => setNewMember({ ...newMember, location: e.target.value })}
+//                         />
+//                       </div>
+//                     </div>
+//                   </div>
+
+                  
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+//                         <input
+//                           type="email"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={newMember.email}
+//                           onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={newMember.phone}
+//                           onChange={(e) => setNewMember({ ...newMember, phone: e.target.value })}
+//                         />
+//                       </div>
+//                       <div className="md:col-span-2">
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={newMember.address}
+//                           onChange={(e) => setNewMember({ ...newMember, address: e.target.value })}
+//                         />
+//                       </div>
+//                     </div>
+//                   </div>
+
+                  
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
+//                     <div>
+//                       <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
+//                       <input
+//                         type="text"
+//                         className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                         value={newMember.skills}
+//                         onChange={(e) => setNewMember({ ...newMember, skills: e.target.value })}
+//                         placeholder="e.g. JavaScript, React, Communication"
+//                       />
+//                     </div>
+//                   </div>
+
+//                   {/* Action Buttons */}
+//                   <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
+//                     <button
+//                       type="button"
+//                       onClick={() => setIsAddMemberModalOpen(false)}
+//                       className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+//                     >
+//                       Cancel
+//                     </button>
+//                     <button
+//                       type="submit"
+//                       className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
+//                     >
+//                       Add Member
+//                     </button>
+//                   </div>
+//                 </form>
+//               </motion.div>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+
+//         {/* Edit modal */}
+//         <AnimatePresence>
+//           {isEditMemberModalOpen && editedMember && (
+//             <motion.div
+//               className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 p-4"
+//               onClick={() => setIsEditMemberModalOpen(false)}
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
+//               transition={{ duration: 0.3 }}
+//             >
+//               <motion.div
+//                 onClick={(e) => e.stopPropagation()}
+//                 initial={{ scale: 0.9, opacity: 0 }}
+//                 animate={{ scale: 1, opacity: 1 }}
+//                 exit={{ scale: 0.9, opacity: 0 }}
+//                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
+//               >
+//                 {/* Header */}
+//                 <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+//                   <h2 className="text-xl md:text-2xl font-semibold text-gray-100">Edit Member Profile</h2>
+//                   <button
+//                     onClick={() => setIsEditMemberModalOpen(false)}
+//                     className="text-gray-400 hover:text-white transition-colors"
+//                   >
+//                     <X size={24} />
+//                   </button>
+//                 </div>
+
+//                 {/* Form Content */}
+//                 <form
+//                   onSubmit={(e) => {
+//                     e.preventDefault()
+//                     handleSaveEditedMember()
+//                   }}
+//                   className="space-y-6"
+//                 >
+//                   {/* Basic Information */}
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.name}
+//                           onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.role}
+//                           onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
+//                         <select
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.department}
+//                           onChange={(e) => setEditedMember({ ...editedMember, department: e.target.value })}
+//                         >
+//                           <option value="HR">HR</option>
+//                           <option value="Tech">Tech</option>
+//                           <option value="Design">Design</option>
+//                           <option value="Operations">Operations</option>
+//                         </select>
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.location}
+//                           onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Position</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.position}
+//                           onChange={(e) => setEditedMember({ ...editedMember, position: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Experience</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.experience}
+//                           onChange={(e) => setEditedMember({ ...editedMember, experience: e.target.value })}
+//                         />
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   {/* Contact Information */}
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+//                         <input
+//                           type="email"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.email}
+//                           onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.phone}
+//                           onChange={(e) => setEditedMember({ ...editedMember, phone: e.target.value })}
+//                         />
+//                       </div>
+//                       <div className="md:col-span-2">
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.address}
+//                           onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
+//                         />
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   {/* Employment Details */}
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Employment Details</h3>
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Status</label>
+//                         <select
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.active ? "Active" : "Inactive"}
+//                           onChange={(e) =>
+//                             setEditedMember({
+//                               ...editedMember,
+//                               active: e.target.value === "Active",
+//                               status: e.target.value,
+//                             })
+//                           }
+//                         >
+//                           <option value="Active">Active</option>
+//                           <option value="Inactive">Inactive</option>
+//                         </select>
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Salary</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.salary}
+//                           onChange={(e) => setEditedMember({ ...editedMember, salary: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Join Date</label>
+//                         <input
+//                           type="date"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.joinDate || ""}
+//                           onChange={(e) => setEditedMember({ ...editedMember, joinDate: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Release Date</label>
+//                         <input
+//                           type="date"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.releaseDate || ""}
+//                           onChange={(e) => setEditedMember({ ...editedMember, releaseDate: e.target.value })}
+//                         />
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   {/* Skills */}
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
+//                     <div>
+//                       <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
+//                       <input
+//                         type="text"
+//                         className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                         value={editedMember.skills?.join(", ") || ""}
+//                         onChange={(e) => setEditedMember({ ...editedMember, skills: e.target.value.split(", ") })}
+//                       />
+//                     </div>
+//                   </div>
+
+//                   {/* Document Links */}
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Document Links</h3>
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card URL</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.aadharCard || ""}
+//                           onChange={(e) => setEditedMember({ ...editedMember, aadharCard: e.target.value })}
+//                         />
+//                       </div>
+//                       <div>
+//                         <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card URL</label>
+//                         <input
+//                           type="text"
+//                           className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                           value={editedMember.panCard || ""}
+//                           onChange={(e) => setEditedMember({ ...editedMember, panCard: e.target.value })}
+//                         />
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   {/* Remarks */}
+//                   <div>
+//                     <h3 className="text-lg font-medium text-gray-200 mb-3">Remarks</h3>
+//                     <div>
+//                       <textarea
+//                         className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+//                         value={editedMember.remark || ""}
+//                         onChange={(e) => setEditedMember({ ...editedMember, remark: e.target.value })}
+//                         rows={3}
+//                       />
+//                     </div>
+//                   </div>
+
+//                   {/* Action Buttons */}
+//                   <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
+//                     <button
+//                       type="button"
+//                       onClick={() => setIsEditMemberModalOpen(false)}
+//                       className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+//                     >
+//                       Cancel
+//                     </button>
+//                     <button
+//                       type="submit"
+//                       className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
+//                     >
+//                       Save Changes
+//                     </button>
+//                   </div>
+//                 </form>
+//               </motion.div>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
 //       </motion.div>
 //       <button
 //         onClick={() => setIsAddMemberModalOpen(true)}
-//         className="bg-blue-500 text-white p-4 rounded-full fixed bottom-10 right-10 z-50 "
+//         className="bg-blue-500 text-white p-4 rounded-full fixed bottom-10 right-10 z-50 shadow-lg hover:bg-blue-600 transition-colors"
+//         aria-label="Add new member"
 //       >
 //         <AiOutlinePlus size={24} />
 //       </button>
-
-//       {isAddMemberModalOpen && (
-//         <motion.div
-//           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 mt-16 p-7"
-//           onClick={() => setIsAddMemberModalOpen(false)}
-//         >
-//           <motion.div
-//             className="bg-gray-800 p-6 rounded-lg shadow-sm md:w-1/2 xs:w-full"
-//             onClick={(e) => e.stopPropagation()}
-//             initial={{ x: "100%" }}
-//             animate={{ x: "0%" }}
-//             exit={{ x: "100%" }}
-//             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-//           >
-//             <div className="flex justify-between items-center mb-6">
-//               <h2 className="md:text-3xl xs:text-sm xs:w-full sm:text-center font-bold text-white">Add New Member</h2>
-//               <button onClick={() => setIsAddMemberModalOpen(false)} className="text-white text-2xl">
-//                 <AiOutlineClose />
-//               </button>
-//             </div>
-//             <form
-//               onSubmit={(e) => {
-//                 e.preventDefault()
-//                 handleAddNewMember()
-//               }}
-//             >
-//               <input
-//                 type="text"
-//                 value={newMember.name}
-//                 onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
-//                 placeholder="Name"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-//               <input
-//                 type="text"
-//                 value={newMember.role}
-//                 onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
-//                 placeholder="Role"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-//               <input
-//                 type="text"
-//                 value={newMember.department}
-//                 onChange={(e) => setNewMember({ ...newMember, department: e.target.value })}
-//                 placeholder="Department"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <input
-//                 type="text"
-//                 value={newMember.contact}
-//                 onChange={(e) => setNewMember({ ...newMember, contact: e.target.value })}
-//                 placeholder="Contact"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-//               <input
-//                 type="text"
-//                 value={newMember.address}
-//                 onChange={(e) => setNewMember({ ...newMember, address: e.target.value })}
-//                 placeholder="Address"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-//               <input
-//                 type="text"
-//                 value={newMember.location}
-//                 onChange={(e) => setNewMember({ ...newMember, location: e.target.value })}
-//                 placeholder="Location"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-//               <button type="submit" className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg">
-//                 Add Member
-//               </button>
-//             </form>
-//           </motion.div>
-//         </motion.div>
-//       )}
-
-//       {/* Edit Member Modal */}
-//       {/* {isEditMemberModalOpen && (
-//     <motion.div
-//       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 mt-16 p-7"
-//       onClick={() => setIsEditMemberModalOpen(false)} >
-//       <motion.div
-//         className="bg-gray-800 p-6 rounded-lg shadow-sm md:w-1/2 xs:w-full"
-//         onClick={(e) => e.stopPropagation()}
-//         initial={{ x: '100%' }}
-//         animate={{ x: '0%' }}
-//         exit={{ x: '100%' }}
-//         transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-//       >
-//         <div className="flex justify-between items-center mb-6">
-//           <h2 className="md:text-3xl xs:text-sm xs:w-full sm:text-center font-bold text-white">Edit Member</h2>
-//           <button onClick={() => setIsEditMemberModalOpen(false)} className="text-white text-2xl">
-//             <AiOutlineClose />
-//           </button>
-//         </div>
-//         <form onSubmit={(e) => { e.preventDefault(); handleSaveEditedMember(); }}>
-//           <input
-//             type="text"
-//             value={editedMember.name}
-//             onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
-//             placeholder="Name"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-//           <input
-//             type="text"
-//             value={editedMember.role}
-//             onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
-//             placeholder="Role"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-//           <input
-//             type="text"
-//             value={editedMember.department}
-//             onChange={(e) => setEditedMember({ ...editedMember, department: e.target.value })}
-//             placeholder="Department"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-          
-//           <input
-//             type="text"
-//             value={editedMember.contact}
-//             onChange={(e) => setEditedMember({ ...editedMember, contact: e.target.value })}
-//             placeholder="Contact"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-//           <input
-//             type="text"
-//             value={editedMember.address}
-//             onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
-//             placeholder="Address"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-//           <input
-//             type="text"
-//             value={editedMember.location}
-//             onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
-//             placeholder="Location"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-//           <input
-//             type="text"
-//             value={editedMember.verificationDocuments?.panCard}
-//             onChange={(e) => setEditedMember({ ...editedMember, verificationDocuments: e.target.value })}
-//             placeholder="Verification"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-//           <input
-//             type="text"
-//             value={editedMember.companyDetails?.name}
-//             onChange={(e) => setEditedMember({ ...editedMember, companyDetails: e.target.value })}
-//             placeholder="Company Name"
-//             className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//           />
-//           <button type="submit" className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg">Save Changes</button>
-//         </form>
-//       </motion.div>
-//     </motion.div>
-//   )} */}
-//       {isEditMemberModalOpen && (
-//         <motion.div
-//           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 mt-16 p-7"
-//           onClick={() => setIsEditMemberModalOpen(false)}
-//         >
-//           <motion.div
-//             className="bg-gray-800 p-6 rounded-lg shadow-sm md:w-1/2 xs:w-full overflow-y-auto max-h-[80vh]"
-//             onClick={(e) => e.stopPropagation()}
-//             initial={{ x: "100%" }}
-//             animate={{ x: "0%" }}
-//             exit={{ x: "100%" }}
-//             transition={{ type: "spring", stiffness: 200, damping: 25 }}
-//           >
-//             {/* Modal Header */}
-//             <div className="flex justify-between items-center mb-6">
-//               <h2 className="md:text-2xl xs:text-lg xs:w-full sm:text-center font-bold text-white">
-//                 Edit Member Details
-//               </h2>
-//               <button onClick={() => setIsEditMemberModalOpen(false)} className="text-white text-2xl">
-//                 <AiOutlineClose />
-//               </button>
-//             </div>
-
-//             <form
-//               onSubmit={(e) => {
-//                 e.preventDefault()
-//                 handleSaveEditedMember()
-//               }}
-//             >
-//               <input
-//                 type="text"
-//                 value={editedMember.name}
-//                 onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
-//                 placeholder="Name"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <input
-//                 type="text"
-//                 value={editedMember.role}
-//                 onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
-//                 placeholder="Role"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <input
-//                 type="text"
-//                 value={editedMember.department}
-//                 onChange={(e) => setEditedMember({ ...editedMember, department: e.target.value })}
-//                 placeholder="Department"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <input
-//                 type="text"
-//                 value={editedMember.contact}
-//                 onChange={(e) => setEditedMember({ ...editedMember, contact: e.target.value })}
-//                 placeholder="Contact"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <input
-//                 type="text"
-//                 value={editedMember.address}
-//                 onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
-//                 placeholder="Address"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <input
-//                 type="text"
-//                 value={editedMember.location}
-//                 onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
-//                 placeholder="Location"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <input
-//                 type="text"
-//                 value={editedMember.skills?.join(", ") || ""}
-//                 onChange={(e) => setEditedMember({ ...editedMember, skills: e.target.value.split(", ") })}
-//                 placeholder="Skills (comma-separated)"
-//                 className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//               />
-
-//               <div className="border-t border-gray-600 pt-4">
-//                 <h3 className="text-lg font-semibold text-gray-100 mb-2">Verification Documents</h3>
-//                 <input
-//                   type="text"
-//                   value={editedMember.verificationDocuments?.panCard || ""}
-//                   onChange={(e) =>
-//                     setEditedMember({
-//                       ...editedMember,
-//                       verificationDocuments: {
-//                         ...editedMember.verificationDocuments,
-//                         panCard: e.target.value,
-//                       },
-//                     })
-//                   }
-//                   placeholder="PAN Card"
-//                   className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//                 />
-
-//                 <input
-//                   type="text"
-//                   value={editedMember.verificationDocuments?.msmeCertificate || ""}
-//                   onChange={(e) =>
-//                     setEditedMember({
-//                       ...editedMember,
-//                       verificationDocuments: {
-//                         ...editedMember.verificationDocuments,
-//                         msmeCertificate: e.target.value,
-//                       },
-//                     })
-//                   }
-//                   placeholder="MSME Certificate"
-//                   className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//                 />
-
-//                 <input
-//                   type="text"
-//                   value={editedMember.verificationDocuments?.gstCertificate || ""}
-//                   onChange={(e) =>
-//                     setEditedMember({
-//                       ...editedMember,
-//                       verificationDocuments: {
-//                         ...editedMember.verificationDocuments,
-//                         gstCertificate: e.target.value,
-//                       },
-//                     })
-//                   }
-//                   placeholder="GST Certificate"
-//                   className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//                 />
-//               </div>
-
-//               {/* Company Details */}
-//               <div className="border-t border-gray-600 pt-4">
-//                 <h3 className="text-lg font-semibold text-gray-100 mb-2">Company Details</h3>
-//                 <input
-//                   type="text"
-//                   value={editedMember.companyDetails?.name || ""}
-//                   onChange={(e) =>
-//                     setEditedMember({
-//                       ...editedMember,
-//                       companyDetails: { ...editedMember.companyDetails, name: e.target.value },
-//                     })
-//                   }
-//                   placeholder="Company Name"
-//                   className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//                 />
-
-//                 <input
-//                   type="text"
-//                   value={editedMember.companyDetails?.type || ""}
-//                   onChange={(e) =>
-//                     setEditedMember({
-//                       ...editedMember,
-//                       companyDetails: { ...editedMember.companyDetails, type: e.target.value },
-//                     })
-//                   }
-//                   placeholder="Company Type"
-//                   className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//                 />
-//               </div>
-
-//               {/* Subscription Details */}
-//               <div className="border-t border-gray-600 pt-4">
-//                 <h3 className="text-lg font-semibold text-gray-100 mb-2">Subscription Details</h3>
-//                 <input
-//                   type="text"
-//                   value={editedMember.subscriptionDetails?.plan || ""}
-//                   onChange={(e) =>
-//                     setEditedMember({
-//                       ...editedMember,
-//                       subscriptionDetails: {
-//                         ...editedMember.subscriptionDetails,
-//                         plan: e.target.value,
-//                       },
-//                     })
-//                   }
-//                   placeholder="Subscription Plan"
-//                   className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//                 />
-
-//                 <input
-//                   type="text"
-//                   value={editedMember.subscriptionDetails?.validUntil || ""}
-//                   onChange={(e) =>
-//                     setEditedMember({
-//                       ...editedMember,
-//                       subscriptionDetails: {
-//                         ...editedMember.subscriptionDetails,
-//                         validUntil: e.target.value,
-//                       },
-//                     })
-//                   }
-//                   placeholder="Valid Until"
-//                   className="w-full px-4 py-2 mb-4 text-white bg-gray-800 rounded-lg border border-gray-600"
-//                 />
-//               </div>
-
-//               {/* Submit Button */}
-//               <button type="submit" className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-//                 Save Changes
-//               </button>
-//             </form>
-//           </motion.div>
-//         </motion.div>
-//       )}
 //     </div>
 //   )
 // }
 
 // export default TeamManagementDashboard
 
+"use client"
+
 import { useState } from "react"
 import Header from "../components/Common/Header"
-import { toast } from "react-hot-toast"
+import { toast, Toaster } from "react-hot-toast"
 import { motion, AnimatePresence } from "framer-motion"
 import { AiOutlinePlus, AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai"
-import { Search, XCircle, CheckCircle, ToggleLeft, ToggleRight, X } from "lucide-react"
+import {
+  Search,
+  XCircle,
+  CheckCircle,
+  ToggleRight,
+  X,
+  Filter,
+  Mail,
+  Phone,
+  Calendar,
+  MapPin,
+  Briefcase,
+  User,
+  Shield,
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+  AlertTriangle,
+} from "lucide-react"
 
 const TeamManagementDashboard = () => {
   const [members, setMembers] = useState([
@@ -1243,7 +1361,7 @@ const TeamManagementDashboard = () => {
   ])
 
   const [viewingMember, setViewingMember] = useState(null)
-  const [filters, setFilters] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
   const [selectedDepartment, setSelectedDepartment] = useState("all")
   const [currentPage, setCurrentPage] = useState(1)
   const [newMember, setNewMember] = useState({
@@ -1254,50 +1372,99 @@ const TeamManagementDashboard = () => {
     skills: "",
     contact: "",
     address: "",
+    email: "",
+    phone: "",
+    experience: "",
+    salary: "",
+    position: "",
+    active: true,
+    status: "Active",
+    joinDate: "",
+    releaseDate: "",
+    aadharCard: "",
+    panCard: "",
+    remark: "",
   })
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false)
   const [isEditMemberModalOpen, setIsEditMemberModalOpen] = useState(false)
   const [editedMember, setEditedMember] = useState(null)
   const [filterStatus, setFilterStatus] = useState("All")
+  const [filterSidebar, setFilterSidebar] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false)
+  const [memberToDelete, setMemberToDelete] = useState(null)
+  const [activeTab, setActiveTab] = useState("All")
 
   const membersPerPage = 10
 
-  const handleFilterChange = (e) => setFilters(e.target.value)
-  const handleDepartmentChange = (e) => setSelectedDepartment(e.target.value)
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value)
+    setCurrentPage(1)
+  }
+
+  const handleDepartmentChange = (e) => {
+    setSelectedDepartment(e.target.value)
+    setCurrentPage(1)
+  }
+
+  const handleToggleStatus = () => {
+    const nextStatus = filterStatus === "All" ? "Active" : filterStatus === "Active" ? "Inactive" : "All"
+
+    setFilterStatus(nextStatus)
+    setActiveTab(nextStatus)
+    setCurrentPage(1)
+  }
+
+  const handleTabChange = (status) => {
+    setActiveTab(status)
+    setFilterStatus(status)
+    setCurrentPage(1)
+  }
 
   const filteredMembers = members.filter((member) => {
-    // Search term can match name OR skills OR role OR location
-    const searchTerm = filters.toLowerCase()
-    const isNameMatch = member.name.toLowerCase().includes(searchTerm)
-    const isRoleMatch = member.role.toLowerCase().includes(searchTerm)
-    const isLocationMatch = member.location.toLowerCase().includes(searchTerm)
-    const isSkillsMatch = member.skills.some((skill) => skill.toLowerCase().includes(searchTerm))
+    // Search term can match name OR skills OR role OR location OR email
+    const searchLower = searchTerm.toLowerCase()
+    const isNameMatch = member.name.toLowerCase().includes(searchLower)
+    const isRoleMatch = member.role.toLowerCase().includes(searchLower)
+    const isLocationMatch = member.location.toLowerCase().includes(searchLower)
+    const isEmailMatch = member.email.toLowerCase().includes(searchLower)
+    const isSkillsMatch = member.skills.some((skill) => skill.toLowerCase().includes(searchLower))
 
-    
+    // Department filter
     const isDepartmentMatch =
       selectedDepartment === "all" || member.department.toLowerCase() === selectedDepartment.toLowerCase()
 
+    // Status filter
     const isStatusMatch =
       filterStatus === "All" ||
       (filterStatus === "Active" && member.active) ||
       (filterStatus === "Inactive" && !member.active)
 
-    return (isNameMatch || isRoleMatch || isLocationMatch || isSkillsMatch) && isDepartmentMatch && isStatusMatch
+    return (
+      (isNameMatch || isRoleMatch || isLocationMatch || isEmailMatch || isSkillsMatch) &&
+      isDepartmentMatch &&
+      isStatusMatch
+    )
   })
 
   const paginatedMembers = filteredMembers.slice((currentPage - 1) * membersPerPage, currentPage * membersPerPage)
 
   const handleDeleteMember = (id) => {
-    setMembers(members.filter((member) => member.id !== id))
-    toast.error("Member deleted!", {
-      style: {
-        background: "#f8d7da",
-      },
-    })
+    setMemberToDelete(members.find((member) => member.id === id))
+    setDeleteModal(true)
+  }
+
+  const confirmDelete = () => {
+    if (memberToDelete) {
+      setMembers(members.filter((member) => member.id !== memberToDelete.id))
+      toast.error("Member deleted successfully!")
+      setDeleteModal(false)
+      setMemberToDelete(null)
+    }
   }
 
   const handleUpdateMember = (updatedMember) => {
     setMembers(members.map((member) => (member.id === updatedMember.id ? updatedMember : member)))
+    toast.success("Member details updated successfully!")
   }
 
   const handleAddNewMember = () => {
@@ -1305,182 +1472,394 @@ const TeamManagementDashboard = () => {
       id: members.length + 1,
       ...newMember,
       skills: newMember.skills.split(",").map((skill) => skill.trim()),
+      active: newMember.status === "Active",
     }
     setMembers([...members, newMemberObj])
     setIsAddMemberModalOpen(false)
-    toast.success("New member added!")
-    setNewMember({ name: "", role: "", department: "", location: "", skills: "", contact: "", address: "" })
+    toast.success("New member added successfully!")
+    setNewMember({
+      name: "",
+      role: "",
+      department: "",
+      location: "",
+      skills: "",
+      contact: "",
+      address: "",
+      email: "",
+      phone: "",
+      experience: "",
+      salary: "",
+      position: "",
+      active: true,
+      status: "Active",
+      joinDate: "",
+      releaseDate: "",
+      aadharCard: "",
+      panCard: "",
+      remark: "",
+    })
   }
 
   const handleEditMember = (member) => {
-    setEditedMember(member)
+    setEditedMember({ ...member })
     setIsEditMemberModalOpen(true)
   }
 
   const handleSaveEditedMember = () => {
-    handleUpdateMember(editedMember)
+    const updatedMember = {
+      ...editedMember,
+      active: editedMember.status === "Active",
+    }
+    handleUpdateMember(updatedMember)
     setIsEditMemberModalOpen(false)
-    toast.success("Member details updated!")
   }
 
   const openDetailView = (item) => setViewingMember(item)
   const closeDetailView = () => setViewingMember(null)
 
-  const indexOfLastMember = currentPage * membersPerPage
-  const indexOfFirstMember = indexOfLastMember - membersPerPage
-  const currentMembers = filteredMembers.slice(indexOfFirstMember, indexOfLastMember)
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen">
       <Header title="Team Management" />
+      
+
       <motion.div
-        className="flex-1 md:p-6 sm:p-2"
+        className="p-4 md:p-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-          <div className="w-full md:w-1/3  relative">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
+          <div className="relative flex-grow">
             <input
               type="text"
-              value={filters}
-              onChange={handleFilterChange}
-              placeholder="Search..."
-              className="w-full py-2 pl-10 bg-gray-800 text-white border rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search members..."
+              className="w-full py-2 pl-10 pr-4 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
           </div>
-          <div className="flex items-center gap-4 w-full md:w-auto">
+          <div className="flex gap-2">
+           
             <button
-              onClick={() =>
-                setFilterStatus(filterStatus === "All" ? "Active" : filterStatus === "Active" ? "Inactive" : "All")
-              }
-              className="flex items-center gap-2 bg-gray-700 px-4 py-2 rounded hover:bg-gray-600"
+              onClick={() => setFilterSidebar(true)}
+              className="flex items-center justify-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
             >
-              {filterStatus === "Active" ? <ToggleLeft size={20} /> : <ToggleRight size={20} />}
-              {filterStatus}
+              <Filter size={18} />
+              <span>Filters</span>
             </button>
-            <div className="relative w-full md:w-auto">
-              <select
-                value={selectedDepartment}
-                onChange={handleDepartmentChange}
-                className="w-full md:w-auto px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="all">All Departments</option>
-                <option value="HR">HR</option>
-                <option value="Tech">Tech</option>
-                <option value="Design">Design</option>
-                <option value="Operations">Operations</option>
-              </select>
-            </div>
           </div>
         </div>
 
-        <div className="overflow-x-auto border rounded-lg border-gray-700">
-          <table className="w-full table-auto border-collapse bg-gray-900 text-white rounded-lg shadow-md overflow-hidden">
-            <thead className="text-white">
-              <tr>
-                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
-                  Name
-                </th>
-                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
-                  Experience
-                </th>
-                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
-                  Location
-                </th>
-                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
-                  Department
-                </th>
-                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-r border-b border-gray-700">
-                  Status
-                </th>
-                <th className="px-4 md:px-6 py-4 text-left font-bold uppercase tracking-wider text-sm border-b border-gray-700">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedMembers.map((member, index) => (
-                <tr
-                  key={member.id}
-                  className="border-t border-gray-700 transition duration-300 hover:bg-gray-800 cursor-pointer"
-                >
-                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
-                    {member.name}
-                  </td>
-                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
-                    {member.experience}
-                  </td>
-                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
-                    {member.location}
-                  </td>
-                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
-                    {member.department}
-                  </td>
-                  <td className="px-4 md:px-6 py-4 text-gray-200 font-medium border-r border-gray-700">
-                    <span
-                      className={`px-2 py-1 flex items-center space-x-1 rounded text-xs ${member.active ? "bg-green-500 text-white" : "bg-red-500 text-white"}`}
+        {/* Status Tabs - Similar to jobopening.tsx */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-gray-800 rounded-lg p-1 flex flex-wrap">
+            <button
+              onClick={() => handleTabChange("All")}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                activeTab === "All"
+                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white"
+                  : "text-gray-300 hover:text-white hover:bg-gray-700"
+              }`}
+            >
+              All Members
+            </button>
+            <button
+              onClick={() => handleTabChange("Active")}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                activeTab === "Active"
+                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white"
+                  : "text-gray-300 hover:text-white hover:bg-gray-700"
+              }`}
+            >
+              Active Members
+            </button>
+            <button
+              onClick={() => handleTabChange("Inactive")}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                activeTab === "Inactive"
+                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white"
+                  : "text-gray-300 hover:text-white hover:bg-gray-700"
+              }`}
+            >
+              Inactive Members
+            </button>
+          </div>
+        </div>
+
+        {/* Filter Sidebar */}
+        <AnimatePresence>
+          {filterSidebar && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.5 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setFilterSidebar(false)}
+                className="fixed inset-0 bg-black z-40"
+              />
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "tween" }}
+                className="fixed right-0 top-0 h-full w-full md:w-96 bg-gray-800 p-6 shadow-xl z-50 overflow-y-auto"
+              >
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-semibold text-white">Filters</h2>
+                  <button
+                    onClick={() => setFilterSidebar(false)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-white mb-2">Department</label>
+                    <select
+                      value={selectedDepartment}
+                      onChange={handleDepartmentChange}
+                      className="w-full bg-gray-700 text-white rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     >
-                      {member.active ? (
-                        <>
-                          <CheckCircle size={14} className="text-white" />
-                          <span>Active</span>
-                        </>
-                      ) : (
-                        <>
-                          <XCircle size={14} className="text-white" />
-                          <span>Inactive</span>
-                        </>
-                      )}
-                    </span>
-                  </td>
-                  <td className="px-4 md:px-6 py-4">
-                    <div className="flex items-center space-x-2">
+                      <option value="all">All Departments</option>
+                      <option value="HR">HR</option>
+                      <option value="Tech">Tech</option>
+                      <option value="Design">Design</option>
+                      <option value="Operations">Operations</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-white mb-2">Status</label>
+                    <div className="flex items-center gap-4">
                       <button
-                        onClick={() => openDetailView(member)}
-                        className="p-2 text-sm rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md"
+                        onClick={() => setFilterStatus("All")}
+                        className={`px-4 py-2 rounded-lg ${
+                          filterStatus === "All" ? "bg-purple-600 text-white" : "bg-gray-700 text-gray-300"
+                        }`}
                       >
-                        <AiOutlineEye size={16} />
+                        All
                       </button>
                       <button
-                        onClick={() => handleEditMember(member)}
-                        className="p-2 text-sm rounded bg-purple-500 hover:bg-purple-600 text-white shadow-md"
+                        onClick={() => setFilterStatus("Active")}
+                        className={`px-4 py-2 rounded-lg ${
+                          filterStatus === "Active" ? "bg-green-600 text-white" : "bg-gray-700 text-gray-300"
+                        }`}
                       >
-                        <AiOutlineEdit size={16} />
+                        Active
                       </button>
                       <button
-                        onClick={() => handleDeleteMember(member.id)}
-                        className="p-2 text-sm rounded bg-red-500 hover:bg-red-600 text-white shadow-md"
+                        onClick={() => setFilterStatus("Inactive")}
+                        className={`px-4 py-2 rounded-lg ${
+                          filterStatus === "Inactive" ? "bg-red-600 text-white" : "bg-gray-700 text-gray-300"
+                        }`}
                       >
-                        <AiOutlineDelete size={16} />
+                        Inactive
                       </button>
                     </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                  </div>
+
+                  <div className="pt-4 flex justify-end">
+                    <button
+                      onClick={() => {
+                        setSelectedDepartment("all")
+                        setFilterStatus("All")
+                        setSearchTerm("")
+                      }}
+                      className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 mr-2"
+                    >
+                      Reset
+                    </button>
+                    <button
+                      onClick={() => setFilterSidebar(false)}
+                      className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+
+        {/* Member Cards */}
+        {paginatedMembers.length === 0 ? (
+          <div className="bg-gray-800 p-8 text-center rounded-lg">
+            <p className="text-gray-400">No team members found matching your criteria.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {paginatedMembers.map((member) => (
+              <motion.div
+                key={member.id}
+                className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 shadow-lg cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                
+              >
+                <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-4">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">{member.name}</h3>
+                      <p className="text-purple-400 text-sm">{member.position || member.role}</p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center text-white text-lg font-bold">
+                      {member.name.charAt(0)}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Mail className="h-4 w-4 text-gray-400" />
+                    <p className="text-sm text-gray-300 truncate">{member.email}</p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-4 w-4 text-gray-400" />
+                    <p className="text-sm text-gray-300">{member.phone}</p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Briefcase className="h-4 w-4 text-gray-400" />
+                    <p className="text-sm text-gray-300">{member.department}</p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-gray-400" />
+                    <p className="text-sm text-gray-300">{member.location}</p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-gray-400" />
+                    <p className="text-sm text-gray-300">Experience: {member.experience}</p>
+                  </div>
+
+                  <div className="mt-2">
+                    <span
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        member.active ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {member.active ? <CheckCircle className="w-3 h-3 mr-1" /> : <XCircle className="w-3 h-3 mr-1" />}
+                      {member.active ? "Active" : "Inactive"}
+                    </span>
+                  </div>
+
+                  <div className="mt-3">
+                    <p className="text-xs text-gray-400 mb-1">Skills</p>
+                    <div className="flex flex-wrap gap-1">
+                      {member.skills.slice(0, 3).map((skill, index) => (
+                        <span key={index} className="px-2 py-0.5 bg-gray-700 rounded-full text-xs text-gray-300">
+                          {skill}
+                        </span>
+                      ))}
+                      {member.skills.length > 3 && (
+                        <span className="px-2 py-0.5 bg-gray-700 rounded-full text-xs text-gray-300">
+                          +{member.skills.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-gray-700 p-3 flex justify-between items-center">
+                  <div className="flex gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        openDetailView(member)
+                      }}
+                      className="p-1.5 bg-gray-700 rounded-full text-blue-400 hover:text-blue-300 transition-colors"
+                      title="View Details"
+                    >
+                      <AiOutlineEye size={16} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleEditMember(member)
+                      }}
+                      className="p-1.5 bg-gray-700 rounded-full text-purple-400 hover:text-purple-300 transition-colors"
+                      title="Edit Member"
+                    >
+                      <AiOutlineEdit size={16} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleDeleteMember(member.id)
+                      }}
+                      className="p-1.5 bg-gray-700 rounded-full text-red-400 hover:text-red-300 transition-colors"
+                      title="Delete Member"
+                    >
+                      <AiOutlineDelete size={16} />
+                    </button>
+                  </div>
+                  <span className="text-xs text-gray-400">
+                    Joined: {new Date(member.joinDate).toLocaleDateString()}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* Pagination */}
-        <div className="mt-6 flex justify-center flex-wrap gap-2">
-          {Array.from({ length: Math.ceil(filteredMembers.length / membersPerPage) }, (_, index) => (
-            <button
-              key={index + 1}
-              className={`px-3 py-2 rounded-lg ${
-                currentPage === index + 1 ? "bg-purple-500 text-white" : "bg-gray-700 text-gray-400"
-              } hover:bg-purple-600 hover:text-white`}
-              onClick={() => paginate(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
+        {filteredMembers.length > membersPerPage && (
+          <div className="flex justify-center mt-8">
+            <div className="flex gap-2">
+              <button
+                onClick={() => paginate(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className={`px-3 py-2 rounded-lg transition-colors ${
+                  currentPage === 1
+                    ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                }`}
+              >
+                <ChevronLeft size={18} />
+              </button>
 
-        {/* User Detail Slider */}
+              {Array.from({ length: Math.ceil(filteredMembers.length / membersPerPage) }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => paginate(index + 1)}
+                  className={`
+                    px-4 py-2 rounded-lg transition-colors
+                    ${
+                      currentPage === index + 1
+                        ? "bg-purple-600 text-white"
+                        : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                    }
+                  `}
+                >
+                  {index + 1}
+                </button>
+              ))}
+
+              <button
+                onClick={() => paginate(Math.min(Math.ceil(filteredMembers.length / membersPerPage), currentPage + 1))}
+                disabled={currentPage === Math.ceil(filteredMembers.length / membersPerPage)}
+                className={`px-3 py-2 rounded-lg transition-colors ${
+                  currentPage === Math.ceil(filteredMembers.length / membersPerPage)
+                    ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                }`}
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Member Detail Slider */}
         <AnimatePresence>
           {viewingMember && (
             <motion.div
@@ -1492,323 +1871,506 @@ const TeamManagementDashboard = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:p-6 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 h-full ml-auto relative shadow-2xl overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                transition={{ type: "tween" }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <X
-                  className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-gray-200"
-                  size={24}
-                  onClick={closeDetailView}
-                />
-
-                {/* User Profile Header */}
-                <div className="flex flex-col items-center space-y-4 mb-6">
-                  <div className="h-20 w-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-2xl">
-                    {viewingMember.name.charAt(0)}
-                  </div>
-                  <h2 className="text-2xl font-semibold text-gray-100">{viewingMember.name}</h2>
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      viewingMember.active ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"
-                    }`}
-                  >
-                    {viewingMember.active ? "Active" : "Inactive"}
-                  </span>
-                </div>
-
-                {/* Basic Information */}
-                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Basic Information</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
-                      <p className="text-sm text-gray-400">Role</p>
-                      <p className="text-sm text-gray-200">{viewingMember.role}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Position</p>
-                      <p className="text-sm text-gray-200">{viewingMember.position}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Department</p>
-                      <p className="text-sm text-gray-200">{viewingMember.department}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Location</p>
-                      <p className="text-sm text-gray-200">{viewingMember.location}</p>
-                    </div>
+                <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-xl font-semibold text-white">Member Profile</h2>
+                    <button
+                      onClick={closeDetailView}
+                      className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-700"
+                    >
+                      <X size={20} />
+                    </button>
                   </div>
                 </div>
 
-                {/* Contact Information */}
-                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Contact Information</h3>
-                  <div className="grid grid-cols-1 gap-3">
-                    <div>
-                      <p className="text-sm text-gray-400">Email</p>
-                      <p className="text-sm text-gray-200">{viewingMember.email}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Phone</p>
-                      <p className="text-sm text-gray-200">{viewingMember.phone}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Address</p>
-                      <p className="text-sm text-gray-200">{viewingMember.address}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Employment Details */}
-                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Employment Details</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
-                      <p className="text-sm text-gray-400">Experience</p>
-                      <p className="text-sm text-gray-200">{viewingMember.experience}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Salary</p>
-                      <p className="text-sm text-gray-200">{viewingMember.salary}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Join Date</p>
-                      <p className="text-sm text-gray-200">{viewingMember.joinDate}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">Release Date</p>
-                      <p className="text-sm text-gray-200">{viewingMember.releaseDate || "N/A"}</p>
+                <div className="p-6 space-y-6">
+                  {/* Profile Header */}
+                  <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-6 border border-gray-700">
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+                      <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-bold">
+                        {viewingMember.name.charAt(0)}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold text-white">{viewingMember.name}</h3>
+                        <p className="text-purple-400">{viewingMember.position || viewingMember.role}</p>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          <span className="px-3 py-1 rounded-full text-sm bg-purple-900/40 text-purple-400 border border-purple-800/50">
+                            {viewingMember.department}
+                          </span>
+                          <span
+                            className={`px-3 py-1 rounded-full text-sm ${
+                              viewingMember.active
+                                ? "bg-green-900/40 text-green-400 border border-green-800/50"
+                                : "bg-red-900/40 text-red-400 border border-red-800/50"
+                            }`}
+                          >
+                            {viewingMember.active ? "Active" : "Inactive"}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Skills */}
-                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Skills</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {viewingMember.skills.map((skill, index) => (
-                      <span key={index} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Verification Documents */}
-                <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Verification Documents</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm text-gray-400">Aadhar Card</p>
-                      <img
-                        src={viewingMember.aadharCard || "/placeholder.svg"}
-                        alt="Aadhar Card"
-                        className="w-full h-auto mt-2 rounded-md object-cover"
-                      />
+                  {/* Contact Information Card */}
+                  <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+                    <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <User size={20} className="text-purple-400" /> Contact Information
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-purple-900/20">
+                          <Mail size={18} className="text-purple-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-400">Email</p>
+                          <a
+                            href={`mailto:${viewingMember.email}`}
+                            className="text-white hover:text-purple-400 transition-colors"
+                          >
+                            {viewingMember.email}
+                          </a>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-purple-900/20">
+                          <Phone size={18} className="text-purple-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-400">Phone</p>
+                          <a
+                            href={`tel:${viewingMember.phone}`}
+                            className="text-white hover:text-purple-400 transition-colors"
+                          >
+                            {viewingMember.phone}
+                          </a>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-purple-900/20">
+                          <MapPin size={18} className="text-purple-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-400">Location</p>
+                          <p className="text-white">{viewingMember.location}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-purple-900/20">
+                          <MapPin size={18} className="text-purple-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-400">Address</p>
+                          <p className="text-white">{viewingMember.address}</p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-gray-400">PAN Card</p>
-                      <img
-                        src={viewingMember.panCard || "/placeholder.svg"}
-                        alt="PAN Card"
-                        className="w-full h-auto mt-2 rounded-md object-cover"
-                      />
+                  </div>
+
+                  {/* Professional Details */}
+                  <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+                    <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <Briefcase size={20} className="text-purple-400" /> Professional Details
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-sm text-gray-400">Role</p>
+                        <p className="text-white">{viewingMember.role}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Position</p>
+                        <p className="text-white">{viewingMember.position || "N/A"}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Department</p>
+                        <p className="text-white">{viewingMember.department}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Experience</p>
+                        <p className="text-white">{viewingMember.experience}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Salary</p>
+                        <p className="text-white">{viewingMember.salary}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Remarks */}
-                <div className="bg-gray-800/50 rounded-lg p-4 mb-6">
-                  <h3 className="text-lg font-semibold text-gray-100 mb-3">Remarks</h3>
-                  <p className="text-sm text-gray-200">{viewingMember.remark || "No remarks available"}</p>
-                </div>
+                  {/* Employment Details */}
+                  <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+                    <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <Calendar size={20} className="text-purple-400" /> Employment Details
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-sm text-gray-400">Join Date</p>
+                        <p className="text-white">{viewingMember.joinDate}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Release Date</p>
+                        <p className="text-white">{viewingMember.releaseDate || "N/A"}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Status</p>
+                        <p className={`text-${viewingMember.active ? "green" : "red"}-400`}>
+                          {viewingMember.active ? "Active" : "Inactive"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-                {/* Action Buttons */}
-                <div className="flex justify-between">
-                  <button
-                    onClick={() => {
-                      closeDetailView()
-                      handleEditMember(viewingMember)
-                    }}
-                    className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
-                  >
-                    Edit Details
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:opacity-90 transition duration-300"
-                    onClick={closeDetailView}
-                  >
-                    Close
-                  </button>
+                  {/* Skills */}
+                  <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+                    <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <Shield size={20} className="text-purple-400" /> Skills
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {viewingMember.skills.map((skill, index) => (
+                        <span key={index} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Verification Documents */}
+                  <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+                    <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <FileText size={20} className="text-purple-400" /> Verification Documents
+                    </h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-sm text-gray-400">Aadhar Card</p>
+                        <img
+                          src={viewingMember.aadharCard || "/placeholder.svg"}
+                          alt="Aadhar Card"
+                          className="w-full h-auto mt-2 rounded-md object-cover"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">PAN Card</p>
+                        <img
+                          src={viewingMember.panCard || "/placeholder.svg"}
+                          alt="PAN Card"
+                          className="w-full h-auto mt-2 rounded-md object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Remarks */}
+                  <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+                    <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <FileText size={20} className="text-purple-400" /> Remarks
+                    </h3>
+                    <p className="text-white">{viewingMember.remark || "No remarks available"}</p>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                    <button
+                      onClick={() => {
+                        closeDetailView()
+                        handleEditMember(viewingMember)
+                      }}
+                      className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+                    >
+                      <AiOutlineEdit size={18} />
+                      Edit Member
+                    </button>
+                    <button
+                      onClick={closeDetailView}
+                      className="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+                    >
+                      Close
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Add member modal */}
+        {/* Add Member Slider */}
         <AnimatePresence>
           {isAddMemberModalOpen && (
             <motion.div
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 p-4"
+              className="fixed inset-0 bg-black bg-opacity-50 flex z-50"
               onClick={() => setIsAddMemberModalOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "tween" }}
                 onClick={(e) => e.stopPropagation()}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
               >
-                {/* Header */}
-                <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
-                  <h2 className="text-xl md:text-2xl font-semibold text-gray-100">Add New Member</h2>
-                  <button
-                    onClick={() => setIsAddMemberModalOpen(false)}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    <X size={24} />
-                  </button>
+                <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-xl font-semibold text-white">Add New Member</h2>
+                    <button
+                      onClick={() => setIsAddMemberModalOpen(false)}
+                      className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-700"
+                    >
+                      <X size={20} />
+                    </button>
+                  </div>
                 </div>
 
-                
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    handleAddNewMember()
-                  }}
-                  className="space-y-6">
-                  
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={newMember.name}
-                          onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={newMember.role}
-                          onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
-                        <select
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={newMember.department}
-                          onChange={(e) => setNewMember({ ...newMember, department: e.target.value })}
-                        >
-                          <option value="">Select Department</option>
-                          <option value="HR">HR</option>
-                          <option value="Tech">Tech</option>
-                          <option value="Design">Design</option>
-                          <option value="Operations">Operations</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={newMember.location}
-                          onChange={(e) => setNewMember({ ...newMember, location: e.target.value })}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
-                        <input
-                          type="email"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={newMember.email}
-                          onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={newMember.phone}
-                          onChange={(e) => setNewMember({ ...newMember, phone: e.target.value })}
-                        />
-                      </div>
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={newMember.address}
-                          onChange={(e) => setNewMember({ ...newMember, address: e.target.value })}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
+                <div className="p-6">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      handleAddNewMember()
+                    }}
+                    className="space-y-6"
+                  >
+                    {/* Basic Information */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
-                      <input
-                        type="text"
-                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                        value={newMember.skills}
-                        onChange={(e) => setNewMember({ ...newMember, skills: e.target.value })}
-                        placeholder="e.g. JavaScript, React, Communication"
-                      />
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.name}
+                            onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.role}
+                            onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Position</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.position}
+                            onChange={(e) => setNewMember({ ...newMember, position: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
+                          <select
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.department}
+                            onChange={(e) => setNewMember({ ...newMember, department: e.target.value })}
+                            required
+                          >
+                            <option value="">Select Department</option>
+                            <option value="HR">HR</option>
+                            <option value="Tech">Tech</option>
+                            <option value="Design">Design</option>
+                            <option value="Operations">Operations</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.location}
+                            onChange={(e) => setNewMember({ ...newMember, location: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Status</label>
+                          <select
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.status}
+                            onChange={(e) => setNewMember({ ...newMember, status: e.target.value })}
+                            required
+                          >
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Action Buttons */}
-                  <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setIsAddMemberModalOpen(false)}
-                      className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
-                    >
-                      Add Member
-                    </button>
-                  </div>
-                </form>
+                    {/* Contact Information */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                          <input
+                            type="email"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.email}
+                            onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.phone}
+                            onChange={(e) => setNewMember({ ...newMember, phone: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="md:col-span-2">
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.address}
+                            onChange={(e) => setNewMember({ ...newMember, address: e.target.value })}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Employment Details */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Employment Details</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Experience</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.experience}
+                            onChange={(e) => setNewMember({ ...newMember, experience: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Salary</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.salary}
+                            onChange={(e) => setNewMember({ ...newMember, salary: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Join Date</label>
+                          <input
+                            type="date"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.joinDate}
+                            onChange={(e) => setNewMember({ ...newMember, joinDate: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Release Date</label>
+                          <input
+                            type="date"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.releaseDate}
+                            onChange={(e) => setNewMember({ ...newMember, releaseDate: e.target.value })}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Skills */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.skills}
+                          onChange={(e) => setNewMember({ ...newMember, skills: e.target.value })}
+                          placeholder="e.g. JavaScript, React, Communication"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    {/* Document Links */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Document Links</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card URL</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.aadharCard}
+                            onChange={(e) => setNewMember({ ...newMember, aadharCard: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card URL</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={newMember.panCard}
+                            onChange={(e) => setNewMember({ ...newMember, panCard: e.target.value })}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Remarks */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Remarks</h3>
+                      <div>
+                        <textarea
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={newMember.remark}
+                          onChange={(e) => setNewMember({ ...newMember, remark: e.target.value })}
+                          rows={3}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
+                      <button
+                        type="button"
+                        onClick={() => setIsAddMemberModalOpen(false)}
+                        className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
+                      >
+                        Add Member
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Edit modal */}
+        {/* Edit Member Slider */}
         <AnimatePresence>
           {isEditMemberModalOpen && editedMember && (
             <motion.div
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 p-4"
+              className="fixed inset-0 bg-black bg-opacity-50 flex z-50"
               onClick={() => setIsEditMemberModalOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -1816,258 +2378,334 @@ const TeamManagementDashboard = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "tween" }}
                 onClick={(e) => e.stopPropagation()}
+              >
+                <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-xl font-semibold text-white">Edit Member Profile</h2>
+                    <button
+                      onClick={() => setIsEditMemberModalOpen(false)}
+                      className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-700"
+                    >
+                      <X size={20} />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      handleSaveEditedMember()
+                    }}
+                    className="space-y-6"
+                  >
+                    {/* Basic Information */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.name}
+                            onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.role}
+                            onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Position</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.position || ""}
+                            onChange={(e) => setEditedMember({ ...editedMember, position: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
+                          <select
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.department}
+                            onChange={(e) => setEditedMember({ ...editedMember, department: e.target.value })}
+                            required
+                          >
+                            <option value="HR">HR</option>
+                            <option value="Tech">Tech</option>
+                            <option value="Design">Design</option>
+                            <option value="Operations">Operations</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.location}
+                            onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Status</label>
+                          <select
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.active ? "Active" : "Inactive"}
+                            onChange={(e) =>
+                              setEditedMember({
+                                ...editedMember,
+                                active: e.target.value === "Active",
+                                status: e.target.value,
+                              })
+                            }
+                            required
+                          >
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Contact Information */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                          <input
+                            type="email"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.email}
+                            onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.phone}
+                            onChange={(e) => setEditedMember({ ...editedMember, phone: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="md:col-span-2">
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.address}
+                            onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Employment Details */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Employment Details</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Experience</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.experience}
+                            onChange={(e) => setEditedMember({ ...editedMember, experience: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Salary</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.salary}
+                            onChange={(e) => setEditedMember({ ...editedMember, salary: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Join Date</label>
+                          <input
+                            type="date"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.joinDate}
+                            onChange={(e) => setEditedMember({ ...editedMember, joinDate: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Release Date</label>
+                          <input
+                            type="date"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.releaseDate || ""}
+                            onChange={(e) => setEditedMember({ ...editedMember, releaseDate: e.target.value })}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Skills */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
+                        <input
+                          type="text"
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.skills?.join(", ") || ""}
+                          onChange={(e) => setEditedMember({ ...editedMember, skills: e.target.value.split(", ") })}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    {/* Document Links */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Document Links</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card URL</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.aadharCard || ""}
+                            onChange={(e) => setEditedMember({ ...editedMember, aadharCard: e.target.value })}
+                          />
+                          {editedMember.aadharCard && (
+                            <div className="mt-2">
+                              <img
+                                src={editedMember.aadharCard || "/placeholder.svg"}
+                                alt="Aadhar Card"
+                                className="w-full h-auto max-h-40 object-contain rounded-md border border-gray-700"
+                              />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card URL</label>
+                          <input
+                            type="text"
+                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                            value={editedMember.panCard || ""}
+                            onChange={(e) => setEditedMember({ ...editedMember, panCard: e.target.value })}
+                          />
+                          {editedMember.panCard && (
+                            <div className="mt-2">
+                              <img
+                                src={editedMember.panCard || "/placeholder.svg"}
+                                alt="PAN Card"
+                                className="w-full h-auto max-h-40 object-contain rounded-md border border-gray-700"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Remarks */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Remarks</h3>
+                      <div>
+                        <textarea
+                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                          value={editedMember.remark || ""}
+                          onChange={(e) => setEditedMember({ ...editedMember, remark: e.target.value })}
+                          rows={3}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
+                      <button
+                        type="button"
+                        onClick={() => setIsEditMemberModalOpen(false)}
+                        className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
+                      >
+                        Save Changes
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Delete Confirmation Modal */}
+        <AnimatePresence>
+          {deleteModal && memberToDelete && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+            >
+              <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="bg-gray-800 rounded-lg p-6 w-full max-w-md"
               >
-                {/* Header */}
-                <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
-                  <h2 className="text-xl md:text-2xl font-semibold text-gray-100">Edit Member Profile</h2>
-                  <button
-                    onClick={() => setIsEditMemberModalOpen(false)}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    <X size={24} />
-                  </button>
+                <div className="flex items-center gap-3 text-red-400 mb-4">
+                  <AlertTriangle size={24} />
+                  <h3 className="text-xl font-semibold">Confirm Deletion</h3>
                 </div>
 
-                {/* Form Content */}
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    handleSaveEditedMember()
-                  }}
-                  className="space-y-6"
-                >
-                  {/* Basic Information */}
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Basic Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.name}
-                          onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.role}
-                          onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Department</label>
-                        <select
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.department}
-                          onChange={(e) => setEditedMember({ ...editedMember, department: e.target.value })}
-                        >
-                          <option value="HR">HR</option>
-                          <option value="Tech">Tech</option>
-                          <option value="Design">Design</option>
-                          <option value="Operations">Operations</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Location</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.location}
-                          onChange={(e) => setEditedMember({ ...editedMember, location: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Position</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.position}
-                          onChange={(e) => setEditedMember({ ...editedMember, position: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Experience</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.experience}
-                          onChange={(e) => setEditedMember({ ...editedMember, experience: e.target.value })}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                <p className="text-gray-300 mb-6">
+                  Are you sure you want to remove <span className="font-semibold">{memberToDelete.name}</span> from the
+                  team? This action cannot be undone.
+                </p>
 
-                  {/* Contact Information */}
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Contact Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
-                        <input
-                          type="email"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.email}
-                          onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.phone}
-                          onChange={(e) => setEditedMember({ ...editedMember, phone: e.target.value })}
-                        />
-                      </div>
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.address}
-                          onChange={(e) => setEditedMember({ ...editedMember, address: e.target.value })}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Employment Details */}
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Employment Details</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Status</label>
-                        <select
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.active ? "Active" : "Inactive"}
-                          onChange={(e) =>
-                            setEditedMember({
-                              ...editedMember,
-                              active: e.target.value === "Active",
-                              status: e.target.value,
-                            })
-                          }
-                        >
-                          <option value="Active">Active</option>
-                          <option value="Inactive">Inactive</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Salary</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.salary}
-                          onChange={(e) => setEditedMember({ ...editedMember, salary: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Join Date</label>
-                        <input
-                          type="date"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.joinDate || ""}
-                          onChange={(e) => setEditedMember({ ...editedMember, joinDate: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Release Date</label>
-                        <input
-                          type="date"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.releaseDate || ""}
-                          onChange={(e) => setEditedMember({ ...editedMember, releaseDate: e.target.value })}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Skills */}
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Skills</h3>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">Skills (comma separated)</label>
-                      <input
-                        type="text"
-                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                        value={editedMember.skills?.join(", ") || ""}
-                        onChange={(e) => setEditedMember({ ...editedMember, skills: e.target.value.split(", ") })}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Document Links */}
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Document Links</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card URL</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.aadharCard || ""}
-                          onChange={(e) => setEditedMember({ ...editedMember, aadharCard: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card URL</label>
-                        <input
-                          type="text"
-                          className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                          value={editedMember.panCard || ""}
-                          onChange={(e) => setEditedMember({ ...editedMember, panCard: e.target.value })}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Remarks */}
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-200 mb-3">Remarks</h3>
-                    <div>
-                      <textarea
-                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                        value={editedMember.remark || ""}
-                        onChange={(e) => setEditedMember({ ...editedMember, remark: e.target.value })}
-                        rows={3}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-700 pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setIsEditMemberModalOpen(false)}
-                      className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-colors"
-                    >
-                      Save Changes
-                    </button>
-                  </div>
-                </form>
+                <div className="flex justify-end gap-3">
+                  <button
+                    onClick={() => setDeleteModal(false)}
+                    className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmDelete}
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                </div>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
+
+      {/* Add Member Button */}
       <button
         onClick={() => setIsAddMemberModalOpen(true)}
-        className="bg-blue-500 text-white p-4 rounded-full fixed bottom-10 right-10 z-50 shadow-lg hover:bg-blue-600 transition-colors"
+        className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-full fixed bottom-10 right-10 z-30 shadow-lg hover:from-purple-700 hover:to-blue-700 transition-colors"
         aria-label="Add new member"
       >
         <AiOutlinePlus size={24} />
@@ -2077,4 +2715,6 @@ const TeamManagementDashboard = () => {
 }
 
 export default TeamManagementDashboard
+
+
 

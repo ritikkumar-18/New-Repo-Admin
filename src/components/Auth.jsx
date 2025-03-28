@@ -643,6 +643,7 @@ import Notification from "./Notification/Notification";
 import Profile from "./Profile/Profile";
 import Askedquestion from "./HelpDesk/Askedquestion";
 import SupportChat from "./HelpDesk/SupportChat";
+import HRM from "../Pages/HRM";
 
 
 
@@ -1052,6 +1053,7 @@ function RecruiterDashboard({ onLogout }) {
         <Route path='/helpdesk/faq'element={<Askedquestion/>}/>
         <Route path='/helpdesk/support-chat'element={<SupportChat/>}/>
         <Route path="/payment" element={<Payment />} />
+        <Route path='/hrm' element={<HRM/>}/>
         <Route path="/settings" element={<Settings />} />
         <Route path='/notifications'element={<Notification/>}/>
         <Route path='/profile'element ={<Profile/>}/>

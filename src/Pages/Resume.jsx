@@ -942,7 +942,7 @@
 
 // export default ResumeSearch
 
-"use client"
+
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -1528,11 +1528,11 @@ const ResumeSearch = () => {
             {paginatedCandidates.map((candidate) => (
               <motion.div
                 key={candidate.id}
-                className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 shadow-lg"
+                className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 shadow-lg hover:cursor-pointer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                
               >
                 <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-4">
                   <div className="flex justify-between items-start">

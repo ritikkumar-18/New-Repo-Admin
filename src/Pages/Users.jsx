@@ -18,7 +18,7 @@ const Users = () => {
     <div className='flex-1 overflow-auto relative z-10'>
 			<Header title='Recruiters' />
 
-			<main className='max-w-7xl mx-auto py-6 md:px-6'>
+			<main className='max-w-7xl  '>
 				{/* STATS */}
 				<motion.div
 					className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4'
