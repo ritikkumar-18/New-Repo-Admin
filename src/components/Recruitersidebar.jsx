@@ -105,7 +105,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FiBarChart2, FiLogOut, FiSettings } from 'react-icons/fi';
 import { BiMenu } from 'react-icons/bi';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, BookTemplate, Briefcase, CalendarHeart, Download, HardDrive, Mail, MessagesSquareIcon, UserSearch } from 'lucide-react';
+import { BookOpen, BookTemplate, Briefcase, CalendarHeart, Download, HardDrive, Mail, MessagesSquareIcon, UserCog, UserSearch } from 'lucide-react';
 import { FaQuestionCircle, FaComments, FaRegSmile } from 'react-icons/fa'; // Icons for FAQ, Support Chat, and Feedback
 
 const SIDEBAR = [
@@ -116,6 +116,7 @@ const SIDEBAR = [
   { name: 'Search Candidate', icon: Download, color: '#8B5CF6', href: '/resume' },
   { name: 'Template', icon: BookTemplate, color: '#8B5CF6', href: '/template' },
   { name:"HRM", icon: HardDrive, color: '#8B5CF6', href: '/hrm' },
+  { name:"Sub Admin", icon: UserCog, color: '#8B5CF6', href: '/subadmin' },
   // { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },
   {
     name: 'Help Desk',
