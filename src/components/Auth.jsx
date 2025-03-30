@@ -646,6 +646,7 @@ import Profile from "./Profile/Profile"
 import Askedquestion from "./HelpDesk/Askedquestion"
 import SupportChat from "./HelpDesk/SupportChat"
 import HRM from "../Pages/HRM"
+import RecruiterChat from "../Pages/RecruiterChat"
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login")
@@ -1006,6 +1007,7 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/payment" element={<Payment />} />
         <Route path="/hrm" element={<HRM />} />
         <Route path='/subadmin'element={<SubAdmin/>}/>
+        <Route path='/chat'element={<RecruiterChat/>}/>
         <Route path="/settings" element={<Settings />} />
         <Route path="/notifications" element={<Notification />} />
         <Route path="/profile" element={<Profile />} />

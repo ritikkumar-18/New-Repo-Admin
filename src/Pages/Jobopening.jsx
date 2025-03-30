@@ -2929,6 +2929,7 @@ const Jobopening = () => {
         year: "2018",
       },
       skills: ["React", "TypeScript", "Node.js", "GraphQL", "AWS"],
+      Topskills: ["React", "TypeScript", "Node.js", "AWS"],
       portfolio: "https://johndoe.dev",
       github: "https://github.com/johndoe",
       linkedin: "https://linkedin.com/in/johndoe",
@@ -2965,6 +2966,7 @@ const Jobopening = () => {
         year: "2020",
       },
       skills: ["UI/UX", "Figma", "Adobe XD", "Sketch", "User Research"],
+      Topskills: ["UI/UX", "Figma", "Adobe XD", "Sketch"],
       portfolio: "https://janesmith.design",
       github: "https://github.com/janesmith",
       linkedin: "https://linkedin.com/in/janesmith",
@@ -3001,6 +3003,7 @@ const Jobopening = () => {
         year: "2016",
       },
       skills: ["Python", "SQL", "Hadoop", "Spark", "Machine Learning"],
+      Topskills: ["Python", "SQL", "Hadoop", "Machine Learning"],
       portfolio: "https://mikejohnson.tech",
       github: "https://github.com/mikejohnson",
       linkedin: "https://linkedin.com/in/mikejohnson",
@@ -3037,6 +3040,7 @@ const Jobopening = () => {
         year: "2019",
       },
       skills: ["Product Strategy", "Agile", "User Research", "Market Analysis", "Roadmapping"],
+      Topskills: ["Product Strategy", "Agile", "User Research", "Market Analysis"],
       portfolio: "https://sarahwilliams.co",
       github: "https://github.com/sarahwilliams",
       linkedin: "https://linkedin.com/in/sarahwilliams",
@@ -3068,6 +3072,7 @@ const Jobopening = () => {
         year: "2017",
       },
       skills: ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform"],
+      Topskills: ["AWS", "Docker", "Kubernetes", "CI/CD"],
       portfolio: "https://alexchen.dev",
       github: "https://github.com/alexchen",
       linkedin: "https://linkedin.com/in/alexchen",
@@ -3097,6 +3102,7 @@ const Jobopening = () => {
         year: "2021",
       },
       skills: ["JavaScript", "React", "CSS", "HTML", "Responsive Design"],
+      Topskills: ["JavaScript", "React", "CSS", "HTML"],
       portfolio: "https://emilybrown.me",
       github: "https://github.com/emilybrown",
       linkedin: "https://linkedin.com/in/emilybrown",
@@ -3157,7 +3163,7 @@ const Jobopening = () => {
   const [viewApplicantDetail, setViewApplicantDetail] = useState(false)
   const [selectedApplicant, setSelectedApplicant] = useState(null)
   const [applicantCurrentPage, setApplicantCurrentPage] = useState(1)
-  const [applicantsPerPage] = useState(3)
+  const [applicantsPerPage] = useState(10)
   const [applicantSearchTerm, setApplicantSearchTerm] = useState("")
   const [applicantFilterStatus, setApplicantFilterStatus] = useState("all")
   const [scheduleInterviewModal, setScheduleInterviewModal] = useState(false)
@@ -3919,7 +3925,7 @@ const Jobopening = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                onClick={() => openViewJobModal(job)}
+                
               >
                 <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-4">
                   <div className="flex justify-between items-start">
@@ -5169,205 +5175,304 @@ const Jobopening = () => {
           )}
         </AnimatePresence>
 
-        {/* Applicant Detail Slider */}
-        <AnimatePresence>
-          {viewApplicantDetail && selectedApplicant && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.5 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setViewApplicantDetail(false)}
-                className="fixed inset-0 bg-black z-40"
+        {/* Applicant Detail Slider */}  
+      <AnimatePresence>
+      {viewApplicantDetail && selectedApplicant && (
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setViewApplicantDetail(false)}
+        className="fixed inset-0 bg-black z-40"
+      />
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ type: "tween" }}
+        className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+      >
+        <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-semibold text-white">Applicant Details</h2>
+            <button
+              onClick={closeApplicantDetail}
+              className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-700"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+
+        <div className="p-6 space-y-6">
+          {/* Profile Header */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-6 border border-gray-700">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+              <img
+                src={selectedApplicant.avatar || "/placeholder.svg?height=80&width=80"}
+                alt={selectedApplicant.name}
+                className="w-20 h-20 rounded-full object-cover border-2 border-purple-500"
               />
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
-              >
-                <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
-                  <div className="flex justify-between items-center">
-                    <h2 className="text-xl font-semibold text-white">Applicant Details</h2>
-                    <button
-                      onClick={closeApplicantDetail}
-                      className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-700"
-                    >
-                      <X size={20} />
-                    </button>
-                  </div>
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white">{selectedApplicant.name}</h3>
+                <p className="text-purple-400">
+                  {selectedApplicant.currentRole} at {selectedApplicant.currentCompany}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <span className={`px-3 py-1 rounded-full text-sm ${
+                    selectedApplicant.status === "Shortlisted"
+                      ? "bg-green-900/40 text-green-400 border border-green-800/50"
+                      : selectedApplicant.status === "Rejected"
+                        ? "bg-red-900/40 text-red-400 border border-red-800/50"
+                        : "bg-blue-900/40 text-blue-400 border border-blue-800/50"
+                  }`}>
+                    {selectedApplicant.status}
+                  </span>
                 </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Resume Download */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-5 border border-gray-700 shadow-lg">
+            <div className="flex flex-col md:flex-row items-center justify-between">
+              <div className="flex items-center gap-3 mb-3 md:mb-0">
+                <div className="p-3 rounded-lg bg-purple-900/40">
+                  <FileText size={24} className="text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="font-medium text-white">Applicant Resume</h4>
+                  <p className="text-sm text-gray-400">Download full resume</p>
+                </div>
+              </div>
+              <button
+                onClick={() => window.open(selectedApplicant.resumeUrl, "_blank")}
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center gap-2 transition-colors"
+              >
+                <Download size={16} />
+                Download Resume
+              </button>
+            </div>
+          </div>
 
-                <div className="p-6 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={selectedApplicant.avatar || "/placeholder.svg?height=80&width=80"}
-                      alt={selectedApplicant.name}
-                      className="w-20 h-20 rounded-full object-cover border-2 border-purple-500"
-                    />
-                    <div>
-                      <h3 className="text-2xl font-bold text-white">{selectedApplicant.name}</h3>
-                      <p className="text-gray-300">
-                        {selectedApplicant.currentRole} at {selectedApplicant.currentCompany}
-                      </p>
-                      <button
-                        onClick={() => window.open(selectedApplicant.resumeUrl, "_blank")}
-                        className="mt-2 px-4 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center gap-2 transition-colors text-sm"
-                      >
-                        <Download size={14} />
-                        Download Resume
-                      </button>
-                    </div>
-                  </div>
+          {/* Contact Information Card */}
+          <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+              <User size={20} className="text-purple-400" /> Basic Information
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-purple-900/20">
+                  <Mail size={18} className="text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Email</p>
+                  <a
+                    href={`mailto:${selectedApplicant.email}`}
+                    className="text-white hover:text-purple-400 transition-colors"
+                  >
+                    {selectedApplicant.email}
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-purple-900/20">
+                  <Phone size={18} className="text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Phone</p>
+                  <a
+                    href={`tel:${selectedApplicant.phone}`}
+                    className="text-white hover:text-purple-400 transition-colors"
+                  >
+                    {selectedApplicant.phone}
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-purple-900/20">
+                  <MapPin size={18} className="text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Location</p>
+                  <p className="text-white">{selectedApplicant.location}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-purple-900/20">
+                  <Calendar size={18} className="text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Availability</p>
+                  <p className="text-white">{selectedApplicant.availability}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    <span
-                      className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
-                        selectedApplicant.status === "Shortlisted"
-                          ? "bg-gradient-to-r from-green-900/60 to-green-700/60 text-green-300 border border-green-500"
-                          : selectedApplicant.status === "Rejected"
-                            ? "bg-gradient-to-r from-red-900/60 to-red-700/60 text-red-300 border border-red-500"
-                            : "bg-gradient-to-r from-blue-900/60 to-blue-700/60 text-blue-300 border border-blue-500"
-                      }`}
-                    >
-                      {selectedApplicant.status}
-                    </span>
-                  </div>
+          {/* Professional Details */}
+          <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+              <Briefcase size={20} className="text-purple-400" /> Professional Details
+            </h3>
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-400">Current Role</p>
+                  <p className="text-white">{selectedApplicant.currentRole}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Company</p>
+                  <p className="text-white">{selectedApplicant.currentCompany}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Experience</p>
+                  <p className="text-white">{selectedApplicant.experience}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Expected Salary</p>
+                  <p className="text-white">{selectedApplicant.salary}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 flex items-center">
-                        <User size={18} className="mr-2 text-purple-400" /> Basic Information
-                      </h4>
-                      <div className="bg-gray-800 p-4 rounded-lg space-y-2">
-                        <p className="flex items-center text-gray-300">
-                          <Mail size={16} className="mr-2 text-purple-400" /> {selectedApplicant.email}
-                        </p>
-                        <p className="flex items-center text-gray-300">
-                          <Phone size={16} className="mr-2 text-purple-400" /> {selectedApplicant.phone}
-                        </p>
-                        <p className="flex items-center text-gray-300">
-                          <MapPin size={16} className="mr-2 text-purple-400" /> {selectedApplicant.location}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 flex items-center">
-                        <Briefcase size={18} className="mr-2 text-purple-400" /> Professional Experience
-                      </h4>
-                      <div className="bg-gray-800 p-4 rounded-lg space-y-2">
-                        <div>
-                          <p className="text-gray-400 text-sm">Current Role</p>
-                          <p className="text-white">{selectedApplicant.currentRole}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-sm">Company</p>
-                          <p className="text-white">{selectedApplicant.currentCompany}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-sm">Experience</p>
-                          <p className="text-white">{selectedApplicant.experience}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-sm">Expected Salary</p>
-                          <p className="text-white">{selectedApplicant.salary}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-sm">Availability</p>
-                          <p className="text-white">{selectedApplicant.availability}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 flex items-center">
-                        <GraduationCap size={18} className="mr-2 text-purple-400" /> Education
-                      </h4>
-                      <div className="bg-gray-800 p-4 rounded-lg">
-                        <p className="text-white">{selectedApplicant.education.degree}</p>
-                        <p className="text-gray-300">{selectedApplicant.education.university}</p>
-                        <p className="text-gray-400">Graduated: {selectedApplicant.education.year}</p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 flex items-center">
-                        <Award size={18} className="mr-2 text-purple-400" /> Skills
-                      </h4>
-                      <div className="bg-gray-800 p-4 rounded-lg">
-                        <div className="flex flex-wrap gap-2">
-                          {selectedApplicant.skills.map((skill, index) => (
-                            <span key={index} className="px-3 py-1 bg-gray-700 text-sm rounded-full text-gray-300">
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 flex items-center">
-                        <MessageSquare size={18} className="mr-2 text-purple-400" /> Cover Letter
-                      </h4>
-                      <div className="bg-gray-800 p-4 rounded-lg">
-                        <p className="text-gray-300 text-sm italic">{selectedApplicant.coverLetter}</p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 flex items-center">
-                        <Paperclip size={18} className="mr-2 text-purple-400" /> References
-                      </h4>
-                      <div className="bg-gray-800 p-4 rounded-lg">
-                        {selectedApplicant.references.map((reference, index) => (
-                          <div key={index} className="mb-2 last:mb-0">
-                            <p className="text-white">{reference.name}</p>
-                            <p className="text-gray-300 text-sm">
-                              {reference.position} at {reference.company}
-                            </p>
-                            <p className="text-gray-400 text-sm">{reference.contact}</p>
-                          </div>
+          {/* Skills Card */}
+          <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+              <Award size={20} className="text-purple-400" /> Skills & Expertise</h3>
+              <div className="mb-4">
+                      <h4 className="text-white text-sm font-medium mb-2">Top Skills</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedApplicant.Topskills.slice(0, 4).map((Topskill, index) => (
+                          <span
+                            key={index}
+                            className="px-3 py-1 rounded-full text-sm bg-purple-900/40 text-purple-400 border border-purple-800/50"
+                          >
+                            {Topskill}
+                          </span>
                         ))}
                       </div>
                     </div>
+            <div className="flex flex-wrap gap-2">
+              {selectedApplicant.skills.map((skill, index) => (
+                <span 
+                  key={index} 
+                  className="px-3 py-1 rounded-full text-sm bg-gray-700 text-white"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
 
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 flex items-center">
-                        <FileText size={18} className="mr-2 text-purple-400" /> Interview Notes
-                      </h4>
-                      <div className="bg-gray-800 p-4 rounded-lg">
-                        <p className="text-gray-300 text-sm">
-                          {selectedApplicant.interviewNotes || "No interview notes yet."}
+          {/* Education Card */}
+          <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+              <GraduationCap size={20} className="text-purple-400" /> Education
+            </h3>
+            <div className="p-4 bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg border border-gray-700">
+              <div className="flex flex-col md:flex-row md:items-center justify-between">
+                <div>
+                  <h4 className="font-medium text-white">{selectedApplicant.education.degree}</h4>
+                  <p className="text-gray-400">{selectedApplicant.education.university}</p>
+                </div>
+                <div className="mt-2 md:mt-0">
+                  <span className="px-3 py-1 rounded-full text-xs bg-purple-900/40 text-purple-400">
+                    {selectedApplicant.education.year}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Cover Letter Card */}
+          <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+              <MessageSquare size={20} className="text-purple-400" /> Cover Letter
+            </h3>
+            <div className="p-4 bg-gray-700/30 rounded-lg">
+              <p className="text-gray-300 text-sm italic">{selectedApplicant.coverLetter}</p>
+            </div>
+          </div>
+
+          {/* References Card */}
+          {selectedApplicant.references && selectedApplicant.references.length > 0 && (
+            <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                <Users size={20} className="text-purple-400" /> References
+              </h3>
+              <div className="space-y-3">
+                {selectedApplicant.references.map((reference, index) => (
+                  <div key={index} className="p-4 bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg border border-gray-700">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-white">{reference.name}</h4>
+                        <p className="text-gray-400">
+                          {reference.position} at {reference.company}
                         </p>
                       </div>
+                      <a
+                        href={`mailto:${reference.contact}`}
+                        className="mt-2 md:mt-0 px-3 py-1 rounded-full text-xs bg-purple-900/40 text-purple-400 hover:bg-purple-800/40 transition-colors"
+                      >
+                        Contact
+                      </a>
                     </div>
                   </div>
-
-                  <div className="flex flex-col gap-3 pt-4">
-                    <button
-                      onClick={() => openScheduleInterviewModal(selectedApplicant)}
-                      className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-md hover:from-purple-700 hover:to-indigo-700 flex items-center justify-center"
-                    >
-                      <Calendar size={18} className="mr-2" /> Schedule Interview
-                    </button>
-                    <button
-                      onClick={() => handleShortlistApplicant(selectedApplicant)}
-                      className={`px-4 py-2 rounded-md flex items-center justify-center ${
-                        selectedApplicant.status === "Shortlisted"
-                          ? "bg-gray-600 text-white hover:bg-gray-700"
-                          : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-700 hover:to-cyan-700"
-                      }`}
-                    >
-                      {selectedApplicant.status === "Shortlisted" ? "Remove from Shortlist" : "Add to Shortlist"}
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            </>
+                ))}
+              </div>
+            </div>
           )}
-        </AnimatePresence>
+
+          {/* Interview Notes Card */}
+          <div className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-lg">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+              <FileText size={20} className="text-purple-400" /> Interview Notes
+            </h3>
+            <div className="p-4 bg-gray-700/30 rounded-lg">
+              <p className="text-gray-300 text-sm">
+                {selectedApplicant.interviewNotes || "No interview notes yet."}
+              </p>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
+            <button
+              onClick={() => openScheduleInterviewModal(selectedApplicant)}
+              className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+            >
+              <Calendar size={18} />
+              Schedule Interview
+            </button>
+            <button
+              onClick={() => handleShortlistApplicant(selectedApplicant)}
+              className={`flex-1 py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg ${
+                selectedApplicant.status === "Shortlisted"
+                  ? "bg-gray-600 hover:bg-gray-700 text-white"
+                  : "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white"
+              }`}
+            >
+              {selectedApplicant.status === "Shortlisted" ? (
+                <>
+                  <X size={18} />
+                  Remove from Shortlist
+                </>
+              ) : (
+                <>
+                  <CheckCircle size={18} />
+                  Add to Shortlist
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </>
+  )}
+</AnimatePresence>
 
         {/* Schedule Interview Modal */}
         <AnimatePresence>

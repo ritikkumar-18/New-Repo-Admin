@@ -142,7 +142,7 @@ const Header = ({ title }) => {
     <>
       <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg border-b border-gray-700 fixed top-0 w-full z-50">
         <div className="max-w-none mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-2xl font-semibold text-gray-100">{title}</h1>
+          <h1 className="md:text-2xl sm:text-xl font-semibold text-gray-100">{title}</h1>
 
           
           <div className="flex items-center gap-4 md:mr-64 sm:mr-20">
@@ -203,7 +203,7 @@ const Header = ({ title }) => {
       </header>
 
       {/* Spacer to account for the fixed header */}
-      <div className="pt-[72px] md:pt-[80px]"></div>
+      <div className="pt-[72px] md:pt-[68px]"></div>
     </>
   );
 };

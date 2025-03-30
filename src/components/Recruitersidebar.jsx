@@ -117,6 +117,7 @@ const SIDEBAR = [
   { name: 'Template', icon: BookTemplate, color: '#8B5CF6', href: '/template' },
   { name:"HRM", icon: HardDrive, color: '#8B5CF6', href: '/hrm' },
   { name:"Sub Admin", icon: UserCog, color: '#8B5CF6', href: '/subadmin' },
+  {name:"Chat",icon:MessagesSquareIcon,color:'#8B5CF6',href:'/chat'},
   // { name: 'Calendar', icon: CalendarHeart, color: '#8B5CF6', href: '/calender' },
   {
     name: 'Help Desk',
