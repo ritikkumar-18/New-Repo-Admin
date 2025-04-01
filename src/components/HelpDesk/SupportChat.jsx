@@ -509,15 +509,15 @@ const SupportChat = () => {
   }, [emojiPickerOpen, attachmentMenuOpen])
 
   return (
-    <div className="flex flex-col h-screen bg-gray-900 text-white">
+    <div className="flex flex-col h-screen md:w-full bg-gray-900 text-white">
       <Header title={"Support Chat"} />
       <Toaster />
+      
 
       {/* Chat Messages */}
       <div
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 w-full max-w-7xl  scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
-      >
+        className="flex-1 overflow-y-auto p-4 space-y-4 w-full max-w-7xl  scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
         {messages.length === 0 && (
           <div className="flex items-center justify-center h-full">
             <div className="text-center text-gray-500">
@@ -585,10 +585,10 @@ const SupportChat = () => {
           <div className="relative attachment-menu-container">
             <button
               onClick={() => setAttachmentMenuOpen(!attachmentMenuOpen)}
-              className="p-2 hover:bg-gray-700 rounded-full transition-colors"
+              className="md:p-2 sm:p-0 hover:bg-gray-700 rounded-full transition-colors"
               aria-label="Add attachment"
             >
-              <Paperclip className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
+              <Paperclip className="md:w-5 md:h-5 sm:w-5 sm:h-5 text-gray-400" />
             </button>
 
             {attachmentMenuOpen && (
@@ -612,18 +612,18 @@ const SupportChat = () => {
           </div>
 
           {/* Emoji Picker */}
-          <div className="relative emoji-picker-container">
+          <div className="relative emoji-picker-container ">
             <button
               onClick={() => setEmojiPickerOpen(!emojiPickerOpen)}
-              className="p-2 hover:bg-gray-700 rounded-full transition-colors"
+              className="p-2 sm:p-0 hover:bg-gray-700 rounded-full transition-colors"
               aria-label="Add emoji"
             >
-              <Smile className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
+              <Smile className="md:w-5 md:h-5 sm:w-5 sm:h-5 text-gray-400" />
             </button>
 
             {emojiPickerOpen && (
               <div className="absolute bottom-12 left-0 z-10">
-                <EmojiPicker onEmojiClick={addEmoji} />
+                <EmojiPicker onEmojiClick={addEmoji}  />
               </div>
             )}
           </div>
@@ -636,7 +636,7 @@ const SupportChat = () => {
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Type your message..."
-              className="w-full p-2 sm:p-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 pr-12"
+              className="w-full p-2 sm:p-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 pr-12"
               disabled={isWaitingForReply}
             />
           </div>
@@ -645,19 +645,19 @@ const SupportChat = () => {
           <button
             onClick={sendMessage}
             disabled={isWaitingForReply || newMessage.trim() === ""}
-            className="p-2 sm:px-4 sm:py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+            className="md:px-4 md:py-3 sm:px-2 sm:py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
             aria-label="Send message"
           >
-            <Send className="w-5 h-5 sm:w-6 sm:h-6" />
+            <Send className="w-5 h-5 sm:w-5 sm:h-5" />
           </button>
 
           {/* Clear Chat Button */}
           <button
             onClick={clearChat}
-            className="p-2 sm:px-4 sm:py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+            className="md:px-4 md:py-3 sm:px-2 sm:py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
             aria-label="Clear chat"
           >
-            <Trash2 className="w-5 h-5 sm:w-6 sm:h-6" />
+            <Trash2 className="w-5 h-5 sm:w-5 sm:h-5" />
           </button>
         </div>
       </div>
@@ -694,6 +694,7 @@ const SupportChat = () => {
           </motion.div>
         </div>
       )}
+      
     </div>
   )
 }

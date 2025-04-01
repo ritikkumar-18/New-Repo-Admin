@@ -1970,27 +1970,7 @@ const ChatApp = () => {
             )}
           </div>
 
-          {/* Footer */}
-          <div className="p-4 border-t border-gray-700 bg-gray-800">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
-                  {userRole === "recruiter" ? "R" : "C"}
-                </div>
-                <div>
-                  <p className="font-medium">{userRole === "recruiter" ? "Recruiter" : "Candidate"}</p>
-                  <p className="text-xs text-green-500">Online</p>
-                </div>
-              </div>
-              <button 
-                className="p-2 rounded-full hover:bg-gray-700 transition-colors"
-                onClick={() => alert("Settings would open here")}
-                title="Settings"
-              >
-                <MoreVertical size={20} />
-              </button>
-            </div>
-          </div>
+          
         </div>
       )}
 

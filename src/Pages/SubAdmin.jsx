@@ -182,6 +182,7 @@ const SubAdmin = () => {
 
     setSubAdmins(updatedAdmins)
     setEditAdmin(null)
+    setShowForm(false) 
     setShowPermissions(false)
     toast.success("Sub-Admin Updated Successfully!")
   }
