@@ -1254,7 +1254,7 @@ const FeedbackAndReview = () => {
       {activeModal === "feedback" && (
         <motion.div
           ref={modalRef}
-          className="h-full w-full max-w-[50vw] bg-gradient-to-b from-gray-800 to-gray-900 border-l border-blue-900/50 shadow-2xl overflow-hidden"
+          className="h-full w-full md:max-w-[50vw]  bg-gradient-to-b from-gray-800 to-gray-900 border-l border-blue-900/50 shadow-2xl overflow-hidden"
           variants={{
             hidden: { x: "100%", opacity: 0 },
             visible: { 
@@ -1460,7 +1460,7 @@ const FeedbackAndReview = () => {
       {activeModal === "report" && (
         <motion.div
           ref={modalRef}
-          className="h-full w-full max-w-[50vw] bg-gradient-to-b from-gray-800 to-gray-900 border-l border-red-900/50 shadow-2xl overflow-hidden"
+          className="h-full w-full md:max-w-[50vw]  bg-gradient-to-b from-gray-800 to-gray-900 border-l border-red-900/50 shadow-2xl overflow-hidden"
           variants={{
             hidden: { x: "100%", opacity: 0 },
             visible: { 
