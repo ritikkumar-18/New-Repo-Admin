@@ -103,19 +103,22 @@
 // export default Sidebar;
 
 import { useState, useEffect } from "react"
+import { MdOutlinePrivacyTip } from "react-icons/md";
+
 import { motion, AnimatePresence } from "framer-motion"
 import { FiBarChart2, FiLogOut } from "react-icons/fi"
 import { BiMenu } from "react-icons/bi"
 import { Link, useLocation } from "react-router-dom"
-import { ArrowLeftRight, CopyMinus, Info, LockKeyhole, MessageSquare, ShieldCheck } from "lucide-react"
+import { ArrowLeftRight, CopyMinus, Info, LockKeyhole, MessageSquare,  ShieldCheck, ShieldCheckIcon } from "lucide-react"
 import { FaRupeeSign, FaTeamspeak, FaUser, FaChevronDown } from "react-icons/fa"
 
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, href: "/" },
   { name: "Recruiters", icon: FaUser, href: "/users" },
+  {name:"User",icon:FaUser,href:"/adminuser"},
   { name: "Staff Management", icon: FaTeamspeak, href: "/team" },
   // { name: "SubAdmin", icon: Axis3D, href: "/sub" },
-  { name: "Subscription Plan", icon: FaRupeeSign, href: "/payment" },
+  { name: "Subscription Plan", icon: ShieldCheckIcon, href: "/payment" },
   { name: "Transaction", icon: ArrowLeftRight, href: "/transaction" },
   { name: "Queries", icon: MessageSquare, href: "/help" },
   {
@@ -124,8 +127,9 @@ const SIDEBAR = [
     href: "#",
     subMenu: [
       { name: "Privacy Policy", icon: LockKeyhole, href: "/cms/privacy-policy" },
-      { name: "Payment Policy", icon: ArrowLeftRight, href: "/cms/payment-policy" },
+      { name: "Payment Policy", icon: MdOutlinePrivacyTip , href: "/cms/payment-policy" },
       { name: "Terms & Conditions", icon: ShieldCheck, href: "/cms/terms-and-conditions" },
+
       { name: "About Us", icon: Info, href: "/cms/about-us" },
     ],
   },

@@ -288,7 +288,7 @@ import { FaQuestionCircle, FaComments, FaRegSmile, FaChevronDown } from "react-i
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, color: "#8B5CF6", href: "/" },
   { name: "Job Opening", icon: BookOpen, color: "#8B5CF6", href: "/jobopening" },
-  { name: "Shortlisted", icon: UserSearch, color: "#8B5CF6", href: "/candidate" },
+  { name: "Selected Users", icon: UserSearch, color: "#8B5CF6", href: "/candidate" },
   { name: "Recruit", icon: Briefcase, color: "#8B5CF6", href: "/recruit" },
   { name: "Search Candidate", icon: Download, color: "#8B5CF6", href: "/resume" },
   { name: "Template", icon: BookTemplate, color: "#8B5CF6", href: "/template" },
