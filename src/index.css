@@ -1,89 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Custom Scrollbar Styling */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 1px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #6B7280; 
-    border-radius: 10px;
-    transition: background 0.3s ease;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #4B5563; 
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  /* Custom scrollbar styles */
-:root {
-  --scrollbar-width: 4px;
-  --scrollbar-track: rgba(31, 41, 55, 0.1);
-  --scrollbar-thumb: rgba(107, 114, 128, 0.5);
-  --scrollbar-thumb-hover: rgba(107, 114, 128, 0.7);
-  
-}
 
-/* Global scrollbar styles */
-::-webkit-scrollbar {
-  width: var(--scrollbar-width);
-  height: var(--scrollbar-width);
-}
-
-::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
-}
-
-/* Firefox scrollbar styles */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-}
-
-/* Custom scrollbar class for specific elements */
-.custom-scrollbar::-webkit-scrollbar {
-  width: var(--scrollbar-width);
-  height: var(--scrollbar-width);
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
-}
-
-/* Hide scrollbar but keep functionality */
-.hide-scrollbar {
+/* Hide scrollbar but keep scroll functionality */
+.scroll-hidden {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+.scroll-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
+html {
+  scroll-behavior: smooth;
+}

@@ -4172,7 +4172,7 @@ const Transaction = () => {
   }
 
   return (
-    <div className="flex-1 overflow-auto bg-gray-900 text-white min-h-screen">
+    <div className="flex-1 overflow-auto bg-gray-900 text-white min-h-screen scroll-hidden">
       <Header title={"Transactions"} />
       
 
@@ -4926,7 +4926,7 @@ const Transaction = () => {
             onClick={() => setViewTransaction(null)}
           >
             <motion.div
-              className="bg-gray-900 w-full max-w-md sm:max-w-lg md:max-w-xl h-full overflow-y-auto"
+              className="bg-gray-900 w-full max-w-md sm:max-w-lg md:max-w-xl h-full overflow-y-auto scroll-hidden"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}

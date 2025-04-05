@@ -920,7 +920,7 @@ const FeedbackAndReview = () => {
   }
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen">
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen scroll-hidden">
       <Header title={"Feedback & Issues"} />
       <Toaster/>
       <motion.div  
@@ -1292,7 +1292,7 @@ const FeedbackAndReview = () => {
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-6 scroll-hidden">
               <form onSubmit={handleFeedbackSubmit}>
               <div className="mb-4">
                 <label htmlFor="feedbackTitle" className="block text-sm font-medium text-gray-300 mb-2">
@@ -1498,7 +1498,7 @@ const FeedbackAndReview = () => {
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-6 scroll-hidden">
               <form onSubmit={handleReportSubmit}>
                 <div className="mb-4">
                   <label htmlFor="reportTitle" className="block text-sm font-medium text-gray-300 mb-2">

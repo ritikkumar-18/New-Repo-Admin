@@ -3709,7 +3709,7 @@ const Jobopening = () => {
   }
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen">
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen scroll-hidden">
       <Header title={"Job Openings"} />
 
       <motion.div
@@ -4107,7 +4107,7 @@ const Jobopening = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
               >
                 <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
                   <div className="flex justify-between items-center">
@@ -4421,7 +4421,7 @@ const Jobopening = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
               >
                 <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
                   <div className="flex justify-between items-center">
@@ -4672,7 +4672,7 @@ const Jobopening = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
               >
                 <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
                   <div className="flex justify-between items-center">
@@ -4947,7 +4947,7 @@ const Jobopening = () => {
         {/* Applications Modal */}
         {applicationsModalOpen && selectedJobApplications && (
           <div
-            className="fixed z-50 overflow-y-auto bg-gray-900 top-[70px] left-0 md:left-[260px] right-0 bottom-0"
+            className="fixed z-50 overflow-y-auto bg-gray-900 top-[70px] left-0 md:left-[260px] right-0 bottom-0 scroll-hidden"
             style={{
               opacity: 1,
               transition: "opacity 0.3s ease",
@@ -5191,7 +5191,7 @@ const Jobopening = () => {
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ type: "tween" }}
-        className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+        className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
       >
         <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
           <div className="flex justify-between items-center">

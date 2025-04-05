@@ -37,6 +37,7 @@ import SupportChat from "./HelpDesk/SupportChat"
 import HRM from "../Pages/HRM"
  import RecruiterChat from "../Pages/RecruiterChat"
 import Adminuser from "../Pages/Adminuser"
+import BuySubscription from "../Pages/BuySubscription"
 
 function Auth() {
   const [currentPage, setCurrentPage] = useState("login")
@@ -390,6 +391,7 @@ function RecruiterDashboard({ onLogout }) {
         <Route path="/jobopening" element={<Jobopening />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path='/buysubscription' element={<BuySubscription/>}/>
         <Route path="/template" element={<Template />} />
         <Route path="/email" element={<Email />} />
         <Route path="/helpdesk/feedback" element={<FeedbackandReview />} />

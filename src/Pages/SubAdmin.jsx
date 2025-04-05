@@ -299,7 +299,7 @@ const SubAdmin = () => {
   }
 
   return (
-    <div className="flex-1 overflow-auto relative bg-gray-900 text-white min-h-screen">
+    <div className="flex-1 overflow-auto relative bg-gray-900 text-white min-h-screen scroll-hidden">
       <Header title="Sub Admins" />
 
       <motion.div
@@ -685,7 +685,7 @@ const SubAdmin = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
               >
                 <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
                   <div className="flex justify-between items-center">
@@ -836,7 +836,7 @@ const SubAdmin = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
               >
                 <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
                   <div className="flex justify-between items-center">
@@ -937,46 +937,13 @@ const SubAdmin = () => {
                           </select>
                         </div>
 
-                        <div>
-                          <label className="block text-gray-300 mb-2 font-medium">Department</label>
-                          <select
-                            name="department"
-                            value={editAdmin ? editAdmin.department : newAdmin.department}
-                            onChange={handleChange}
-                            className="px-4 py-3 w-full border border-gray-700 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                          >
-                            {departmentOptions.map((dept) => (
-                              <option key={dept} value={dept}>
-                                {dept}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
+                        
                       </div>
 
-                      <div>
-                        <label className="block text-gray-300 mb-2 font-medium">Status</label>
-                        <select
-                          name="status"
-                          value={editAdmin ? editAdmin.status : newAdmin.status}
-                          onChange={handleChange}
-                          className="px-4 py-3 w-full border border-gray-700 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                        >
-                          <option value="Active">Active</option>
-                          <option value="Inactive">Inactive</option>
-                        </select>
-                      </div>
+                      
                     </div>
 
                     <div>
-                      <button
-                        type="button"
-                        onClick={() => setShowPermissions(true)}
-                        className="w-full bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-600 flex items-center justify-center gap-2"
-                      >
-                        <Shield size={18} />
-                        Set Permissions
-                      </button>
                     </div>
 
                     <div className="flex justify-end space-x-4 pt-4">
@@ -1008,136 +975,8 @@ const SubAdmin = () => {
           )}
         </AnimatePresence>
 
-        {/* Permission Modal */}
-        <AnimatePresence>
-          {showPermissions && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.5 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setShowPermissions(false)}
-                className="fixed inset-0 bg-black z-50"
-              />
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="fixed inset-0 flex items-center justify-center z-50 p-4"
-              >
-                <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-3xl border border-gray-700">
-                  <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-xl font-semibold text-white flex items-center">
-                      <Shield size={20} className="mr-2 text-purple-400" />
-                      Set Permissions
-                    </h3>
-                    <button
-                      onClick={() => setShowPermissions(false)}
-                      className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-700"
-                    >
-                      <X size={20} />
-                    </button>
-                  </div>
-
-                  <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-2">
-                    {permissionModules.map((module) => (
-                      <div key={module.key} className="bg-gray-800 p-4 rounded-lg">
-                        <h4 className="text-lg font-medium text-white flex items-center mb-4">
-                          <module.icon size={18} className="mr-2 text-purple-400" />
-                          {module.name}
-                        </h4>
-
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                          {permissionTypes.map((type) => (
-                            <label
-                              key={type.key}
-                              className="flex items-center gap-2 bg-gray-700 p-3 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors"
-                            >
-                              <input
-                                type="checkbox"
-                                checked={
-                                  editAdmin
-                                    ? editAdmin.permissions[module.key][type.key]
-                                    : newAdmin.permissions[module.key][type.key]
-                                }
-                                onChange={() => togglePermission(module.key, type.key)}
-                                className="w-4 h-4 accent-purple-500"
-                              />
-                              <span className="text-sm text-gray-200">{type.name}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex justify-end mt-6 gap-3">
-                    <button
-                      onClick={() => {
-                        // Select all permissions
-                        const allPermissions = {}
-                        permissionModules.forEach((module) => {
-                          allPermissions[module.key] = {}
-                          permissionTypes.forEach((type) => {
-                            allPermissions[module.key][type.key] = true
-                          })
-                        })
-
-                        if (editAdmin) {
-                          setEditAdmin((prev) => ({
-                            ...prev,
-                            permissions: allPermissions,
-                          }))
-                        } else {
-                          setNewAdmin((prev) => ({
-                            ...prev,
-                            permissions: allPermissions,
-                          }))
-                        }
-                      }}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                    >
-                      Select All
-                    </button>
-                    <button
-                      onClick={() => {
-                        // Clear all permissions
-                        const noPermissions = {}
-                        permissionModules.forEach((module) => {
-                          noPermissions[module.key] = {}
-                          permissionTypes.forEach((type) => {
-                            noPermissions[module.key][type.key] = false
-                          })
-                        })
-
-                        if (editAdmin) {
-                          setEditAdmin((prev) => ({
-                            ...prev,
-                            permissions: noPermissions,
-                          }))
-                        } else {
-                          setNewAdmin((prev) => ({
-                            ...prev,
-                            permissions: noPermissions,
-                          }))
-                        }
-                      }}
-                      className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
-                    >
-                      Clear All
-                    </button>
-                    <button
-                      onClick={() => setShowPermissions(false)}
-                      className="px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-md hover:from-purple-700 hover:to-indigo-700 font-medium"
-                    >
-                      Save Permissions
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
+        
+        
 
         {/* Delete Confirmation Modal */}
         <AnimatePresence>

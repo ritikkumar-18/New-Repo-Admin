@@ -1,9 +1,29 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Header from "../components/Common/Header"
 import { toast, Toaster } from "react-hot-toast"
 import { motion, AnimatePresence } from "framer-motion"
-import { AiOutlinePlus, AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai"
-import { Search, XCircle, CheckCircle, ToggleRight, X, Filter, Mail, Phone, Calendar, MapPin, Briefcase, User, Shield, FileText, ChevronLeft, ChevronRight, AlertTriangle, UserPlus } from 'lucide-react'
+import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai"
+import {
+  Search,
+  XCircle,
+  CheckCircle,
+  X,
+  Filter,
+  Mail,
+  Phone,
+  Calendar,
+  MapPin,
+  Briefcase,
+  User,
+  Shield,
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+  AlertTriangle,
+  UserPlus,
+  Upload,
+  FileX,
+} from "lucide-react"
 
 const TeamManagementDashboard = () => {
   const [members, setMembers] = useState([
@@ -21,6 +41,8 @@ const TeamManagementDashboard = () => {
       releaseDate: null,
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "alice@example.com",
       phone: "+1-234-567-8901",
       experience: "5 years",
@@ -43,6 +65,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2024-01-20",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "bob@example.com",
       phone: "+1-987-654-3210",
       experience: "8 years",
@@ -65,6 +89,8 @@ const TeamManagementDashboard = () => {
       releaseDate: null,
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "charlie@example.com",
       phone: "+44-203-123-4567",
       experience: "10 years",
@@ -87,6 +113,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2023-11-30",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "david@example.com",
       phone: "+1-312-555-7890",
       experience: "7 years",
@@ -109,6 +137,8 @@ const TeamManagementDashboard = () => {
       releaseDate: null,
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "eva@example.com",
       phone: "+49-30-9876-5432",
       experience: "6 years",
@@ -131,6 +161,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2024-01-20",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "bob@example.com",
       phone: "+1-987-654-3210",
       experience: "8 years",
@@ -153,6 +185,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2024-01-20",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "bob@example.com",
       phone: "+1-987-654-3210",
       experience: "8 years",
@@ -175,6 +209,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2024-01-20",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "bob@example.com",
       phone: "+1-987-654-3210",
       experience: "8 years",
@@ -197,6 +233,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2024-01-20",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "bob@example.com",
       phone: "+1-987-654-3210",
       experience: "8 years",
@@ -219,6 +257,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2024-01-20",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "bob@example.com",
       phone: "+1-987-654-3210",
       experience: "8 years",
@@ -241,6 +281,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "2024-01-20",
       aadharCard: "https://t4.ftcdn.net/jpg/06/20/32/15/240_F_620321511_fodPcaOudj9jTg1Fo6wybZWJM91IaKIp.jpg",
       panCard: "https://indiangrow.com/data/user/maker/document/pan/banner.jpg",
+      aadharCardFile: null,
+      panCardFile: null,
       email: "bob@example.com",
       phone: "+1-987-654-3210",
       experience: "8 years",
@@ -250,6 +292,20 @@ const TeamManagementDashboard = () => {
       remark: "Left for a better opportunity",
     },
   ])
+
+  // Define available roles for dropdown
+  const availableRoles = [
+    "Recruiter",
+    "Interviewer",
+    "Manager",
+    "HR Specialist",
+    "Software Engineer",
+    "Designer",
+    "Product Manager",
+    "QA Engineer",
+    "DevOps Engineer",
+    "Data Analyst",
+  ]
 
   const [viewingMember, setViewingMember] = useState(null)
   const [searchTerm, setSearchTerm] = useState("")
@@ -274,6 +330,8 @@ const TeamManagementDashboard = () => {
     releaseDate: "",
     aadharCard: "",
     panCard: "",
+    aadharCardFile: null,
+    panCardFile: null,
     remark: "",
   })
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false)
@@ -284,6 +342,12 @@ const TeamManagementDashboard = () => {
   const [deleteModal, setDeleteModal] = useState(false)
   const [memberToDelete, setMemberToDelete] = useState(null)
   const [activeTab, setActiveTab] = useState("All")
+
+  // Refs for file inputs
+  const aadharFileInputRef = useRef(null)
+  const panFileInputRef = useRef(null)
+  const editAadharFileInputRef = useRef(null)
+  const editPanFileInputRef = useRef(null)
 
   const membersPerPage = 10
 
@@ -358,6 +422,46 @@ const TeamManagementDashboard = () => {
     toast.success("Member details updated successfully!")
   }
 
+  // Handle file uploads for new member
+  const handleFileChange = (e, fileType) => {
+    const file = e.target.files[0]
+    if (file) {
+      if (fileType === "aadhar") {
+        setNewMember({
+          ...newMember,
+          aadharCardFile: file,
+          aadharCard: URL.createObjectURL(file),
+        })
+      } else if (fileType === "pan") {
+        setNewMember({
+          ...newMember,
+          panCardFile: file,
+          panCard: URL.createObjectURL(file),
+        })
+      }
+    }
+  }
+
+  // Handle file uploads for edited member
+  const handleEditFileChange = (e, fileType) => {
+    const file = e.target.files[0]
+    if (file) {
+      if (fileType === "aadhar") {
+        setEditedMember({
+          ...editedMember,
+          aadharCardFile: file,
+          aadharCard: URL.createObjectURL(file),
+        })
+      } else if (fileType === "pan") {
+        setEditedMember({
+          ...editedMember,
+          panCardFile: file,
+          panCard: URL.createObjectURL(file),
+        })
+      }
+    }
+  }
+
   const handleAddNewMember = () => {
     const newMemberObj = {
       id: members.length + 1,
@@ -387,6 +491,8 @@ const TeamManagementDashboard = () => {
       releaseDate: "",
       aadharCard: "",
       panCard: "",
+      aadharCardFile: null,
+      panCardFile: null,
       remark: "",
     })
   }
@@ -411,9 +517,9 @@ const TeamManagementDashboard = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen">
+    <div className="flex-1 overflow-auto scroll-hidden relative z-10 bg-gray-900 min-h-screen">
       <Header title="Team Management" />
-      
+      <Toaster position="top-right" />
 
       <motion.div
         className="p-4 md:p-6"
@@ -440,7 +546,7 @@ const TeamManagementDashboard = () => {
               <Filter size={18} />
               <span>Filters</span>
             </button>
-            
+
             {/* Add Member Button - Added next to filter button */}
             <button
               onClick={() => setIsAddMemberModalOpen(true)}
@@ -504,7 +610,7 @@ const TeamManagementDashboard = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-96 bg-gray-800 p-6 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-96 bg-gray-800 p-6 shadow-xl z-50 overflow-y-auto scroll-hidden"
               >
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-xl font-semibold text-white">Filters</h2>
@@ -588,7 +694,7 @@ const TeamManagementDashboard = () => {
 
         {/* Member Cards */}
         {paginatedMembers.length === 0 ? (
-          <div className="bg-gray-800 p-8 text-center rounded-lg">
+          <div className="bg-gray-800 p-8 text-center rounded-lg ">
             <p className="text-gray-400">No team members found matching your criteria.</p>
           </div>
         ) : (
@@ -770,7 +876,7 @@ const TeamManagementDashboard = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
@@ -946,19 +1052,33 @@ const TeamManagementDashboard = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <p className="text-sm text-gray-400">Aadhar Card</p>
-                        <img
-                          src={viewingMember.aadharCard || "/placeholder.svg"}
-                          alt="Aadhar Card"
-                          className="w-full h-auto mt-2 rounded-md object-cover"
-                        />
+                        {viewingMember.aadharCard ? (
+                          <img
+                            src={viewingMember.aadharCard || "/placeholder.svg"}
+                            alt="Aadhar Card"
+                            className="w-full h-auto mt-2 rounded-md object-cover"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center justify-center h-32 mt-2 bg-gray-700 rounded-md text-gray-400">
+                            <FileX size={24} />
+                            <p className="text-sm mt-2">Document not provided</p>
+                          </div>
+                        )}
                       </div>
                       <div>
                         <p className="text-sm text-gray-400">PAN Card</p>
-                        <img
-                          src={viewingMember.panCard || "/placeholder.svg"}
-                          alt="PAN Card"
-                          className="w-full h-auto mt-2 rounded-md object-cover"
-                        />
+                        {viewingMember.panCard ? (
+                          <img
+                            src={viewingMember.panCard || "/placeholder.svg"}
+                            alt="PAN Card"
+                            className="w-full h-auto mt-2 rounded-md object-cover"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center justify-center h-32 mt-2 bg-gray-700 rounded-md text-gray-400">
+                            <FileX size={24} />
+                            <p className="text-sm mt-2">Document not provided</p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1008,7 +1128,7 @@ const TeamManagementDashboard = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
@@ -1051,13 +1171,19 @@ const TeamManagementDashboard = () => {
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
-                          <input
-                            type="text"
+                          <select
                             className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
                             value={newMember.role}
                             onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
                             required
-                          />
+                          >
+                            <option value="">Select Role</option>
+                            {availableRoles.map((role, index) => (
+                              <option key={index} value={role}>
+                                {role}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-400 mb-1">Position</label>
@@ -1204,27 +1330,85 @@ const TeamManagementDashboard = () => {
                       </div>
                     </div>
 
-                    {/* Document Links */}
+                    {/* Document Uploads */}
                     <div>
-                      <h3 className="text-lg font-medium text-gray-200 mb-3">Document Links</h3>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Document Uploads</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card URL</label>
-                          <input
-                            type="text"
-                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                            value={newMember.aadharCard}
-                            onChange={(e) => setNewMember({ ...newMember, aadharCard: e.target.value })}
-                          />
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card</label>
+                          <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                              <input
+                                ref={aadharFileInputRef}
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={(e) => handleFileChange(e, "aadhar")}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => aadharFileInputRef.current.click()}
+                                className="w-full flex items-center justify-center gap-2 p-2 bg-gray-700 text-white rounded border border-gray-600 hover:bg-gray-600 transition-colors"
+                              >
+                                <Upload size={16} />
+                                Upload Aadhar Card
+                              </button>
+                            </div>
+                            {newMember.aadharCard && (
+                              <div className="relative mt-2">
+                                <img
+                                  src={newMember.aadharCard || "/placeholder.svg"}
+                                  alt="Aadhar Card Preview"
+                                  className="w-full h-auto max-h-32 object-contain rounded-md border border-gray-700"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setNewMember({ ...newMember, aadharCard: "", aadharCardFile: null })}
+                                  className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                                >
+                                  <X size={14} />
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card URL</label>
-                          <input
-                            type="text"
-                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                            value={newMember.panCard}
-                            onChange={(e) => setNewMember({ ...newMember, panCard: e.target.value })}
-                          />
+                          <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card</label>
+                          <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                              <input
+                                ref={panFileInputRef}
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={(e) => handleFileChange(e, "pan")}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => panFileInputRef.current.click()}
+                                className="w-full flex items-center justify-center gap-2 p-2 bg-gray-700 text-white rounded border border-gray-600 hover:bg-gray-600 transition-colors"
+                              >
+                                <Upload size={16} />
+                                Upload PAN Card
+                              </button>
+                            </div>
+                            {newMember.panCard && (
+                              <div className="relative mt-2">
+                                <img
+                                  src={newMember.panCard || "/placeholder.svg"}
+                                  alt="PAN Card Preview"
+                                  className="w-full h-auto max-h-32 object-contain rounded-md border border-gray-700"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setNewMember({ ...newMember, panCard: "", panCardFile: null })}
+                                  className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                                >
+                                  <X size={14} />
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1277,7 +1461,7 @@ const TeamManagementDashboard = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
@@ -1320,13 +1504,18 @@ const TeamManagementDashboard = () => {
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-400 mb-1">Role</label>
-                          <input
-                            type="text"
+                          <select
                             className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
                             value={editedMember.role}
                             onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })}
                             required
-                          />
+                          >
+                            {availableRoles.map((role, index) => (
+                              <option key={index} value={role}>
+                                {role}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-400 mb-1">Position</label>
@@ -1477,45 +1666,87 @@ const TeamManagementDashboard = () => {
                       </div>
                     </div>
 
-                    {/* Document Links */}
+                    {/* Document Uploads */}
                     <div>
-                      <h3 className="text-lg font-medium text-gray-200 mb-3">Document Links</h3>
+                      <h3 className="text-lg font-medium text-gray-200 mb-3">Document Uploads</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card URL</label>
-                          <input
-                            type="text"
-                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                            value={editedMember.aadharCard || ""}
-                            onChange={(e) => setEditedMember({ ...editedMember, aadharCard: e.target.value })}
-                          />
-                          {editedMember.aadharCard && (
-                            <div className="mt-2">
-                              <img
-                                src={editedMember.aadharCard || "/placeholder.svg"}
-                                alt="Aadhar Card"
-                                className="w-full h-auto max-h-40 object-contain rounded-md border border-gray-700"
+                          <label className="block text-sm font-medium text-gray-400 mb-1">Aadhar Card</label>
+                          <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                              <input
+                                ref={editAadharFileInputRef}
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={(e) => handleEditFileChange(e, "aadhar")}
                               />
+                              <button
+                                type="button"
+                                onClick={() => editAadharFileInputRef.current.click()}
+                                className="w-full flex items-center justify-center gap-2 p-2 bg-gray-700 text-white rounded border border-gray-600 hover:bg-gray-600 transition-colors"
+                              >
+                                <Upload size={16} />
+                                {editedMember.aadharCard ? "Change Aadhar Card" : "Upload Aadhar Card"}
+                              </button>
                             </div>
-                          )}
+                            {editedMember.aadharCard && (
+                              <div className="relative mt-2">
+                                <img
+                                  src={editedMember.aadharCard || "/placeholder.svg"}
+                                  alt="Aadhar Card"
+                                  className="w-full h-auto max-h-32 object-contain rounded-md border border-gray-700"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setEditedMember({ ...editedMember, aadharCard: "", aadharCardFile: null })
+                                  }
+                                  className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                                >
+                                  <X size={14} />
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card URL</label>
-                          <input
-                            type="text"
-                            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
-                            value={editedMember.panCard || ""}
-                            onChange={(e) => setEditedMember({ ...editedMember, panCard: e.target.value })}
-                          />
-                          {editedMember.panCard && (
-                            <div className="mt-2">
-                              <img
-                                src={editedMember.panCard || "/placeholder.svg"}
-                                alt="PAN Card"
-                                className="w-full h-auto max-h-40 object-contain rounded-md border border-gray-700"
+                          <label className="block text-sm font-medium text-gray-400 mb-1">PAN Card</label>
+                          <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                              <input
+                                ref={editPanFileInputRef}
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={(e) => handleEditFileChange(e, "pan")}
                               />
+                              <button
+                                type="button"
+                                onClick={() => editPanFileInputRef.current.click()}
+                                className="w-full flex items-center justify-center gap-2 p-2 bg-gray-700 text-white rounded border border-gray-600 hover:bg-gray-600 transition-colors"
+                              >
+                                <Upload size={16} />
+                                {editedMember.panCard ? "Change PAN Card" : "Upload PAN Card"}
+                              </button>
                             </div>
-                          )}
+                            {editedMember.panCard && (
+                              <div className="relative mt-2">
+                                <img
+                                  src={editedMember.panCard || "/placeholder.svg"}
+                                  alt="PAN Card"
+                                  className="w-full h-auto max-h-32 object-contain rounded-md border border-gray-700"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setEditedMember({ ...editedMember, panCard: "", panCardFile: null })}
+                                  className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                                >
+                                  <X size={14} />
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1605,3 +1836,4 @@ const TeamManagementDashboard = () => {
 }
 
 export default TeamManagementDashboard
+

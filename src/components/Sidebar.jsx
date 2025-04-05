@@ -169,7 +169,7 @@ const Sidebar = () => {
           <BiMenu size={24} className="text-gray-300" />
         </motion.button>
 
-        <nav className="mt-8 flex-grow overflow-y-auto max-h-[calc(100vh-100px)] custom-scrollbar">
+        <nav className="mt-8 flex-grow overflow-y-auto max-h-[calc(100vh-100px)] scroll-hidden">
           {SIDEBAR.map((item, index) => (
             <div key={index} className="relative">
               {/* Regular menu item or dropdown trigger */}

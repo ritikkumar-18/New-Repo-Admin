@@ -643,18 +643,18 @@ const Adminuser = () => {
   }
 
   return (
-    <div className="flex-1 bg-gray-900 relative overflow-auto">
+    <div className="flex-1 bg-gray-900 relative overflow-auto scroll-hidden ">
       <Header title={"Total User"} />
       <Toaster/>
       <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}>
-      <div className="p-4 md:p-6">
+      <div className="p-4 md:p-6 ">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4 mb-6  ">
           <motion.div
-            className="relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-xl shadow-lg border border-blue-700"
+            className="relative overflow-hidden  bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-xl shadow-lg border border-blue-700"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}>
@@ -775,7 +775,7 @@ const Adminuser = () => {
         </div>
 
         {/* Status Tabs */}
-        <div className="flex justify-center mb-6 overflow-x-auto">
+        <div className="flex justify-center mb-6 overflow-x-auto ">
           <div className="bg-gray-800 rounded-lg p-1 flex flex-nowrap">
             <button
               onClick={() => handleTabChange("All")}
@@ -1171,7 +1171,7 @@ const Adminuser = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
@@ -1456,7 +1456,7 @@ const Adminuser = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}

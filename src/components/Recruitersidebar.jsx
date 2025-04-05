@@ -280,6 +280,7 @@ import {
   HardDrive,
   MessageCircle,
   MessagesSquareIcon,
+  Shield,
   UserCog,
   UserSearch,
 } from "lucide-react"
@@ -291,6 +292,7 @@ const SIDEBAR = [
   { name: "Selected Users", icon: UserSearch, color: "#8B5CF6", href: "/candidate" },
   { name: "Recruit", icon: Briefcase, color: "#8B5CF6", href: "/recruit" },
   { name: "Search Candidate", icon: Download, color: "#8B5CF6", href: "/resume" },
+  { name:  "Buy Subscription",icon:Shield,color:"#8B5CF6",href:"/buysubscription"},
   { name: "Template", icon: BookTemplate, color: "#8B5CF6", href: "/template" },
   { name: "HRM", icon: HardDrive, color: "#8B5CF6", href: "/hrm" },
   { name: "Sub Admin", icon: UserCog, color: "#8B5CF6", href: "/subadmin" },
@@ -346,7 +348,7 @@ const RecruiterSidebar = () => {
           <BiMenu size={24} className="text-gray-300" />
         </motion.button>
 
-        <nav className="mt-8 flex-grow overflow-y-auto max-h-[calc(100vh-100px)] custom-scrollbar">
+        <nav className="mt-8 flex-grow overflow-y-auto max-h-[calc(100vh-100px)] scroll-hidden">
           {SIDEBAR.map((item) => (
             <div key={item.href || item.name}>
               {/* Regular menu item or dropdown trigger */}

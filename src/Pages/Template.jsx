@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { FileText, X, Filter, Search } from "lucide-react"
+import { FileText, X, Filter, Search, ChevronLeft, ChevronRight } from "lucide-react"
 import { toast, Toaster } from "react-hot-toast"
 import Header from "../components/Common/Header"
-
 
 const predefinedTemplates = [
   {
@@ -373,7 +372,7 @@ const predefinedTemplates = [
   },
 ]
 
-// Categories for filtering
+
 const categories = [
   { name: "All Templates", count: predefinedTemplates.length },
   { name: "Technology", count: predefinedTemplates.filter((t) => t.category === "Technology").length },
@@ -391,7 +390,8 @@ const Template = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [activeCategory, setActiveCategory] = useState("All Templates")
   const [searchQuery, setSearchQuery] = useState("")
-  const itemsPerPage = 8
+  
+  const itemsPerPage = 10
 
   // Filter templates based on active category and search query
   useEffect(() => {
@@ -418,40 +418,35 @@ const Template = () => {
     setCurrentPage(1) // Reset to first page when filters change
   }, [activeCategory, searchQuery])
 
-  
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentTemplates = templates.slice(indexOfFirstItem, indexOfLastItem)
   const totalPages = Math.ceil(templates.length / itemsPerPage)
 
-  
   const previewTemplate = (template) => {
     setSelectedTemplate(template)
     setShowPreview(true)
-    
+
     const placeholders = template.content.match(/\[(.*?)\]/g) || []
     const initialValues = {}
     placeholders.forEach((placeholder) => {
-      const key = placeholder.slice(1, -1) 
+      const key = placeholder.slice(1, -1)
       initialValues[key] = ""
     })
     setFormValues(initialValues)
   }
 
-  
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormValues({ ...formValues, [name]: value })
   }
 
-  
   const generateDocument = () => {
     let generatedContent = selectedTemplate.content
     Object.keys(formValues).forEach((key) => {
       generatedContent = generatedContent.replace(`[${key}]`, formValues[key])
     })
 
-    
     const element = document.createElement("a")
     const file = new Blob([generatedContent], { type: "text/plain" })
     element.href = URL.createObjectURL(file)
@@ -470,39 +465,56 @@ const Template = () => {
     })
   }
 
-  
   const getContentPreview = (content) => {
     return content.trim().substring(0, 100) + "..."
   }
 
-  return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
-      <Header title="Templates" />
-      
+  
+  const getCategoryGradient = (category) => {
+    switch (category) {
+      case "Technology":
+        return "from-blue-600 to-blue-700"
+      case "Finance":
+        return "from-green-600 to-green-700"
+      case "Marketing":
+        return "from-purple-600 to-purple-700"
+      case "Human Resources":
+        return "from-pink-600 to-pink-700"
+      case "My Templates":
+        return "from-yellow-600 to-yellow-700"
+      default:
+        return "from-blue-600 via-purple-600 to-pink-600"
+    }
+  }
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        {/* Category Navigation */}
-        <div className="overflow-x-auto bg-gray-800 border-b border-gray-700">
-          <div className="flex p-2 min-w-max">
+  return (
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 scroll-hidden">
+      <Header title="Templates" />
+      <Toaster />
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <div className=" p-4 sticky top-0 z-2">
+        
+        <div className="flex justify-center mb-6 overflow-x-auto pb-2">
+          <div className="bg-gray-800 rounded-lg p-1 flex">
             {categories.map((category) => (
               <button
                 key={category.name}
                 onClick={() => setActiveCategory(category.name)}
-                className={`px-4 py-2 mx-1 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeCategory === category.name
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                    ? `bg-gradient-to-r ${getCategoryGradient(category.name)} text-white`
+                    : "text-gray-300 hover:text-white hover:bg-gray-700"
                 }`}
               >
-                {category.name} <span className="ml-1 opacity-70">{category.count}</span>
+                {category.name} <span className="ml-1 opacity-70">({category.count})</span>
               </button>
             ))}
           </div>
         </div>
+      </div>
 
-       
+      
         <div className="p-4 md:p-6">
-          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {currentTemplates.map((template) => (
               <motion.div
@@ -510,7 +522,6 @@ const Template = () => {
                 className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
                 whileHover={{ y: -5 }}
               >
-                
                 <div className="p-4 bg-gray-750 border-b border-gray-700 flex-1">
                   <div className="text-xs text-blue-400 mb-1">{template.category}</div>
                   <h3 className="text-lg font-semibold text-white mb-1 truncate">{template.title}</h3>
@@ -534,43 +545,62 @@ const Template = () => {
           </div>
 
           {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center items-center mt-8">
-              <div className="flex items-center bg-gray-800 rounded-full px-2 py-1 shadow-lg">
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                  disabled={currentPage === 1}
-                  className={`mx-1 w-8 h-8 flex items-center justify-center rounded-full ${
-                    currentPage === 1 ? "text-gray-500 cursor-not-allowed" : "text-gray-300 hover:bg-gray-700"
-                  }`}
-                >
-                  &lt;
-                </button>
+       {totalPages > 1 && (
+        <div className="flex justify-center mt-8">
+        <div className="flex gap-2">
+         <button
+            onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+            disabled={currentPage === 1}
+            className={`px-3 py-2 rounded-lg transition-colors ${
+            currentPage === 1
+            ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+            : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+               }`}>
+         <ChevronLeft size={18} />
+      </button>
 
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <button
-                    key={i + 1}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`mx-1 w-8 h-8 rounded-full ${
-                      currentPage === i + 1 ? "bg-purple-600 text-white" : "text-gray-300 hover:bg-gray-700"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
+      {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
+        let pageNum =
+          currentPage <= 3
+            ? index + 1
+            : currentPage >= totalPages - 2
+              ? totalPages - 4 + index
+              : currentPage - 2 + index;
 
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                  disabled={currentPage === totalPages}
-                  className={`mx-1 w-8 h-8 flex items-center justify-center rounded-full ${
-                    currentPage === totalPages ? "text-gray-500 cursor-not-allowed" : "text-gray-300 hover:bg-gray-700"
-                  }`}
-                >
-                  &gt;
+        if (pageNum <= 0) pageNum = 1;
+        if (pageNum > totalPages) return null;
+
+        return (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(pageNum)}
+            className={`
+              px-4 py-2 rounded-lg transition-colors
+              ${
+                currentPage === pageNum
+                  ? "bg-purple-600 text-white"
+                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                     }
+                    `}
+                    >
+                     {pageNum}
                 </button>
-              </div>
-            </div>
-          )}
+                  );
+                   })}
+
+                 <button
+                 onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                 disabled={currentPage === totalPages}
+                 className={`px-3 py-2 rounded-lg transition-colors ${
+                 currentPage === totalPages
+                 ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+                 : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                 }`}>
+               <ChevronRight size={18} />
+               </button>
+               </div>
+             </div>
+           )}
         </div>
 
         {/* Template Preview Modal */}
@@ -583,7 +613,7 @@ const Template = () => {
               exit={{ opacity: 0 }}
             >
               <motion.div
-                className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto"
+                className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto scroll-hidden"
                 initial={{ scale: 0.9, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.9, y: 20 }}
@@ -635,6 +665,7 @@ const Template = () => {
             </motion.div>
           )}
         </AnimatePresence>
+      
       </motion.div>
     </div>
   )

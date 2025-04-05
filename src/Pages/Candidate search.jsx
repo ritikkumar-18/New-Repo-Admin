@@ -642,7 +642,7 @@ function Candidate() {
   const paginatedCandidates = filteredCandidates.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen">
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen scroll-hidden">
       <Header title="Shortlisted" />
       
 
@@ -998,7 +998,7 @@ function Candidate() {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween" }}
-                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto"
+                className="fixed right-0 top-0 h-full w-full md:w-[600px] bg-gray-900 shadow-xl z-50 overflow-y-auto scroll-hidden"
               >
                 <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 z-10">
                   <div className="flex justify-between items-center">

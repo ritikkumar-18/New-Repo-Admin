@@ -4,7 +4,7 @@ import ChatApp from '../components/Help/SupportForm'
 
 const Help = () => {
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900">
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 scroll-hidden">
             <Header title={"Messages & Queries"} />
             <main className='w-full'>
               

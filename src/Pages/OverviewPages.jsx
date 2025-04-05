@@ -13,10 +13,10 @@ import Production from '../components/Analytics/Production'
 
 const OverviewPages = () => {
   return (
-    <div className='flex-1 overflow-auto relative z-10 '>
+    <div className='flex-1 overflow-auto relative z-10  scroll-hidden'>
     <Header title="Overview"/>
 
-    <main className='w-full mx-auto py-6 px-4 lg:px-8 '>
+    <main className='w-full mx-auto py-6 px-4 lg:px-8  '>
         <motion.div className=" w-full grid grid-cols-1 gap-5 sm-grid-cols-2 lg:grid-cols-5 mb-8"
             initial={{opacity:0,y:20}}
             animate={{opacity:1,y:0}}

@@ -480,7 +480,7 @@ const OverviewRecruit = () => {
   ]
 
   return (
-    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen text-white">
+    <div className="flex-1 overflow-auto relative z-10 bg-gray-900 min-h-screen text-white scroll-hidden">
       <Header title="Overview" />
 
       <div className="p-6 max-w-7xl mx-auto">

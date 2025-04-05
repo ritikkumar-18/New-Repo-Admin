@@ -1347,20 +1347,7 @@ const RecruiterChat = () => {
                   className="w-10 h-10 rounded-full object-cover"
                 />
               </div>
-              <div className="flex items-center space-x-4">
-                <button 
-                  className="text-gray-400 hover:text-white"
-                  onClick={handleNewChat}
-                >
-                  <RiChatNewLine className="text-xl" />
-                </button>
-                <button 
-                  className="text-gray-400 hover:text-white"
-                  onClick={() => alert("Menu options would appear here")}
-                >
-                  <FiMoreHorizontal className="text-xl" />
-                </button>
-              </div>
+             
             </div>
 
             {/* Search */}
@@ -1374,12 +1361,7 @@ const RecruiterChat = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <BiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
-                <button 
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                  onClick={() => alert("Filter options would appear here")}
-                >
-                  <BiFilter className="text-lg" />
-                </button>
+                
               </div>
             </div>
 
@@ -1397,12 +1379,7 @@ const RecruiterChat = () => {
               >
                 Unread
               </button>
-              <button
-                className={`flex-1 py-3 text-sm font-medium ${activeTab === "groups" ? "text-purple-400 border-b-2 border-purple-400" : "text-gray-400"}`}
-                onClick={() => setActiveTab("groups")}
-              >
-                Groups
-              </button>
+              
             </div>
 
             {/* Contacts */}
@@ -1479,67 +1456,7 @@ const RecruiterChat = () => {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4">
-                  {isCalling || isVideoCalling ? (
-                    <button 
-                      className="text-red-500 hover:text-red-400"
-                      onClick={endCall}
-                    >
-                      <IoCall className="text-xl" />
-                    </button>
-                  ) : (
-                    <>
-                      <button 
-                        className="text-gray-400 hover:text-white"
-                        onClick={handleCall}
-                      >
-                        <IoCall className="text-xl" />
-                      </button>
-                      <button 
-                        className="text-gray-400 hover:text-white"
-                        onClick={handleVideoCall}
-                      >
-                        <IoVideocam className="text-xl" />
-                      </button>
-                    </>
-                  )}
-                  <div className="relative" ref={menuRef}>
-                    <button 
-                      className="text-gray-400 hover:text-white"
-                      onClick={() => setShowContactMenu(!showContactMenu)}
-                    >
-                      <BiDotsVerticalRounded className="text-xl" />
-                    </button>
-                    {showContactMenu && (
-                      <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-10 border border-gray-700">
-                        <button 
-                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 w-full text-left"
-                          onClick={handleViewProfile}
-                        >
-                          View Profile
-                        </button>
-                        <button 
-                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 w-full text-left"
-                          onClick={handleMuteNotifications}
-                        >
-                          {mutedContacts.includes(selectedContact.id) ? "Unmute" : "Mute"} Notifications
-                        </button>
-                        <button 
-                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 w-full text-left"
-                          onClick={handleClearChat}
-                        >
-                          Clear Chat
-                        </button>
-                        <button 
-                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 w-full text-left"
-                          onClick={handleDeleteChat}
-                        >
-                          Delete Chat
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                
               </div>
 
               {/* Messages */}
@@ -1671,87 +1588,6 @@ const RecruiterChat = () => {
                   </button>
                 </div>
               </div>
-
-              {/* Profile Modal */}
-              {showProfileModal && selectedContact && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                  <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-xl font-semibold text-white">Candidate Profile</h3>
-                      <button 
-                        className="text-gray-400 hover:text-white"
-                        onClick={() => setShowProfileModal(false)}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="flex flex-col items-center mb-4">
-                      <img
-                        src={selectedContact.avatar || "/placeholder.svg"}
-                        alt={selectedContact.name}
-                        className="w-24 h-24 rounded-full object-cover mb-3 border-2 border-purple-500"
-                      />
-                      <h4 className="text-xl font-bold text-white">{selectedContact.name}</h4>
-                      <p className="text-purple-400">{selectedContact.role}</p>
-                      <p className="text-gray-400 text-sm">{selectedContact.company}</p>
-                      <p className={`text-sm mt-2 ${selectedContact.online ? "text-green-400" : "text-gray-400"}`}>
-                        {selectedContact.status}
-                      </p>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Email</span>
-                        <span className="text-white">user@example.com</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Phone</span>
-                        <span className="text-white">+1 234 567 890</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Location</span>
-                        <span className="text-white">San Francisco, CA</span>
-                      </div>
-                    </div>
-                    <div className="mt-6 flex justify-center">
-                      <button 
-                        className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
-                        onClick={() => setShowProfileModal(false)}
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Call Modal */}
-              {(isCalling || isVideoCalling) && (
-                <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-                  <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md text-center">
-                    <div className="mb-6">
-                      <img
-                        src={selectedContact.avatar || "/placeholder.svg"}
-                        alt={selectedContact.name}
-                        className="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-purple-500"
-                      />
-                      <h3 className="text-2xl font-bold text-white">{selectedContact.name}</h3>
-                      <p className="text-gray-400">
-                        {isVideoCalling ? "Video call" : "Voice call"} in progress
-                      </p>
-                    </div>
-                    <div className="flex justify-center space-x-6">
-                      <button 
-                        className="p-3 bg-red-500 rounded-full hover:bg-red-600"
-                        onClick={endCall}
-                      >
-                        <IoCall className="text-2xl text-white" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
             </>
           ) : (
             // Empty state when no chat is selected
