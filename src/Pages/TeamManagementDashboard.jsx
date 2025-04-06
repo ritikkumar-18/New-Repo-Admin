@@ -518,8 +518,8 @@ const TeamManagementDashboard = () => {
 
   return (
     <div className="flex-1 overflow-auto scroll-hidden relative z-10 bg-gray-900 min-h-screen">
-      <Header title="Team Management" />
-      <Toaster position="top-right" />
+      <Header title="StaffManagement" />
+      <Toaster/>
 
       <motion.div
         className="p-4 md:p-6"

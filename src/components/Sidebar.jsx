@@ -109,15 +109,14 @@ import { motion, AnimatePresence } from "framer-motion"
 import { FiBarChart2, FiLogOut } from "react-icons/fi"
 import { BiMenu } from "react-icons/bi"
 import { Link, useLocation } from "react-router-dom"
-import { ArrowLeftRight, CopyMinus, Info, LockKeyhole, MessageSquare,  ShieldCheck, ShieldCheckIcon } from "lucide-react"
+import { ArrowLeftRight, Building2, CopyMinus, Info, LockKeyhole, MessageSquare,  ShieldCheck, ShieldCheckIcon } from "lucide-react"
 import { FaRupeeSign, FaTeamspeak, FaUser, FaChevronDown } from "react-icons/fa"
 
 const SIDEBAR = [
   { name: "Overview", icon: FiBarChart2, href: "/" },
-  { name: "Recruiters", icon: FaUser, href: "/users" },
+  { name: "Companies", icon: Building2, href: "/users" },
   {name:"User",icon:FaUser,href:"/adminuser"},
   { name: "Staff Management", icon: FaTeamspeak, href: "/team" },
-  // { name: "SubAdmin", icon: Axis3D, href: "/sub" },
   { name: "Subscription Plan", icon: ShieldCheckIcon, href: "/payment" },
   { name: "Transaction", icon: ArrowLeftRight, href: "/transaction" },
   { name: "Queries", icon: MessageSquare, href: "/help" },

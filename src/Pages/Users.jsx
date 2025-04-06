@@ -16,7 +16,7 @@ const userStats = {
 const Users = () => {
   return (
     <div className='flex-1 overflow-auto relative z-10 scroll-hidden'>
-			<Header title='Recruiters' />
+			<Header title='Companies' />
 
 			<main className='max-w-7xl  '>
 				{/* STATS */}
