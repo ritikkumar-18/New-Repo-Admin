@@ -4,7 +4,12 @@ import { Bell, BriefcaseIcon, CheckCircle2, AlertCircle, MessageSquare, Users, F
 import { formatDistanceToNow } from "date-fns";
 import Header from "../Common/Header";
 
+
 const Notification = () => {
+
+  
+
+     
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -33,9 +38,9 @@ const Notification = () => {
           { name: "CloudNine", industry: "Infrastructure" }
         ];
 
-        // Generate recruiter-specific notifications
+        
         for (let i = 0; i < 10; i++) {
-          const randomHours = Math.floor(Math.random() * 168); // 7 days in hours
+          const randomHours = Math.floor(Math.random() * 168); 
           const timestamp = new Date(now.getTime() - randomHours * 60 * 60 * 1000);
 
           const types = [
@@ -127,6 +132,8 @@ const Notification = () => {
       setLoading(false);
     }
   };
+
+
 
   const handleScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
@@ -228,7 +235,7 @@ const Notification = () => {
 
   return (
     <div className="flex-1 overflow-auto relative bg-gray-700 min-h-screen text-gray-100">
-      <Header title="Recruiter Notifications" />
+      <Header title="Notifications" />
 
       {/* Filter and Mark All as Read */}
       <div className="flex justify-between items-center p-4 md:p-6 flex-wrap gap-3 bg-gray-800 border-b border-gray-600">

@@ -415,7 +415,7 @@
 
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast, Toaster } from "react-hot-toast"
 import { motion } from "framer-motion"
 import Sidebar from "./Sidebar"
@@ -440,8 +440,17 @@ import Paymentpolicy from "./cms/Paymentpolicy"
 import Notification from "./Notification/Notification"
 import Profile from "./Profile/Profile"
 import Adminuser from "../Pages/Adminuser"
-
+import { generateToken, messaging } from "../notifications/firebase"
+import {onMessage} from "firebase/messaging"
 function Auth() {
+  useEffect(() => {
+      generateToken();
+      onMessage(messaging,(payload) => {
+        console.log(payload)
+
+      })
+      
+    },[]);
   const [currentPage, setCurrentPage] = useState("login")
   const [userDetails, setUserDetails] = useState({ username: "", role: "" })
   const [userPassword, setUserPassword] = useState({ password: "" })
