@@ -2,14 +2,12 @@ import React from 'react'
 import StatCards from '../components/Common/StatCards'
 import { motion } from 'framer-motion'
 import Header from '../components/Common/Header'
-import {  FaGetPocket, FaRegUserCircle } from 'react-icons/fa'
-import { FiBarChart2 } from 'react-icons/fi'
 import SalesOverview from '../components/SalesOverview'
 import Categorybased from '../components/Categorybased'
-import GetjobChart from '../components/GetjobChart'
-import {  Briefcase, Building2, CreditCard, DollarSign, UserCheck, UserPlus2, Users2Icon } from 'lucide-react'
+import {  DollarSign, UserCheck, } from 'lucide-react'
 import UserCharts from '../components/Users/UserCharts'
-import Production from '../components/Analytics/Production'
+import { Briefcase, CreditCard, Building2 } from 'lucide-react'
+
 
 const OverviewPages = () => {
   return (
@@ -17,7 +15,7 @@ const OverviewPages = () => {
     <Header title="Overview"/>
 
     <main className='w-full mx-auto py-6 px-4 lg:px-8  '>
-        <motion.div className=" w-full grid grid-cols-1 gap-5 sm-grid-cols-2 lg:grid-cols-5 mb-8"
+        <motion.div className=" w-full grid grid-cols-1 gap-5 sm-grid-cols-2 lg:grid-cols-5 mb-8 hover:cursor-pointer"
             initial={{opacity:0,y:20}}
             animate={{opacity:1,y:0}}
             transition={{duration:0.5}}>

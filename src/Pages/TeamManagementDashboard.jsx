@@ -518,7 +518,7 @@ const TeamManagementDashboard = () => {
 
   return (
     <div className="flex-1 overflow-auto scroll-hidden relative z-10 bg-gray-900 min-h-screen">
-      <Header title="StaffManagement" />
+      <Header title="Staff Management" />
       <Toaster/>
 
       <motion.div
