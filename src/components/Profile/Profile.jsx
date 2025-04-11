@@ -3,36 +3,10 @@ import { toast, Toaster } from "react-hot-toast"
 import { motion, AnimatePresence } from "framer-motion"
 import Header from "../Common/Header"
 import { BsTwitterX } from "react-icons/bs";
-
-
-import {
-  Activity,
-  AlertTriangle,
-  Calendar,
-  Check,
-  Edit2,
-  ExternalLink,
-  Eye,
-  EyeOff,
-  Github,
-  Globe,
-  HardDrive,
-  Linkedin,
-  Lock,
-  Mail,
-  MapPin,
-  Phone,
-  Plus,
-  Save,
-  Server,
-  Shield,
-  Twitter,
-  User,
-  X,
-} from "lucide-react"
+import {Activity,AlertTriangle,Calendar,Check,Edit2,ExternalLink,Eye,EyeOff,Github,Globe,HardDrive,Linkedin,Lock,Mail,MapPin,Phone,Plus,Save,Server,Shield,User,X,} from "lucide-react"
 
 const Profile = () => {
-  // Admin personal details state
+  
   const [adminDetails, setAdminDetails] = useState({
     avatar: "",
     coverImage:
@@ -105,8 +79,8 @@ const Profile = () => {
   const [securitySettings, setSecuritySettings] = useState({
     twoFactorAuth: true,
     loginNotifications: true,
-    sessionTimeout: 30, // minutes
-    passwordExpiry: 90, // days
+    sessionTimeout: 30, 
+    passwordExpiry: 90, 
     ipRestriction: false,
     failedLoginLockout: true,
     passwordComplexity: "high",
@@ -138,7 +112,7 @@ const Profile = () => {
   // Mobile state
   const [isMobile, setIsMobile] = useState(false)
 
-  // Check if mobile on mount and window resize
+  
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768)
@@ -1335,7 +1309,7 @@ const Profile = () => {
 
             {/* Activity Log Card */}
             <div
-              className={`bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-purple-900/20 ${isMobile && activeTab !== "activity" ? "hidden" : ""}`}
+              className={`bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-purple-900/20  ${isMobile && activeTab !== "activity" ? "hidden" : ""}`}
             >
               <div className="p-6 border-b border-gray-700">
                 <h2 className="text-xl font-bold text-white flex items-center">
@@ -1345,7 +1319,7 @@ const Profile = () => {
                 <p className="text-gray-400 text-sm mt-1">Your latest actions and system events</p>
               </div>
 
-              <div className="p-6 max-h-[400px] overflow-y-auto">
+              <div className="p-6 max-h-[400px] overflow-y-auto scroll-hidden">
                 <AnimatePresence>
                   <div className="space-y-4">
                     {activityLog.map((activity) => (

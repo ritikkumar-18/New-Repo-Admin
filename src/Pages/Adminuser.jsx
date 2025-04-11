@@ -1,35 +1,6 @@
 import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import {
-  Search,
-  X,
-  Filter,
-  Mail,
-  Phone,
-  Calendar,
-  CheckCircle,
-  XCircle,
-  Clock,
-  User,
-  ChevronLeft,
-  ChevronRight,
-  AlertTriangle,
-  Briefcase,
-  MapPin,
-  Clock4,
-  Download,
-  Upload,
-  Users,
-  UserCheck,
-  UserX,
-  GraduationCap,
-  Award,
-  BarChart2,
-  FileUp,
-  UserPlus,
-  Settings,
-  Layers,
-} from "lucide-react"
+import {Search,X,Filter,Mail,Phone,Calendar,CheckCircle,XCircle,Clock,User,ChevronLeft,ChevronRight,AlertTriangle,Briefcase,MapPin,Clock4,Download,Upload,Users,UserCheck,UserX,GraduationCap,Award,BarChart2,FileUp,UserPlus,Settings,Layers} from "lucide-react"
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai"
 import { toast, Toaster } from "react-hot-toast"
 import Header from "../components/Common/Header"
@@ -1789,19 +1760,8 @@ const Adminuser = () => {
                   />
                 </div>
 
-                <div className="flex justify-between items-center">
-                  <a
-                    href="#"
-                    className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      // Here you would typically provide a template download
-                      toast.success("Template downloaded successfully!")
-                    }}
-                  >
-                    <Download size={14} />
-                    Download Template
-                  </a>
+                
+                 
 
                   <div className="flex gap-3">
                     <button
@@ -1818,7 +1778,7 @@ const Adminuser = () => {
                       Select File
                     </button>
                   </div>
-                </div>
+                
               </motion.div>
             </motion.div>
           )}
