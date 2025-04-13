@@ -24,22 +24,22 @@
 // import Profile from "./Profile/Profile"
 // import Adminuser from "../Pages/Adminuser"
 // import { generateToken, messaging } from "../notifications/firebase"
-// import {onMessage} from "firebase/messaging"
-// import {loginUser} from "../api/auth"
-// function Auth() {
+// import { onMessage } from "firebase/messaging"
+// import { loginUser, sendOTP, verifyOTP, resetPassword } from "../api/auth"
+// import cookies from "universal-cookie"
+
+// export default function Auth() {
 //   useEffect(() => {
-//       generateToken();
-//       onMessage(messaging,(payload) => {
-//         console.log(payload)
-//         toast.success(payload.notification.title, {})
-//       })
-      
-//     },[]);
-    
-    
+//     generateToken()
+//     onMessage(messaging, (payload) => {
+//       console.log(payload)
+//       toast.success(payload.notification.title, {})
+//     })
+//   }, [])
+
 //   const [currentPage, setCurrentPage] = useState("login")
 //   const [userDetails, setUserDetails] = useState({ username: "", role: "" })
-//   const [userPassword, setUserPassword] = useState({ password: "" })
+//   const [loading, setLoading] = useState(false)
 
 //   const playPointSound = () => {
 //     const audio = new Audio(pointSound)
@@ -48,32 +48,43 @@
 
 //   const handleLogin = async (email, password) => {
 //     try {
-//       const res = await loginUser({ email, password })
-//       setUserDetails({ username: email, role: res.data.role })
+//       setLoading(true)
+//       const response = await loginUser({ email, password })
+
+//       const cookie = new cookies()
+//       if (response.data.token) {
+//         cookie.set("token", response.data.token, { path: "/" })
+//       }
+
+//       setUserDetails({ username: email, role: response.data.role })
 //       setCurrentPage("adminDashboard")
 //       toast.success("Welcome to the Admin Dashboard.")
 //     } catch (error) {
-//       toast.error("Invalid credentials")
+//       toast.error(error.response?.data?.message || "Invalid credentials")
 //       playPointSound()
+//     } finally {
+//       setLoading(false)
 //     }
 //   }
-  
 
 //   const handleLogout = () => {
+//     // Clear token from cookie
+//     const cookie = new cookies()
+//     cookie.remove("token", { path: "/" })
+
 //     setCurrentPage("login")
 //     toast.success("You have been logged out.")
 //   }
 
 //   return (
 //     <div className="flex items-center justify-center h-screen bg-black">
-//       <Toaster position="top-center"/>
-//       {currentPage === "login" && <LoginPage onLogin={handleLogin} />}
+//       <Toaster position="top-center" />
+//       {currentPage === "login" && <LoginPage onLogin={handleLogin} loading={loading} />}
 //       {currentPage === "adminDashboard" && <AdminDashboard userDetails={userDetails} onLogout={handleLogout} />}
 //     </div>
 //   )
 // }
-
-// function LoginPage({ onLogin }) {
+// function LoginPage({ onLogin, loading }) {
 //   const navigate = useNavigate()
 //   const [username, setUsername] = useState("")
 //   const [password, setPassword] = useState("")
@@ -85,6 +96,11 @@
 //   const [newPassword, setNewPassword] = useState("")
 //   const [confirmPassword, setConfirmPassword] = useState("")
 //   const [passwordError, setPasswordError] = useState("")
+//   const [forgotLoading, setForgotLoading] = useState(false)
+//   const [otpLoading, setOtpLoading] = useState(false)
+//   const [resetLoading, setResetLoading] = useState(false)
+//   const [resendLoading, setResendLoading] = useState(false) // New state for resend OTP
+//   const [userEmail, setUserEmail] = useState("")
 
 //   const handleSubmit = (e) => {
 //     e.preventDefault()
@@ -94,15 +110,11 @@
 //     setPassword("")
 //   }
 
-//   const handleForgotPasswordSubmit = (e) => {
+//   const handleForgotPasswordSubmit = async (e) => {
 //     e.preventDefault()
 
 //     if (signupEmail === "") {
-//       toast.error("Email field cannot be empty.", {
-//         style: {
-//           background: "#f8d7da",
-//         },
-//       })
+//       toast.error("Email field cannot be empty.")
 //       return
 //     }
 
@@ -112,61 +124,132 @@
 //       return
 //     }
 
-//     // If validation passes, send the OTP
-//     toast.promise(
-//       new Promise((resolve) => {
-//         setTimeout(() => {
-//           resolve("OTP sent successfully!")
-//           setOtpSent(true)
-//           setOtp("")
-//         }, 2000)
-//       }),
-//       {
-//         loading: "Sending OTP...",
-//         success: "OTP sent successfully!",
-//         error: "Failed to send OTP.",
-//       },
-//     )
-//     setSignupEmail("")
-//   }
+//     try {
+//       setForgotLoading(true)
+//       setUserEmail(signupEmail)
 
-//   const handleVerifyOtp = (e) => {
-//     e.preventDefault()
-//     if (otp === "1234") {
-//       toast.promise(
-//         new Promise((resolve) => {
-//           setTimeout(() => {
-//             resolve("OTP verified successfully!")
-//             setIsOtpVerified(true)
-//             setOtp("")
-//           }, 2000)
-//         }),
-//         {
-//           loading: "Verifying OTP...",
-//           success: "OTP verified successfully!",
-//           error: "Invalid OTP!",
-//         },
-//       )
-//       setNewPassword("")
-//       setConfirmPassword("")
-//     } else {
-//       toast.error("Invalid OTP!")
-//       playPointSound() // Play beep sound
+//       const response = await sendOTP({ email: signupEmail })
+
+//       // Store the OTP token if it's in the response
+//       console.log("resssss",response);
+//       if (response.data) {
+//         console.log("+++++",response.data.data.token)
+//         localStorage.setItem("otpToken", response.data.data.token)
+//       }
+
+//       toast.success(response.data.message || "OTP sent successfully!")
+//       setOtpSent(true)
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || "Failed to send OTP.")
+//       playPointSound()
+//     } finally {
+//       setForgotLoading(false)
+//       setSignupEmail("")
 //     }
 //   }
 
-//   const handleResetPassword = (e) => {
+//   const handleVerifyOtp = async (e) => {
 //     e.preventDefault()
+
+//     try {
+//       setOtpLoading(true)
+
+//       // Get the OTP token from localStorage
+//       const otpToken = localStorage.getItem("otpToken")
+
+//       const response = await verifyOTP(
+//         {
+//           email: userEmail,
+//           otp: otp,
+//         },
+//         otpToken,
+//       )
+
+//       // Store the token for password reset if needed
+//       if (response.data.token) {
+//         localStorage.setItem("resetToken", response.data.token)
+//       }
+
+//       toast.success(response.data.message || "OTP verified successfully!")
+//       setIsOtpVerified(true)
+//       setOtp("") // Clear OTP input
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || "Invalid OTP!")
+//       playPointSound()
+//     } finally {
+//       setOtpLoading(false)
+//     }
+//   }
+
+//   const handleResendOtp = async () => {
+//     try {
+//       setResendLoading(true)
+
+//       const response = await sendOTP({ email: userEmail })
+
+//       // Update the OTP token if it's in the response
+//       if (response.data.token) {
+//         localStorage.setItem("otpToken", response.data.token)
+//       }
+
+//       toast.success(response.data.message || "OTP resent successfully!")
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || "Failed to resend OTP.")
+//       playPointSound()
+//     } finally {
+//       setResendLoading(false)
+//     }
+//   }
+
+//   const handleChangeEmail = () => {
+//     setOtpSent(false) // Go back to Forgot Password form
+//     setOtp("") // Clear OTP input
+//     setSignupEmail("") // Clear email input
+//     setUserEmail("") // Clear stored email
+//   }
+
+//   const handleResetPassword = async (e) => {
+//     e.preventDefault()
+
 //     if (newPassword.length < 6) {
 //       setPasswordError("Password must be at least 6 characters.")
-//     } else if (newPassword !== confirmPassword) {
+//       return
+//     }
+
+//     if (newPassword !== confirmPassword) {
 //       setPasswordError("Password does not match. Please try again.")
-//     } else {
+//       return
+//     }
+
+//     try {
+//       setResetLoading(true)
 //       setPasswordError("")
-//       toast.success("Password reset successfully!")
-//       setIsLogin(true) // Redirect to login
+
+//       // Get the reset token from localStorage
+//       const resetToken = localStorage.getItem("resetToken")
+
+//       const payload = {
+//         email: userEmail,
+//         password: newPassword,
+//         confirmPassword: confirmPassword,
+//       }
+
+//       const response = await resetPassword(payload, resetToken)
+
+//       toast.success(response.data.message || "Password reset successfully!")
+
+//       // Clear tokens after successful reset
+//       localStorage.removeItem("otpToken")
+//       localStorage.removeItem("resetToken")
+
+//       setIsLogin(true)
 //       setOtpSent(false)
 //       setIsOtpVerified(false)
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || "Password reset failed.")
+//       setPasswordError(error.response?.data?.message || "Password reset failed.")
+//     } finally {
+//       setResetLoading(false)
 //     }
 //   }
 
@@ -197,6 +280,7 @@
 //                   onChange={(e) => setUsername(e.target.value)}
 //                   placeholder="Enter your email"
 //                   className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+//                   disabled={loading}
 //                 />
 //               </div>
 //               <div>
@@ -207,28 +291,26 @@
 //                   onChange={(e) => setPassword(e.target.value)}
 //                   placeholder="Enter your password"
 //                   className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+//                   disabled={loading}
 //                 />
 //               </div>
 //               <button
 //                 type="submit"
 //                 className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+//                 disabled={loading}
 //               >
-//                 Login
+//                 {loading ? "Logging in..." : "Login"}
 //               </button>
 //             </form>
 //             <div className="text-center mt-4">
-//               <button onClick={() => setIsLogin(false)} className="text-purple-600 hover:underline">
+//               <button onClick={() => setIsLogin(false)} className="text-purple-600 hover:underline" disabled={loading}>
 //                 Forgot Password?
 //               </button>
-              
-//             <div className="mt-2">
-//                  <a
-//                    href="https://static-page-0011.netlify.app/"
-//                    className="text-purple-600 hover:underline"
-//                  >
-//                    Sign Up
-//                  </a>
-//                </div>
+//               <div className="mt-2">
+//                 <a href="https://static-page-0011.netlify.app/" className="text-purple-600 hover:underline">
+//                   Sign Up
+//                 </a>
+//               </div>
 //             </div>
 //           </motion.div>
 //         ) : otpSent ? (
@@ -249,6 +331,7 @@
 //                     onChange={(e) => setNewPassword(e.target.value)}
 //                     placeholder="Enter new password"
 //                     className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+//                     disabled={resetLoading}
 //                   />
 //                 </div>
 //                 <div>
@@ -259,14 +342,16 @@
 //                     onChange={(e) => setConfirmPassword(e.target.value)}
 //                     placeholder="Confirm your password"
 //                     className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+//                     disabled={resetLoading}
 //                   />
 //                 </div>
 //                 {passwordError && <p className="text-red-500 text-sm mt-2">{passwordError}</p>}
 //                 <button
 //                   type="submit"
 //                   className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+//                   disabled={resetLoading}
 //                 >
-//                   Submit
+//                   {resetLoading ? "Submitting..." : "Submit"}
 //                 </button>
 //               </form>
 //             </motion.div>
@@ -278,6 +363,9 @@
 //               transition={{ duration: 1 }}
 //             >
 //               <h2 className="text-2xl font-bold text-center mb-6">Enter OTP</h2>
+//               <p className="text-center text-gray-600 mb-4">
+//                 OTP sent to <span className="font-medium">{userEmail}</span>
+//               </p>
 //               <form onSubmit={handleVerifyOtp} className="space-y-4">
 //                 <div>
 //                   <label className="block text-lg font-medium text-gray-700">OTP</label>
@@ -287,15 +375,35 @@
 //                     onChange={(e) => setOtp(e.target.value)}
 //                     placeholder="Enter the OTP"
 //                     className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+//                     disabled={otpLoading || resendLoading}
 //                   />
 //                 </div>
 //                 <button
 //                   type="submit"
 //                   className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+//                   disabled={otpLoading || resendLoading}
 //                 >
-//                   Verify OTP
+//                   {otpLoading ? "Verifying..." : "Verify OTP"}
 //                 </button>
 //               </form>
+//               <div className="text-center mt-4 space-y-2">
+//                 <button
+//                   onClick={handleResendOtp}
+//                   className="text-purple-600 hover:underline"
+//                   disabled={otpLoading || resendLoading}
+//                 >
+//                   {resendLoading ? "Resending..." : "Resend OTP"}
+//                 </button>
+//                 <div>
+//                   <button
+//                     onClick={handleChangeEmail}
+//                     className="text-purple-600 hover:underline"
+//                     disabled={otpLoading || resendLoading}
+//                   >
+//                     Change Email
+//                   </button>
+//                 </div>
+//               </div>
 //             </motion.div>
 //           )
 //         ) : (
@@ -318,17 +426,23 @@
 //                   onChange={(e) => setSignupEmail(e.target.value)}
 //                   placeholder="Enter your email"
 //                   className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+//                   disabled={forgotLoading}
 //                 />
 //               </div>
 //               <button
 //                 type="submit"
 //                 className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+//                 disabled={forgotLoading}
 //               >
-//                 Send OTP
+//                 {forgotLoading ? "Sending..." : "Send OTP"}
 //               </button>
 //             </form>
 //             <div className="text-center mt-4">
-//               <button onClick={() => setIsLogin(true)} className="text-purple-600 hover:underline">
+//               <button
+//                 onClick={() => setIsLogin(true)}
+//                 className="text-purple-600 hover:underline"
+//                 disabled={forgotLoading}
+//               >
 //                 Back to Login
 //               </button>
 //             </div>
@@ -338,7 +452,6 @@
 //     </div>
 //   )
 // }
-
 // function AdminDashboard({ onLogout }) {
 //   return (
 //     <div className="flex bg-gray-900 text-gray-100 overflow-hidden w-full h-full">
@@ -368,8 +481,11 @@
 //   )
 // }
 
-// export default Auth
-
+// // Helper function for playing sound
+// const playPointSound = () => {
+//   const audio = new Audio(pointSound)
+//   audio.play()
+// }
 
 
 import { useEffect, useState } from "react"
@@ -402,7 +518,7 @@ import { onMessage } from "firebase/messaging"
 import { loginUser, sendOTP, verifyOTP, resetPassword } from "../api/auth"
 import cookies from "universal-cookie"
 
-function Auth() {
+export default function Auth() {
   useEffect(() => {
     generateToken()
     onMessage(messaging, (payload) => {
@@ -425,7 +541,6 @@ function Auth() {
       setLoading(true)
       const response = await loginUser({ email, password })
 
-      
       const cookie = new cookies()
       if (response.data.token) {
         cookie.set("token", response.data.token, { path: "/" })
@@ -459,7 +574,6 @@ function Auth() {
     </div>
   )
 }
-
 function LoginPage({ onLogin, loading }) {
   const navigate = useNavigate()
   const [username, setUsername] = useState("")
@@ -475,6 +589,7 @@ function LoginPage({ onLogin, loading }) {
   const [forgotLoading, setForgotLoading] = useState(false)
   const [otpLoading, setOtpLoading] = useState(false)
   const [resetLoading, setResetLoading] = useState(false)
+  const [resendLoading, setResendLoading] = useState(false) // New state for resend OTP
   const [userEmail, setUserEmail] = useState("")
 
   const handleSubmit = (e) => {
@@ -483,8 +598,6 @@ function LoginPage({ onLogin, loading }) {
     navigate("/")
     setUsername("")
     setPassword("")
-    // Don't clear fields here - only clear if login is successful
-    // The navigate will happen in the parent component after successful login
   }
 
   const handleForgotPasswordSubmit = async (e) => {
@@ -498,15 +611,21 @@ function LoginPage({ onLogin, loading }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(signupEmail)) {
       toast.error("Invalid email format.")
-      
       return
     }
 
     try {
       setForgotLoading(true)
-      setUserEmail(signupEmail) // Store email for later use
+      setUserEmail(signupEmail)
 
       const response = await sendOTP({ email: signupEmail })
+
+      // Store the OTP token if it's in the response
+      // console.log("resssss", response)
+      if (response.data) {
+        // console.log("+++++", response.data.data.token)
+        localStorage.setItem("otpToken", response.data.data.token)
+      }
 
       toast.success(response.data.message || "OTP sent successfully!")
       setOtpSent(true)
@@ -521,25 +640,62 @@ function LoginPage({ onLogin, loading }) {
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault()
-    
+
     try {
       setOtpLoading(true)
 
-      const response = await verifyOTP({
-        email: userEmail,
-        otp: otp,
-      })
+      // Get the OTP token from localStorage
+      const otpToken = localStorage.getItem("otpToken")
+
+      const response = await verifyOTP(
+        {
+          email: userEmail,
+          otp: otp,
+        },
+        otpToken,
+      )
+
+      // Store the token for password reset if needed
+      if (response.data.token) {
+        localStorage.setItem("resetToken", response.data.token)
+      }
 
       toast.success(response.data.message || "OTP verified successfully!")
       setIsOtpVerified(true)
-      setOtp()
+      setOtp("") // Clear OTP input
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid OTP!")
       playPointSound()
     } finally {
       setOtpLoading(false)
-      
     }
+  }
+
+  const handleResendOtp = async () => {
+    try {
+      setResendLoading(true)
+
+      const response = await sendOTP({ email: userEmail })
+
+      // Update the OTP token if it's in the response
+      if (response.data.token) {
+        localStorage.setItem("otpToken", response.data.token)
+      }
+
+      toast.success(response.data.message || "OTP resent successfully!")
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to resend OTP.")
+      playPointSound()
+    } finally {
+      setResendLoading(false)
+    }
+  }
+
+  const handleChangeEmail = () => {
+    setOtpSent(false) // Go back to Forgot Password form
+    setOtp("") // Clear OTP input
+    setSignupEmail("") // Clear email input
+    setUserEmail("") // Clear stored email
   }
 
   const handleResetPassword = async (e) => {
@@ -559,14 +715,24 @@ function LoginPage({ onLogin, loading }) {
       setResetLoading(true)
       setPasswordError("")
 
-      const response = await resetPassword({
+      // Get the reset token from localStorage
+      const resetToken = localStorage.getItem("resetToken")
+
+      const payload = {
         email: userEmail,
         password: newPassword,
         confirmPassword: confirmPassword,
-      })
+      }
+
+      const response = await resetPassword(payload, resetToken)
 
       toast.success(response.data.message || "Password reset successfully!")
-      setIsLogin(true) // Redirect to login
+
+      // Clear tokens after successful reset
+      localStorage.removeItem("otpToken")
+      localStorage.removeItem("resetToken")
+
+      setIsLogin(true)
       setOtpSent(false)
       setIsOtpVerified(false)
     } catch (error) {
@@ -630,7 +796,6 @@ function LoginPage({ onLogin, loading }) {
               <button onClick={() => setIsLogin(false)} className="text-purple-600 hover:underline" disabled={loading}>
                 Forgot Password?
               </button>
-
               <div className="mt-2">
                 <a href="https://static-page-0011.netlify.app/" className="text-purple-600 hover:underline">
                   Sign Up
@@ -688,6 +853,9 @@ function LoginPage({ onLogin, loading }) {
               transition={{ duration: 1 }}
             >
               <h2 className="text-2xl font-bold text-center mb-6">Enter OTP</h2>
+              <p className="text-center text-gray-600 mb-4">
+                OTP sent to <span className="font-medium">{userEmail}</span>
+              </p>
               <form onSubmit={handleVerifyOtp} className="space-y-4">
                 <div>
                   <label className="block text-lg font-medium text-gray-700">OTP</label>
@@ -697,17 +865,33 @@ function LoginPage({ onLogin, loading }) {
                     onChange={(e) => setOtp(e.target.value)}
                     placeholder="Enter the OTP"
                     className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    disabled={otpLoading}
+                    disabled={otpLoading || resendLoading}
                   />
                 </div>
                 <button
                   type="submit"
                   className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
-                  disabled={otpLoading}
+                  disabled={otpLoading || resendLoading}
                 >
                   {otpLoading ? "Verifying..." : "Verify OTP"}
                 </button>
               </form>
+              <div className="flex justify-between mt-4 w-full">
+                <button
+                  onClick={handleResendOtp}
+                  className="text-purple-600 hover:underline"
+                  disabled={otpLoading || resendLoading}
+                >
+                  {resendLoading ? "Resending..." : "Resend OTP"}
+                </button>
+                <button
+                  onClick={handleChangeEmail}
+                  className="text-purple-600 hover:underline"
+                  disabled={otpLoading || resendLoading}
+                >
+                  Change Email
+                </button>
+              </div>
             </motion.div>
           )
         ) : (
@@ -756,7 +940,6 @@ function LoginPage({ onLogin, loading }) {
     </div>
   )
 }
-
 function AdminDashboard({ onLogout }) {
   return (
     <div className="flex bg-gray-900 text-gray-100 overflow-hidden w-full h-full">
@@ -791,5 +974,3 @@ const playPointSound = () => {
   const audio = new Audio(pointSound)
   audio.play()
 }
-
-export default Auth
