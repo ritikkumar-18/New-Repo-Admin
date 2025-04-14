@@ -38,9 +38,7 @@ const headers = {
 
 // Modified to accept custom headers that can override the default headers
 const post_data = async (url, data, customHeaders = null) => {
-
   const finalHeaders = customHeaders || headers
-  console.log(finalHeaders)
   return axios.post(`${BASE_URL}/${url}`, data, finalHeaders)
 }
 

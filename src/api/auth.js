@@ -1,5 +1,4 @@
-
-import { post_data } from "./index"
+import { get_api, post_data, put_api } from "./index"
 
 // API functions for authentication
 
@@ -10,9 +9,7 @@ export const sendOTP = (payload) => post_data("/admin/forgotPassword", payload)
 
 
 export const verifyOTP = (payload,token) => {
-  const token2 = localStorage.getItem("otpToken")
-  // console.log("tokeeeeen", token2)
-
+  const token2 = localStorage.getItem("otpToken")  
     const headers = {
         headers: {
           "Content-Type": "application/json",
@@ -24,9 +21,30 @@ export const verifyOTP = (payload,token) => {
 }
 
 
-export const resetPassword = (payload) => post_data("/admin/resetPassword", payload)
+export const resetPassword = (payload, token) =>{
+  const token3 = localStorage.getItem("otpToken")
+  const headers = {
+    headers: {
+      "Content-Type": "application/json",
+      "token": token3
+      },
+      }
+       return put_api("/admin/resetPassword", payload, headers)
+}
+  
 
-export const changePassword =(payload)=> post_data("/admin/chagePassword", payload)
+export const changePassword =(payload)=> put_api("/admin/chagePassword", payload)
 
-export const logoutUser = () => post_data("/admin/logout");
+export const logoutUser = (payload = undefined) => {
+  const token = localStorage.getItem("loginToken")
+  console.log("+++++++++++",token)
+ const headers = {
+    headers: {
+      "Content-Type": "application/json",
+      "token": token
+      },
+      }
+  return get_api("admin/logout",payload,headers);
+}
+  
 

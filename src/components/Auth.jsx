@@ -491,7 +491,7 @@
 import { useEffect, useState } from "react"
 import { toast, Toaster } from "react-hot-toast"
 import { motion } from "framer-motion"
-import Sidebar from "./Sidebar"
+import Sidebar from "./Sidebar" 
 import { Routes, Route, useNavigate } from "react-router-dom"
 import OverviewPages from "../Pages/OverviewPages"
 import Users from "../Pages/Users"
@@ -517,6 +517,7 @@ import { generateToken, messaging } from "../notifications/firebase"
 import { onMessage } from "firebase/messaging"
 import { loginUser, sendOTP, verifyOTP, resetPassword } from "../api/auth"
 import cookies from "universal-cookie"
+import axios from 'axios';
 
 export default function Auth() {
   useEffect(() => {
@@ -540,10 +541,9 @@ export default function Auth() {
     try {
       setLoading(true)
       const response = await loginUser({ email, password })
-
-      const cookie = new cookies()
-      if (response.data.token) {
-        cookie.set("token", response.data.token, { path: "/" })
+      if (response.data) {
+        localStorage.setItem("loginToken",response.data.data.token);
+        
       }
 
       setUserDetails({ username: email, role: response.data.role })
@@ -557,13 +557,16 @@ export default function Auth() {
     }
   }
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     // Clear token from cookie
-    const cookie = new cookies()
-    cookie.remove("token", { path: "/" })
+    // const cookie = new cookies()
+    // cookie.remove("token", { path: "/" })
 
-    setCurrentPage("login")
-    toast.success("You have been logged out.")
+    // setCurrentPage("login")
+    // toast.success("You have been logged out.")
+    const res = await logoutUser(token)
+    localStorage.clear();
+    navigate("/login");
   }
 
   return (
@@ -594,7 +597,8 @@ function LoginPage({ onLogin, loading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    onLogin(username, password)
+    const res = onLogin(username, password)
+    console.log(res);
     navigate("/")
     setUsername("")
     setPassword("")
@@ -950,7 +954,7 @@ function AdminDashboard({ onLogout }) {
         <Route path="/income" element={<Income />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/analytics" element={<Analytics />} />
-        <Route path="/logout" element={<Logout onLogout={onLogout} />} />
+        <Route path="/logout" element={<Logout onLogout={onLogout} />} /> 
         <Route path="/help" element={<Help />} />
         <Route path="/adminuser" element={<Adminuser />} />
         <Route path="/cms/privacy-policy" element={<Privacy />} />
@@ -974,3 +978,5 @@ const playPointSound = () => {
   const audio = new Audio(pointSound)
   audio.play()
 }
+
+

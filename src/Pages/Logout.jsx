@@ -1,14 +1,19 @@
 import { useNavigate } from "react-router-dom"
 import Header from "../components/Common/Header"
 import { motion } from "framer-motion"
-
+import {logoutUser} from '../api/auth'
 const Logout = ({ onLogout }) => {
   const navigate = useNavigate()
 
   
-  const handleLogout = () => {
-    onLogout()
-    navigate("/login")
+  const handleLogout = async() => {
+    try{
+    const res = await logoutUser()
+    localStorage.clear();
+    navigate("/login");
+    }catch(err){
+      console.log(err);
+    }
   }
 
   const handleCancel = () => {
