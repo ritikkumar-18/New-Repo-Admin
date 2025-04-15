@@ -1,60 +1,48 @@
+import axios from "axios";
+import Cookies from "universal-cookie";
 
-// import axios from "axios";
-// import { toast } from "react-hot-toast";
-// import cookies from "universal-cookie";
+const cookie = new Cookies();
+const BASE_URL = "https://api.techizons.in/api";
 
-// const cookie = new cookies();
-// const token = cookie.get("token");
+// Dynamically get headers to always use latest token
+const getHeaders = () => {
+  const token = cookie.get("token");
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+};
 
-// const BASE_URL = "https://api.techizons.in/api"; 
+// POST request
+const post_data = async (url, data = {}, customHeaders = null) => {
+  const finalHeaders = customHeaders || getHeaders();
+  return axios.post(`${BASE_URL}/${url}`, data, finalHeaders);
+};
 
-// const headers = {
-//   headers: {
-//     "Content-Type": "application/json",
-//     token: token,
-//   },
-// };
+// GET request
+const get_api = async (url, customHeaders) => {
+  const finalHeaders = customHeaders || getHeaders();
+  return axios.get(`${BASE_URL}/${url}`, finalHeaders);
+};
 
-// const post_data = async (url, data) => axios.post(`${BASE_URL}/${url}`, data, headers);
-// const get_api = async (url) => axios.get(`${BASE_URL}/${url}`, headers);
-// const put_api = async (url, data) => axios.put(`${BASE_URL}/${url}`, data, headers);
-// const delete_api = async (url) => axios.delete(`${BASE_URL}/${url}`, headers);
+// PUT request
+const put_api = async (url, data = {}, customHeaders = null) => {
+  const finalHeaders = customHeaders || getHeaders();
+  return axios.put(`${BASE_URL}/${url}`, data, finalHeaders);
+};
 
-// export { post_data, get_api, put_api, delete_api };
-import axios from "axios"
-import cookies from "universal-cookie"
-
-const cookie = new cookies()
-const token = cookie.get("token")
-
-const BASE_URL = "https://api.techizons.in/api"
-
-const headers = {
-  headers: {
-    "Content-Type": "application/json",
-    token: token,
-  },
-}
-
-// Modified to accept custom headers that can override the default headers
-const post_data = async (url, data, customHeaders = null) => {
-  const finalHeaders = customHeaders || headers
-  return axios.post(`${BASE_URL}/${url}`, data, finalHeaders)
-}
-
-const get_api = async (url, customHeaders = null) => {
-  const finalHeaders = customHeaders || headers
-  return axios.get(`${BASE_URL}/${url}`, finalHeaders)
-}
-
-const put_api = async (url, data, customHeaders = null) => {
-  const finalHeaders = customHeaders || headers
-  return axios.put(`${BASE_URL}/${url}`, data, finalHeaders)
-}
-
+// DELETE request
 const delete_api = async (url, customHeaders = null) => {
-  const finalHeaders = customHeaders || headers
-  return axios.delete(`${BASE_URL}/${url}`, finalHeaders)
-}
+  const finalHeaders = customHeaders || getHeaders();
+  return axios.delete(`${BASE_URL}/${url}`, finalHeaders);
+};
 
-export { post_data, get_api, put_api, delete_api }
+// PATCH request
+const patch_api = async (url, data = {}, customHeaders = null) => {
+  const finalHeaders = customHeaders || getHeaders();
+  return axios.patch(`${BASE_URL}/${url}`, data, finalHeaders);
+};
+
+export { post_data, get_api, put_api, delete_api, patch_api };

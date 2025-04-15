@@ -35,16 +35,14 @@ export const resetPassword = (payload, token) =>{
 
 export const changePassword =(payload)=> put_api("/admin/chagePassword", payload)
 
-export const logoutUser = (payload = undefined) => {
-  const token = localStorage.getItem("loginToken")
-  console.log("+++++++++++",token)
+export const logoutUser = (payload ) => {
  const headers = {
     headers: {
       "Content-Type": "application/json",
-      "token": token
+      "token": payload
       },
-      }
-  return get_api("admin/logout",payload,headers);
+  }
+  return get_api("admin/logout",headers);
 }
   
 

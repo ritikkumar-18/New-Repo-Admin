@@ -1,18 +1,33 @@
 import { useNavigate } from "react-router-dom"
 import Header from "../components/Common/Header"
 import { motion } from "framer-motion"
-import {logoutUser} from '../api/auth'
-const Logout = ({ onLogout }) => {
+import { logoutUser } from "../api/auth"
+import toast from "react-hot-toast"
+
+const Logout = ({ onLogoutSuccess }) => {
   const navigate = useNavigate()
 
-  
-  const handleLogout = async() => {
-    try{
-    const res = await logoutUser()
-    localStorage.clear();
-    navigate("/login");
-    }catch(err){
-      console.log(err);
+  const handleLogout = async () => {
+    try {
+      
+      const token = localStorage.getItem("loginToken")
+      if (token) {
+        await logoutUser(token)
+      }
+      localStorage.clear()
+      toast.success("You have been logged out successfully.")
+      if (onLogoutSuccess) {
+        onLogoutSuccess()
+      }
+      navigate("/login")
+    } catch (error) {
+      console.error("Logout error:", error)
+      toast.error("Error during logout. Please try again.")
+      localStorage.clear()
+      if (onLogoutSuccess) {
+        onLogoutSuccess()
+      }
+      navigate("/login")
     }
   }
 
@@ -51,4 +66,3 @@ const Logout = ({ onLogout }) => {
 }
 
 export default Logout
-
