@@ -1011,6 +1011,10 @@ import Adminuser from "../Pages/Adminuser"
 import { generateToken, messaging } from "../notifications/firebase"
 import { onMessage } from "firebase/messaging"
 import { loginUser, sendOTP, verifyOTP, resetPassword } from "../api/auth"
+import Blog from "../Pages/Blog"
+import Banner from "../Pages/Banner"
+import ManagePackage from "../Pages/ManageProducts"
+import ManageProducts from "../Pages/ManageProducts"
 
 export default function Auth() {
   const navigate = useNavigate()
@@ -1928,6 +1932,9 @@ function AdminDashboard({ userDetails, onLogoutSuccess }) {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/logout" element={<Logout onLogoutSuccess={onLogoutSuccess} />} />
         <Route path="/help" element={<Help />} />
+        <Route path ='/blog' element={<Blog/>}/>
+        <Route path ='/banner' element={<Banner/>}/>
+        <Route path ='/manageproducts' element={<ManageProducts/>}/>
         <Route path="/adminuser" element={<Adminuser />} />
         <Route path="/cms/privacy-policy" element={<Privacy />} />
         <Route path="/cms/payment-policy" element={<Paymentpolicy />} />

@@ -6,10 +6,8 @@ import toast from "react-hot-toast"
 
 const Logout = ({ onLogoutSuccess }) => {
   const navigate = useNavigate()
-
-  const handleLogout = async () => {
+   const handleLogout = async () => {
     try {
-      
       const token = localStorage.getItem("loginToken")
       if (token) {
         await logoutUser(token)
@@ -30,7 +28,6 @@ const Logout = ({ onLogoutSuccess }) => {
       navigate("/login")
     }
   }
-
   const handleCancel = () => {
     navigate("/")
   }
