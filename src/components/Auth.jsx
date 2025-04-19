@@ -1127,8 +1127,6 @@ function OtpInput({ length = 6, value, onChange, disabled }) {
       const newOtp = [...otp]
       newOtp[index] = value
       setOtp(newOtp)
-
-      // Call the onChange callback with the joined OTP
       onChange(newOtp.join(""))
 
       // Move to next input if current input is filled
