@@ -1013,7 +1013,6 @@ import { onMessage } from "firebase/messaging"
 import { loginUser, sendOTP, verifyOTP, resetPassword } from "../api/auth"
 import Blog from "../Pages/Blog"
 import Banner from "../Pages/Banner"
-import ManagePackage from "../Pages/ManageProducts"
 import ManageProducts from "../Pages/ManageProducts"
 
 export default function Auth() {
