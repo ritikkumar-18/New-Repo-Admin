@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import Header from "../components/Common/Header"
+import {motion} from "framer-motion"
 import {
   ChevronLeft,
   ChevronRight,
@@ -361,7 +362,10 @@ const Banner = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-y-auto scroll-hidden">
       <Header title="Banners" />
-
+     <motion.div
+     initial={{ opacity: 0, y: 20 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ duration: 0.5 }}>
       {/* Search and Filter Bar */}
       <div className="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-sm border-b border-slate-800 transition-all">
         <div className="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2">
@@ -737,7 +741,7 @@ const Banner = () => {
       {filteredBanners.length > 0 && (
         <div className="container mx-auto px-4 py-6 mt-4">
           <h3 className="text-xl font-semibold text-white mb-4">Quick Preview</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4">
             {filteredBanners.map((banner, index) => (
               <div
                 key={index}
@@ -778,6 +782,7 @@ const Banner = () => {
           </div>
         </div>
       )}
+      </motion.div>
     </div>
   )
 }

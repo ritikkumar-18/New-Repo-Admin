@@ -1,6 +1,3 @@
-
-"use client"
-
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { toast, Toaster } from "react-hot-toast"
@@ -480,7 +477,7 @@ const Blog = () => {
               whileTap={{ scale: 0.95 }}
             >
               <SlidersHorizontal size={18} />
-              <span className="hidden sm:inline">Filters</span>
+              <span className="hidden md:block">Filters</span>
             </motion.button>
           </div>
         </div>
